@@ -1,0 +1,37 @@
+name: "Lint, test and diagnostics"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  reference_run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Python requirements
+      run: pip install -r ./requirements.txt
+
+    - name: Lint python sources
+      run: flake8 src/*.py
+
+    - name: Install Java
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y -q --no-install-recommends \
+          git \
+          openjdk-17-jdk \
+          openjdk-17-jre-headless
+
+    - name: Generate antlr sources
+      run: ./antlr.sh --generate
+
+    - name: Run python unit tests
+      run: pytest --no-header -v
+
+    - name: Run templates diagnostics
+      run: python3 src/main.py
