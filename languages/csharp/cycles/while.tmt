@@ -1,0 +1,11 @@
+~main body start~
+
+~template simple_while start~
+int i = 0;
+while(i < 10) {
+    i++;
+    ~[VAR_String]~ = ~[EXPR_String]~;
+}
+~template end~
+
+~main body end~

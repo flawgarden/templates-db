@@ -1,0 +1,7 @@
+~class Container start~
+static class Container {
+    public static T Id<T>(T t) {
+        return T;
+    }
+}
+~class end~

@@ -1,0 +1,10 @@
+src/generated/
+antlr/gen/
+antlr/TemplateLexer.tokens
+gen/
+
+.pytest_cache/
+
+.idea/
+
+.DS_STORE
