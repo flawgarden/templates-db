@@ -1,8 +1,8 @@
-from enum import Enum
 from pathlib import Path
 from typing import List, Tuple
 
 import template
+from template import TmtFileKind
 from console import Console
 
 try:
@@ -28,12 +28,6 @@ class ParsingException(Exception):
     def __init__(self, msg):
         super().__init__(msg)
         self.msg = msg
-
-
-class TmtFileKind(Enum):
-    UNSUPPORTED = 0
-    TODO = 1
-    TMT = 2
 
 
 def get_kind(path: Path) -> TmtFileKind | None:
@@ -204,8 +198,9 @@ def with_wrapping(path: Path, action):
 
 
 def parse_template_file(file_path: Path) -> template.TemplateFile:
-    if get_kind(file_path) != TmtFileKind.TMT:
+    if (kind := get_kind(file_path)) != TmtFileKind.TMT:
         return template.TemplateFile(
+            kind,
             file_path,
             file_path.stem,
             get_parents(file_path),
@@ -231,6 +226,7 @@ def parse_template_file(file_path: Path) -> template.TemplateFile:
     templates = list(map(parse_template, main_class_ctx.template()))
 
     return template.TemplateFile(
+        kind,
         file_path,
         file_path.stem,
         get_parents(file_path),
@@ -243,8 +239,9 @@ def parse_template_file(file_path: Path) -> template.TemplateFile:
 
 
 def parse_extension_file(file_path: Path) -> template.ExtensionFile:
-    if get_kind(file_path) != TmtFileKind.TMT:
+    if (kind := get_kind(file_path)) != TmtFileKind.TMT:
         return template.ExtensionFile(
+            kind,
             file_path,
             file_path.stem,
             get_parents(file_path),
@@ -259,6 +256,7 @@ def parse_extension_file(file_path: Path) -> template.ExtensionFile:
     macros = list(map(parse_macro_definition, extensions_ctx.macroDefinition()))
 
     return template.ExtensionFile(
+        kind,
         file_path,
         file_path.stem,
         get_parents(file_path),
@@ -268,8 +266,9 @@ def parse_extension_file(file_path: Path) -> template.ExtensionFile:
 
 
 def parse_helper_file(file_path: Path) -> template.HelperFile:
-    if get_kind(file_path) != TmtFileKind.TMT:
+    if (kind := get_kind(file_path)) != TmtFileKind.TMT:
         return template.HelperFile(
+            kind,
             file_path,
             file_path.stem,
             get_parents(file_path),
@@ -282,6 +281,7 @@ def parse_helper_file(file_path: Path) -> template.HelperFile:
     helper_class = parse_helper_class(helper_file_ctx.helperClass())
 
     return template.HelperFile(
+        kind,
         file_path,
         file_path.stem,
         get_parents(file_path),

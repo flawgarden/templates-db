@@ -1,6 +1,13 @@
 from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
 from typing import List, Tuple
+
+
+class TmtFileKind(Enum):
+    UNSUPPORTED = 0
+    TODO = 1
+    TMT = 2
 
 
 @dataclass
@@ -50,6 +57,7 @@ class HelperClass:
 
 @dataclass
 class ProjectFile:
+    kind: TmtFileKind
     path: Path
     name: str
     parents: List[str]

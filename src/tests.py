@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List
 from diagnostic import DiagnosticResult
 from template import TemplateFile, HelperFile, ExtensionFile, LanguageProject, HelperImport, ExtensionImport, \
-    HelperClass, Macro, Template
+    HelperClass, Macro, Template, TmtFileKind
 
 
 class ProjectBuilder:
@@ -40,6 +40,7 @@ class DefaultFiles:
     @staticmethod
     def get_template_file():
         return TemplateFile(
+            kind=TmtFileKind.TMT,
             name="name",
             path=Path(),
             parents=[],
@@ -53,6 +54,7 @@ class DefaultFiles:
     @staticmethod
     def get_helper_file():
         return HelperFile(
+            kind=TmtFileKind.TMT,
             name="name",
             path=Path(),
             parents=[],
@@ -62,6 +64,7 @@ class DefaultFiles:
     @staticmethod
     def get_extension_file():
         return ExtensionFile(
+            kind=TmtFileKind.TMT,
             name="name",
             path=Path(),
             parents=[],
@@ -87,7 +90,100 @@ def has_warning(diagnostics: List[DiagnosticResult]) -> bool:
 class DiagnosticsTest:
 
     class LanguageStructuralEqualityTest:
-        pass
+
+        @staticmethod
+        def test_missed_template_file_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            first_project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_missed_helper_file_cause_error():
+            helper_file = DefaultFiles.get_helper_file()
+            first_project = ProjectBuilder() \
+                .with_helper_file(helper_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_missed_extension_file_cause_error():
+            extension_file = DefaultFiles.get_extension_file()
+            first_project = ProjectBuilder() \
+                .with_extension_file(extension_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_same_todo_file_cause_warning():
+            template_file = DefaultFiles.get_template_file()
+            template_file.name = "some_file"
+            todo_template_file = DefaultFiles.get_template_file()
+            todo_template_file.name = "some_file"
+            todo_template_file.kind = TmtFileKind.TODO
+            first_project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .with_template_file(todo_template_file) \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert not has_error(diagnostics) and has_warning(diagnostics)
+
+        @staticmethod
+        def test_same_unsupported_file_doesnt_cause_error_or_warning():
+            template_file = DefaultFiles.get_template_file()
+            template_file.name = "some_file"
+            unsupported_template_file = DefaultFiles.get_template_file()
+            unsupported_template_file.name = "some_file"
+            unsupported_template_file.kind = TmtFileKind.UNSUPPORTED
+            first_project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .with_template_file(unsupported_template_file) \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_same_template_file_with_different_templates_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            template_file.name = "some_file"
+            template_file.templates = [Template(body="", holes=[], macros=[], name="SomeTemplate1")]
+            other_template_file = DefaultFiles.get_template_file()
+            other_template_file.name = "some_file"
+            other_template_file.templates = [Template(body="", holes=[], macros=[], name="SomeTemplate2")]
+            first_project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("first_lang")
+            second_project = ProjectBuilder() \
+                .with_template_file(other_template_file) \
+                .get_project("second_lang")
+
+            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
 
     class InvalidImportsTest:
 

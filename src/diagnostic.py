@@ -3,8 +3,8 @@ from enum import Enum
 from pathlib import Path
 from typing import List, Callable, TypeVar
 from console import Console
-from parsing import get_kind, TmtFileKind
-from template import LanguageProject, ProjectFile, TemplateFile, HelperFile, ExtensionFile, Extension, Hole, Template
+from template import LanguageProject, ProjectFile, TemplateFile, HelperFile, ExtensionFile, Extension, Hole, Template, \
+    TmtFileKind
 
 
 @dataclass(frozen=True)
@@ -133,7 +133,13 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         return None
 
     def compare_template_file(fst: TemplateFile, snd: TemplateFile):
-        if get_kind(fst.path) != TmtFileKind.TMT or get_kind(snd.path) != TmtFileKind.TMT:
+        if fst.kind == TmtFileKind.TODO:
+            result.append(DiagnosticResult.warning(f"TODO file {fst.path}"))
+            return
+        if snd.kind == TmtFileKind.TODO:
+            result.append(DiagnosticResult.warning(f"TODO file {snd.path}"))
+            return
+        if fst.kind != TmtFileKind.TMT or snd.kind != TmtFileKind.TMT:
             return
         fst_template_names = [x.name for x in fst.templates]
         snd_template_names = [x.name for x in snd.templates]
