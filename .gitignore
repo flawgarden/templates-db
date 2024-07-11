@@ -1,6 +1,7 @@
 src/generated/
 antlr/gen/
 antlr/TemplateLexer.tokens
+gen/
 
 .pytest_cache/
 
