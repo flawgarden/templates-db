@@ -9,12 +9,8 @@ holeKind
     ;
 
 holeType
-    : INT_TYPE
-    | STRING_TYPE
-    | BOOL_TYPE
-    | DICT_TYPE_NAME GENERIC_START holeType COMMA holeType GENERIC_END
-    | LIST_TYPE_NAME GENERIC_START holeType GENERIC_END
-    | SET_TYPE_NAME GENERIC_START holeType GENERIC_END
+    : TYPE
+    | TYPE_NAME
     ;
 
 holeRef

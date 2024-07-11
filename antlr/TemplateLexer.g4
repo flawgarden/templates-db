@@ -78,15 +78,11 @@ CLOSE_BRACKET
     : ']' -> popMode, popMode
     ;
 
-INT_TYPE       : 'Integer';
-STRING_TYPE    : 'String';
-BOOL_TYPE      : 'Boolean';
-GENERIC_START  : '<';
-GENERIC_END    : '>';
-COMMA          : ',';
-DICT_TYPE_NAME : 'Dict';
-SET_TYPE_NAME  : 'Set';
-LIST_TYPE_NAME : 'List';
+TYPE_NAME
+    : (~[~\n\r[\]_@0123456789 ])+
+    ;
+
+TYPE           : 'TYPE';
 REF_MARKER     : '@';
 UNDERSCORE     : '_';
 
