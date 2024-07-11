@@ -262,17 +262,24 @@ def invalid_extensions_diagnostic(project: LanguageProject) -> List[DiagnosticRe
 
 
 @nerd.language_diagnostic("Dangling ref")
-def dangling_ling_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
+def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
     result = []
 
-    def get_dangling_refs(holes: List[Hole]) -> List[str]:
+    def get_dangling_refs(holes: List[Hole]) -> List[Hole]:
         dangling_refs = []
-        refs = list(map(lambda x: x.ref, holes))
-        for ref in refs:
-            if ref is None:
+        for hole in holes:
+            if hole.ref is None:
                 continue
-            if refs.count(ref) < 2:
-                dangling_refs.append(ref)
+            if hole.type_ != "TYPE" and holes.count(hole) < 2:
+                dangling_refs.append(hole)
+            elif hole.type_ == "TYPE":
+                found_types_ref = 0
+                for other_hole in holes:
+                    if other_hole.type_ == "TYPE" and other_hole.ref == hole.ref:
+                        found_types_ref += 1
+                if found_types_ref < 2:
+                    dangling_refs.append(hole)
+
         return dangling_refs
 
     def check_extension(path: Path, e: Extension):
