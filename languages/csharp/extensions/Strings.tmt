@@ -1,1 +1,0 @@
-~[EXPR_String]~ -> ~[EXPR_String]~.substring(0, 5)
