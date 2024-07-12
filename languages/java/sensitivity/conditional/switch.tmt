@@ -1,0 +1,60 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~import java.util.*;~
+
+~template switch_operator_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+switch (~[VAR_String@1]~) {
+    case ~[CONST_String]~:
+        break;
+    case ~[CONST_String]~:
+        ~[VAR_String@1]~ = ~[VAR_String@1]~;
+        break;
+    default:
+        ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template switch_operator_negative start~
+String tmpUnique42 = "";
+~[BODY]~
+switch (~[VAR_String@1]~) {
+    case "":
+        break;
+    case ~[CONST_String]~:
+        ~[VAR_String@1]~ = "";
+        break;
+    default:
+        ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template switch_operator_any_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+switch (~[MACRO_Any_String]~) {
+    case ~[CONST_String]~:
+        ~[VAR_String@1]~ = ~[VAR_String@1]~;
+        break;
+    default:
+        ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template switch_operator_any_negative start~
+String tmpUnique42 = "";
+~[BODY]~
+switch (~[MACRO_Any_String]~) {
+    case ~[CONST_String]~:
+        ~[VAR_String@1]~ = "";
+        break;
+    default:
+        ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~main body end~

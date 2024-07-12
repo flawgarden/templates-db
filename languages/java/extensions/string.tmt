@@ -1,0 +1,49 @@
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.isEmpty()
+~[EXPR_Boolean]~ -> ~[VAR_String@1]~.isEmpty() && ~[VAR_String@1]~.contains(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String@1]~ != null && ~[EXPR_String@1]~.contains(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.equals(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.equalsIgnoreCase(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.compareTo(~[EXPR_String]~) == 0
+~[EXPR_Boolean]~ -> ~[EXPR_String@1]~.compareTo(~[EXPR_String@1]~) == 0
+~[EXPR_Boolean]~ -> ~[EXPR_String@1]~ != null && ~[EXPR_String@1]~.charAt(~[CONST_int]~) == ~[CONST_char]~
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.endsWith(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.regionMatches(~[EXPR_int]~, ~[EXPR_String]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.startsWith(~[EXPR_String]~)
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.startsWith(~[EXPR_String]~, ~[EXPR_int]~)
+
+~[EXPR_String]~ -> ~[EXPR_String]~.replace(~[EXPR_char]~, ~[EXPR_char]~)
+~[EXPR_String]~ -> ~[EXPR_String]~.replace('/', '.')
+~[EXPR_String]~ -> ""
+~[EXPR_String]~ -> ~[EXPR_String]~.concat(~[EXPR_String]~)
+~[EXPR_String]~ -> ~[EXPR_String]~.intert()
+~[EXPR_String]~ -> ~[EXPR_String]~.substring(~[EXPR_int]~)
+~[EXPR_String]~ -> ~[EXPR_String]~.substring(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_String]~ -> ~[EXPR_String]~.toLowerCase()
+~[EXPR_String]~ -> ~[EXPR_String]~.toString()
+~[EXPR_String]~ -> ~[EXPR_String]~.toUpperCase()
+~[EXPR_String]~ -> ~[EXPR_String]~.trim()
+
+~[EXPR_int]~ -> ~[EXPR_String]~.length()
+~[EXPR_int]~ -> ~[EXPR_String]~.codePointAt(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.codePointBefore(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.compareTo(~[EXPR_String]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.compareToIgnoreCase(~[EXPR_String]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.indexOf(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.indexOf(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.indexOf(~[EXPR_String]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.indexOf(~[EXPR_String]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.lastIndexOf(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.lastIndexOf(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.lastIndexOf(~[EXPR_String]~)
+~[EXPR_int]~ -> ~[EXPR_String]~.lastIndexOf(~[EXPR_String]~, ~[EXPR_int]~)
+
+~[EXPR_char]~ -> ~[EXPR_String]~.charAt(~[EXPR_int]~)
+
+~[EXPR_char\[\]]~ -> ~[EXPR_String]~.toCharArray()
+
+~[EXPR_byte\[\]]~ -> ~[EXPR_String]~.getBytes()
+~[EXPR_byte\[\]]~ -> ~[EXPR_String]~.getBytes(~[EXPR_String]~)
+
+~[MACRO_Any_String]~ -> ~[EXPR_String]~
+~[MACRO_Any_String]~ -> ~[VAR_String]~
+~[MACRO_Any_String]~ -> ~[CONST_String]~

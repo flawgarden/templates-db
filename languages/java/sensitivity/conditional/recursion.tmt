@@ -1,0 +1,59 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function param_or_empty start~
+public String paramOrEmpty(int value, String param) {
+    if (param.length() == value) {
+        return param;
+    } else if (value > param.length()) {
+        paramOrEmpty(--value, param);
+    } else {
+        return "";
+    }
+}
+~function end~
+
+~function param_or_empty_mutual1 start~
+public String paramOrEmptyMutual1(int value, String param) {
+    if (param.length() == value) {
+        return param;
+    } else if (value > param.length()) {
+        paramOrEmptyMutual2(value, param);
+    } else {
+        return "";
+    }
+}
+~function end~
+
+~function param_or_empty_mutual2 start~
+public String paramOrEmptyMutual2(int value, String param) {
+    return paramOrEmptyMutual1(--value, param);
+}
+~function end~
+
+~helper functions end~
+
+~import java.util.*;~
+
+~template recursion_simple_positive start~
+~[VAR_String@1]~ = paramOrEmpty(~[VAR_String@1]~.length(), ~[VAR_String@1]~);
+~template end~
+
+~template recursion_simple_negative start~
+~[VAR_String@1]~ = paramOrEmpty(-1, ~[VAR_String@1]~);
+~template end~
+
+~template recursion_mutual_positive start~
+~[VAR_String@1]~ = paramOrEmptyMutual1(~[VAR_String@1]~.length(), ~[VAR_String@1]~);
+~template end~
+
+~template recursion_mutual_negative start~
+~[VAR_String@1]~ = paramOrEmptyMutual2(~[VAR_String@1]~.length(), ~[VAR_String@1]~);
+~template end~
+
+~main body end~

@@ -1,0 +1,15 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~import java.util.regex.Pattern;~
+~import java.util.regex.Matcher;~
+~import java.util.*;~
+
+~template create_pattern_and_matcher start~
+Pattern pattern = Pattern.compile(~[MACRO_Regex]~);
+Matcher matcher = pattern.matcher(~[EXPR_String]~);
+~template end~
+
+~main body end~

@@ -1,0 +1,26 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/virtuality/helpers/UnaryOpInterface~
+~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
+~import java.util.*;~
+
+~template create_unary_lambda_empty start~
+UnaryOpInterface val89458 = (t) -> "";
+~template end~
+
+~template create_unary_lambda start~
+UnaryOpInterface val89458 = (t) -> ~[EXPR_String]~;
+~template end~
+
+~template create_binary_lambda_empty start~
+BinaryOpInterface val89458 = (t, u) -> "";
+~template end~
+
+~template create_binary_lambda start~
+BinaryOpInterface val89458 = (t, u) -> ~[EXPR_String]~;
+~template end~
+
+~main body end~

@@ -1,0 +1,11 @@
+~[EXPR_Boolean]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.offer(~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.element()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.peek()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.poll()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.remove()
+
+~[EXPR_Object\[\]]~ -> ~[EXPR_Queue<~[TYPE]~>]~.toArray()
+
+~[EXPR_Collection<~[TYPE@1]~>]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~

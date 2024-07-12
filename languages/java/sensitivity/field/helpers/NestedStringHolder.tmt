@@ -1,0 +1,27 @@
+~class NestedStringHolder start~
+
+public class NestedStringHolder {
+    private InnerStringHolder innerObject;
+
+    public NestedStringHolder(String value) {
+        this.innerObject = this.new InnerStringHolder(value);
+    }
+
+    public NestedStringHolder() {
+        this.innerObject = this.new InnerStringHolder("");
+    }
+
+    public InnerStringHolder getValue() {
+        return innerObject.innerValue;
+    }
+
+
+    public class InnerStringHolder {
+        public String innerValue;
+
+        InnerStringHolder(String value) {
+            this.innerValue = value;
+        }
+    }
+}
+~class end~

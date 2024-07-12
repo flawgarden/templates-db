@@ -1,0 +1,8 @@
+~class UnaryOpClass start~
+
+public class UnaryOpClass {
+    public String VirtualCall(String t) {
+        return "";
+    }
+}
+~class end~

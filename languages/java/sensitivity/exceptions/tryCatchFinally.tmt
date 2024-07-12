@@ -1,0 +1,79 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+~import java.util.*;~
+
+~template try_cath_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_String]~);
+} catch (Exception1 e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_cath_negative start~
+try {
+  throw new Exception1(~[EXPR_String]~);
+} catch (Exception1 e) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template try_cath_finally_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_String]~);
+} catch (Exception1 e) {
+    ~[VAR_String@1]~ = "";
+} finally {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_cath_finally_negative start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_String]~);
+} catch (Exception1 e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+} finally {
+    ~[VAR_String@1]~ = "";
+}
+~template end~
+
+~template try_multi_cath_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+try {
+  if (~[EXPR_Boolean]~) {
+     throw new Exception1(~[EXPR_String]~);
+  } else {
+     throw new Exception2(~[EXPR_String]~);
+  }
+} catch (Exception1 | Exception2 e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_multi_cath_negative start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+try {
+  if (~[EXPR_Boolean]~) {
+     throw new Exception1(~[EXPR_String]~);
+  } else {
+     throw new Exception2(~[EXPR_String]~);
+  }
+} catch (Exception1 | Exception2 e) {
+    ~[VAR_String@1]~ = "";
+}
+~template end~
+
+~main body end~

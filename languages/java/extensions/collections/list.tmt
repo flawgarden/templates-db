@@ -1,0 +1,24 @@
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE]~>]~.isEmpty()
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.add(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.addAll(~[EXPR_List<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.addAll(~[EXPR_int]~, ~[EXPR_List<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE]~>]~.contains(~[EXPR_Object]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.containsAll(~[EXPR_List<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE]~>]~.remove(~[EXPR_Object]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.removeAll(~[EXPR_List<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_List<~[TYPE@1]~>]~.retainAll(~[EXPR_List<~[TYPE@1]~>]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.get(~[EXPR_int]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.set(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.remove(~[EXPR_int]~)
+
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE]~>]~.indexOf(~[EXPR_Object]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE]~>]~.lastIndexOf(~[EXPR_Object]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE]~>]~.size()
+
+~[EXPR_Object\[\]]~ -> ~[EXPR_List<~[TYPE]~>]~.toArray()
+
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_List<~[TYPE@1]~>]~.stream()
+
+~[EXPR_Collection<~[TYPE@1]~>]~ -> ~[EXPR_List<~[TYPE@1]~>]~

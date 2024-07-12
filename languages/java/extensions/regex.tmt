@@ -1,0 +1,91 @@
+~[MACRO_Regex]~ -> "[a-z]+"
+~[MACRO_Regex]~ -> "\\"
+~[MACRO_Regex]~ -> "\0n"
+~[MACRO_Regex]~ -> "\0nn"
+~[MACRO_Regex]~ -> "\0mnn"
+~[MACRO_Regex]~ -> "\xhh"
+~[MACRO_Regex]~ -> "\uhhhh"
+~[MACRO_Regex]~ -> "\x{h..h}"
+~[MACRO_Regex]~ -> "\t"
+~[MACRO_Regex]~ -> "\n"
+~[MACRO_Regex]~ -> "\r"
+~[MACRO_Regex]~ -> "\f"
+~[MACRO_Regex]~ -> "\a"
+~[MACRO_Regex]~ -> "\e"
+~[MACRO_Regex]~ -> "\cx"
+
+~[MACRO_Regex]~ -> "[abc]"
+~[MACRO_Regex]~ -> "[^abc]"
+~[MACRO_Regex]~ -> "[a-zA-Z]"
+~[MACRO_Regex]~ -> "[a-d[m-p]]"
+~[MACRO_Regex]~ -> "[a-z&&[def]]"
+~[MACRO_Regex]~ -> "[a-z&&[^bc]]"
+~[MACRO_Regex]~ -> "[a-z&&[^m-p]]"
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{5}")
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "??")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{5}?")
+
+~[MACRO_Regex]~ -> ("(" + ~[MACRO_Regex]~ + ")")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + ~[MACRO_Regex]~)
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "|" +  ~[MACRO_Regex]~)
+
+~[MACRO_Regex]~ -> ~[EXPR_Pattern]~.pattert()
+
+~[EXPR_Matcher]~ -> ~[EXPR_Pattern]~.matcher(~[EXPR_String]~)
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.region(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.reset()
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.reset(~[EXPR_String]~)
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.useAnchoringBounds(~[EXPR_Boolean]~)
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.useTransparentBounds(~[EXPR_Boolean]~)
+~[EXPR_Matcher]~ -> ~[EXPR_Matcher]~.usePattern(~[EXPR_Pattern]~)
+
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.end()
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.end(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.end(~[EXPR_String]~)
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.groupCount()
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.regionEnd()
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.regionStart()
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.start()
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.start(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_Matcher]~.start(~[EXPR_String]~)
+
+~[EXPR_int]~ -> ~[EXPR_MatchResult]~.end()
+~[EXPR_int]~ -> ~[EXPR_MatchResult]~.end(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_MatchResult]~.start()
+~[EXPR_int]~ -> ~[EXPR_MatchResult]~.start(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_MatchResult]~.groupCount()
+
+~[EXPR_MatchResult]~ -> ~[EXPR_Matcher]~.toMatchResult()
+
+~[EXPR_Boolean]~ -> ~[EXPR_String]~.matches(~[MACRO_Regex]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.find()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.find(~[EXPR_int]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.hasAnchoringBounds()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.hasTransparentBounds()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.hitEnd()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.lookingAt()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.matches()
+~[EXPR_Boolean]~ -> ~[EXPR_Matcher]~.requireEnd()
+
+~[EXPR_String]~ -> ~[EXPR_String]~.replaceAll(~[MACRO_Regex]~, ~[EXPR_String]~)
+~[EXPR_String]~ -> ~[EXPR_String]~.replaceFirst(~[MACRO_Regex]~, ~[EXPR_String]~)
+~[EXPR_String]~ -> ~[EXPR_Pattern]~.pattert()
+~[EXPR_String]~ -> ~[EXPR_Pattern]~.toString()
+~[EXPR_String]~ -> ~[EXPR_Matcher]~.group()
+~[EXPR_String]~ -> ~[EXPR_Matcher]~.group(~[EXPR_int]~)
+~[EXPR_String]~ -> ~[EXPR_Matcher]~.group(~[EXPR_String]~)
+~[EXPR_String]~ -> ~[EXPR_MatchResult]~.group()
+~[EXPR_String]~ -> ~[EXPR_MatchResult]~.group(~[EXPR_int]~)
+
+~[EXPR_String\[\]]~ -> ~[EXPR_String]~.split(~[MACRO_Regex]~)
+~[EXPR_String\[\]]~ -> ~[EXPR_String]~.split(~[MACRO_Regex]~, ~[EXPR_int]~)
+~[EXPR_String\[\]]~ -> ~[EXPR_Pattern]~.split(~[EXPR_String]~)
+~[EXPR_String\[\]]~ -> ~[EXPR_Pattern]~.split(~[EXPR_String]~, ~[EXPR_int]~)
+~[EXPR_Stream<String>]~ -> ~[EXPR_Pattern]~.splitAsStream(~[EXPR_String]~)

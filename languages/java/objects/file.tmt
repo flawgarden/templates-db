@@ -1,0 +1,9 @@
+~main body start~
+~import java.util.*;~
+~import java.io.*;~
+
+~template create_file start~
+File f = new File(~[EXPR_String]~);
+~template end~
+
+~main body end~

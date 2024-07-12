@@ -1,0 +1,19 @@
+~class SuperClass start~
+public class SuperClass {
+}
+~class end~
+
+~class SubClass start~
+public class SubClass extends SuperClass {
+}
+~class end~
+
+~class SubSubClass start~
+final public class SubSubClass extends SubClass {
+}
+~class end~
+
+~class SiblingClass start~
+public class SiblingClass extends SuperClass {
+}
+~class end~

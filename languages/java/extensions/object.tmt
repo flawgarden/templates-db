@@ -1,0 +1,3 @@
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~.equals(~[EXPR_Object]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Object@1]~.equals(~[EXPR_Object@1]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ == null

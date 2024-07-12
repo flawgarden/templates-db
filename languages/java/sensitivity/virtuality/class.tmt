@@ -1,0 +1,42 @@
+~main body start~
+~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+~import java.util.*;~
+
+~template derived_binary_op1_positive start~
+BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
+~[BODY]~
+~[VAR_String@1]~ = a12341.VirtualCall(~[VAR_String@1]~, "");
+~template end~
+
+~template derived_binary_op1_negative start~
+BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
+~[BODY]~
+~[VAR_String@1]~ = a12341.VirtualCall("", ~[VAR_String@1]~);
+~template end~
+
+~template derived_binary_op2_positive start~
+BaseBinaryOpClass a12341 = new DerivedBinaryOpClass2();
+~[BODY]~
+~[VAR_String@1]~ = a12341.VirtualCall("", ~[VAR_String@1]~);
+~template end~
+
+~template derived_binary_op2_negative start~
+BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
+~[BODY]~
+~[VAR_String@1]~ = a12341.VirtualCall(~[VAR_String@1]~, "");
+~template end~
+
+~template base_binary_op_positive start~
+BaseBinaryOpClass a12341 = (~[EXPR_Boolean]~) ? new DerivedBinaryOpClass1() : new DerivedBinaryOpClass2();
+~[BODY]~
+~[VAR_String]~ = a12341.VirtualCall("", "");
+~template end~
+
+~template base_binary_op_negative start~
+BaseBinaryOpClass a12341 = new BaseBinaryOpClass();
+~[BODY]~
+~[VAR_String@1]~ = a12341.VirtualCall(~[VAR_String@1]~, ~[VAR_String@1]~);
+~template end~
+
+~main body end~

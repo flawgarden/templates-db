@@ -1,0 +1,29 @@
+~class BinaryOpInterfaceDefaultBase start~
+public interface BinaryOpInterfaceDefaultBase {
+    public String InterfaceCall(String l, String r);
+}
+~class end~
+
+~class BinaryOpInterfaceDefault1 start~
+public interface BinaryOpInterfaceDefault1 implements BinaryOpInterfaceDefaultBase {
+    default String InterfaceCall(String l, String r) {
+        return l;
+    }
+}
+~class end~
+
+~class BinaryOpInterfaceDefault2 start~
+public interface BinaryOpInterfaceDefault2 implements BinaryOpInterfaceDefaultBase  {
+    default String InterfaceCall(String l, String r) {
+        return r;
+    }
+}
+~class end~
+
+~class BinaryOpInterfaceDefault start~
+public interface BinaryOpInterfaceDefault implements BinaryOpInterfaceDefault1, BinaryOpInterfaceDefault2 {
+    default String InterfaceCall(String l, String r) {
+        return "";
+    }
+}
+~class end~

@@ -1,0 +1,3 @@
+~[EXPR_Predicate<String>]~ -> e -> ~[EXPR_Boolean]~ 
+
+~[EXPR_Predicate<~[TYPE]~>]~ -> e -> ~[EXPR_Boolean]~ 

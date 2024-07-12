@@ -1,0 +1,29 @@
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.map(e -> ~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_Boolean]~ -> ~[EXPR_Stream<~[TYPE]~>]~.allMatch(e -> ~[EXPR_Boolean]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.allMatch(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.noneMatch(~[EXPR_Predicate<~[TYPE@1]~>]~)
+
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.filter(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.distinct()
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.limit(~[EXPR_Long]~)
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.skip(~[EXPR_Long]~)
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.flatMap(~[EXPR_Function<~[TYPE@1]~, Stream<~[TYPE@1]~>>]~)
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.flat(~[EXPR_Function<~[TYPE@1]~, ~[TYPE@1]~>]~)
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.sorted()
+~[EXPR_Stream<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.sorted(~[EXPR_Comparator<~[TYPE@1]~>]~)
+
+~[EXPR_Optional<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.max(~[EXPR_Comparator<~[TYPE@1]~>]~)
+~[EXPR_Optional<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.min(~[EXPR_Comparator<~[TYPE@1]~>]~)
+~[EXPR_Optional<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.findAny(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_Optional<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.findFirst(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_Optional<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.reduce(~[EXPR_BinaryOperator<~[TYPE@1]~>]~)
+
+~[EXPR_Stream<~[TYPE]~>]~ -> Stream.empty()
+~[EXPR_Stream<~[TYPE@1]~>]~ -> Stream.of(~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_Long]~ -> ~[EXPR_Stream<~[TYPE]~>]~.count()
+
+~[EXPR_List<~[TYPE@1]~>]~ -> ~[EXPR_Stream<~[TYPE@1]~>]~.map()
+
+~[EXPR_Object\[\]]~ -> ~[EXPR_Stream<~[TYPE]~>]~.toArray()

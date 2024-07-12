@@ -1,0 +1,34 @@
+~class GenericClass start~
+public class GenericClass<T> {
+    private T value;
+
+    public GenericClass(T value) {
+        this.value = value;
+    }
+
+    public Object getObjectValue() {
+        return value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    public static bool sIsAssignableFromT(GenericClass<? extends A> genericClassObj) {
+        return s.isAssignableFrom(tParam.getClass());
+    }
+
+}
+~class end~
+
+~class A start~
+public class A {}
+~class end~
+
+~class B start~
+public class B extends A {}
+~class end~
+
+~class C start~
+public class C extends B {}
+~class end~

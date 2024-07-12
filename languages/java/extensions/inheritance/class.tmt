@@ -1,0 +1,13 @@
+~[EXPR_Boolean]~ -> ~[VAR_SuperClass]~ instanceof SubClass
+~[EXPR_Boolean]~ -> ~[VAR_SuperClass]~ instanceof SubSubClass
+~[EXPR_Boolean]~ -> ~[VAR_SuperClass]~ instanceof SuperClass
+~[EXPR_Boolean]~ -> ~[VAR_SuperClass]~ instanceof SiblingClass
+~[EXPR_Boolean]~ -> ~[EXPR_SuperClass]~ instanceof SubClass
+~[EXPR_Boolean]~ -> ~[EXPR_SuperClass]~ instanceof SubSubClass
+~[EXPR_Boolean]~ -> ~[EXPR_SuperClass]~ instanceof SuperClass
+~[EXPR_Boolean]~ -> ~[EXPR_SuperClass]~ instanceof SiblingClass
+
+~[EXPR_SuperClass]~ -> new SuperClass()
+~[EXPR_SuperClass]~ -> new SubClass()
+~[EXPR_SuperClass]~ -> new SubSubClass()
+~[EXPR_SuperClass]~ -> new SiblingClass()

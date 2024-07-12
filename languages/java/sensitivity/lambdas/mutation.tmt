@@ -1,0 +1,53 @@
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+~helper import sensitivity/lambdas/helpers/UnaryOpMutationInterface~
+~import java.util.*;~
+
+~template unary_lambda_mutation_positive start~
+final String s23423 = ~[VAR_String@1]~;
+StringHolder a12341 = new StringHolder();
+UnaryOpMutationInterface lambda1231 = (s) -> { s.value = s23423; };
+lambda1231.Mutate(a12341);
+~[BODY]~
+~[VAR_String@1]~ = a12341.value;
+~template end~
+
+~template unary_lambda_mutation_negative start~
+StringHolder a12341 = new StringHolder(~[VAR_String@1]~);
+UnaryOpMutationInterface lambda1231 = (s) -> { s.value = ""; };
+lambda1231.Mutate(a12341);
+~[BODY]~
+~[VAR_String@1]~ = a12341.value;
+~template end~
+
+~template nested_unary_lambda_mutation_positive start~
+final String s23423 = ~[VAR_String@1]~;
+StringHolder a12341 = new StringHolder();
+UnaryOpMutationInterface lambda1231 = (s) -> {
+	UnaryOpMutationInterface innerLambda1231 = (p) -> {
+        p.value = "";
+	}
+	innerLambda1231.Mutate(s);
+    s.value = s23423;
+};
+lambda1231.Mutate(a12341);
+~[BODY]~
+~[VAR_String@1]~ = a12341.value;
+~template end~
+
+~template nested_unary_lambda_mutation_negative start~
+StringHolder a12341 = new StringHolder(~[VAR_String@1]~);
+UnaryOpMutationInterface lambda1231 = (s) -> {
+    final String inner234234 = s.value;
+	UnaryOpMutationInterface innerLambda1231 = (p) -> {
+        p.value = inner234234;
+	}
+	innerLambda1231.Mutate(s);
+    s.value = "";
+};
+lambda1231.Mutate(a12341);
+~[BODY]~
+~[VAR_String@1]~ = a12341.value;
+~template end~
+
+~main body end~

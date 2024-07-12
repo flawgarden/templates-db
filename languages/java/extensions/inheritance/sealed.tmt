@@ -1,0 +1,10 @@
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof SealedSuper
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof PermittedSub1
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof PermittedSub2
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof SealedSuper
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof PermittedSub1
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof PermittedSub2
+
+~[EXPR_Object]~ -> new SealedSuper()
+~[EXPR_Object]~ -> new PermittedSub1()
+~[EXPR_Object]~ -> new PermittedSub2()
