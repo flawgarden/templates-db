@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from pathlib import Path
 from console import Console
 import diagnostic
