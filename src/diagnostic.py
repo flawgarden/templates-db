@@ -26,6 +26,7 @@ class DiagnosticResult:
 
 
 T = TypeVar("T")
+TextDiagnosticFunc = Callable[[Path], List[DiagnosticResult]]
 DiagnosticFunc = Callable[[List[LanguageProject]], List[DiagnosticResult]]
 LanguageDiagnosticFunc = Callable[[LanguageProject], List[DiagnosticResult]]
 TemplateDiagnosticFunc = Callable[[LanguageProject, TemplateFile], List[DiagnosticResult]]
@@ -38,14 +39,31 @@ class Diagnostic:
     perform: DiagnosticFunc
 
 
+@dataclass(frozen=True)
+class TextDiagnostic:
+    name: str
+    perform: TextDiagnosticFunc
+
+
 class Nerd:
 
     def __init__(self):
         self._diagnostics = []
+        self._pre_parsing_diagnostics = []
 
     def diagnostic(self, name: str):
         def wrapper(func: DiagnosticFunc) -> DiagnosticFunc:
             self._diagnostics.append(Diagnostic(
+                name=name,
+                perform=func
+            ))
+            return func
+
+        return wrapper
+
+    def pre_parsing_diagnostic(self, name: str):
+        def wrapper(func: TextDiagnosticFunc) -> TextDiagnosticFunc:
+            self._pre_parsing_diagnostics.append(TextDiagnostic(
                 name=name,
                 perform=func
             ))
@@ -92,20 +110,37 @@ class Nerd:
     def extension_diagnostic(self, name: str):
         return self._file_wrapper(name, lambda proj: proj.extension_files)
 
-    def perform_diagnostics(self, projects: List[LanguageProject]) -> bool:
-        has_errors = False
-        for diagnostic in self._diagnostics:
-            Console.info(f"[{diagnostic.name}] Start diagnostic ")
-            results = diagnostic.perform(projects)
-            for result in results:
-                if result.level == DiagnosticResult.DiagnosticLevel.ERROR:
-                    has_errors = True
-                    Console.err(f"[{diagnostic.name}] ERROR: {result.message}")
-                if result.level == DiagnosticResult.DiagnosticLevel.WARNING:
-                    Console.warn(f"[{diagnostic.name}] WARNING: {result.message}")
-            Console.info(f"[{diagnostic.name}] Finished diagnostic")
+    @staticmethod
+    def _print_diagnostic_result(diagnostic, result: DiagnosticResult):
+        if result.level == DiagnosticResult.DiagnosticLevel.ERROR:
+            Console.err(f"[{diagnostic.name}] ERROR: {result.message}")
+        if result.level == DiagnosticResult.DiagnosticLevel.WARNING:
+            Console.warn(f"[{diagnostic.name}] WARNING: {result.message}")
 
-        return has_errors
+    @staticmethod
+    def _has_errors(results: List[DiagnosticResult]) -> bool:
+        for result in results:
+            if result.level == DiagnosticResult.DiagnosticLevel.ERROR:
+                return True
+        return False
+
+    @staticmethod
+    def _perform(diagnostics, args) -> bool:
+        all_results = []
+        for diagnostic in diagnostics:
+            Console.info(f"[{diagnostic.name}] Start diagnostic")
+            results = diagnostic.perform(args)
+            all_results.extend(results)
+            for result in results:
+                Nerd._print_diagnostic_result(diagnostic, result)
+            Console.info(f"[{diagnostic.name}] Finished diagnostic")
+        return Nerd._has_errors(all_results)
+
+    def perform_diagnostics(self, projects: List[LanguageProject]) -> bool:
+        return Nerd._perform(self._diagnostics, projects)
+
+    def perform_pre_parsing_diagnostics(self, paths: List[Path]) -> bool:
+        return Nerd._perform(self._pre_parsing_diagnostics, paths)
 
 
 nerd = Nerd()
@@ -120,6 +155,44 @@ def diff(fst: List[T], snd: List[T]) -> List[T]:
         if snd_e not in fst:
             result.append(snd_e)
     return result
+
+
+@nerd.pre_parsing_diagnostic("Unescaped tilda")
+def unescaped_tilda_diagnostic(paths: List[Path]) -> List[DiagnosticResult]:
+    results = []
+
+    def find_all(target_str, sub_str):
+        start = 0
+        while True:
+            start = target_str.find(sub_str, start)
+            if start == -1:
+                return
+            yield start
+            start += len(sub_str)
+
+    def is_valid_tilda(line_text: str, pos: int) -> bool:
+        assert line_text.count("\n") == 0
+        assert line_text[pos] == "~"
+        if pos == 0 or pos == len(line_text) - 1:
+            return True
+        if line_text[pos - 1] == "\\":
+            return True
+        if line_text[pos - 1] == "]":
+            return True
+        if line_text[pos + 1] == "[":
+            return True
+        return False
+
+    for path in paths:
+        text = path.read_text()
+        lines = text.split("\n")
+        for line_n, line in enumerate(lines):
+            tilda_positions = find_all(line, "~")
+            for position in tilda_positions:
+                if not is_valid_tilda(line, position):
+                    results.append(DiagnosticResult.error(f"Unescaped tilda at {line_n}:{position} [{path}]"))
+
+    return results
 
 
 @nerd.diagnostic("Language structural equality")
