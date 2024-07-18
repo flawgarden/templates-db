@@ -1,4 +1,4 @@
-~main class start~
+~main body start~
 
 ~template simple_while start~
 int i = 0;
@@ -8,4 +8,4 @@ while(i < 10) {
 }
 ~template end~
 
-~main class end~
+~main body end~

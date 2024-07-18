@@ -7,7 +7,7 @@
 
 ~extensions end~
 
-~main class start~
+~main body start~
 ~helper import helpers/Container~
 
 ~template simple_for start~
@@ -24,4 +24,4 @@ for (int i = 0; i < ~[VAR_Integer]~; i++) {
 }
 ~template end~
 
-~main class end~
+~main body end~
