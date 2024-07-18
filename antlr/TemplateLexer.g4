@@ -73,6 +73,10 @@ BODY
     : 'BODY' -> pushMode(Hole)
     ;
 
+TYPE
+    : 'TYPE' -> pushMode(Hole)
+    ;
+
 mode Hole;
 
 CLOSE_BRACKET
@@ -83,9 +87,11 @@ TYPE_NAME
     : (~[~\n\r[\]_@0123456789 ])+
     ;
 
-TYPE           : 'TYPE';
 REF_MARKER     : '@';
 UNDERSCORE     : '_';
+HOLE_TYPE
+    : 'TYPE' -> type(TYPE)
+    ;
 
 NUM
     : [0-9]+

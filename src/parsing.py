@@ -175,10 +175,21 @@ class Parser:
     def _parse_macro_name(self, ctx: TemplateParser.MacroContext) -> str:
         return ctx.IDENTIFIER().getText()
 
+    def _parse_type_hole(self, ctx: TemplateParser.TypeContext) -> template.Hole:
+        ref_ctx = ctx.holeRef()
+        ref = None if ref_ctx is None else ref_ctx.getText()
+        return template.Hole(
+            kind="TYPE",
+            type_="TYPE",
+            ref=ref,
+        )
+
     def _parse_code_string(self, ctx: TemplateParser.CodeStringContext) -> Tuple[str, List[str], List[template.Hole]]:
         body = ctx.getText()
         macros = Parser._map_option(self._parse_macro_name, ctx.macro())
         holes = Parser._map_option(self._parse_hole, ctx.hole())
+        type_holes = Parser._map_option(self._parse_type_hole, ctx.type_())
+        holes.extend(type_holes)
         return body, macros, holes
 
     def _parse_code(self, ctx: TemplateParser.CodeContext) -> Tuple[str, List[str], List[template.Hole]]:

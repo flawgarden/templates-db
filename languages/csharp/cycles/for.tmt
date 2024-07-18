@@ -18,6 +18,8 @@ for (int i = 0; i < ~[VAR_Integer]~; i++) {
 
 ~template nested_for start~
 for (int i = 0; i < ~[VAR_Integer]~; i++) {
+    var x = new List<~[TYPE@1]~>();
+    x.Add(~[VAR_TYPE@1]~);
     for (int i = 0; i < ~[VAR_Integer]~; i++) {
         ~[VAR_String]~ = ~[MACRO_Double_String]~
     }

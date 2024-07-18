@@ -41,8 +41,12 @@ body
     : TILDA OPEN_BRACKET BODY CLOSE_BRACKET TILDA
     ;
 
+type
+    : TILDA OPEN_BRACKET TYPE holeRef? CLOSE_BRACKET TILDA
+    ;
+
 codeString
-    : (CODE_LINE_PART | hole | macro | body)+
+    : (CODE_LINE_PART | hole | macro | body | type)+
     ;
 
 extensionDefinition
