@@ -9,6 +9,20 @@
 
 ~main body start~
 
+~helper functions start~
+
+~function HelperFun start~
+public static void HelperFun() {
+
+}
+~function end~
+
+~function HelperFun2 start~
+public static void HelperFun2()
+~function end~
+
+~helper functions end~
+
 ~template simple_for start~
 for (int i = 0; i < ~[VAR_Integer]~; i++) {
     ~[VAR_String@1]~ = ~[VAR_String@1]~

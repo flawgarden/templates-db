@@ -46,6 +46,8 @@ END            : 'end';
 TEMPLATE       : 'template';
 MAIN           : 'main';
 BODY_LK        : 'body';
+FUNCTION       : 'function';
+FUNCTIONS      : 'functions';
 
 IDENTIFIER
     : (~[\n\r~[\] ])+
