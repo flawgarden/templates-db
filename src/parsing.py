@@ -400,9 +400,6 @@ class Parser:
 
         self._has_errors = False
 
-        helpers_dir_name = "helpers"
-        extensions_dir_name = "extensions"
-
         def tmt_rglob(p: Path, pattern: str) -> List[Path]:
             result = []
             for extension in [".tmt", ".todo", ".unsupported"]:
