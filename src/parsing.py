@@ -101,6 +101,7 @@ class Parser:
         self.debug = debug
         self._deleted_lines = []
         self._current_file = None
+        self._has_errors = False
 
     def _get_origin_line_n(self, line: int) -> int:
         shift = 0
@@ -147,6 +148,7 @@ class Parser:
                     finished = True
                 except ParsingException as e:
                     if len(self._deleted_lines) == 0:
+                        self._has_errors = True
                         Console.err(f"ERROR: {e.msg}, [{self._current_file}]")
                     if self.debug:
                         Console.warn(f"[TRACE] delete line {e.line}")
@@ -393,19 +395,13 @@ class Parser:
         else:
             assert False
 
-    def parse_project(self, path: Path) -> template.LanguageProject:
+    def parse_project(self, path: Path) -> Tuple[bool, template.LanguageProject]:
         assert path.is_dir()
+
+        self._has_errors = False
 
         helpers_dir_name = "helpers"
         extensions_dir_name = "extensions"
-
-        helpers_path = path.joinpath(helpers_dir_name)
-        if not helpers_path.exists():
-            raise ParsingException(f"Helpers path doesn't exist {path}")
-
-        extensions_path = path.joinpath(extensions_dir_name)
-        if not extensions_path.exists():
-            raise ParsingException(f"Extensions path doesn't exist {path}")
 
         def tmt_rglob(p: Path, pattern: str) -> List[Path]:
             result = []
@@ -425,4 +421,4 @@ class Parser:
         Console.info(f"[{path.stem}] Finished project parsing")
         name = f"{path.stem}"
 
-        return template.LanguageProject(name, templates, helpers, extensions)
+        return self._has_errors, template.LanguageProject(name, templates, helpers, extensions)

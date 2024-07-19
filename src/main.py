@@ -15,7 +15,9 @@ if __name__ == '__main__':
     parser = parsing.Parser()
     projects = []
     for path in languages_path.iterdir():
-        projects.append(parser.parse_project(path))
+        has_parsing_errors, project = parser.parse_project(path)
+        projects.append(project)
+        has_errors = has_errors or has_parsing_errors
 
     has_errors = has_errors | diagnostic.nerd.perform_diagnostics(projects)
 
