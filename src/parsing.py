@@ -407,9 +407,16 @@ class Parser:
         if not extensions_path.exists():
             raise ParsingException(f"Extensions path doesn't exist {path}")
 
-        template_files = self._traverse(path, exclude=[helpers_path, extensions_path])
-        helper_files = self._traverse(helpers_path)
-        extension_files = self._traverse(extensions_path)
+        def tmt_rglob(p: Path, pattern: str) -> List[Path]:
+            result = []
+            for extension in [".tmt", ".todo", ".unsupported"]:
+                result.extend(p.rglob(pattern + extension))
+            return result
+
+        helper_files = tmt_rglob(path, "helpers/*")
+        extension_files = tmt_rglob(path, "extensions/*")
+        all_files = tmt_rglob(path, "*")
+        template_files = [f for f in all_files if f not in helper_files and f not in extension_files]
 
         Console.info(f"[{path.stem}] Start project parsing")
         templates: List[template.TemplateFile] = Parser._map_option(self._parse_template_file, template_files)
