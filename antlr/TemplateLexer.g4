@@ -97,6 +97,10 @@ TYPE_NAME
     : (~[~\n\r[\]_@0123456789\\])+
     ;
 
+INNER_MACROS_OR_HOLE_OPEN
+    : '~' -> pushMode(TemplateLanguage), type(TILDA)
+    ;
+
 REF_MARKER     : '@';
 UNDERSCORE     : '_';
 HOLE_TYPE
