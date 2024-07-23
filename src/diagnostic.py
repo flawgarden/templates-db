@@ -378,3 +378,49 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
             check_extension(extension_file.path, extension)
 
     return result
+
+
+@nerd.language_diagnostic("Duplicated names")
+def duplicated_names(project: LanguageProject) -> List[DiagnosticResult]:
+    result = []
+
+    def check_names(
+            files: List[ProjectFile],
+            get_named_objects: Callable[[ProjectFile], T],
+            get_name: Callable[[T], str],
+            object_name: str
+    ):
+        name_to_file = {}
+        names = set()
+        for f in files:
+            named_objects = get_named_objects(f)
+            if named_objects is None:
+                continue
+            for named_object in named_objects:
+                name = get_name(named_object)
+                if name in names:
+                    result.append(DiagnosticResult.error(
+                        f"Duplicated {object_name} name [{named_object.name}] in "
+                        f"[{f.path}]"
+                        f" and "
+                        f"[{name_to_file[name].path}]")
+                    )
+                else:
+                    names.add(name)
+                    name_to_file[name] = f
+
+    check_names(
+        project.template_files,
+        lambda template_file: template_file.templates,
+        lambda template: template.name,
+        "template"
+    )
+
+    check_names(
+        project.helper_files,
+        lambda helper_file: helper_file.classes,
+        lambda helper_class: helper_class.name,
+        "helper class"
+    )
+
+    return result
