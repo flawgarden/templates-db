@@ -156,7 +156,7 @@ helperClassStart
     ;
 
 helperClassEnd
-    : TILDA CLASS WHITESPACE END TILDA
+    : TILDA CLASS WHITESPACE END TILDA LINE_BREAK+
     ;
 
 helperClass
@@ -172,5 +172,5 @@ extensionFile
     ;
 
 helperFile
-    : helperClass
+    : helperClass+
     ;

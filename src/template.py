@@ -74,7 +74,7 @@ class TemplateFile(ProjectFile):
 
 @dataclass
 class HelperFile(ProjectFile):
-    class_: HelperClass | None
+    classes: List[HelperClass] | None
 
 
 @dataclass
@@ -153,7 +153,7 @@ class LanguageProject:
         def add_by_filter(helper_filter: Callable[[HelperFile], bool]):
             for helper_file in self._helper_files:
                 if helper_filter(helper_file):
-                    result.append(helper_file.class_)
+                    result.extend(helper_file.classes)
 
         if import_.target == "*":
             add_by_filter(lambda helper_file: True)
@@ -171,6 +171,6 @@ class LanguageProject:
             helper_file_parents_and_name = [x for x in f.parents][::-1]
             helper_file_parents_and_name.append(f.name)
             if helper_file_parents_and_name == parents_and_name:
-                return [f.class_]
+                return f.classes
 
         return None

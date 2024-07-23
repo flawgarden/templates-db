@@ -352,7 +352,7 @@ class Parser:
     def _parse_helper_file_text(self, text: str, default_value: template.HelperFile) -> template.HelperFile:
         parser = self._get_parser(text)
         helper_file_ctx = parser.helperFile()
-        helper_class = self._parse_helper_class(helper_file_ctx.helperClass())
+        helper_class = self._map_option(self._parse_helper_class, helper_file_ctx.helperClass())
 
         return template.HelperFile(
             get_kind(self._current_file),

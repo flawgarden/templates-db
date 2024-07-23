@@ -58,7 +58,7 @@ class DefaultFiles:
             name="name",
             path=Path(),
             parents=[],
-            class_=None
+            classes=None
         )
 
     @staticmethod
@@ -205,7 +205,7 @@ class DiagnosticsTest:
             helper_file = DefaultFiles.get_helper_file()
             helper_file.parents = ["helpers"]
             helper_file.name = "SomeHelper"
-            helper_file.class_ = HelperClass(name="SomeHelper", body="")
+            helper_file.classes = HelperClass(name="SomeHelper", body="")
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
                 .with_helper_file(helper_file) \
