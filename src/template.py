@@ -64,12 +64,19 @@ class ProjectFile:
 
 
 @dataclass
+class HelperFunction:
+    name: str
+    body: str
+
+
+@dataclass
 class TemplateFile(ProjectFile):
     helper_imports: List[HelperImport]
     extension_imports: List[ExtensionImport]
     local_extensions: List[Extension]
     local_macros: List[Macro]
     templates: List[Template]
+    helper_functions: List[HelperFunction]
 
 
 @dataclass

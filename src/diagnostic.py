@@ -423,4 +423,11 @@ def duplicated_names(project: LanguageProject) -> List[DiagnosticResult]:
         "helper class"
     )
 
+    check_names(
+        project.template_files,
+        lambda template_file: template_file.helper_functions,
+        lambda helper_function: helper_function.name,
+        "helper function"
+    )
+
     return result
