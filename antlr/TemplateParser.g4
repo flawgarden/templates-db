@@ -8,9 +8,19 @@ holeKind
     | VAR_KIND
     ;
 
-holeType
+holeTypeIdent
+    : (TYPE_NAME | OPEN_BRACKET | CLOSE_BRACKET)+
+    ;
+
+holeProperType
     : TYPE
-    | (TYPE_NAME | OPEN_BRACKET | CLOSE_BRACKET)+
+    | holeTypeIdent
+    ;
+
+holeType
+    : holeProperType
+    | (holeTypeIdent type)+ holeTypeIdent?
+    | holeTypeIdent? (type holeTypeIdent)+
     ;
 
 holeRef
