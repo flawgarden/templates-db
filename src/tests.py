@@ -48,7 +48,8 @@ class DefaultFiles:
             helper_imports=[],
             local_extensions=[],
             local_macros=[],
-            templates=[]
+            templates=[],
+            helper_functions=[],
         )
 
     @staticmethod
