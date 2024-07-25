@@ -11,9 +11,15 @@ class TmtFileKind(Enum):
 
 
 @dataclass
+class HoleType:
+    body: str
+    types: List["Hole"]
+
+
+@dataclass
 class Hole:
     kind: str
-    type_: str
+    type_: HoleType | None
     ref: str | None
 
 
@@ -64,17 +70,24 @@ class ProjectFile:
 
 
 @dataclass
+class HelperFunction:
+    name: str
+    body: str
+
+
+@dataclass
 class TemplateFile(ProjectFile):
     helper_imports: List[HelperImport]
     extension_imports: List[ExtensionImport]
     local_extensions: List[Extension]
     local_macros: List[Macro]
     templates: List[Template]
+    helper_functions: List[HelperFunction]
 
 
 @dataclass
 class HelperFile(ProjectFile):
-    class_: HelperClass | None
+    classes: List[HelperClass] | None
 
 
 @dataclass
@@ -153,7 +166,7 @@ class LanguageProject:
         def add_by_filter(helper_filter: Callable[[HelperFile], bool]):
             for helper_file in self._helper_files:
                 if helper_filter(helper_file):
-                    result.append(helper_file.class_)
+                    result.extend(helper_file.classes)
 
         if import_.target == "*":
             add_by_filter(lambda helper_file: True)
@@ -171,6 +184,6 @@ class LanguageProject:
             helper_file_parents_and_name = [x for x in f.parents][::-1]
             helper_file_parents_and_name.append(f.name)
             if helper_file_parents_and_name == parents_and_name:
-                return [f.class_]
+                return f.classes
 
         return None

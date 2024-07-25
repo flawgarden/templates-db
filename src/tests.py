@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List
 from diagnostic import DiagnosticResult
 from template import TemplateFile, HelperFile, ExtensionFile, LanguageProject, HelperImport, ExtensionImport, \
-    HelperClass, Macro, Template, TmtFileKind, Extension, Hole
+    HelperClass, Macro, Template, TmtFileKind, Extension, Hole, HelperFunction, HoleType
 
 
 class ProjectBuilder:
@@ -48,7 +48,8 @@ class DefaultFiles:
             helper_imports=[],
             local_extensions=[],
             local_macros=[],
-            templates=[]
+            templates=[],
+            helper_functions=[],
         )
 
     @staticmethod
@@ -58,7 +59,7 @@ class DefaultFiles:
             name="name",
             path=Path(),
             parents=[],
-            class_=None
+            classes=None
         )
 
     @staticmethod
@@ -205,7 +206,7 @@ class DiagnosticsTest:
             helper_file = DefaultFiles.get_helper_file()
             helper_file.parents = ["helpers"]
             helper_file.name = "SomeHelper"
-            helper_file.class_ = HelperClass(name="SomeHelper", body="")
+            helper_file.classes = HelperClass(name="SomeHelper", body="")
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
                 .with_helper_file(helper_file) \
@@ -338,9 +339,9 @@ class DiagnosticsTest:
         def test_dangling_ref_in_local_extension_cause_warning():
             template_file = DefaultFiles.get_template_file()
             template_file.local_extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -357,7 +358,7 @@ class DiagnosticsTest:
                 name="",
                 body="",
                 macros=[],
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -371,9 +372,9 @@ class DiagnosticsTest:
         def test_dangling_ref_in_extension_file_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_extension_file(extension_file) \
@@ -387,11 +388,11 @@ class DiagnosticsTest:
         def test_dangling_ref_with_same_ref_but_different_types_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="EXPR", ref="@1", type_="Boolean")
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Boolean", types=[]))
                 ]
             )]
             project = ProjectBuilder() \
@@ -406,11 +407,11 @@ class DiagnosticsTest:
         def test_dangling_ref_with_same_ref_but_different_kind_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="VAR", ref="@1", type_="Integer")
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="VAR", ref="@1", type_=HoleType(body="Integer", types=[]))
                 ]
             )]
             project = ProjectBuilder() \
@@ -425,10 +426,13 @@ class DiagnosticsTest:
         def test_dangling_type_ref_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="TYPE"),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
                 ]
             )]
             project = ProjectBuilder() \
@@ -443,11 +447,17 @@ class DiagnosticsTest:
         def test_type_refs_doesnt_cause_error_or_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="TYPE"),
-                    Hole(kind="VAR", ref="@1", type_="TYPE"),
+                    Hole(kind="EXPR", ref=None, type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
+                    Hole(kind="VAR", ref=None, type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
                 ]
             )]
             project = ProjectBuilder() \
@@ -462,11 +472,11 @@ class DiagnosticsTest:
         def test_refs_doesnt_cause_error_or_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
                 ]
             )]
             project = ProjectBuilder() \
@@ -474,5 +484,172 @@ class DiagnosticsTest:
                 .get_project("lang")
 
             diagnostics = diagnostic.dangling_ref_diagnostic(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+    class DuplicatedNamesTest:
+
+        @staticmethod
+        def test_duplicated_template_names_in_same_file_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[]),
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_template_names_in_different_files_cause_error():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_template_names_doesnt_cause_error_or_warning():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.templates = [
+                Template(name="name1", body="", macros=[], holes=[]),
+                Template(name="name2", body="", macros=[], holes=[])
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.templates = [
+                Template(name="name3", body="", macros=[], holes=[]),
+                Template(name="name4", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_function_names_in_same_file_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+                HelperFunction(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_function_names_in_different_files_cause_error():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_helper_function_names_doesnt_cause_error_or_warning():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.helper_functions = [
+                HelperFunction(name="name1", body=""),
+                HelperFunction(name="name2", body="")
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.helper_functions = [
+                HelperFunction(name="name3", body=""),
+                HelperFunction(name="name4", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_class_names_in_same_file_cause_error():
+            helper_file = DefaultFiles.get_helper_file()
+            helper_file.classes = [
+                HelperClass(name="name", body=""),
+                HelperClass(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_class_names_in_different_files_cause_error():
+            first_helper_file = DefaultFiles.get_helper_file()
+            first_helper_file.classes = [
+                HelperClass(name="name", body="")
+            ]
+            second_helper_file = DefaultFiles.get_helper_file()
+            second_helper_file.classes = [
+                HelperClass(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(first_helper_file) \
+                .with_helper_file(second_helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_helper_class_names_doesnt_cause_error_or_warning():
+            first_helper_file = DefaultFiles.get_helper_file()
+            first_helper_file.classes = [
+                HelperClass(name="name1", body=""),
+                HelperClass(name="name2", body="")
+            ]
+            second_helper_file = DefaultFiles.get_helper_file()
+            second_helper_file.classes = [
+                HelperClass(name="name3", body=""),
+                HelperClass(name="name4", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(first_helper_file) \
+                .with_helper_file(second_helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
 
             assert not has_error(diagnostics) and not has_warning(diagnostics)

@@ -161,12 +161,18 @@ class Parser:
 
         return wrapper
 
+    def _parse_hole_type(self, ctx: TemplateParser.HoleTypeContext) -> template.HoleType:
+        return template.HoleType(
+            body=ctx.getText(),
+            types=[self._parse_type_hole(x) for x in ctx.type_()],
+        )
+
     def _parse_hole_body(self, ctx: TemplateParser.HoleBodyContext) -> template.Hole:
         hole_ref_ctx = ctx.holeRef()
         hole_ref = None if hole_ref_ctx is None else hole_ref_ctx.getText()
         return template.Hole(
             kind=ctx.holeKind().getText(),
-            type_=ctx.holeType().getText(),
+            type_=self._parse_hole_type(ctx.holeType()),
             ref=hole_ref,
         )
 
@@ -182,7 +188,7 @@ class Parser:
         ref = None if ref_ctx is None else ref_ctx.getText()
         return template.Hole(
             kind="TYPE",
-            type_="TYPE",
+            type_=None,
             ref=ref,
         )
 
@@ -232,6 +238,11 @@ class Parser:
         body, macros, holes = self._parse_code(ctx.code())
         return template.HelperClass(name, body)
 
+    def _parse_helper_function(self, ctx: TemplateParser.HelperFunctionContext) -> template.HelperFunction:
+        name = ctx.helperFunctionStart().IDENTIFIER().getText()
+        body, macros, holes = self._parse_code(ctx.code())
+        return template.HelperFunction(name, body)
+
     def _get_parser(self, text: str) -> TemplateParser:
         if self.debug:
             print_tokens(text)
@@ -265,10 +276,15 @@ class Parser:
         parser = self._get_parser(text)
         template_file_ctx = parser.templateFile()
 
-        extension_block_ctx = template_file_ctx.extensionsBlock()
         extension_imports = []
         local_extensions = []
         local_macros = []
+        helper_functions = []
+
+        main_class_ctx = template_file_ctx.mainClass()
+        extension_block_ctx = template_file_ctx.extensionsBlock()
+        helper_functions_ctx = main_class_ctx.helperFunctions()
+
         if extension_block_ctx is not None:
             extensions_ctx = extension_block_ctx.extensions()
             extension_imports = Parser._map_option(
@@ -281,7 +297,9 @@ class Parser:
                 self._parse_macro_definition, extensions_ctx.macroDefinition()
             )
 
-        main_class_ctx = template_file_ctx.mainClass()
+        if helper_functions_ctx is not None:
+            helper_functions = Parser._map_option(self._parse_helper_function, helper_functions_ctx.helperFunction())
+
         helper_imports = Parser._map_option(self._parse_helper_import, main_class_ctx.helperImport())
         templates = Parser._map_option(self._parse_template, main_class_ctx.template())
 
@@ -294,7 +312,8 @@ class Parser:
             extension_imports,
             local_extensions,
             local_macros,
-            templates
+            templates,
+            helper_functions,
         )
 
     def _parse_template_file(self, file_path: Path) -> template.TemplateFile:
@@ -305,7 +324,7 @@ class Parser:
             file_path,
             file_path.stem,
             self._get_parents(file_path),
-            [], [], [], [], [],
+            [], [], [], [], [], []
         )
 
         if kind != TmtFileKind.TMT:
@@ -352,7 +371,7 @@ class Parser:
     def _parse_helper_file_text(self, text: str, default_value: template.HelperFile) -> template.HelperFile:
         parser = self._get_parser(text)
         helper_file_ctx = parser.helperFile()
-        helper_class = self._parse_helper_class(helper_file_ctx.helperClass())
+        helper_class = self._map_option(self._parse_helper_class, helper_file_ctx.helperClass())
 
         return template.HelperFile(
             get_kind(self._current_file),
