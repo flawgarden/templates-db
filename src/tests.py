@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List
 from diagnostic import DiagnosticResult
 from template import TemplateFile, HelperFile, ExtensionFile, LanguageProject, HelperImport, ExtensionImport, \
-    HelperClass, Macro, Template, TmtFileKind, Extension, Hole
+    HelperClass, Macro, Template, TmtFileKind, Extension, Hole, HelperFunction
 
 
 class ProjectBuilder:
@@ -475,5 +475,172 @@ class DiagnosticsTest:
                 .get_project("lang")
 
             diagnostics = diagnostic.dangling_ref_diagnostic(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+    class DuplicatedNamesTest:
+
+        @staticmethod
+        def test_duplicated_template_names_in_same_file_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[]),
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_template_names_in_different_files_cause_error():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.templates = [
+                Template(name="name", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_template_names_doesnt_cause_error_or_warning():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.templates = [
+                Template(name="name1", body="", macros=[], holes=[]),
+                Template(name="name2", body="", macros=[], holes=[])
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.templates = [
+                Template(name="name3", body="", macros=[], holes=[]),
+                Template(name="name4", body="", macros=[], holes=[])
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_function_names_in_same_file_cause_error():
+            template_file = DefaultFiles.get_template_file()
+            template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+                HelperFunction(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_function_names_in_different_files_cause_error():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.helper_functions = [
+                HelperFunction(name="name", body=""),
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_helper_function_names_doesnt_cause_error_or_warning():
+            first_template_file = DefaultFiles.get_template_file()
+            first_template_file.helper_functions = [
+                HelperFunction(name="name1", body=""),
+                HelperFunction(name="name2", body="")
+            ]
+            second_template_file = DefaultFiles.get_template_file()
+            second_template_file.helper_functions = [
+                HelperFunction(name="name3", body=""),
+                HelperFunction(name="name4", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_template_file(first_template_file) \
+                .with_template_file(second_template_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert not has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_class_names_in_same_file_cause_error():
+            helper_file = DefaultFiles.get_helper_file()
+            helper_file.classes = [
+                HelperClass(name="name", body=""),
+                HelperClass(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_duplicated_helper_class_names_in_different_files_cause_error():
+            first_helper_file = DefaultFiles.get_helper_file()
+            first_helper_file.classes = [
+                HelperClass(name="name", body="")
+            ]
+            second_helper_file = DefaultFiles.get_helper_file()
+            second_helper_file.classes = [
+                HelperClass(name="name", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(first_helper_file) \
+                .with_helper_file(second_helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
+
+            assert has_error(diagnostics) and not has_warning(diagnostics)
+
+        @staticmethod
+        def test_different_helper_class_names_doesnt_cause_error_or_warning():
+            first_helper_file = DefaultFiles.get_helper_file()
+            first_helper_file.classes = [
+                HelperClass(name="name1", body=""),
+                HelperClass(name="name2", body="")
+            ]
+            second_helper_file = DefaultFiles.get_helper_file()
+            second_helper_file.classes = [
+                HelperClass(name="name3", body=""),
+                HelperClass(name="name4", body="")
+            ]
+            project = ProjectBuilder() \
+                .with_helper_file(first_helper_file) \
+                .with_helper_file(second_helper_file) \
+                .get_project("lang")
+
+            diagnostics = diagnostic.duplicated_names(project)
 
             assert not has_error(diagnostics) and not has_warning(diagnostics)
