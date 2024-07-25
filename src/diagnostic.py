@@ -357,7 +357,7 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
         return result_holes
 
     def check_extension(path: Path, e: Extension):
-        for ref in get_dangling_refs(traverse_holes(e.holes)):
+        for ref in get_dangling_refs(traverse_holes([*e.target.type_.types, *e.holes])):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside extensions in file [{path}]")
             )
