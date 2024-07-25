@@ -343,26 +343,27 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
         for hole in holes:
             if hole.ref is None:
                 continue
-            if hole.type_ != "TYPE" and holes.count(hole) < 2:
+            if holes.count(hole) < 2:
                 dangling_refs.append(hole)
-            elif hole.type_ == "TYPE":
-                found_types_ref = 0
-                for other_hole in holes:
-                    if other_hole.type_ == "TYPE" and other_hole.ref == hole.ref:
-                        found_types_ref += 1
-                if found_types_ref < 2:
-                    dangling_refs.append(hole)
 
         return dangling_refs
 
+    def traverse_holes(holes: List[Hole]) -> List[Hole]:
+        result_holes = []
+        for hole in holes:
+            result_holes.append(hole)
+            if hole.type_ is not None:
+                result_holes.extend(hole.type_.types)
+        return result_holes
+
     def check_extension(path: Path, e: Extension):
-        for ref in get_dangling_refs(e.holes):
+        for ref in get_dangling_refs(traverse_holes(e.holes)):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside extensions in file [{path}]")
             )
 
     def check_template(path: Path, t: Template):
-        for ref in get_dangling_refs(t.holes):
+        for ref in get_dangling_refs(traverse_holes(t.holes)):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside template [{t.name}] in file [{path}]")
             )

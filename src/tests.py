@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List
 from diagnostic import DiagnosticResult
 from template import TemplateFile, HelperFile, ExtensionFile, LanguageProject, HelperImport, ExtensionImport, \
-    HelperClass, Macro, Template, TmtFileKind, Extension, Hole, HelperFunction
+    HelperClass, Macro, Template, TmtFileKind, Extension, Hole, HelperFunction, HoleType
 
 
 class ProjectBuilder:
@@ -339,9 +339,9 @@ class DiagnosticsTest:
         def test_dangling_ref_in_local_extension_cause_warning():
             template_file = DefaultFiles.get_template_file()
             template_file.local_extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -358,7 +358,7 @@ class DiagnosticsTest:
                 name="",
                 body="",
                 macros=[],
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -372,9 +372,9 @@ class DiagnosticsTest:
         def test_dangling_ref_in_extension_file_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
-                holes=[Hole(kind="EXPR", ref="@1", type_="Integer")]
+                holes=[Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[]))]
             )]
             project = ProjectBuilder() \
                 .with_extension_file(extension_file) \
@@ -388,11 +388,11 @@ class DiagnosticsTest:
         def test_dangling_ref_with_same_ref_but_different_types_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="EXPR", ref="@1", type_="Boolean")
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Boolean", types=[]))
                 ]
             )]
             project = ProjectBuilder() \
@@ -407,11 +407,11 @@ class DiagnosticsTest:
         def test_dangling_ref_with_same_ref_but_different_kind_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="VAR", ref="@1", type_="Integer")
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="VAR", ref="@1", type_=HoleType(body="Integer", types=[]))
                 ]
             )]
             project = ProjectBuilder() \
@@ -426,10 +426,13 @@ class DiagnosticsTest:
         def test_dangling_type_ref_cause_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="TYPE"),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
                 ]
             )]
             project = ProjectBuilder() \
@@ -444,11 +447,17 @@ class DiagnosticsTest:
         def test_type_refs_doesnt_cause_error_or_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="TYPE"),
-                    Hole(kind="VAR", ref="@1", type_="TYPE"),
+                    Hole(kind="EXPR", ref=None, type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
+                    Hole(kind="VAR", ref=None, type_=HoleType(
+                        body="TYPE@1",
+                        types=[Hole(kind="TYPE", ref="@1", type_=None)])
+                    ),
                 ]
             )]
             project = ProjectBuilder() \
@@ -463,11 +472,11 @@ class DiagnosticsTest:
         def test_refs_doesnt_cause_error_or_warning():
             extension_file = DefaultFiles.get_extension_file()
             extension_file.extensions = [Extension(
-                target=Hole(kind="EXPR", ref=None, type_="Integer"),
+                target=Hole(kind="EXPR", ref=None, type_=HoleType(body="Integer", types=[])),
                 body="",
                 holes=[
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
-                    Hole(kind="EXPR", ref="@1", type_="Integer"),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
+                    Hole(kind="EXPR", ref="@1", type_=HoleType(body="Integer", types=[])),
                 ]
             )]
             project = ProjectBuilder() \

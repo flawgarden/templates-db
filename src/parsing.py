@@ -161,12 +161,18 @@ class Parser:
 
         return wrapper
 
+    def _parse_hole_type(self, ctx: TemplateParser.HoleTypeContext) -> template.HoleType:
+        return template.HoleType(
+            body=ctx.getText(),
+            types=[self._parse_type_hole(x) for x in ctx.type_()],
+        )
+
     def _parse_hole_body(self, ctx: TemplateParser.HoleBodyContext) -> template.Hole:
         hole_ref_ctx = ctx.holeRef()
         hole_ref = None if hole_ref_ctx is None else hole_ref_ctx.getText()
         return template.Hole(
             kind=ctx.holeKind().getText(),
-            type_=ctx.holeType().getText(),
+            type_=self._parse_hole_type(ctx.holeType()),
             ref=hole_ref,
         )
 
@@ -182,7 +188,7 @@ class Parser:
         ref = None if ref_ctx is None else ref_ctx.getText()
         return template.Hole(
             kind="TYPE",
-            type_="TYPE",
+            type_=None,
             ref=ref,
         )
 

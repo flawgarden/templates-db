@@ -11,9 +11,15 @@ class TmtFileKind(Enum):
 
 
 @dataclass
+class HoleType:
+    body: str
+    types: List["Hole"]
+
+
+@dataclass
 class Hole:
     kind: str
-    type_: str
+    type_: HoleType | None
     ref: str | None
 
 
