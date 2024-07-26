@@ -1,0 +1,7 @@
+~class SimpleRecord start~
+public record SimpleRecord (String t) {}
+~class end~
+
+~class NestedRecord start~
+public record NestedRecord (SimpleRecord a, SimpleRecord b) {}
+~class end~

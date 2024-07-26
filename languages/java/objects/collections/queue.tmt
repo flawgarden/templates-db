@@ -1,0 +1,32 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_Queue_Size]~ -> 1
+~[MACRO_Queue_Size]~ -> 2
+~[MACRO_Queue_Size]~ -> 3
+~extensions end~
+
+~main body start~
+~import java.util.*;~
+
+~template create_queue start~
+Queue<~[TYPE]~> queue = new ArrayBlockingQueue<>(~[MACRO_Queue_Size]~);
+~template end~
+
+~template queue_add start~
+~[VAR_Queue<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~template queue_remove start~
+~[VAR_Queue<~[TYPE]~>]~.remove();
+~template end~
+
+~template queue_poll start~
+~[TYPE@1]~ val23242 = ~[VAR_Queue<~[TYPE@1]~>]~.poll();
+~template end~
+
+~template queue_offer start~
+~[VAR_Queue<~[TYPE@1]~>]~.offer(~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~main body end~

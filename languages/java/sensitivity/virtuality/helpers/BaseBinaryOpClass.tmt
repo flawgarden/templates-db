@@ -1,0 +1,8 @@
+~class BaseBinaryOpClass start~
+
+public class BaseBinaryOpClass {
+    public String VirtualCall(String l, String r) {
+        return "";
+    }
+}
+~class end~

@@ -1,0 +1,8 @@
+~[EXPR_Function<String, Stream<String>>]~ -> e -> ~[EXPR_Stream<String>]~
+~[EXPR_Function<~[TYPE@1]~, Stream<~[TYPE@1]~>>]~ -> e -> ~[EXPR_Stream<~[TYPE@1]~>]~
+
+~[EXPR_Function<String, String>]~ -> e -> ~[EXPR_String]~
+~[EXPR_Function<~[TYPE]~, ~[TYPE@1]~>]~ -> e -> ~[EXPR_~[TYPE@1]~]~
+
+~[EXPR_BinaryOperator<String>]~ -> (a, b) -> ~[EXPR_String]~
+~[EXPR_BinaryOperator<~[TYPE@1]~>]~ -> (a, b) -> ~[EXPR_~[TYPE@1]~]~

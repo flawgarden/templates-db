@@ -1,0 +1,21 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/helpers/Record~
+~import java.util.*;~
+
+~template create_simple_record_empty start~
+SimpleRecord recordEmpty = new SimpleRecord("");
+~template end~
+
+~template create_simple_record start~
+SimpleRecord record = new SimpleRecord(~[EXPR_String]~);
+~template end~
+
+~template create_nested_record start~
+SimpleRecord nested = new NestedRecord(~[EXPR_SimpleRecord]~, ~[EXPR_SimpleRecord]~);
+~template end~
+
+~main body end~

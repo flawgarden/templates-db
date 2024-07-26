@@ -1,0 +1,65 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~import java.util.*;~
+~template if_operator_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+if (~[EXPR_Boolean]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template if_operator_negative start~
+if (~[EXPR_Boolean]~) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template if_else_operator_neutral start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+if (~[EXPR_Boolean]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+} else {
+    ~[VAR_String@1]~ = "";
+}
+~template end~
+
+~template if_else_if_operator_neutral start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+if (~[EXPR_Boolean@1]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+} else if (~[EXPR_Boolean@1]~) {
+    ~[VAR_String@1]~ = ~[EXPR_String]~;
+} else {
+    ~[VAR_String@1]~ = "";
+}
+~template end~
+
+~template if_operator_with_var_in_condition_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+Boolean conditionMet = false;
+if (~[EXPR_Boolean]~) {
+    conditionMet = true;
+}
+if (!conditionMet && ~[EXPR_Boolean]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template if_operator_with_var_in_condition_negative start~
+Boolean conditionMet = false;
+if (~[EXPR_Boolean]~) {
+    conditionMet = true;
+}
+if (!conditionMet && ~[EXPR_Boolean]~) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~main body end~

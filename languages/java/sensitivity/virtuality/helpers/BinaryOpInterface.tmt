@@ -1,0 +1,6 @@
+~class BinaryOpInterface start~
+
+public interface BinaryOpInterface {
+   public String InterfaceCall(String l, String r);
+}
+~class end~

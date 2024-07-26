@@ -1,0 +1,66 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/virtuality/helpers/UnaryOpClass~
+~helper import sensitivity/virtuality/helpers/UnaryOpInterface~
+~import java.util.*;~
+
+~template create_anonymous_class_empty start~
+UnaryOpClass val89458 = new UnaryOpClass() {
+    @Override
+    public String VirtualCall(String t) {
+        return "";
+    }
+};
+~template end~
+
+~template create_anonymous_class start~
+UnaryOpClass val89458 = new UnaryOpClass() {
+    @Override
+    public String VirtualCall(String t) {
+        return ~[EXPR_String]~;
+    }
+};
+~template end~
+
+~template create_anonymous_class_extended start~
+UnaryOpClass val89458 = new UnaryOpClass() {
+    @Override
+    public String VirtualCall(String t) {
+	    ~[BODY]~
+        return ~[EXPR_String]~;
+    }
+};
+~template end~
+
+~template create_anonymous_interface_empty start~
+UnaryOpInterface val89458 = new UnaryOpInterface() {
+    @Override
+    public String InterfaceCall(String t) {
+        return "";
+    }
+};
+~template end~
+
+~template create_anonymous_interface start~
+UnaryOpInterface val89458 = new UnaryOpInterface() {
+    @Override
+    public String InterfaceCall(String t) {
+        return ~[EXPR_String]~;
+    }
+};
+~template end~
+
+~template create_anonymous_interface_extended start~
+UnaryOpInterface val89458 = new UnaryOpInterface() {
+    @Override
+    public String InterfaceCall(String t) {
+	    ~[BODY]~
+        return ~[EXPR_String]~;
+    }
+};
+~template end~
+
+~main body end~

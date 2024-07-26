@@ -1,0 +1,35 @@
+~class ConstructorChains start~
+
+public class ConstructorChains {
+
+    private final bool condition;
+    private final String text;
+
+
+    public ConstructorChains() {
+        this(true, "");
+    }
+
+    public ConstructorChains(String text) {
+        this(true, text);
+    }
+
+    public ConstructorChains(bool condition, String text) {
+        this.condition = condition;
+        if (condition) {
+            this.text = text;
+        } else {
+            this.text = "";
+        }
+    }
+
+    public String getText(bool condition) {
+        if (this.condition || condition) {
+            return text;
+        } else {
+            return "";
+        }
+    }
+
+}
+~class end~

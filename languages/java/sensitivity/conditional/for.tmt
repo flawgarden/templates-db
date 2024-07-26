@@ -1,0 +1,181 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_String_Array]~ -> {~[EXPR_String]~}
+~[MACRO_String_Array]~ -> {~[EXPR_String]~, ~[EXPR_String]~}
+~[MACRO_String_Array]~ -> {~[EXPR_String]~, ~[EXPR_String]~, ~[EXPR_String]~}
+~extensions end~
+
+~main body start~
+~import java.util.*;~
+~import java.io.*;~
+
+~template for_operator_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_reverse_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = ~[EXPR_int]~; i >= 0; i--) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_reverse_negative start~
+for (int i = ~[EXPR_int]~; i >= 0; i--) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_string_array_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+String[] stringArray = ~[MACRO_String_Array]~;
+for (int i = 0; i < stringArray.length; i++) {
+    if(stringArray[i].equals(stringArray[i + 1])) {
+        ~[VAR_String@1]~ = tmpUnique42;
+    }
+}
+~template end~
+
+~template for_operator_string_array_negative start~
+String[] stringArray = ~[MACRO_String_Array]~;
+for (int i = 0; i < stringArray.length; i++) {
+    if(stringArray[i].equals(stringArray[i + 1])) {
+        ~[VAR_String]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_continue_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_Boolean]~) {
+        continue;
+    }
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_continue_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_Boolean]~) {
+        continue;
+    }
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_break_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_Boolean]~) {
+        break;
+    }
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_break_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_Boolean]~) {
+        break;
+    }
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_nested_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    for (int j = 0; j < ~[EXPR_int]~; j++) {
+        ~[VAR_String@1]~ = tmpUnique42;
+    }
+}
+~template end~
+
+~template for_operator_nested_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    for (int j = 0; j < ~[EXPR_int]~; j++) {
+        ~[VAR_String]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_change_index_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_change_index_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_non_zero_init_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (int i = ~[EXPR_int]~; i < ~[EXPR_int]~; i++) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_non_zero_init_negative start~
+for (int i = ~[EXPR_int]~; i < ~[EXPR_int]~; i++) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template for_operator_strcpy_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[VAR_String@1]~ = "";
+for (int i = 0; i < tmpUnique42.length(); i++) {
+    char c = tmpUnique42.charAt(i);
+   ~[VAR_String@1]~ = ~[VAR_String@1]~ + c;
+}
+~template end~
+
+~template for_operator_strcpy_negative start~
+String tmpUnique42 = "";
+for (int i = 0; i < ~[VAR_String@1]~.length(); i++) {
+    char c = ~[VAR_String@1]~.charAt(i);
+    tmpUnique42 = tmpUnique42 + c;
+    if (i + 1 == ~[VAR_String@1]~.length()) {
+        ~[VAR_String@1]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_collection_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+~[BODY]~
+for (~[TYPE@1]~ el : ~[VAR_Collection<~[TYPE@1]~>]~) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_collection_negative start~
+for (~[TYPE@1]~ el : ~[VAR_Collection<~[TYPE@1]~>]~) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~main body end~

@@ -1,0 +1,19 @@
+~class ImplBinaryOpInterfaceClass1 start~
+
+public class ImplBinaryOpInterfaceClass1 implements BinaryOpInterface {
+   @Override
+   public String InterfaceCall(String l, String r) {
+       return l;
+   }
+}
+~class end~
+
+~class ImplBinaryOpInterfaceClass2 start~
+
+public class ImplBinaryOpInterfaceClass2 implements BinaryOpInterface {
+   @Override
+   public String InterfaceCall(String l, String r) {
+       return r;
+   }
+}
+~class end~

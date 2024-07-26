@@ -1,0 +1,19 @@
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+~import java.util.*;~
+
+~template class_with_string_field_positive start~
+StringHolder sh = new StringHolder();
+sh.value = ~[VAR_String@1]~;
+~[BODY]~
+~[VAR_String@1]~ = sh.value;
+~template end~
+
+~template class_with_string_field_negative start~
+StringHolder sh = new StringHolder();
+sh.value = "";
+~[BODY]~
+~[VAR_String]~ = sh.value;
+~template end~
+
+~main body end~

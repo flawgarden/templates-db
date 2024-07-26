@@ -1,0 +1,14 @@
+~class SealedSuper start~
+public sealed class SealedSuper permits PermittedSub1, PermittedSub2 {
+}
+~class end~
+
+~class PermittedSub1 start~
+public final class PermittedSub1 extends SealedSuper {
+}
+~class end~
+
+~class PermittedSub2 start~
+public final class PermittedSub2 extends SealedSuper {
+}
+~class end~

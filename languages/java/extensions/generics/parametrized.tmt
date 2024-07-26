@@ -1,0 +1,17 @@
+~[EXPR_Boolean]~ -> ~[VAR_GenericClass<~[TYPE]~>]~ instanceof GenericClass<~[TYPE]~>
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof GenericClass<~[TYPE]~>
+~[EXPR_Boolean]~ -> ~[EXPR_GenericClass<~[TYPE]~>]~ instanceof GenericClass<~[TYPE]~>
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof GenericClass<~[TYPE]~>
+~[EXPR_Boolean]~ -> GenericTwoClass<~[TYPE@1]~, ~[TYPE@2]~>.tIsAssignableFromS(~[TYPE@1]~.class, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_Boolean]~ -> GenericTwoClass<~[TYPE@1]~, ~[TYPE@2]~>.sIsAssignableFromT(~[TYPE@2]~.class, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> GenericTwoClass<~[TYPE@1]~, ~[TYPE]~>.tIsAssignableFromT(~[TYPE@1]~.class, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> GenericTwoClass<~[TYPE]~, ~[TYPE@1]~>.sIsAssignableFromS(~[TYPE@1]~.class, ~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_A]~ -> new A()
+~[EXPR_B]~ -> new B()
+~[EXPR_C]~ -> new C()
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_GenericClass<~[TYPE@1]~>]~.getValue()
+~[EXPR_Object]~ -> ~[EXPR_GenericClass<~[TYPE]~>]~.getObjectValue()
+
+~[EXPR_GenericClass<~[TYPE@1]~>]~ -> new GenericClass<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~]~)

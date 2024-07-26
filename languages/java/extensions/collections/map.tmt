@@ -1,0 +1,23 @@
+~[EXPR_Boolean]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE]~>]~.isEmpty()
+~[EXPR_Boolean]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE]~>]~.containsKey(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE@1]~>]~.containsValue(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.replace(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE]~>]~.remove(~[EXPR_Object]~, ~[EXPR_Object]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE@1]~>]~.get(~[EXPR_Object]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE@1]~>]~.getOrDefault(~[EXPR_Object]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.put(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.putIfAbsent(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE@1]~>]~.remove(~[EXPR_Object]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.replace(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.compute(~[EXPR_~[TYPE@1]~]~, (key, value) -> ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.computeIfAbsent(~[EXPR_~[TYPE@1]~]~, key -> ~[EXPR_String]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.computeIfPresent(~[EXPR_~[TYPE@1]~]~, (key, value) -> ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_~[TYPE@2]~]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.merge(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~, (key, value) -> ~[EXPR_~[TYPE@2]~]~)
+
+~[EXPR_int]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE]~>]~.size()
+~[EXPR_int]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE]~>]~.hashCode()
+
+~[EXPR_Set<Map.Entry<~[TYPE@1]~, ~[TYPE@2]~>>]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE@2]~>]~.entrySet()
+~[EXPR_Set<~[TYPE@1]~>]~ -> ~[EXPR_Map<~[TYPE@1]~, ~[TYPE]~>]~.keySet()
+~[EXPR_Collections<~[TYPE@1]~>]~ -> ~[EXPR_Map<~[TYPE]~, ~[TYPE@1]~>]~.values()

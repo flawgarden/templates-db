@@ -1,0 +1,14 @@
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.addAll(~[EXPR_Collection<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE]~>]~.contains(~[EXPR_Object]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.containsAll(~[EXPR_Collection<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE]~>]~.isEmpty()
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE]~>]~.remove(~[EXPR_Object]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.removeAll(~[EXPR_Collection<~[TYPE@1]~>]~)
+~[EXPR_Boolean]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.removeAll(~[EXPR_Collection<~[TYPE@1]~>]~)
+
+~[EXPR_int]~ -> ~[EXPR_Set<~[TYPE]~>]~.size()
+
+~[EXPR_Object\[\]]~ -> ~[EXPR_Set<~[TYPE]~>]~.toArray()
+
+~[EXPR_Collection<~[TYPE@1]~>]~ -> ~[EXPR_Set<~[TYPE@1]~>]~

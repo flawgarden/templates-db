@@ -1,0 +1,13 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~import java.util.*;~
+~import java.util.stream.*;~
+
+~template create_stream start~
+Stream<~[TYPE@1]~> stream222523 = ~[EXPR_Collection<~[TYPE@1]~>]~.stream();
+~template end~
+
+~main body end~

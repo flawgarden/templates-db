@@ -1,0 +1,6 @@
+~class UnaryOpMutationInterface start~
+
+public class UnaryOpMutationInterface {
+    public void Mutate(StringHolder t);
+}
+~class end~

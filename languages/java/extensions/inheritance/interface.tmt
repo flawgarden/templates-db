@@ -1,0 +1,16 @@
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof SuperInterface
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof SubInterface
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof SideInterface
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof ImplementingSuperClass
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof ImplementingSubClass
+~[EXPR_Boolean]~ -> ~[VAR_Object]~ instanceof ImplementingSuperSideClass
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof SuperInterface
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof SubInterface
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof SideInterface
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof ImplementingSuperClass
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof ImplementingSubClass
+~[EXPR_Boolean]~ -> ~[EXPR_Object]~ instanceof ImplementingSuperSideClass
+
+~[EXPR_Object]~ -> new ImplementingSuperClass()
+~[EXPR_Object]~ -> new ImplementingSubClass()
+~[EXPR_Object]~ -> new ImplementingSuperSideClass()

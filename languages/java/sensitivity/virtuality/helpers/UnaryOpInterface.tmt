@@ -1,0 +1,6 @@
+~class UnaryOpInterface start~
+
+public class UnaryOpInterface {
+    public String InterfaceCall(String t);
+}
+~class end~

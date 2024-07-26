@@ -1,0 +1,14 @@
+~[EXPR_Boolean]~ -> GenericClassVariance.extendsVariance(~[EXPR_GenericClass<A>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.extendsVariance(~[EXPR_GenericClass<B>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.extendsVariance(~[EXPR_GenericClass<C>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.superVariance(~[EXPR_GenericClass<A>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.superVariance(~[EXPR_GenericClass<B>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.superVariance(~[EXPR_GenericClass<C>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.wildCardVariance(~[EXPR_GenericClass<A>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.wildCardVariance(~[EXPR_GenericClass<B>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.wildCardVariance(~[EXPR_GenericClass<C>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.extendsVariance(~[EXPR_GenericClass<~[TYPE]~>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.superVariance(~[EXPR_GenericClass<~[TYPE]~>]~)
+~[EXPR_Boolean]~ -> GenericClassVariance.wildCardVariance(~[EXPR_GenericClass<~[TYPE]~>]~)
+
+~[EXPR_Boolean]~ -> ~[EXPR_GenericClass<~[TYPE]~>]~ insatanceof GenericClass<?>

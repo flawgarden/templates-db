@@ -1,0 +1,24 @@
+~class NoOpException start~
+public class NoOpException extends Exception {
+    public NoOpException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+~class end~
+
+~class Exception1 start~
+public class Exception1 extends Exception {
+    public Exception1(String errorMessage) {
+        super(errorMessage);
+    }
+}
+~class end~
+
+~class Exception2 start~
+public class Exception2 extends Exception {
+    public Exception2(String errorMessage) {
+        super(errorMessage);
+        errorMessage = "";
+    }
+}
+~class end~
