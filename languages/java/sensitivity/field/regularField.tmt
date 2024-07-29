@@ -1,6 +1,9 @@
 ~main body start~
 ~helper import sensitivity/field/helpers/StringHolder~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template class_with_string_field_positive start~
 StringHolder sh = new StringHolder();

@@ -95,8 +95,16 @@ helperImport
     : TILDA HELPER WHITESPACE IMPORT WHITESPACE IDENTIFIER TILDA LINE_BREAK+
     ;
 
-languageImport
-    : TILDA IMPORT WHITESPACE IDENTIFIER TILDA LINE_BREAK+
+languageImportsStart
+    : TILDA IMPORTS WHITESPACE START TILDA LINE_BREAK+
+    ;
+
+languageImportsEnd
+    : TILDA IMPORTS WHITESPACE END TILDA LINE_BREAK+
+    ;
+
+languageImports
+    : languageImportsStart code languageImportsEnd
     ;
 
 templateStart
@@ -144,7 +152,7 @@ mainClassEnd
     ;
 
 mainClass
-    : mainClassStart helperFunctions? helperImport* languageImport* template+ mainClassEnd
+    : mainClassStart helperFunctions? helperImport* languageImports? template+ mainClassEnd
     ;
 
 helperClassStart

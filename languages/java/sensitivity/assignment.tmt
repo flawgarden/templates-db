@@ -1,6 +1,10 @@
 ~main body start~
-~import java.util.*;~
-~import java.util.function.Supplier;~
+
+~imports start~
+import java.util.*;
+import java.util.function.Supplier;
+~imports end~
+
 
 ~template simple_assignment_positive start~
 ~[VAR_String@1]~ = ~[VAR_String@1]~;

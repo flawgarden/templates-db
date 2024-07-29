@@ -1,6 +1,9 @@
 ~main body start~
 ~helper import sensitivity/helpers/Record~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template simple_record_positive start~
 SimpleRecord record = new SimpleRecord(~[VAR_String@1]~);

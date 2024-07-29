@@ -4,7 +4,10 @@
 
 ~main body start~
 ~helper import sensitivity/exceptions/helpers/Exceptions~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template try_cath_positive start~
 String tmpUnique42 = ~[VAR_String@1]~;
