@@ -12,7 +12,10 @@
 ~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/InstanceInitializer~
 ~helper import sensitivity/field/helpers/StringFactory~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 
 ~template class_with_string_initialization_positive start~

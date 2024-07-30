@@ -9,7 +9,10 @@
 
 ~main body start~
 ~helper import objects/inheritance/helpers/SuperClass~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template create_super_class start~
 SuperClass ~[MACRO_VarName]~ = new SuperClass();

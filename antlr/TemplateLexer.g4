@@ -41,6 +41,7 @@ CLASS          : 'class';
 EXTENSIONS     : 'extensions';
 HELPER         : 'helper';
 IMPORT         : 'import';
+IMPORTS        : 'imports';
 START          : 'start';
 END            : 'end';
 TEMPLATE       : 'template';

@@ -3,7 +3,10 @@
 ~extensions end~
 
 ~main body start~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template create_list start~
 List<~[TYPE]~> list787234 = new ArrayList<>();

@@ -3,7 +3,10 @@
 ~extensions end~
 
 ~main body start~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template create_map start~
 Map<~[TYPE]~, ~[TYPE]~> map89458 = new HashMap<>();

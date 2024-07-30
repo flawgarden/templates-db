@@ -38,7 +38,9 @@ public String paramOrEmptyMutual2(int value, String param) {
 
 ~helper functions end~
 
-~import java.util.*;~
+~imports start~
+import java.util.*;
+~imports end~
 
 ~template recursion_simple_positive start~
 ~[VAR_String@1]~ = paramOrEmpty(~[VAR_String@1]~.length(), ~[VAR_String@1]~);

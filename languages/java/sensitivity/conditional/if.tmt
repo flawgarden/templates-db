@@ -3,7 +3,11 @@
 ~extensions end~
 
 ~main body start~
-~import java.util.*;~
+
+~imports start~
+import java.util.*;
+~imports end~
+
 ~template if_operator_positive start~
 String tmpUnique42 = ~[VAR_String@1]~;
 ~[BODY]~

@@ -3,9 +3,12 @@
 ~extensions end~
 
 ~main body start~
-~import java.util.regex.Pattern;~
-~import java.util.regex.Matcher;~
-~import java.util.*;~
+
+~imports start~
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.*;
+~imports end~
 
 ~template create_pattern_and_matcher start~
 Pattern pattern = Pattern.compile(~[MACRO_Regex]~);
