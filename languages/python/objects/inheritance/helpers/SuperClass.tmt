@@ -1,0 +1,23 @@
+~class SuperClass start~
+class SuperClass:
+    pass
+~class end~
+
+~class SubClass start~
+class SubClass(SuperClass):
+    pass
+~class end~
+
+~class SubSubClass start~
+from typing import final
+
+
+@final
+class SubSubClass(SubClass):
+    pass
+~class end~
+
+~class SiblingClass start~
+class SiblingClass(SuperClass):
+    pass
+~class end~

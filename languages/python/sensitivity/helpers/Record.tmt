@@ -1,0 +1,16 @@
+~class SimpleRecord start~
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class SimpleRecord:
+    t: str
+~class end~
+
+~class NestedRecord start~
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class NestedRecord:
+    a: SimpleRecord
+    b: SimpleRecord
+~class end~

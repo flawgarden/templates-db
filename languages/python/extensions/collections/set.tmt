@@ -1,0 +1,25 @@
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.difference(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ - ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.intersection(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ & ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.isdisjoint(~[EXPR_set\[~[TYPE@1]~\]]~)
+
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.issubset(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ <= ~[EXPR_set\[~[TYPE@1]~\]]~
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ < ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.issuperset(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ >= ~[EXPR_set\[~[TYPE@1]~\]]~
+~[EXPR_bool]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ > ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.symmetric_difference(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ ^ ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~.union(~[EXPR_set\[~[TYPE@1]~\]]~)
+~[EXPR_set\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~ | ~[EXPR_set\[~[TYPE@1]~\]]~
+
+~[EXPR_int]~ -> len(~[EXPR_set\[~[TYPE]~\]]~)
+
+~[EXPR_Iterable\[~[TYPE@1]~\]]~ -> ~[EXPR_set\[~[TYPE@1]~\]]~

@@ -1,0 +1,11 @@
+~class UnaryOpInterface start~
+
+from abc import ABC, abstractmethod
+
+
+class UnaryOpInterface(ABC):
+    @abstractmethod
+    def interface_call(t: str) -> str:
+        raise NotImplementedError
+
+~class end~

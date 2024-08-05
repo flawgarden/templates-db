@@ -1,0 +1,70 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+
+~template try_cath_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+~[BODY]~
+try:
+    raise Exception1(~[EXPR_str]~)
+except Exception1 as e:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template try_cath_negative start~
+try:
+    raise Exception1(~[EXPR_str]~)
+except Exception1 as e:
+    ~[VAR_str]~ = ""
+~template end~
+
+~template try_cath_finally_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+~[BODY]~
+try:
+    raise Exception1(~[EXPR_str]~)
+except Exception1 as e:
+    ~[VAR_str@1]~ = ""
+finally:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template try_cath_finally_negative start~
+tmpUnique42 = ~[VAR_str@1]~
+~[BODY]~
+try:
+    raise Exception1(~[EXPR_str]~)
+except Exception1 as e:
+    ~[VAR_str@1]~ = tmpUnique42
+finally:
+    ~[VAR_str@1]~ = ""
+~template end~
+
+~template try_multi_cath_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+~[BODY]~
+try:
+    if ~[EXPR_bool]~:
+        raise Exception1(~[EXPR_str]~)
+    else:
+        raise Exception2(~[EXPR_str]~)
+except (Exception1, Exception2) as e:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template try_multi_cath_negative start~
+tmpUnique42 = ~[VAR_str@1]~
+~[BODY]~
+try:
+    if ~[EXPR_bool]~:
+        raise Exception1(~[EXPR_str]~)
+    else:
+        raise Exception2(~[EXPR_str]~)
+except (Exception1, Exception2) as e:
+    ~[VAR_str@1]~ = ""
+~template end~
+
+~main body end~

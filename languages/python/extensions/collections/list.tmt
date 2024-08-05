@@ -1,0 +1,12 @@
+~[EXPR_bool]~ -> not ~[EXPR_list\[~[TYPE]~\]]~
+~[EXPR_bool]~ -> ~[EXPR_list\[~[TYPE@1]~\]]~.append(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_list\[~[TYPE@1]~\]]~.insert(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_list\[~[TYPE@1]~\]]~.extend(~[EXPR_list\[~[TYPE@1]~\]]~)
+~[EXPR_bool]~ -> ~[EXPR_Any]~ in ~[EXPR_list\[~[TYPE]~\]]~
+~[EXPR_bool]~ -> all([x12345 in ~[EXPR_list\[~[TYPE@1]~\]]~ for x12345 in ~[EXPR_list\[~[TYPE@1]~\]]~])
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_list\[~[TYPE@1]~\]]~[~[EXPR_int]~]
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_list\[~[TYPE@1]~\]]~[~[EXPR_int]~] = ~[EXPR_~[TYPE@1]~]~
+
+~[EXPR_int]~ -> ~[EXPR_list\[~[TYPE]~\]]~.index(~[EXPR_Any]~)
+~[EXPR_int]~ -> len(~[EXPR_list\[~[TYPE]~\]]~)

@@ -1,0 +1,31 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_Queue_Size]~ -> 1
+~[MACRO_Queue_Size]~ -> 2
+~[MACRO_Queue_Size]~ -> 3
+~extensions end~
+
+~main body start~
+
+~imports start~
+from queue import Queue
+~imports end~
+
+~template create_queue start~
+queue = Queue(~[MACRO_Queue_Size]~)
+~template end~
+
+~template queue_add start~
+~[VAR_Queue\[~[TYPE@1]~\]]~.put(~[EXPR_~[TYPE@1]~]~)
+~template end~
+
+~template queue_remove start~
+~[VAR_Queue\[~[TYPE]~\]]~.get()
+~template end~
+
+~template queue_poll start~
+val23242 = ~[VAR_Queue\[~[TYPE]~\]]~.get()
+~template end~
+
+~main body end~

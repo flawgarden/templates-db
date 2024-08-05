@@ -1,0 +1,7 @@
+~[EXPR_bool]~ -> ~[EXPR_SimpleQueue\[~[TYPE]~\]]~.empty()
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_SimpleQueue\[~[TYPE@1]~\]]~.get()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_SimpleQueue\[~[TYPE@1]~\]]~.get_nowait()
+~[EXPR_int]~ -> ~[EXPR_SimpleQueue\[~[TYPE]~\]]~.qsize()
+
+~[EXPR_Iterable\[~[TYPE@1]~\]]~ -> ~[EXPR_SimpleQueue\[~[TYPE@1]~\]]~

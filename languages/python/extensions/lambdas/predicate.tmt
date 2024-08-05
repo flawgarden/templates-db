@@ -1,0 +1,3 @@
+~[EXPR_Callable\[ \[str\], bool \]]~ -> lambda e: ~[EXPR_bool]~
+
+~[EXPR_Callable\[ \[~[TYPE]~\], bool \]]~ -> lambda e: ~[EXPR_bool]~

@@ -9,18 +9,18 @@ import java.util.*;
 import java.io.*;
 ~imports end~
 
-~template while_operator_positive start~
+~template do_while_operator_positive start~
 String tmpUnique42 = ~[VAR_String@1]~;
 ~[BODY]~
-while (~[EXPR_Boolean]~) {
+do {
     ~[VAR_String@1]~ = tmpUnique42;
-}
+} while (~[EXPR_Boolean]~);
 ~template end~
 
-~template while_operator_negative start~
-while (~[EXPR_Boolean]~) {
+~template do_while_operator_negative start~
+do {
     ~[VAR_String]~ = "";
-}
+} while (~[EXPR_Boolean]~);
 ~template end~
 
 ~main body end~

@@ -47,27 +47,6 @@ try {
 }
 ~template end~
 
-~template array_store_exception_positive start~
-String tmpUnique42 = ~[VAR_String@1]~;
-try {
-~[BODY]~
-    Object x[] = new String[3];
-    x[0] = new Integer(0);
-} catch (ArrayStoreException e) {
-    ~[VAR_String@1]~ = tmpUnique42;
-}
-~template end~
-
-~template array_store_exception_negative start~
-try {
-~[BODY]~
-    Object x[] = new String[3];
-    x[0] = new Integer(0);
-} catch (ArrayStoreException e) {
-    ~[VAR_String]~ = "";
-}
-~template end~
-
 ~template null_pointer_exception_positive start~
 String tmpUnique42 = ~[VAR_String@1]~;
 try {

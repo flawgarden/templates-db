@@ -1,0 +1,18 @@
+~main body start~
+~helper import sensitivity/field/helpers/StaticFieldHolder~
+
+
+~template class_with_static_string_field_positive start~
+StaticFieldHolder.default_value= ~[VAR_String@1]~
+sfh = new StaticFieldHolder()
+~[BODY]~
+~[VAR_String@1]~ = sfh.value
+~template end~
+
+~template class_with_static_string_field_negative start~
+sfh = new StaticFieldHolder()
+~[BODY]~
+~[VAR_String]~ = sfh.value
+~template end~
+
+~main body end~

@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> isinstance(~[VAR_GenericClass\[~[TYPE]~\]]~, GenericClass[~[TYPE]~])
+~[EXPR_bool]~ -> isinstance(~[VAR_Any]~, GenericClass[~[TYPE]~])
+~[EXPR_bool]~ -> isinstance(~[EXPR_GenericClass\[~[TYPE]~\]]~, GenericClass[~[TYPE]~])
+~[EXPR_bool]~ -> isinstance(~[EXPR_Any]~, GenericClass[~[TYPE]~])
+
+~[EXPR_A]~ -> A()
+~[EXPR_B]~ -> B()
+~[EXPR_C]~ -> C()
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_GenericClass\[~[TYPE@1]~\]]~.get_value()
+~[EXPR_Any]~ -> ~[EXPR_GenericClass\[~[TYPE]~\]]~.get_object_value()
+
+~[EXPR_GenericClass\[~[TYPE@1]~\]]~ -> GenericClass[~[TYPE@1]~](~[EXPR_~[TYPE@1]~]~)
