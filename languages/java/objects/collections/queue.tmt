@@ -10,6 +10,7 @@
 
 ~imports start~
 import java.util.*;
+import java.util.concurrent.*;
 ~imports end~
 
 ~template create_queue start~

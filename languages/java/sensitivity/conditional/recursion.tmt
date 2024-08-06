@@ -15,6 +15,7 @@ public String paramOrEmpty(int value, String param) {
     } else {
         return "";
     }
+    return "";
 }
 ~function end~
 
@@ -27,6 +28,7 @@ public String paramOrEmptyMutual1(int value, String param) {
     } else {
         return "";
     }
+    return "";
 }
 ~function end~
 

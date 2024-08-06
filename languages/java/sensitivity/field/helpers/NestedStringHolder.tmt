@@ -11,7 +11,7 @@ public class NestedStringHolder {
         this.innerObject = this.new InnerStringHolder("");
     }
 
-    public InnerStringHolder getValue() {
+    public String getValue() {
         return innerObject.innerValue;
     }
 

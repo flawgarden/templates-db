@@ -1,18 +1,18 @@
 ~class GenericTwoClass start~
 public class GenericTwoClass<T, S> {
-    public static bool tIsAssignableFromS(Class<T> t, S sParam) {
+    public static boolean tIsAssignableFromS(Class<T> t, S sParam) {
         return t.isAssignableFrom(sParam.getClass());
     }
 
-    public static bool sIsAssignableFromT(Class<S> s, T tParam) {
+    public static boolean sIsAssignableFromT(Class<S> s, T tParam) {
         return s.isAssignableFrom(tParam.getClass());
     }
 
-    public static bool tIsAssignableFromT(Class<T> t, T tParam) {
+    public static boolean tIsAssignableFromT(Class<T> t, T tParam) {
         return t.isAssignableFrom(tParam.getClass());
     }
 
-    public static bool sIsAssignableFromS(Class<T> t, S sParam) {
+    public static boolean sIsAssignableFromS(Class<T> t, S sParam) {
         return s.isAssignableFrom(sParam.getClass());
     }
 }

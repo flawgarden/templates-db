@@ -2,7 +2,7 @@
 
 public class ConstructorChains {
 
-    private final bool condition;
+    private final boolean condition;
     private final String text;
 
 
@@ -14,7 +14,7 @@ public class ConstructorChains {
         this(true, text);
     }
 
-    public ConstructorChains(bool condition, String text) {
+    public ConstructorChains(boolean condition, String text) {
         this.condition = condition;
         if (condition) {
             this.text = text;
@@ -23,7 +23,7 @@ public class ConstructorChains {
         }
     }
 
-    public String getText(bool condition) {
+    public String getText(boolean condition) {
         if (this.condition || condition) {
             return text;
         } else {
