@@ -10,37 +10,37 @@ import java.util.*;
 ~imports end~
 
 ~template binary_op_interface_default1_positive start~
-BinaryOpInterfaceDefault1 a12341 = new BinaryOpInterfaceDefault1();
+BinaryOpInterfaceDefault1 a12341 = new BinaryOpInterfaceDefault1Implementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall(~[VAR_String@1]~, "");
 ~template end~
 
 ~template binary_op_interface_default1_negative start~
-BinaryOpInterfaceDefault1 a12341 = new BinaryOpInterfaceDefault1();
+BinaryOpInterfaceDefault1 a12341 = new BinaryOpInterfaceDefault1Implementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall("", ~[VAR_String@1]~);
 ~template end~
 
 ~template binary_op_interface_default2_positive start~
-BinaryOpInterfaceDefault2 a12341 = new BinaryOpInterfaceDefault2();
+BinaryOpInterfaceDefault2 a12341 = new BinaryOpInterfaceDefault2Implementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall("", ~[VAR_String@1]~);
 ~template end~
 
 ~template binary_op_interface_default2_negative start~
-BinaryOpInterfaceDefault2 a12341 = new BinaryOpInterfaceDefault2();
+BinaryOpInterfaceDefault2 a12341 = new BinaryOpInterfaceDefault2Implementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall(~[VAR_String@1]~, "");
 ~template end~
 
 ~template binary_op_interface_default_positive start~
-BinaryOpInterfaceDefaultBase a12341 = (~[EXPR_Boolean]~) ? new BinaryOpInterfaceDefault1() : new BinaryOpInterfaceDefault2();
+BinaryOpInterfaceDefaultBase a12341 = (~[EXPR_Boolean]~) ? new BinaryOpInterfaceDefault1Implementation() : new BinaryOpInterfaceDefault2Implementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall(~[VAR_String@1]~, ~[VAR_String@1]~);
 ~template end~
 
 ~template binary_op_interface_default_negative start~
-BinaryOpInterfaceDefault a12341 = new BinaryOpInterfaceDefault();
+BinaryOpInterfaceDefault a12341 = new BinaryOpInterfaceDefaultImplementation();
 ~[BODY]~
 ~[VAR_String@1]~ = a12341.InterfaceCall(~[VAR_String@1]~, ~[VAR_String@1]~);
 ~template end~

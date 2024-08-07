@@ -14,10 +14,6 @@ public class GenericClass<T> {
         return value;
     }
 
-    public static bool sIsAssignableFromT(GenericClass<? extends A> genericClassObj) {
-        return s.isAssignableFrom(tParam.getClass());
-    }
-
 }
 ~class end~
 

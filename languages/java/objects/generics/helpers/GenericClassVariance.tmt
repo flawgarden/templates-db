@@ -1,14 +1,14 @@
 ~class GenericClassVariance start~
 public class GenericClassVariance {
-    public static bool extendsVariance(GenericClass<? extends A> genericClassObj) {
+    public static boolean extendsVariance(GenericClass<? extends A> genericClassObj) {
         return genericClassObj.getObjectValue() instanceof B;
     }
 
-    public static bool superVariance(GenericClass<? super C> genericClassObj) {
+    public static boolean superVariance(GenericClass<? super C> genericClassObj) {
         return genericClassObj.getObjectValue() instanceof B;
     }
 
-    public static bool wildcardVariance(GenericClass<?> genericClassObj) {
+    public static boolean wildcardVariance(GenericClass<?> genericClassObj) {
         return genericClassObj.getObjectValue() instanceof B;
     }
 }

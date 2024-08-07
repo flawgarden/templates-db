@@ -12,6 +12,9 @@
 ~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/InstanceInitializer~
 ~helper import sensitivity/field/helpers/StringFactory~
+~helper import sensitivity/field/helpers/ConstructorChains~
+~helper import sensitivity/field/helpers/NestedStringHolder~
+
 
 ~imports start~
 import java.util.*;

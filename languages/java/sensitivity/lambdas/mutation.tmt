@@ -29,7 +29,7 @@ StringHolder a12341 = new StringHolder();
 UnaryOpMutationInterface lambda1231 = (s) -> {
 	UnaryOpMutationInterface innerLambda1231 = (p) -> {
         p.value = "";
-	}
+	};
 	innerLambda1231.Mutate(s);
     s.value = s23423;
 };
@@ -44,7 +44,7 @@ UnaryOpMutationInterface lambda1231 = (s) -> {
     final String inner234234 = s.value;
 	UnaryOpMutationInterface innerLambda1231 = (p) -> {
         p.value = inner234234;
-	}
+	};
 	innerLambda1231.Mutate(s);
     s.value = "";
 };
