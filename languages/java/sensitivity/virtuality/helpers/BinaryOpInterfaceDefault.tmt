@@ -5,7 +5,7 @@ public interface BinaryOpInterfaceDefaultBase {
 ~class end~
 
 ~class BinaryOpInterfaceDefault1 start~
-public interface BinaryOpInterfaceDefault1 implements BinaryOpInterfaceDefaultBase {
+public interface BinaryOpInterfaceDefault1 extends BinaryOpInterfaceDefaultBase {
     default String InterfaceCall(String l, String r) {
         return l;
     }
@@ -13,7 +13,7 @@ public interface BinaryOpInterfaceDefault1 implements BinaryOpInterfaceDefaultBa
 ~class end~
 
 ~class BinaryOpInterfaceDefault2 start~
-public interface BinaryOpInterfaceDefault2 implements BinaryOpInterfaceDefaultBase  {
+public interface BinaryOpInterfaceDefault2 extends BinaryOpInterfaceDefaultBase  {
     default String InterfaceCall(String l, String r) {
         return r;
     }
@@ -21,7 +21,7 @@ public interface BinaryOpInterfaceDefault2 implements BinaryOpInterfaceDefaultBa
 ~class end~
 
 ~class BinaryOpInterfaceDefault start~
-public interface BinaryOpInterfaceDefault implements BinaryOpInterfaceDefault1, BinaryOpInterfaceDefault2 {
+public interface BinaryOpInterfaceDefault extends BinaryOpInterfaceDefault1, BinaryOpInterfaceDefault2 {
     default String InterfaceCall(String l, String r) {
         return "";
     }
