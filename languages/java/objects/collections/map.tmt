@@ -8,6 +8,8 @@
 ~[MACRO_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[MACRO_MapName@1]~ = new HashMap<>();
 ~[MACRO_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[MACRO_MapName@1]~ = new TreeMap<>();
 ~[MACRO_Add_Element_ToMap]~ -> ~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~);
+~[MACRO_Add_Element_ToMap]~ -> ~[MACRO_MapName@1]~.put(~[VAR_~[TYPE@1]~]~, ~[VAR_~[TYPE@2]~]~);
+
 ~extensions end~
 
 ~main body start~
@@ -18,20 +20,20 @@ import java.util.*;
 
 ~template map_simple_get_1 start~
 ~[MACRO_Create_Map]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
 ~[TYPE@2]~ value7841 = ~[MACRO_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
 ~template map_simple_get_2 start~
 ~[MACRO_Create_Map]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
 ~[TYPE@2]~ value7842 = ~[MACRO_MapName@1]~.get(~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
-~template map_remove start~
+~template map_remove_1 start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
 if (~[MACRO_MapName@1]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
     ~[MACRO_MapName@1]~.remove(~[EXPR_~[TYPE@1]~@1]~);
 }
@@ -41,11 +43,11 @@ if (value7843 == null) {
 }
 ~template end~
 
-~template map_merge start~
+~template map_merge_1 start~
 Map<~[TYPE@1]~, ~[TYPE@2]~> map111 = new HashMap<>();
 Map<~[TYPE@1]~, ~[TYPE@2]~> map222 = new HashMap<>();
-map111.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
-map222.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
+map111.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
+map222.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
 map111.putAll(map222);
 ~[TYPE@2]~ value7844 = map111.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
@@ -65,36 +67,36 @@ if (value7845 == null) {
 ~template map_put_if_absent start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
-~[MACRO_MapName@1]~.putIfAbsent(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.putIfAbsent(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
 ~[TYPE@2]~ value7846 = ~[MACRO_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
-~template map_remove start~
+~template map_remove_2 start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~]~);
-~[TYPE@2]~ value7847 = ~[MACRO_MapName@1]~.remove(~[EXPR_~[TYPE@1]~@1]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~]~);
+~[TYPE@2]~ value7847 = ~[MACRO_MapName@1]~.remove(~[VAR_~[TYPE@1]~@1]~);
 ~template end~
 
-~template map_merge start~
+~template map_merge_2 start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
-~[TYPE@2]~ value7848 = ~[MACRO_MapName@1]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[TYPE@2]~ value7848 = ~[MACRO_MapName@1]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
 ~template end~
 
 ~template map_compute_if_present start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
 ~[TYPE@2]~ value7849 = ~[MACRO_MapName@1]~.computeIfPresent(~[EXPR_~[TYPE@1]~@1]~, (k, v) -> v.equals(~[CONST_~[TYPE@2]~]~) ? v : ~[CONST_~[TYPE@2]~]~);
 ~template end~
 
 ~template map_stream start~
 ~[MACRO_Create_Map]~
 ~[MACRO_Add_Element_ToMap]~
-~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
+~[MACRO_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
 ~[TYPE@2]~ value78410 = ~[MACRO_MapName@1]~.entrySet().stream()
                                 .filter(entry -> entry.equals(~[CONST_~[TYPE@2]~]~))
                                 .findFirst().get().getValue();

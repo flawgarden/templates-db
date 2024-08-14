@@ -7,7 +7,9 @@
 ~[MACRO_ListName]~ -> list787234
 ~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new ArrayList<>();
 ~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new LinkedList<>();
+~[MACRO_Add_Element_ToList]~ -> ~[MACRO_ListName@1]~.add(~[VAR_~[TYPE@1]~]~);
 ~[MACRO_Add_Element_ToList]~ -> ~[MACRO_ListName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+
 
 ~extensions end~
 
@@ -20,7 +22,7 @@ import java.util.*;
 ~template list_set start~
 ~[MACRO_Create_List]~
 ~[MACRO_Add_Element_ToList]~
-~[TYPE@1]~ value7841 = ~[MACRO_ListName@1]~.set(0, ~[EXPR_~[TYPE@1]~]~);
+~[TYPE@1]~ value7841 = ~[MACRO_ListName@1]~.set(0, ~[VAR_~[TYPE@1]~]~);
 ~template end~
 
 ~template list_add_empty start~
@@ -59,7 +61,6 @@ if (~[EXPR_Boolean]~) {
 ~[MACRO_Create_List]~
 ~[MACRO_Add_Element_ToList]~
 ~[TYPE@1]~ value7844 = (String) ~[MACRO_ListName@1]~.toArray()[0];
-
 ~template end~
 
 ~template list_filter start~

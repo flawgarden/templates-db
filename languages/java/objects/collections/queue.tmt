@@ -11,10 +11,13 @@
 
 ~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[EXPR_~[TYPE@1]~]~);
 ~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[VAR_~[TYPE@1]~]~);
+~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[VAR_~[TYPE@1]~]~);
 
 ~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
 ~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~@1]~);
-
+~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[VAR_~[TYPE@1]~@1]~);
 ~extensions end~
 
 ~main body start~
@@ -74,8 +77,8 @@ for (~[TYPE@1]~ el : ~[MACRO_QueueName@1]~) {
 ~[MACRO_Add_Fixed_Element_ToQueue]~
 ~[TYPE@1]~ value7845 = ~[CONST_TYPE@1]~;
 
-if (~[MACRO_QueueName@1]~.contains(~[EXPR_~[TYPE@1]~@1]~)) {
-    value7845 = ~[EXPR_~[TYPE@1]~@1]~;
+if (~[MACRO_QueueName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
 }
 ~template end~
 
@@ -85,8 +88,8 @@ if (~[MACRO_QueueName@1]~.contains(~[EXPR_~[TYPE@1]~@1]~)) {
 ~[MACRO_Add_Fixed_Element_ToQueue]~
 ~[TYPE@1]~ value7846 = ~[CONST_TYPE@1]~;
 
-if (~[MACRO_QueueName@1]~.contains(~[EXPR_~[TYPE@1]~]~)) {
-    value7846 = ~[EXPR_~[TYPE@1]~@1]~;
+if (~[MACRO_QueueName@1]~.contains(~[VAR_~[TYPE@1]~]~)) {
+    value7846 = ~[VAR_~[TYPE@1]~@1]~;
 }
 ~template end~
 
@@ -107,7 +110,7 @@ while (!~[MACRO_QueueName@1]~.isEmpty()) {
 ~[MACRO_Add_Element_ToQueue]~
 ~[MACRO_Add_Fixed_Element_ToQueue]~
 ~[TYPE@1]~ value7848 = ~[CONST_TYPE@1]~;
-if (~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~]~)) {
+if (~[MACRO_QueueName@1]~.offer(~[VAR_~[TYPE@1]~]~)) {
     value7848 = ~[MACRO_QueueName@1]~.poll();
 }
 ~template end~
@@ -137,7 +140,7 @@ Queue<~[TYPE@1]~> targetQueue = new ArrayDeque<>();
 sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
 sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
 targetQueue.add(~[EXPR_~[TYPE@1]~]~);
-targetQueue.add(~[EXPR_~[TYPE@1]~]~);
+targetQueue.add(~[VAR_~[TYPE@1]~]~);
 while (!sourceQueue.isEmpty()) {
     targetQueue.offer(sourceQueue.poll());
 }

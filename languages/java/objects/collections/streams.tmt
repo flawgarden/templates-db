@@ -12,6 +12,7 @@
 ~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new ArrayList<>();
 ~[MACRO_Create_Stream]~ -> Stream<~[TYPE@1]~> ~[MACRO_StreamName@1]~ = ~[MACRO_ListName@1]~.stream();
 ~[MACRO_Add_Element_ToList]~ -> ~[MACRO_ListName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Add_Element_ToList]~ -> ~[MACRO_ListName@1]~.add(~[VAR_~[TYPE@1]~]~);
 
 
 ~extensions end~
