@@ -12,4 +12,5 @@ public class ServiceConst implements ServiceI {
         return "123";
     }
 }
+
 ~class end~
