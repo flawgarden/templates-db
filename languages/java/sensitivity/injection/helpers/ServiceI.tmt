@@ -1,0 +1,7 @@
+~class ServiceI start~
+public interface ServiceI {
+
+    public String getFieldValue();
+
+}
+~class end~
