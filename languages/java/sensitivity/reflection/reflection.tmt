@@ -1,0 +1,28 @@
+~main body start~
+~helper import sensitivity/reflection/helpers/ReflectionHelper~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template simple_reflection_positive start~
+try {
+    ReflectionHelper rh = (ReflectionHelper) ReflectionHelper.class.getConstructors()[0].newInstance(~[VAR_String@1]~);
+    rh.getClass().getDeclaredFields()[0].set(rh, ~[VAR_String@1]~);
+    ~[VAR_String@1]~ = rh.getValue();
+} catch (Throwable e) {
+    throw new RuntimeException(e);
+}
+~template end~
+
+~template simple_reflection_negative start~
+try {
+    ReflectionHelper rh = (ReflectionHelper) ReflectionHelper.class.getConstructors()[0].newInstance(~[VAR_String@1]~);
+    rh.getClass().getDeclaredFields()[0].set(rh, ~[CONST_String]~);
+    ~[VAR_String@1]~ = rh.getValue();
+} catch (Throwable e) {
+    throw new RuntimeException(e);
+}
+~template end~
+
+~main body end~
