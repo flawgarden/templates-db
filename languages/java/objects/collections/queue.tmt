@@ -1,9 +1,20 @@
 ~extensions start~
 ~extensions import *~
 
-~[MACRO_Queue_Size]~ -> 1
-~[MACRO_Queue_Size]~ -> 2
-~[MACRO_Queue_Size]~ -> 3
+~[MACRO_QueueName]~ -> queue787231
+~[MACRO_QueueName]~ -> queue787231
+~[MACRO_QueueName]~ -> queue787231
+~[MACRO_QueueName]~ -> queue787231
+~[MACRO_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[MACRO_QueueName@1]~ = new PriorityQueue<>();
+~[MACRO_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[MACRO_QueueName@1]~ = new ArrayDeque<>();
+~[MACRO_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[MACRO_QueueName@1]~ = new LinkedList<>();
+
+~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Add_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~]~);
+
+~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[MACRO_Add_Fixed_Element_ToQueue]~ -> ~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~@1]~);
+
 ~extensions end~
 
 ~main body start~
@@ -13,24 +24,125 @@ import java.util.*;
 import java.util.concurrent.*;
 ~imports end~
 
-~template create_queue start~
-Queue<~[TYPE]~> queue = new ArrayBlockingQueue<>(~[MACRO_Queue_Size]~);
+~template simple_poll start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[TYPE]~ value7841 = ~[MACRO_QueueName@1]~.poll();
 ~template end~
 
-~template queue_add start~
-~[VAR_Queue<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~);
+~template simple_peek start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_QueueName@1]~.poll();
+~[TYPE]~ value7842 = ~[MACRO_QueueName@1]~.peek();
 ~template end~
 
-~template queue_remove start~
-~[VAR_Queue<~[TYPE]~>]~.remove();
+~template queue_is_empty_1 start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[TYPE]~ value7843 = ~[MACRO_QueueName@1]~.peek();
+if (~[MACRO_QueueName@1]~.isEmpty()) {
+    value7843 = ~[CONST_~[TYPE@1]~]~;
+}
+~template end~
+
+~template queue_is_empty_2 start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[TYPE]~ value7844 = ~[MACRO_QueueName@1]~.poll();
+if (~[MACRO_QueueName@1]~.isEmpty()) {
+    value7844 = ~[CONST_~[TYPE@1]~]~;
+}
 ~template end~
 
 ~template queue_poll start~
-~[TYPE@1]~ val23242 = ~[VAR_Queue<~[TYPE@1]~>]~.poll();
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Element_ToQueue]~
+~[TYPE@1]~ val23242 = ~[CONST_TYPE@1]~;
+for (~[TYPE@1]~ el : ~[MACRO_QueueName@1]~) {
+    if (~[EXPR_Boolean]~) {
+        val23242 = el;
+    }
+}
+~template end~
+
+~template queue_contains_1 start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7845 = ~[CONST_TYPE@1]~;
+
+if (~[MACRO_QueueName@1]~.contains(~[EXPR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[EXPR_~[TYPE@1]~@1]~;
+}
+~template end~
+
+~template queue_contains_2 start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7846 = ~[CONST_TYPE@1]~;
+
+if (~[MACRO_QueueName@1]~.contains(~[EXPR_~[TYPE@1]~]~)) {
+    value7846 = ~[EXPR_~[TYPE@1]~@1]~;
+}
+~template end~
+
+~template queue_poll_all start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7847 = ~[CONST_TYPE@1]~;
+while (!~[MACRO_QueueName@1]~.isEmpty()) {
+    value7847 = ~[MACRO_QueueName@1]~.poll();
+}
 ~template end~
 
 ~template queue_offer start~
-~[VAR_Queue<~[TYPE@1]~>]~.offer(~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7848 = ~[CONST_TYPE@1]~;
+if (~[MACRO_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~]~)) {
+    value7848 = ~[MACRO_QueueName@1]~.poll();
+}
 ~template end~
+
+~template queue_conditional_poll start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+if (~[EXPR_Boolean]~) {
+    ~[MACRO_QueueName@1]~.poll();
+}
+~[TYPE@1]~ value7849 = ~[MACRO_QueueName@1]~.poll();
+~template end~
+
+
+~template queue_remove_if start~
+~[MACRO_Create_Queue]~
+~[MACRO_Add_Element_ToQueue]~
+~[MACRO_Add_Fixed_Element_ToQueue]~
+~[MACRO_QueueName@1]~.removeIf(item -> item.equals(~[CONST_~[TYPE@1]~]~));
+~[TYPE@1]~ value784810 = ~[MACRO_QueueName@1]~.poll();
+~template end~
+
+~template two_queues start~
+Queue<~[TYPE@1]~> sourceQueue = new ArrayDeque<>();
+Queue<~[TYPE@1]~> targetQueue = new ArrayDeque<>();
+sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
+sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
+targetQueue.add(~[EXPR_~[TYPE@1]~]~);
+targetQueue.add(~[EXPR_~[TYPE@1]~]~);
+while (!sourceQueue.isEmpty()) {
+    targetQueue.offer(sourceQueue.poll());
+}
+~[TYPE@1]~ value784811 = targetQueue.poll();
+~template end~
+
 
 ~main body end~
