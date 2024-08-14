@@ -1,5 +1,14 @@
 ~extensions start~
 ~extensions import *~
+
+~[MACRO_ListName]~ -> list787231
+~[MACRO_ListName]~ -> list787232
+~[MACRO_ListName]~ -> list787233
+~[MACRO_ListName]~ -> list787234
+~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new ArrayList<>();
+~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new LinkedList<>();
+~[MACRO_Add_Element_ToList]~ -> ~[MACRO_ListName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+
 ~extensions end~
 
 ~main body start~
@@ -8,44 +17,72 @@
 import java.util.*;
 ~imports end~
 
-~template create_list start~
-List<~[TYPE]~> list787234 = new ArrayList<>();
-~template end~
-
-~template list_add start~
-~[VAR_List<~[TYPE@1]~>]~.add(~[EXPR_~[TYPE@1]~]~);
-~template end~
-
 ~template list_set start~
-~[TYPE@1]~ value7843 = ~[VAR_List<~[TYPE@1]~>]~.set(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+~[TYPE@1]~ value7841 = ~[MACRO_ListName@1]~.set(0, ~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
 ~template list_add_empty start~
-~[VAR_List<String>]~.add("");
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+list787234.add("");
+~[TYPE@1]~ value7842 = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
-~template list_add_at_index start~
-~[VAR_List<~[TYPE@1]~>]~.add(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~);
+~template list_get_with_condition start~
+~[MACRO_Create_List]~
+if (~[EXPR_Boolean]~) {
+    ~[MACRO_Add_Element_ToList]~
+}
+~[TYPE@1]~ value7843 = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
-~template list_add_at_zero_index_empty start~
-~[VAR_List<String>]~.add(0, "");
+~template list_add_get_at_zero_index_empty start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+list787234.add(0, "");
+~[TYPE@1]~ value7844 = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
-~template list_add_all start~
-~[VAR_List<~[TYPE@1]~>]~.addAll(EXPR_List<~[TYPE@1]~>);
+~template list_add_and_remove start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+list787234.add(0, "");
+if (~[EXPR_Boolean]~) {
+    list787234.remove(0);
+}
+~[TYPE@1]~ value7843 = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
-~template list_clear start~
-~[VAR_List<~[TYPE]~>]~.clear();
+~template list_to_array_and_get start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+~[TYPE@1]~ value7844 = (String) ~[MACRO_ListName@1]~.toArray()[0];
+
 ~template end~
 
-~template list_remove start~
-~[TYPE@1]~ value2389 = ~[VAR_List<~[TYPE@1]~>]~.remove(~[EXPR_int]~);
+~template list_filter start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+~[MACRO_Add_Element_ToList]~
+~[MACRO_Add_Element_ToList]~
+~[TYPE@1]~ value7845 = ~[MACRO_ListName@1]~.stream().filter(s -> ~[EXPR_Boolean]~).findFirst().get();
 ~template end~
 
-~template list_remove_all start~
-~[VAR_List<~[TYPE@1]~>]~.removeAll(EXPR_List<~[TYPE@1]~>);
+~template list_union start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+List<~[TYPE@1]~> list1234 = new ArrayList<>();
+list1234.addAll(~[MACRO_ListName@1]~);
+~[TYPE@1]~ value7846 = list1234.get(list1234.size() - 1);
+~template end~
+
+~template list_clear_start start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Element_ToList]~
+~[MACRO_ListName@1]~.clear();
+~[TYPE@1]~ value7846 = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
 ~main body end~
