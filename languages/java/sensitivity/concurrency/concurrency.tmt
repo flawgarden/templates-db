@@ -1,0 +1,230 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/concurrency/helpers/concurrency~
+
+~imports start~
+import java.util.concurrent.atomic.*;
+~imports end~
+
+~template thread_set_negative start~
+Wrapper<String> w = new Wrapper<String>(~[VAR_String@1]~);
+Runnable task = new SettingTask(w, "");
+Thread thread = new Thread(task);
+thread.start();
+try {
+  thread.join();
+} catch (InterruptedExcepton e) {
+}
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template thread_set_positive start~
+Wrapper<String> w = new Wrapper<String>("");
+Runnable task = new SettingTask(w, ~[VAR_String@1]~);
+Thread thread = new Thread(task);
+thread.start();
+try {
+  thread.join();
+} catch (InterruptedExcepton e) {
+}
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template thread_set_nostart_positive start~
+Wrapper<String> w = new Wrapper<String>(~[VAR_String@1]~);
+Runnable task = new SettingTask(w, "");
+Thread thread = new Thread(task);
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template two_set_threads_in_sequence_positive start~
+Wrapper<String> w = new Wrapper<String>(~[VAR_String@1]~);
+Runnable task1 = new SettingTask(w, "");
+Runnable task2 = new SettingTask(w, ~[VAR_String@1]~);
+Thread thread1 = new Thread(task1);
+Thread thread2 = new Thread(task2);
+
+thread1.start();
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+thread2.start();
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template two_set_threads_in_sequence_negative start~
+Wrapper<String> w = new Wrapper<String>(~[VAR_String@1]~);
+Runnable task1 = new SettingTask(w, "");
+Runnable task2 = new SettingTask(w, ~[VAR_String@1]~);
+Thread thread1 = new Thread(task1);
+Thread thread2 = new Thread(task2);
+thread2.start();
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+thread1.start();
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template two_switching_tasks_concurrent_positive start~
+Wrapper<String> w = new Wrapper<String>(~[VAR_String@1]~);
+Runnable task = new SwitchingTask(w, ~[VAR_String@1]~);
+Thread thread1 = new Thread(task1);
+Thread thread2 = new Thread(task2);
+thread1.start();
+thread2.start()
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+~[VAR_String@1]~ = w.i;
+~template end~
+
+~template null_and_restore_condvar_positive start~
+NullAndRestore a = new NullAndRestore(~[VAR_String@1]~);
+
+Thread thread1 = new Thread(() -> {
+  a.null();
+});
+Thread thread2 = new Thread(() -> {
+  a.restore();
+});
+
+thread1.start();
+thread2.start();
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+~[VAR_String@1]~ = a.get();
+~template end~
+
+~template atomic_integer_negative start~
+
+AtomicInteger counter = new AtomicInteger(0);
+
+Thread thread1 = new Thread({
+  counter.incrementAndGet();
+});
+
+thread1.start();
+
+Thread thread2 = new Thread({
+  counter.incrementAndGet();
+});
+
+thread2.start();
+
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+if (counter.get() == 2) {
+  ~[VAR_String]~ = "";
+}
+
+~template end~
+
+~template atomic_integer_restore_positive start~
+
+AtomicInteger counter = new AtomicInteger(0);
+String stringCopy = ~[VAR_String@1]~;
+
+if (counter.get() == 0) {
+  ~[VAR_String@1]~ = "";
+}
+
+Thread thread1 = new Thread({
+  counter.incrementAndGet();
+});
+
+thread1.start();
+
+Thread thread2 = new Thread({
+  counter.incrementAndGet();
+});
+
+thread2.start();
+
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+if (counter.get() == 2) {
+  ~[VAR_String@1]~ = stringCopy;
+}
+
+~template end~
+
+~template atomic_integer_restore_negative start~
+
+AtomicInteger counter = new AtomicInteger(0);
+String stringCopy = ~[VAR_String@1]~;
+
+if (counter.get() == 0) {
+  ~[VAR_String@1]~ = "";
+}
+
+Thread thread1 = new Thread({
+  counter.incrementAndGet();
+});
+
+Thread thread2 = new Thread({
+  counter.incrementAndGet();
+});
+
+if (counter.get() == 2) {
+  ~[VAR_String@1]~ = stringCopy;
+}
+
+thread1.start();
+thread2.start();
+
+try {
+  thread1.join();
+} catch (InterruptedExcepton e) {
+}
+
+try {
+  thread2.join();
+} catch (InterruptedExcepton e) {
+}
+
+~template end~
+
+~main body end~
