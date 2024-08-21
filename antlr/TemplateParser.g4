@@ -36,11 +36,19 @@ holeArrow
     ;
 
 macro
-    : TILDA OPEN_BRACKET MACRO IDENTIFIER CLOSE_BRACKET TILDA
+    : TILDA OPEN_BRACKET MACRO IDENTIFIER holeRef? CLOSE_BRACKET TILDA
+    ;
+
+define
+    : TILDA OPEN_BRACKET DEFINE IDENTIFIER holeRef? CLOSE_BRACKET TILDA
     ;
 
 macroArrow
     : TILDA OPEN_BRACKET MACRO IDENTIFIER CLOSE_BRACKET ARROW
+    ;
+
+defineArrow
+    : TILDA OPEN_BRACKET DEFINE IDENTIFIER CLOSE_BRACKET ARROW
     ;
 
 body
@@ -52,7 +60,7 @@ type
     ;
 
 codeString
-    : (CODE_LINE_PART | hole | macro | body | type)+
+    : (CODE_LINE_PART | hole | macro | define | body | type)+
     ;
 
 extensionDefinition
@@ -63,12 +71,16 @@ macroDefinition
     : macroArrow codeString LINE_BREAK+
     ;
 
+defineDefinition
+    : defineArrow codeString LINE_BREAK+
+    ;
+
 code
     : (codeString | LINE_BREAK)+
     ;
 
 extensions
-    : (macroDefinition | extensionDefinition)*
+    : (macroDefinition | extensionDefinition | defineDefinition)*
     ;
 
 extensionImport
