@@ -15,6 +15,7 @@ public string paramOrEmpty(int value, string param) {
     } else {
         return "";
     }
+    return "";
 }
 ~function end~
 
@@ -27,6 +28,7 @@ public string paramOrEmptyMutual1(int value, string param) {
     } else {
         return "";
     }
+    return "";
 }
 ~function end~
 
