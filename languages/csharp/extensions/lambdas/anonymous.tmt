@@ -1,0 +1,4 @@
+~[EXPR_string]~ -> ~[EXPR_UnaryOpClass]~.VirtualCall(~[EXPR_string]~)
+~[EXPR_string]~ -> ~[EXPR_UnaryOpInterface]~.InterfaceCall(~[EXPR_string]~)
+~[EXPR_string]~ -> ~[EXPR_BinaryOpClass]~.VirtualCall(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_string]~ -> ~[EXPR_BinaryOpInterface]~.InterfaceCall(~[EXPR_string]~, ~[EXPR_string]~)

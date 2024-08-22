@@ -1,0 +1,35 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+~imports end~
+
+~template create_map start~
+var map89458 = new Dictionary<~[TYPE]~, ~[TYPE]~>();
+~template end~
+
+~template map_put start~
+~[VAR_Dictionary<~[TYPE@1]~, ~[TYPE@2]~>]~[~[EXPR_~[TYPE@1]~]~] = ~[EXPR_~[TYPE@2]~]~;
+~template end~
+
+~template map_put_empty_val start~
+~[VAR_Dictionary<~[TYPE@1]~, string>]~[~[EXPR_~[TYPE@1]~]~] = "";
+~template end~
+
+~template map_put_empty_key start~
+~[VAR_Dictionary<string, ~[TYPE@1]~>]~[""] = ~[EXPR_~[TYPE@1]~]~;
+~template end~
+
+~template map_put_if_absent start~
+~[VAR_Dictionary<~[TYPE@1]~, ~[TYPE@2]~>]~.TryAdd(~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@2]~]~);
+~template end~
+
+~template map_clear start~
+~[VAR_Dictionary<~[TYPE]~, ~[TYPE]~>]~.Clear();
+~template end~
+
+~main body end~

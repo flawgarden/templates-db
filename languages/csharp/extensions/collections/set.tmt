@@ -1,0 +1,16 @@
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.Add(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.Remove(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.RemoveWhere(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.Contains(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.Overlaps(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.SetEquals(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.IsSubsetOf(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.IsSupersetOf(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.IsProperSubsetOf(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_Set<~[TYPE@1]~>]~.IsProperSupersetOf(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+
+~[EXPR_int]~ -> ~[EXPR_HashSet<~[TYPE]~>]~.Count
+
+~[EXPR_object\[\]]~ -> ~[EXPR_Set<~[TYPE]~>]~.ToArray()
+
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_HashSet<~[TYPE@1]~>]~

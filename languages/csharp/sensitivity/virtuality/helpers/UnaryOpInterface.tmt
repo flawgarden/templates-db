@@ -1,0 +1,6 @@
+~class UnaryOpInterface start~
+
+public interface UnaryOpInterface {
+    public string InterfaceCall(string t);
+}
+~class end~

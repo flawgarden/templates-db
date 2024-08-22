@@ -1,0 +1,179 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_string_Array]~ -> {~[EXPR_string]~}
+~[MACRO_string_Array]~ -> {~[EXPR_string]~, ~[EXPR_string]~}
+~[MACRO_string_Array]~ -> {~[EXPR_string]~, ~[EXPR_string]~, ~[EXPR_string]~}
+~extensions end~
+
+~main body start~
+
+~template for_operator_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_reverse_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = ~[EXPR_int]~; i >= 0; i--) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_reverse_negative start~
+for (int i = ~[EXPR_int]~; i >= 0; i--) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_string_array_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+string[] stringArray = ~[MACRO_string_Array]~;
+for (int i = 0; i < stringArray.Length; i++) {
+    if (stringArray[i] == stringArray[i + 1]) {
+        ~[VAR_string@1]~ = tmpUnique42;
+    }
+}
+~template end~
+
+~template for_operator_string_array_negative start~
+string[] stringArray = ~[MACRO_string_Array]~;
+for (int i = 0; i < stringArray.Length; i++) {
+    if (stringArray[i] == stringArray[i + 1]) {
+        ~[VAR_string]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_continue_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_bool]~) {
+        continue;
+    }
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_continue_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_bool]~) {
+        continue;
+    }
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_break_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_bool]~) {
+        break;
+    }
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_break_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    if (~[EXPR_bool]~) {
+        break;
+    }
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_nested_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    for (int j = 0; j < ~[EXPR_int]~; j++) {
+        ~[VAR_string@1]~ = tmpUnique42;
+    }
+}
+~template end~
+
+~template for_operator_nested_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i++) {
+    for (int j = 0; j < ~[EXPR_int]~; j++) {
+        ~[VAR_string]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_change_index_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_change_index_negative start~
+for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_non_zero_init_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+for (int i = ~[EXPR_int]~; i < ~[EXPR_int]~; i++) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_non_zero_init_negative start~
+for (int i = ~[EXPR_int]~; i < ~[EXPR_int]~; i++) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template for_operator_strcpy_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = "";
+for (int i = 0; i < tmpUnique42.Length; i++) {
+    char c = tmpUnique42[i];
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + c;
+}
+~template end~
+
+~template for_operator_strcpy_negative start~
+string tmpUnique42 = "";
+for (int i = 0; i < ~[VAR_string@1]~.Length; i++) {
+    char c = ~[VAR_string@1]~[i];
+    tmpUnique42 = tmpUnique42 + c;
+    if (i + 1 == ~[VAR_string@1]~.Length) {
+        ~[VAR_string@1]~ = "";
+    }
+}
+~template end~
+
+~template for_operator_collection_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+foreach (var el in ~[VAR_IEnumerable<~[TYPE]~>]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template for_operator_collection_negative start~
+foreach (var el in ~[VAR_IEnumerable<~[TYPE]~>]~) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~main body end~

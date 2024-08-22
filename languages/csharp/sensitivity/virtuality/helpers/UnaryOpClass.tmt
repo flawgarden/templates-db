@@ -1,0 +1,8 @@
+~class UnaryOpClass start~
+
+public class UnaryOpClass {
+    public virtual string VirtualCall(string t) {
+        return "";
+    }
+}
+~class end~

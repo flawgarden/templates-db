@@ -1,0 +1,68 @@
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Select(e => ~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.All(e => ~[EXPR_bool]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.Any()
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.All(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Any(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Aggregate(~[EXPR_Func<~[TYPE@1]~, ~[TYPE@1]~, ~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Aggregate(~[EXPR_Func<~[TYPE@2]~, ~[TYPE@1]~, ~[TYPE@2]~>]~, ~[EXPR_~[TYPE@2]~]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Contains(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.SequenceEqual(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+
+~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Average(~[EXPR_Func<~[TYPE@1]~, ~[double]~>]~)
+~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Sum(~[EXPR_Func<~[TYPE@1]~, ~[double]~>]~)
+
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Append(~[EXPR_TYPE@1]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Prepend(~[EXPR_TYPE@1]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Concat(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Distinct(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Except(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Intersect(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Reverse()
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Skip(~[EXPR_int]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.SkipLast(~[EXPR_int]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.SkipWhile(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Take(~[EXPR_int]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.TakeLast(~[EXPR_int]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.TakeWhile(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Union(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Where(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.DistinctBy(~[EXPR_Func<~[TYPE@1]~, ~[TYPE]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ExceptBy(~[EXPR_IEnumerable<~[TYPE@2]~>]~, ~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.IntersectBy(~[EXPR_IEnumerable<~[TYPE@2]~>]~, ~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.UnionBy(~[EXPR_IEnumerable<~[TYPE@1]~>]~, ~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.DefaultIfEmpty(~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_IEnumerable<~[TYPE@2]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Select(~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)
+
+~[EXPR_IEnumerable<~[TYPE@1]\[\]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Chunk(~[EXPR_int]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.First()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Last()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ElementAt(~[EXPR_int]~)
+
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Max()
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Min()
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.MaxBy(~[EXPR_Func<~[TYPE@1]~, ~[TYPE]~>]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.MinBy(~[EXPR_Func<~[TYPE@1]~, ~[TYPE]~>]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault()
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault()
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ElementAtOrDefault(~[EXPR_int]~)
+
+~[EXPR_int]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.Count()
+
+~[EXPR_long]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.LongCount()
+
+~[EXPR_object\[\]]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.ToArray()
+
+~[EXPR_List<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ToList()
+
+~[EXPR_HashSet<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ToHashSet()
+
+~[EXPR_Dictionary<~[TYPE@2]~, ~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ToDictionary(~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)

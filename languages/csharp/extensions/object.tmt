@@ -1,0 +1,3 @@
+~[EXPR_bool]~ -> ~[EXPR_object]~.Equals(~[EXPR_object]~)
+~[EXPR_bool]~ -> ~[EXPR_object@1]~.Equals(~[EXPR_object@1]~)
+~[EXPR_bool]~ -> ~[EXPR_object]~ == null

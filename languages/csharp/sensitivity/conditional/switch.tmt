@@ -1,0 +1,63 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template switch_operator_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+switch (~[VAR_string@1]~) {
+    case ~[CONST_string]~:
+        break;
+    case ~[CONST_string]~:
+        ~[VAR_string@1]~ = ~[VAR_string@1]~;
+        break;
+    default:
+        ~[VAR_string@1]~ = tmpUnique42;
+        break;
+}
+~template end~
+
+~template switch_operator_negative start~
+string tmpUnique42 = "";
+~[BODY]~
+switch (~[VAR_string@1]~) {
+    case "":
+        break;
+    case ~[CONST_string]~:
+        ~[VAR_string@1]~ = "";
+        break;
+    default:
+        ~[VAR_string@1]~ = tmpUnique42;
+        break;
+}
+~template end~
+
+~template switch_operator_any_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+switch (~[MACRO_Any_string]~) {
+    case ~[CONST_string]~:
+        ~[VAR_string@1]~ = ~[VAR_string@1]~;
+        break;
+    default:
+        ~[VAR_string@1]~ = tmpUnique42;
+        break;
+}
+~template end~
+
+~template switch_operator_any_negative start~
+string tmpUnique42 = "";
+~[BODY]~
+switch (~[MACRO_Any_string]~) {
+    case ~[CONST_string]~:
+        ~[VAR_string@1]~ = "";
+        break;
+    default:
+        ~[VAR_string@1]~ = tmpUnique42;
+        break;
+}
+~template end~
+
+~main body end~

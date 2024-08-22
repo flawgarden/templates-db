@@ -1,0 +1,16 @@
+~[EXPR_bool]~ -> ~[VAR_object]~ is SuperInterface
+~[EXPR_bool]~ -> ~[VAR_object]~ is SubInterface
+~[EXPR_bool]~ -> ~[VAR_object]~ is SideInterface
+~[EXPR_bool]~ -> ~[VAR_object]~ is ImplementingSuperClass
+~[EXPR_bool]~ -> ~[VAR_object]~ is ImplementingSubClass
+~[EXPR_bool]~ -> ~[VAR_object]~ is ImplementingSuperSideClass
+~[EXPR_bool]~ -> ~[EXPR_object]~ is SuperInterface
+~[EXPR_bool]~ -> ~[EXPR_object]~ is SubInterface
+~[EXPR_bool]~ -> ~[EXPR_object]~ is SideInterface
+~[EXPR_bool]~ -> ~[EXPR_object]~ is ImplementingSuperClass
+~[EXPR_bool]~ -> ~[EXPR_object]~ is ImplementingSubClass
+~[EXPR_bool]~ -> ~[EXPR_object]~ is ImplementingSuperSideClass
+
+~[EXPR_object]~ -> new ImplementingSuperClass()
+~[EXPR_object]~ -> new ImplementingSubClass()
+~[EXPR_object]~ -> new ImplementingSuperSideClass()

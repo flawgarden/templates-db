@@ -1,0 +1,6 @@
+~class BinaryOpInterface start~
+
+public interface BinaryOpInterface {
+   public string InterfaceCall(string l, string r);
+}
+~class end~

@@ -1,0 +1,8 @@
+~[EXPR_bool]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.Contains(EXPR_~[TYPE@1]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.Dequeue()
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~.Peek()
+
+~[EXPR_object\[\]]~ -> ~[EXPR_Queue<~[TYPE]~>]~.ToArray
+
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_Queue<~[TYPE@1]~>]~

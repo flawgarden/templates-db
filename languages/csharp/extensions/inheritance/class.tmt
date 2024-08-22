@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> ~[VAR_SuperClass]~ is SubClass
+~[EXPR_bool]~ -> ~[VAR_SuperClass]~ is SubSubClass
+~[EXPR_bool]~ -> ~[VAR_SuperClass]~ is SuperClass
+~[EXPR_bool]~ -> ~[VAR_SuperClass]~ is SiblingClass
+~[EXPR_bool]~ -> ~[EXPR_SuperClass]~ is SubClass
+~[EXPR_bool]~ -> ~[EXPR_SuperClass]~ is SubSubClass
+~[EXPR_bool]~ -> ~[EXPR_SuperClass]~ is SuperClass
+~[EXPR_bool]~ -> ~[EXPR_SuperClass]~ is SiblingClass
+
+~[EXPR_SuperClass]~ -> new SuperClass()
+~[EXPR_SuperClass]~ -> new SubClass()
+~[EXPR_SuperClass]~ -> new SubSubClass()
+~[EXPR_SuperClass]~ -> new SiblingClass()

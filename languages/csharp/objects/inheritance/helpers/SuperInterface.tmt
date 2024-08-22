@@ -1,0 +1,30 @@
+~class SuperInterface start~
+public interface SuperInterface {
+}
+~class end~
+
+~class SubInterface start~
+public interface SubInterface : SuperInterface {
+}
+~class end~
+
+~class SideInterface start~
+public interface SideInterface {
+}
+~class end~
+
+~class ImplementingSuperClass start~
+public class ImplementingSuperClass : SuperInterface {
+}
+~class end~
+
+~class ImplementingSubClass start~
+public class ImplementingSubClass : SubInterface {
+}
+~class end~
+
+~class ImplementingSuperSideClass start~
+public class ImplementingSuperSideClass : SuperInterface, SideInterface {
+}
+~class end~
+

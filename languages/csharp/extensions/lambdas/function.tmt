@@ -1,0 +1,5 @@
+~[EXPR_Func<string, IEnumerable<string>>]~ -> e => ~[EXPR_IEnumerable<string>]~
+~[EXPR_Func<~[TYPE@1]~, IEnumerable<~[TYPE@1]~>>]~ -> e => ~[EXPR_IEnumerable<~[TYPE@1]~>]~
+
+~[EXPR_Func<string, string>]~ -> e => ~[EXPR_string]~
+~[EXPR_Func<~[TYPE]~, ~[TYPE@1]~>]~ -> e => ~[EXPR_~[TYPE@1]~]~

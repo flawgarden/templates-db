@@ -1,0 +1,16 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+using System.LINQ;
+~imports end~
+
+~template create_stream start~
+IEnumerable<~[TYPE@1]~> stream222523 = ~[EXPR_IEnumerable<~[TYPE@1]~>]~;
+~template end~
+
+~main body end~

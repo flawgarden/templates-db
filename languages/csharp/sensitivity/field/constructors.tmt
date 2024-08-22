@@ -1,7 +1,7 @@
 ~extensions start~
-~[MACRO_Empty_String_Array]~ -> {"", ""}
-~[MACRO_Empty_String_Array]~ -> {"", "", ""}
-~[MACRO_Empty_String_Array]~ -> {"", "", "", ""}
+~[MACRO_Empty_string_Array]~ -> {"", ""}
+~[MACRO_Empty_string_Array]~ -> {"", "", ""}
+~[MACRO_Empty_string_Array]~ -> {"", "", "", ""}
 
 ~[MACRO_Zero_Or_One]~ -> 0
 ~[MACRO_Zero_Or_One]~ -> 1
@@ -12,109 +12,102 @@
 ~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/InstanceInitializer~
 ~helper import sensitivity/field/helpers/StringFactory~
-~helper import sensitivity/field/helpers/ConstructorChains~
-~helper import sensitivity/field/helpers/NestedStringHolder~
-
-
-~imports start~
-import java.util.*;
-~imports end~
 
 
 ~template class_with_string_initialization_positive start~
-StringHolder sh = new StringHolder(~[VAR_String@1]~);
+StringHolder sh = new StringHolder(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = sh.value;
+~[VAR_string@1]~ = sh.value;
 ~template end~
 
 ~template class_with_string_initialization_negative start~
 StringHolder sh = new StringHolder();
 ~[BODY]~
-~[VAR_String]~ = sh.value;
+~[VAR_string]~ = sh.value;
 ~template end~
 
 ~template class_with_nested_string_initialization_positive start~
-NestedStringHolder nsh = new NestedStringHolder(~[VAR_String@1]~);
+NestedStringHolder nsh = new NestedStringHolder(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = nsh.getValue();
+~[VAR_string@1]~ = nsh.getValue();
 ~template end~
 
 ~template class_with_nested_string_initialization_negative start~
 NestedStringHolder nsh = new NestedStringHolder();
 ~[BODY]~
-~[VAR_String]~ = nsh.getValue();
+~[VAR_string]~ = nsh.getValue();
 ~template end~
 
 ~template class_with_array_initialization_by_value_positive start~
-ArrayHolder ah = new ArrayHolder(~[VAR_String@1]~);
+ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[0];
+~[VAR_string@1]~ = ah.values[0];
 ~template end~
 
 ~template class_with_array_initialization_by_value_negative start~
-ArrayHolder ah = new ArrayHolder(~[VAR_String@1]~);
+ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[1];
+~[VAR_string@1]~ = ah.values[1];
 ~template end~
 
 ~template class_with_array_initialization_by_value_neutral start~
-ArrayHolder ah = new ArrayHolder(~[VAR_String@1]~);
+ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
+~[VAR_string@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
 ~template end~
 
 ~template class_with_array_initialization_positive start~
-String[] tmpArrayUnique42 = ~[MACRO_Empty_String_Array]~;
-tmpArrayUnique42[0] = ~[VAR_String@1]~;
+string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
+tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[0];
+~[VAR_string@1]~ = ah.values[0];
 ~template end~
 
 ~template class_with_array_initialization_negative start~
-String[] tmpArrayUnique42 = ~[MACRO_Empty_String_Array]~;
-tmpArrayUnique42[0] = ~[VAR_String@1]~;
+string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
+tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[1];
+~[VAR_string@1]~ = ah.values[1];
 ~template end~
 
 ~template class_with_array_initialization_neutral start~
-String[] tmpArrayUnique42 = ~[MACRO_Empty_String_Array]~;
-tmpArrayUnique42[0] = ~[VAR_String@1]~;
+string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
+tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
 ~[BODY]~
-~[VAR_String@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
+~[VAR_string@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
 ~template end~
 
 ~template string_factory_positive start~
-StringFactory sf = StringFactory.createInstance(~[VAR_String@1]~);
+StringFactory sf = StringFactory.createInstance(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = sf.val;
+~[VAR_string@1]~ = sf.val;
 ~template end~
 
 ~template string_factory_negative start~
 StringFactory sf = StringFactory.createInstance();
 ~[BODY]~
-~[VAR_String]~ = sf.val;
+~[VAR_string]~ = sf.val;
 ~template end~
 
 ~template constructor_chains_positive start~
-ConstructorChains cc = new ConstructorChains(true, ~[VAR_String@1]~);
+ConstructorChains cc = new ConstructorChains(true, ~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = cc.getText(true);
+~[VAR_string@1]~ = cc.getText(true);
 ~template end~
 
 ~template constructor_chains_negative start~
-ConstructorChains cc = new ConstructorChains(false, ~[VAR_String@1]~);
+ConstructorChains cc = new ConstructorChains(false, ~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = cc.getText(true);
+~[VAR_string@1]~ = cc.getText(true);
 ~template end~
 
 ~template constructor_chains_neutral start~
-ConstructorChains cc = new ConstructorChains(~[EXPR_Boolean]~, ~[VAR_String@1]~);
+ConstructorChains cc = new ConstructorChains(~[EXPR_bool]~, ~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_String@1]~ = cc.getText(~[EXPR_Boolean]~);
+~[VAR_string@1]~ = cc.getText(~[EXPR_bool]~);
 ~template end~
 
 ~main body end~

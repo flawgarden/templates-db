@@ -1,0 +1,47 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+~imports end~
+
+~template create_list start~
+var list787234 = new List<~[TYPE]~>();
+~template end~
+
+~template list_add start~
+~[VAR_List<~[TYPE@1]~>]~.Add(~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~template list_set start~
+~[VAR_List<~[TYPE@1]~>]~[~[EXPR_int]~] = ~[EXPR_~[TYPE@1]~]~;
+~template end~
+
+~template list_add_empty start~
+~[VAR_List<string>]~.Add("");
+~template end~
+
+~template list_add_at_index start~
+~[VAR_List<~[TYPE@1]~>]~.Insert(~[EXPR_int]~, ~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~template list_add_at_zero_index_empty start~
+~[VAR_List<string>]~.Insert(0, "");
+~template end~
+
+~template list_add_all start~
+~[VAR_List<~[TYPE@1]~>]~.AddRange(EXPR_List<~[TYPE@1]~>);
+~template end~
+
+~template list_clear start~
+~[VAR_List<~[TYPE]~>]~.Clear();
+~template end~
+
+~template list_remove start~
+~[VAR_List<~[TYPE@1]~>]~.RemoveAt(~[EXPR_int]~);
+~template end~
+
+~main body end~

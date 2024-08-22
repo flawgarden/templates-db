@@ -1,0 +1,11 @@
+~main body start~
+
+~imports start~
+using System.IO;
+~imports end~
+
+~template create_file start~
+FileInfo f = new(~[EXPR_string]~);
+~template end~
+
+~main body end~
