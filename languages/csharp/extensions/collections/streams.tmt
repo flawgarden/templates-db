@@ -9,8 +9,8 @@
 ~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Contains(~[EXPR_~[TYPE@1]~]~)
 ~[EXPR_bool]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.SequenceEqual(~[EXPR_IEnumerable<~[TYPE@1]~>]~)
 
-~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Average(~[EXPR_Func<~[TYPE@1]~, ~[double]~>]~)
-~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Sum(~[EXPR_Func<~[TYPE@1]~, ~[double]~>]~)
+~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Average(~[EXPR_Func<~[TYPE@1]~, double>]~)
+~[EXPR_double]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Sum(~[EXPR_Func<~[TYPE@1]~, double>]~)
 
 ~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Append(~[EXPR_TYPE@1]~)
 ~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Prepend(~[EXPR_TYPE@1]~)
@@ -35,7 +35,7 @@
 
 ~[EXPR_IEnumerable<~[TYPE@2]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Select(~[EXPR_Func<~[TYPE@1]~, ~[TYPE@2]~>]~)
 
-~[EXPR_IEnumerable<~[TYPE@1]\[\]~>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Chunk(~[EXPR_int]~)
+~[EXPR_IEnumerable<~[TYPE@1]~\[\]>]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Chunk(~[EXPR_int]~)
 
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.First()
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Last()

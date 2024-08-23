@@ -1,5 +1,5 @@
-~[MACRO_RegexOption]~ = RegexOptions.None
-~[MACRO_RegexOption]~ = RegexOptions.IgnoreCase
+~[MACRO_RegexOption]~ -> RegexOptions.None
+~[MACRO_RegexOption]~ -> RegexOptions.IgnoreCase
 
 ~[MACRO_Regex]~ -> "[a-z]+"
 ~[MACRO_Regex]~ -> "\\"
@@ -75,10 +75,10 @@
 ~[MACRO_MatchScope]~ -> ~[MACRO_MatchScopeNamed]~
 ~[MACRO_MatchScope]~ -> Capture
 
-~[EXPR_int]~ -> ~[EXPR_~[MACRO_MatchScope]~]~.Index
-~[EXPR_int]~ -> ~[EXPR_~[MACRO_MatchScope]~]~.Length
+~[EXPR_int]~ -> ~[MACRO_MatchScope]~.Index
+~[EXPR_int]~ -> ~[MACRO_MatchScope]~.Length
 
-~[EXPR_string]~ -> ~[EXPR_~[MACRO_MatchScope]~]~.Value
-~[EXPR_string]~ -> ~[EXPR_~[MACRO_MatchScopeNamed]~]~.Name
+~[EXPR_string]~ -> ~[MACRO_MatchScope]~.Value
+~[EXPR_string]~ -> ~[MACRO_MatchScopeNamed]~.Name
 
-~[EXPR_bool]~ -> ~[EXPR_~[MACRO_MatchScopeNamed]~]~.Success
+~[EXPR_bool]~ -> ~[MACRO_MatchScopeNamed]~.Success
