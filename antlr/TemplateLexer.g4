@@ -72,6 +72,10 @@ MACRO
     : 'MACRO' -> pushMode(Macro)
     ;
 
+DEFINE
+    : 'DEFINE' -> pushMode(Macro)
+    ;
+
 BODY
     : 'BODY' -> pushMode(Hole)
     ;
@@ -115,7 +119,7 @@ NUM
 mode Macro;
 
 MACROS_IDENTIFIER
-    : (~[~\n\r[\] ])+ -> type(IDENTIFIER)
+    : (~[~\n\r[\]@ ])+ -> type(IDENTIFIER)
     ;
 
 MACROS_CLOSE_BRACKET
