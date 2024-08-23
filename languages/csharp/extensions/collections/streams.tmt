@@ -40,6 +40,10 @@
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.First()
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Last()
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ElementAt(~[EXPR_int]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_~[TYPE@1]~]~)
 
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Max()
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.Min()
@@ -47,12 +51,8 @@
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.MinBy(~[EXPR_Func<~[TYPE@1]~, ~[TYPE]~>]~)
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault()
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault()
-~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_~[TYPE@1]~]~)
-~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_~[TYPE@1]~]~)
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~)
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~)
-~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.FirstOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
-~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.LastOrDefault(~[EXPR_Func<~[TYPE@1]~, bool>]~, ~[EXPR_~[TYPE@1]~]~)
 ~[EXPR_~[TYPE@1]~?]~ -> ~[EXPR_IEnumerable<~[TYPE@1]~>]~.ElementAtOrDefault(~[EXPR_int]~)
 
 ~[EXPR_int]~ -> ~[EXPR_IEnumerable<~[TYPE]~>]~.Count()
