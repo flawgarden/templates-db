@@ -40,20 +40,24 @@ except ZeroDivisionError as e:
 ~template end~
 
 ~template null_pointer_exception_positive start~
+def get_none() -> Any:
+    return None
 tmpUnique42 = ~[VAR_str@1]~
 try:
     ~[BODY]~
-    a = None;
-    a = a + a;
+    a = get_none()
+    a = a + a
 except TypeError as e:
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
 
 ~template null_pointer_exception_negative start~
+def get_none() -> Any:
+    return None
 try:
     ~[BODY]~
-    a = None;
-    a = a + a;
+    a = get_none()
+    a = a + a
 except TypeError as e:
     ~[VAR_str]~ = ""
 ~template end~

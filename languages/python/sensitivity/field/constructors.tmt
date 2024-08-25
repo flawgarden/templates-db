@@ -90,7 +90,7 @@ ii = InstanceInitializer(~[VAR_str@1]~)
 ~template class_with_instance_initializer_negative start~
 ii = InstanceInitializer(~[VAR_str@1]~)
 ~[BODY]~
-~[VAR_str@1]~ = ii.list.[0]
+~[VAR_str@1]~ = ii.list[0]
 ~template end~
 
 ~template string_factory_positive start~

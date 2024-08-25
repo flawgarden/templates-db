@@ -1,5 +1,8 @@
 ~class InstanceInitializer start~
 class InstanceInitializer:
+    value: str
+    list: List[str]
+
     def __new__(cls, *args, **kwargs):
         instance = super().__new__(cls)
         instance.value = ""

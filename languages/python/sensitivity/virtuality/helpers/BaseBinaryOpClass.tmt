@@ -1,7 +1,7 @@
 ~class BaseBinaryOpClass start~
 
 class BaseBinaryOpClass:
-    def virtual_call(l: str, r: str) -> str:
+    def virtual_call(self, l: str, r: str) -> str:
         return ""
 
 ~class end~

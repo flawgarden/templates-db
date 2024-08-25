@@ -26,14 +26,12 @@ lambda1231.mutate(a12341)
 ~template nested_unary_lambda_mutation_positive start~
 s23423 = ~[VAR_str@1]~
 a12341 = StringHolder()
-
 def lmd(s: StringHolder) -> None:
     def innerLmd(p: StringHolder) -> None:
         p.value = "";
     innerLambda = UnaryOpMutation(innerLmd)
     innerLambda.mutate(s)
     s.value = s23423
-
 lambda1231 = UnaryOpMutation(lmd)
 lambda1231.mutate(a12341)
 ~[BODY]~

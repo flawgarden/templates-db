@@ -3,7 +3,7 @@
 ~extensions end~
 
 ~main body start~
-~helper import sensitivity/helpers/Record~
+~helper import sensitivity/record/helpers/Record~
 
 
 ~template create_simple_record_empty start~

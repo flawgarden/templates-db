@@ -123,7 +123,7 @@ tmpUnique42 = ~[VAR_str@1]~
 ~[VAR_str@1]~ = ""
 for i in range(len(tmpUnique42)):
     c = tmpUnique42[i]
-   ~[VAR_str@1]~ = ~[VAR_str@1]~ + c
+    ~[VAR_str@1]~ = ~[VAR_str@1]~ + c
 ~template end~
 
 ~template for_operator_strcpy_negative start~

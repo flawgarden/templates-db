@@ -1,5 +1,5 @@
 ~main body start~
-~helper import sensitivity/helpers/Record~
+~helper import sensitivity/record/helpers/Record~
 
 ~template simple_record_positive start~
 record = SimpleRecord(~[VAR_str@1]~)

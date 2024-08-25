@@ -1,7 +1,7 @@
 ~class ImplBinaryOpInterfaceClass1 start~
 
 class ImplBinaryOpInterfaceClass1(BinaryOpInterface):
-    def interface_call(l: str, r: str) -> str:
+    def interface_call(self, l: str, r: str) -> str:
         return l
 
 ~class end~
@@ -9,7 +9,7 @@ class ImplBinaryOpInterfaceClass1(BinaryOpInterface):
 ~class ImplBinaryOpInterfaceClass2 start~
 
 class ImplBinaryOpInterfaceClass2(BinaryOpInterface):
-    def interface_call(l: str, r: str) -> str:
+    def interface_call(self, l: str, r: str) -> str:
         return r
 
 ~class end~

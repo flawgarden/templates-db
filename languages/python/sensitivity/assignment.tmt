@@ -2,35 +2,35 @@
 
 
 ~template simple_assignment_positive start~
-~[VAR_String@1]~ = ~[VAR_String@1]~
+~[VAR_str@1]~ = ~[VAR_str@1]~
 ~template end~
 
 ~template simple_assignment_negative start~
-~[VAR_String]~ = ""
+~[VAR_str]~ = ""
 ~template end~
 
 ~template assignment_positive start~
-tmpUnique42 = ~[VAR_String@1]~
+tmpUnique42 = ~[VAR_str@1]~
 ~[BODY]~
-~[VAR_String@1]~ = tmpUnique42
+~[VAR_str@1]~ = tmpUnique42
 ~template end~
 
 ~template assignment_negative start~
 tmpUnique42 = ""
 ~[BODY]~
-~[VAR_String]~ = tmpUnique42
+~[VAR_str]~ = tmpUnique42
 ~template end~
 
 ~template lazy_eval_positive start~
-uniquePampam = ~[VAR_String@1]~
+uniquePampam = ~[VAR_str@1]~
 lazyValue = lambda: uniquePampam
 ~[BODY]~
-~[VAR_String@1]~ = lazyValue()
+~[VAR_str@1]~ = lazyValue()
 ~template end~
 
 ~template lazy_eval_negative start~
 lazyValue = lambda: ""
-~[VAR_String]~ = lazyValue()
+~[VAR_str]~ = lazyValue()
 ~template end~
 
 ~template new_var_assignment_neutral start~

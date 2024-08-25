@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 class UnaryOpInterface(ABC):
     @abstractmethod
-    def interface_call(t: str) -> str:
+    def interface_call(self, t: str) -> str:
         raise NotImplementedError
 
 ~class end~

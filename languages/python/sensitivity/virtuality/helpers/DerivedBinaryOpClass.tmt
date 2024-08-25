@@ -1,7 +1,7 @@
 ~class DerivedBinaryOpClass1 start~
 
 class DerivedBinaryOpClass1(BaseBinaryOpClass):
-    def virtual_call(l: str, r: str) -> str:
+    def virtual_call(self, l: str, r: str) -> str:
         return l
 
 ~class end~
@@ -9,7 +9,7 @@ class DerivedBinaryOpClass1(BaseBinaryOpClass):
 ~class DerivedBinaryOpClass2 start~
 
 class DerivedBinaryOpClass2(BaseBinaryOpClass):
-    def virtual_call(l: str, r: str) -> str:
+    def virtual_call(self, l: str, r: str) -> str:
         return r
 
 ~class end~
