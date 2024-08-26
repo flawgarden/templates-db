@@ -48,7 +48,7 @@ import java.util.*;
 ~template end~
 
 ~template varargs_get_first_string_negative start~
-~[VAR_String@1]~ = getFirstString(~[EXPR_String]~, ~[EXPR_String]~);
+~[VAR_String]~ = getFirstString(~[EXPR_String]~, ~[EXPR_String]~);
 ~template end~
 
 ~template varargs_get_string_with_index_positive start~
@@ -60,11 +60,11 @@ import java.util.*;
 ~template end~
 
 ~template varargs_get_first_string_from_array_positive start~
-~[VAR_String@1]~ = getFirstStringFromArray(~[VAR_String@1]~, ~[VAR_String@2]~);
+~[VAR_String@1]~ = getFirstStringFromArray(~[VAR_String@1]~, ~[VAR_String]~);
 ~template end~
 
 ~template varargs_get_first_string_from_array_negative start~
-~[VAR_String@1]~ = getFirstStringFromArray(~[EXPR_String]~, ~[EXPR_String]~);
+~[VAR_String]~ = getFirstStringFromArray(~[EXPR_String]~, ~[EXPR_String]~);
 ~template end~
 
 ~template varargs_with_generics_positive start~
@@ -72,7 +72,7 @@ import java.util.*;
 ~template end~
 
 ~template varargs_with_generics_negative start~
-~[VAR_String@1]~ = varargsWithGenerics(~[EXPR_String]~, ~[EXPR_String]~);
+~[VAR_String]~ = varargsWithGenerics(~[EXPR_String]~, ~[EXPR_String]~);
 ~template end~
 
 ~template varargs_combine_strings_positive start~
@@ -80,7 +80,7 @@ import java.util.*;
 ~template end~
 
 ~template varargs_combine_strings_negative start~
-~[VAR_String@1]~ = combineStrings(~[EXPR_String]~, ~[EXPR_String]~);
+~[VAR_String]~ = combineStrings(~[EXPR_String]~, ~[EXPR_String]~);
 ~template end~
 
 ~main body end~

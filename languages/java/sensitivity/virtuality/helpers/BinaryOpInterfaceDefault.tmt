@@ -12,6 +12,12 @@ public interface BinaryOpInterfaceDefault1 extends BinaryOpInterfaceDefaultBase 
 }
 ~class end~
 
+~class BinaryOpInterfaceDefault1Implementation start~
+class BinaryOpInterfaceDefault1Implementation implements BinaryOpInterfaceDefault1 {
+
+}
+~class end~
+
 ~class BinaryOpInterfaceDefault2 start~
 public interface BinaryOpInterfaceDefault2 extends BinaryOpInterfaceDefaultBase  {
     default String InterfaceCall(String l, String r) {
@@ -20,10 +26,22 @@ public interface BinaryOpInterfaceDefault2 extends BinaryOpInterfaceDefaultBase 
 }
 ~class end~
 
+~class BinaryOpInterfaceDefault2Implementation start~
+class BinaryOpInterfaceDefault2Implementation implements BinaryOpInterfaceDefault2 {
+
+}
+~class end~
+
 ~class BinaryOpInterfaceDefault start~
 public interface BinaryOpInterfaceDefault extends BinaryOpInterfaceDefault1, BinaryOpInterfaceDefault2 {
     default String InterfaceCall(String l, String r) {
         return "";
     }
+}
+~class end~
+
+~class BinaryOpInterfaceDefaultImplementation start~
+class BinaryOpInterfaceDefaultImplementation implements BinaryOpInterfaceDefault {
+
 }
 ~class end~
