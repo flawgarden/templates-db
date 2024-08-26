@@ -1,0 +1,158 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName@1]~ = new PriorityQueue<>();
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName@1]~ = new ArrayDeque<>();
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName@1]~ = new LinkedList<>();
+
+~[DEFINE_Add_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+~[DEFINE_Add_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~]~);
+~[DEFINE_Add_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.add(~[VAR_~[TYPE@1]~]~);
+~[DEFINE_Add_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.offer(~[VAR_~[TYPE@1]~]~);
+
+~[DEFINE_Add_Fixed_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.offer(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_Element_ToQueue]~ -> ~[DEFINE_QueueName@1]~.offer(~[VAR_~[TYPE@1]~@1]~);
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.*;
+import java.util.concurrent.*;
+~imports end~
+
+~template simple_poll start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[VAR_TYPE@1]~ = ~[DEFINE_QueueName@1]~.poll();
+~template end~
+
+~template simple_peek start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_QueueName@1]~.poll();
+~[VAR_TYPE@1]~ = ~[DEFINE_QueueName@1]~.peek();
+~template end~
+
+~template queue_is_empty_1 start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[TYPE]~ value7843 = ~[DEFINE_QueueName@1]~.peek();
+if (~[DEFINE_QueueName@1]~.isEmpty()) {
+    value7843 = ~[CONST_~[TYPE@1]~]~;
+}
+~[VAR_TYPE@1]~ = value7843
+~template end~
+
+~template queue_is_empty_2 start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[TYPE]~ value7844 = ~[DEFINE_QueueName@1]~.poll();
+if (~[DEFINE_QueueName@1]~.isEmpty()) {
+    value7844 = ~[CONST_~[TYPE@1]~]~;
+}
+~[VAR_TYPE@1]~ = value7844
+~template end~
+
+~template queue_poll start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[TYPE@1]~ val23242 = ~[CONST_TYPE@1]~;
+for (~[TYPE@1]~ el : ~[DEFINE_QueueName@1]~) {
+    if (~[EXPR_Boolean]~) {
+        val23242 = el;
+    }
+}
+~[VAR_TYPE@1]~ = val23242
+~template end~
+
+~template queue_contains_1 start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7845 = ~[CONST_TYPE@1]~;
+
+if (~[DEFINE_QueueName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
+}
+~[VAR_TYPE@1]~ = value7845
+~template end~
+
+~template queue_contains_2 start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7846 = ~[CONST_TYPE@1]~;
+
+if (~[DEFINE_QueueName@1]~.contains(~[VAR_~[TYPE@1]~]~)) {
+    value7846 = ~[VAR_~[TYPE@1]~@1]~;
+}
+~[VAR_TYPE@1]~ = value7846
+~template end~
+
+~template queue_poll_all start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7847 = ~[CONST_TYPE@1]~;
+while (!~[DEFINE_QueueName@1]~.isEmpty()) {
+    value7847 = ~[DEFINE_QueueName@1]~.poll();
+}
+~[VAR_TYPE@1]~ = value7847
+~template end~
+
+~template queue_offer start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+~[TYPE@1]~ value7848 = ~[CONST_TYPE@1]~;
+if (~[DEFINE_QueueName@1]~.offer(~[VAR_~[TYPE@1]~]~)) {
+    value7848 = ~[DEFINE_QueueName@1]~.poll();
+}
+~[VAR_TYPE@1]~ = value7848
+~template end~
+
+~template queue_conditional_poll start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+if (~[EXPR_Boolean]~) {
+    ~[DEFINE_QueueName@1]~.poll();
+}
+~[VAR_TYPE@1]~ = ~[DEFINE_QueueName@1]~.poll();
+~template end~
+
+
+~template queue_remove_if start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Element_ToQueue]~
+~[DEFINE_Add_Fixed_Element_ToQueue]~
+~[DEFINE_QueueName@1]~.removeIf(item -> item.equals(~[CONST_~[TYPE@1]~]~));
+~[VAR_TYPE@1]~ = ~[DEFINE_QueueName@1]~.poll();
+~template end~
+
+~template two_queues start~
+Queue<~[TYPE@1]~> sourceQueue = new ArrayDeque<>();
+Queue<~[TYPE@1]~> targetQueue = new ArrayDeque<>();
+sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
+sourceQueue.add(~[EXPR_~[TYPE@1]~]~);
+targetQueue.add(~[EXPR_~[TYPE@1]~]~);
+targetQueue.add(~[VAR_~[TYPE@1]~]~);
+while (!sourceQueue.isEmpty()) {
+    targetQueue.offer(sourceQueue.poll());
+}
+~[VAR_TYPE@1]~ = targetQueue.poll();
+~template end~
+
+
+~main body end~
