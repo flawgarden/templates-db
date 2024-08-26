@@ -41,7 +41,7 @@ if (~[DEFINE_MapName@1]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
 if (value7843 == null) {
     value7843 = ~[EXPR_~[TYPE@2]~]~;
 }
-~[VAR_TYPE@2]~ = value7843
+~[VAR_TYPE@2]~ = value7843;
 ~template end~
 
 ~template map_merge_1 start~
@@ -63,7 +63,7 @@ map111.putAll(map222);
 if (value7845 == null) {
     value7845 = ~[EXPR_~[TYPE@2]~]~;
 }
-~[VAR_TYPE@2]~ = value7845
+~[VAR_TYPE@2]~ = value7845;
 ~template end~
 
 ~template map_put_if_absent start~

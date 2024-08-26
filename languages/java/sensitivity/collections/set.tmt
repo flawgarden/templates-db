@@ -53,7 +53,7 @@ if (~[EXPR_Boolean]~) {
 if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
     value7844 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value7844
+~[VAR_TYPE@1]~ = value7844;
 ~template end~
 
 ~template set_contains_2 start~
@@ -65,7 +65,7 @@ if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
 if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@2]~)) {
     value7845 = ~[VAR_~[TYPE@1]~@2]~;
 }
-~[VAR_TYPE@1]~ = value7845
+~[VAR_TYPE@1]~ = value7845;
 ~template end~
 
 ~template set_size start~
@@ -77,7 +77,7 @@ if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@2]~)) {
 if (~[DEFINE_SetName@1]~.size() == 2) {
     value7846 = ~[DEFINE_SetName@1]~.iterator().next();
 }
-~[VAR_TYPE@1]~ = value7846
+~[VAR_TYPE@1]~ = value7846;
 ~template end~
 
 ~template set_union start~
@@ -92,7 +92,7 @@ if (set111.contains(~[VAR_~[TYPE@1]~@2]~)) {
     it.next();
     value7847 = it.next();
 }
-~[VAR_TYPE@1]~ = value7847
+~[VAR_TYPE@1]~ = value7847;
 ~template end~
 
 ~template set_retain start~
@@ -107,7 +107,7 @@ if (set111.contains(~[VAR_~[TYPE@1]~@2]~)) {
     it.next();
     value7848 = it.next();
 }
-~[VAR_TYPE@1]~ = value7848
+~[VAR_TYPE@1]~ = value7848;
 ~template end~
 
 ~template set_remove start~
@@ -121,7 +121,7 @@ set111.removeAll(set222);
 if (set111.size() == 0) {
     value7849 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value7849
+~[VAR_TYPE@1]~ = value7849;
 ~template end~
 
 ~template set_is_added start~
@@ -131,7 +131,7 @@ if (set111.size() == 0) {
 if (~[DEFINE_SetName@1]~.add(~[VAR_~[TYPE@1]~@1]~)) {
     value78410 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value78410
+~[VAR_TYPE@1]~ = value78410;
 ~template end~
 
 ~template set_disjoint start~
@@ -143,7 +143,7 @@ set222.add(~[VAR_~[TYPE@1]~@1]~);
 if (Collections.disjoint(set111, set222)) {
     value78411 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value78411
+~[VAR_TYPE@1]~ = value78411;
 ~template end~
 
 ~main body end~
