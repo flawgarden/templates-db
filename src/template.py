@@ -24,25 +24,47 @@ class Hole:
 
 
 @dataclass
-class Extension:
-    target: Hole
+class MacroUsage:
+    name: str
+    ref: str | None
+
+
+@dataclass
+class DefineUsage:
+    name: str
+    ref: str | None
+
+
+@dataclass
+class Code:
     holes: List[Hole]
+    macros: List[MacroUsage]
+    defines: List[DefineUsage]
     body: str
 
 
 @dataclass
-class Macro:
+class Extension:
+    target: Hole
+    code: Code
+
+
+@dataclass
+class MacroDefinition:
     name: str
-    holes: List[Hole]
-    body: str
+    code: Code
+
+
+@dataclass
+class DefineDefinition:
+    name: str
+    code: Code
 
 
 @dataclass
 class Template:
     name: str
-    macros: List[str]
-    holes: List[Hole]
-    body: str
+    code: Code
 
 
 @dataclass
@@ -80,7 +102,8 @@ class TemplateFile(ProjectFile):
     helper_imports: List[HelperImport]
     extension_imports: List[ExtensionImport]
     local_extensions: List[Extension]
-    local_macros: List[Macro]
+    local_macros: List[MacroDefinition]
+    local_defines: List[DefineDefinition]
     templates: List[Template]
     helper_functions: List[HelperFunction]
 
@@ -93,7 +116,8 @@ class HelperFile(ProjectFile):
 @dataclass
 class ExtensionFile(ProjectFile):
     extensions: List[Extension]
-    macros: List[Macro]
+    macros: List[MacroDefinition]
+    defines: List[DefineDefinition]
 
 
 class LanguageProject:
@@ -130,9 +154,11 @@ class LanguageProject:
     def extension_files(self) -> List[ExtensionFile]:
         return self._extension_files
 
-    def get_extensions(self, import_: ExtensionImport) -> Tuple[List[Macro], List[Extension]] | None:
+    def get_extensions(self, import_: ExtensionImport) \
+            -> Tuple[List[MacroDefinition], List[Extension], List[DefineDefinition]] | None:
         result_macros = []
         result_extensions = []
+        result_defines = []
 
         def add_by_filter(ext_filter: Callable[[ExtensionFile], bool]):
             for ext_file in self._extension_files:
@@ -142,7 +168,7 @@ class LanguageProject:
 
         if import_.target == "*":
             add_by_filter(lambda ext_file: True)
-            return result_macros, result_extensions
+            return result_macros, result_extensions, result_defines
 
         parents_and_name = import_.target.split("/")
         name = parents_and_name[-1]
@@ -150,13 +176,13 @@ class LanguageProject:
 
         if name == "*":
             add_by_filter(lambda ext_file: ext_file.parents == parents)
-            return result_macros, result_extensions
+            return result_macros, result_extensions, result_defines
 
         for f in self._extension_files:
             ext_file_parents_and_name = [x for x in f.parents][::-1]
             ext_file_parents_and_name.append(f.name)
             if ext_file_parents_and_name == parents_and_name:
-                return f.macros, f.extensions
+                return f.macros, f.extensions, f.defines
 
         return None
 

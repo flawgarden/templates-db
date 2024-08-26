@@ -277,41 +277,62 @@ def invalid_import_diagnostic(project: LanguageProject, template_file: TemplateF
     return result
 
 
-@nerd.template_diagnostic("Undefined macro")
+@nerd.template_diagnostic("Undefined macro or define")
 def undefined_macro_diagnostic(project: LanguageProject, template_file: TemplateFile) -> List[DiagnosticResult]:
     result = []
 
     available_macros = []
+    available_defines = []
     for extension_import in template_file.extension_imports:
         extensions = project.get_extensions(extension_import)
         if extensions is None:
             continue
-        macros, _ = extensions
+        macros, _, defines = extensions
         available_macros.extend(macros)
+        available_defines.extend(defines)
     available_macros.extend(template_file.local_macros)
+    available_defines.extend(template_file.local_defines)
 
     available_macro_names = [macro.name for macro in available_macros]
+    available_define_names = [define.name for define in available_defines]
     for template in template_file.templates:
-        for macro_name in template.macros:
-            if macro_name not in available_macro_names:
-                result.append(DiagnosticResult.error(f"Undefined macro [{macro_name}] in [{template_file.path}]"))
+        for macro_usage in template.code.macros:
+            if macro_usage.name not in available_macro_names:
+                result.append(DiagnosticResult.error(
+                    f"Undefined macro [{macro_usage.name}] in [{template_file.path}]")
+                )
+        for define_usage in template.code.defines:
+            if define_usage.name not in available_define_names:
+                result.append(DiagnosticResult.error(
+                    f"Undefined define [{define_usage.name}] in [{template_file.path}]")
+                )
 
     return result
 
 
-@nerd.template_diagnostic("Unused local macro")
+@nerd.template_diagnostic("Unused local macro or define")
 def unused_local_macro_diagnostic(project: LanguageProject, template_file: TemplateFile) -> List[DiagnosticResult]:
     result = []
 
-    used_macro_names = []
+    used_macro = []
+    used_define = []
     for template in template_file.templates:
-        used_macro_names.extend(template.macros)
+        used_macro.extend(template.code.macros)
+        used_define.extend(template.code.defines)
+
+    used_macro_names = [macro.name for macro in used_macro]
+    used_define_names = [define.name for define in used_define]
 
     for macro in template_file.local_macros:
         if macro.name not in used_macro_names:
             result.append(
-                DiagnosticResult.warning(f"Local macro [{macro.name}] in [{template_file.path}] defined but not used"))
-
+                DiagnosticResult.warning(f"Local macro [{macro.name}] in [{template_file.path}] defined but not used")
+            )
+    for define in template_file.local_defines:
+        if define.name not in used_define_names:
+            result.append(
+                DiagnosticResult.warning(f"Local macro [{define.name}] in [{template_file.path}] defined but not used")
+            )
     return result
 
 
@@ -357,13 +378,15 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
         return result_holes
 
     def check_extension(path: Path, e: Extension):
-        for ref in get_dangling_refs(traverse_holes([*e.target.type_.types, *e.holes])):
+        for ref in get_dangling_refs(traverse_holes([*e.target.type_.types, *e.code.holes])):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside extensions in file [{path}]")
             )
 
     def check_template(path: Path, t: Template):
-        for ref in get_dangling_refs(traverse_holes(t.holes)):
+        if t.code.defines != [] or t.code.macros != []:
+            return
+        for ref in get_dangling_refs(traverse_holes(t.code.holes)):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside template [{t.name}] in file [{path}]")
             )

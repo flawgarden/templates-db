@@ -176,56 +176,72 @@ class Parser:
             ref=hole_ref,
         )
 
+    def _parse_ref(self, ctx) -> str | None:
+        ref_ctx = ctx.holeRef()
+        ref = None if ref_ctx is None else ref_ctx.getText()
+        return ref
+
     def _parse_hole(self, ctx: TemplateParser.HoleContext) -> template.Hole:
         body_ctx = ctx.holeBody()
         return self._parse_hole_body(body_ctx)
 
-    def _parse_macro_name(self, ctx: TemplateParser.MacroContext) -> str:
-        return ctx.IDENTIFIER().getText()
+    def _parse_macro_usage(self, ctx: TemplateParser.MacroContext) -> template.MacroUsage:
+        return template.MacroUsage(ctx.IDENTIFIER().getText(), self._parse_ref(ctx))
+
+    def _parse_define_usage(self, ctx: TemplateParser.MacroContext) -> template.DefineUsage:
+        return template.DefineUsage(ctx.IDENTIFIER().getText(), self._parse_ref(ctx))
 
     def _parse_type_hole(self, ctx: TemplateParser.TypeContext) -> template.Hole:
-        ref_ctx = ctx.holeRef()
-        ref = None if ref_ctx is None else ref_ctx.getText()
         return template.Hole(
             kind="TYPE",
             type_=None,
-            ref=ref,
+            ref=self._parse_ref(ctx),
         )
 
-    def _parse_code_string(self, ctx: TemplateParser.CodeStringContext) -> Tuple[str, List[str], List[template.Hole]]:
+    def _parse_code_string(self, ctx: TemplateParser.CodeStringContext) -> template.Code:
         body = ctx.getText()
-        macros = Parser._map_option(self._parse_macro_name, ctx.macro())
+        macros = Parser._map_option(self._parse_macro_usage, ctx.macro())
+        defines = Parser._map_option(self._parse_define_usage, ctx.define())
         holes = Parser._map_option(self._parse_hole, ctx.hole())
         type_holes = Parser._map_option(self._parse_type_hole, ctx.type_())
         holes.extend(type_holes)
-        return body, macros, holes
+        return template.Code(holes, macros, defines, body)
 
-    def _parse_code(self, ctx: TemplateParser.CodeContext) -> Tuple[str, List[str], List[template.Hole]]:
+    def _parse_code(self, ctx: TemplateParser.CodeContext) -> template.Code:
         body = ctx.getText()
         macros = []
         holes = []
+        defines = []
         for code_string in ctx.codeString():
-            _, s_macros, s_holes = self._parse_code_string(code_string)
-            macros.extend(s_macros)
-            holes.extend(s_holes)
-        return body, macros, holes
+            code = self._parse_code_string(code_string)
+            macros.extend(code.macros)
+            holes.extend(code.holes)
+            defines.extend(code.defines)
+        return template.Code(holes, macros, defines, body)
 
     def _parse_template(self, ctx: TemplateParser.TemplateContext) -> template.Template | None:
         if self._contains_error(ctx):
             return None
         name = ctx.templateStart().IDENTIFIER().getText()
-        body, macros, holes = self._parse_code(ctx.code())
-        return template.Template(name, macros, holes, body)
+        code = self._parse_code(ctx.code())
+        return template.Template(name, code)
 
     def _parse_extension_definition(self, ctx: TemplateParser.ExtensionDefinitionContext) -> template.Extension:
         hole = self._parse_hole_body(ctx.holeArrow().holeBody())
-        body, macros, holes = self._parse_code_string(ctx.codeString())
-        return template.Extension(hole, holes, body)
+        code = self._parse_code_string(ctx.codeString())
+        return template.Extension(hole, code)
 
-    def _parse_macro_definition(self, ctx: TemplateParser.MacroDefinitionContext) -> template.Macro:
-        name = ctx.macroArrow().IDENTIFIER().getText()
-        body, macros, holes = self._parse_code_string(ctx.codeString())
-        return template.Macro(name, holes, body)
+    def _parse_macro_definition(self, ctx: TemplateParser.MacroDefinitionContext) -> template.MacroDefinition:
+        macro_arrow_ctx = ctx.macroArrow()
+        name = macro_arrow_ctx.IDENTIFIER().getText()
+        code = self._parse_code_string(ctx.codeString())
+        return template.MacroDefinition(name, code)
+
+    def _parse_define_definition(self, ctx: TemplateParser.DefineDefinitionContext) -> template.DefineDefinition:
+        define_arrow_ctx = ctx.defineArrow()
+        name = define_arrow_ctx.IDENTIFIER().getText()
+        code = self._parse_code_string(ctx.codeString())
+        return template.DefineDefinition(name, code)
 
     def _parse_extension_import(self, ctx: TemplateParser.ExtensionImportContext) -> template.ExtensionImport:
         return template.ExtensionImport(ctx.IDENTIFIER().getText())
@@ -235,13 +251,13 @@ class Parser:
 
     def _parse_helper_class(self, ctx: TemplateParser.HelperClassContext) -> template.HelperClass:
         name = ctx.helperClassStart().IDENTIFIER().getText()
-        body, macros, holes = self._parse_code(ctx.code())
-        return template.HelperClass(name, body)
+        code = self._parse_code(ctx.code())
+        return template.HelperClass(name, code.body)
 
     def _parse_helper_function(self, ctx: TemplateParser.HelperFunctionContext) -> template.HelperFunction:
         name = ctx.helperFunctionStart().IDENTIFIER().getText()
-        body, macros, holes = self._parse_code(ctx.code())
-        return template.HelperFunction(name, body)
+        code = self._parse_code(ctx.code())
+        return template.HelperFunction(name, code.body)
 
     def _get_parser(self, text: str) -> TemplateParser:
         if self.debug:
@@ -279,6 +295,7 @@ class Parser:
         extension_imports = []
         local_extensions = []
         local_macros = []
+        local_defines = []
         helper_functions = []
 
         main_class_ctx = template_file_ctx.mainClass()
@@ -296,6 +313,9 @@ class Parser:
             local_macros = Parser._map_option(
                 self._parse_macro_definition, extensions_ctx.macroDefinition()
             )
+            local_defines = Parser._map_option(
+                self._parse_define_definition, extensions_ctx.defineDefinition()
+            )
 
         if helper_functions_ctx is not None:
             helper_functions = Parser._map_option(self._parse_helper_function, helper_functions_ctx.helperFunction())
@@ -312,6 +332,7 @@ class Parser:
             extension_imports,
             local_extensions,
             local_macros,
+            local_defines,
             templates,
             helper_functions,
         )
@@ -324,7 +345,7 @@ class Parser:
             file_path,
             file_path.stem,
             self._get_parents(file_path),
-            [], [], [], [], [], []
+            [], [], [], [], [], [], []
         )
 
         if kind != TmtFileKind.TMT:
@@ -340,6 +361,7 @@ class Parser:
 
         extensions = Parser._map_option(self._parse_extension_definition, extensions_ctx.extensionDefinition())
         macros = Parser._map_option(self._parse_macro_definition, extensions_ctx.macroDefinition())
+        defines = Parser._map_option(self._parse_define_definition, extensions_ctx.defineDefinition())
 
         return template.ExtensionFile(
             get_kind(self._current_file),
@@ -348,6 +370,7 @@ class Parser:
             self._get_parents(self._current_file),
             extensions,
             macros,
+            defines
         )
 
     def _parse_extension_file(self, file_path: Path) -> template.ExtensionFile:
@@ -358,7 +381,7 @@ class Parser:
             file_path,
             file_path.stem,
             self._get_parents(file_path),
-            [], [],
+            [], [], []
         )
 
         if kind != TmtFileKind.TMT:
