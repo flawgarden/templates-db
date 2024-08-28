@@ -1,14 +1,11 @@
 ~extensions start~
 ~extensions import *~
 
-~[DEFINE_MapName]~ -> map787231
-~[DEFINE_MapName]~ -> map787232
-~[DEFINE_MapName]~ -> map787233
 ~[DEFINE_MapName]~ -> map787234
-~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName@1]~ = new HashMap<>();
-~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName@1]~ = new TreeMap<>();
-~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
-~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName@1]~.put(~[VAR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new HashMap<>();
+~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new TreeMap<>();
+~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
+~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[VAR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
 
 ~extensions end~
 
@@ -20,24 +17,24 @@ import java.util.*;
 
 ~template map_simple_get_1_positive start~
 ~[DEFINE_Create_Map]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
-~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
 ~template map_simple_get_1_negative start~
 ~[DEFINE_Create_Map]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@2]~]~);
-~[VAR_~[TYPE@2]~]~ = ~[DEFINE_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@2]~]~);
+~[VAR_~[TYPE@2]~]~ = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
 ~template map_remove_1_negative start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_Add_EXPR_ToMap]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
-if (~[DEFINE_MapName@1]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
-    ~[DEFINE_MapName@1]~.remove(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+if (~[DEFINE_MapName]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
+    ~[DEFINE_MapName]~.remove(~[EXPR_~[TYPE@1]~@1]~);
 }
-~[TYPE@2]~ value7843 = ~[DEFINE_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
+~[TYPE@2]~ value7843 = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~);
 if (value7843 == null) {
     value7843 = ~[CONST_~[TYPE@2]~]~;
 }
@@ -46,9 +43,9 @@ if (value7843 == null) {
 
 ~template map_remove_1_positive start~
 ~[DEFINE_Create_Map]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
-if (~[DEFINE_MapName@1]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
-    ~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName@1]~.remove(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+if (~[DEFINE_MapName]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
+    ~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~.remove(~[EXPR_~[TYPE@1]~@1]~);
 }
 ~template end~
 
@@ -64,23 +61,23 @@ map111.putAll(map222);
 ~template map_clear_negative start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_Add_EXPR_ToMap]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@2]~, ~[VAR_~[TYPE@2]~@2]~);
-~[DEFINE_MapName@1]~.clear();
-~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName@1]~.get(~[EXPR_~[TYPE@1]~@2]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@2]~, ~[VAR_~[TYPE@2]~@2]~);
+~[DEFINE_MapName]~.clear();
+~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@2]~);
 ~template end~
 
 ~template map_put_if_absent_negative start~
 ~[DEFINE_Create_Map]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~@2]~);
-~[DEFINE_MapName@1]~.putIfAbsent(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@3]~);
-~[VAR_~[TYPE@2]~@3]~ = ~[DEFINE_MapName@1]~.get(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~@2]~);
+~[DEFINE_MapName]~.putIfAbsent(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@3]~);
+~[VAR_~[TYPE@2]~@3]~ = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
 ~template map_merge_2_negative start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_Add_EXPR_ToMap]~
-~[DEFINE_MapName@1]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
-~[VAR_TYPE@2]~ = ~[DEFINE_MapName@1]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[VAR_TYPE@2]~ = ~[DEFINE_MapName]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
 ~template end~
 
 ~main body end~

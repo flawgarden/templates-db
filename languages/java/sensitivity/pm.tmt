@@ -31,23 +31,23 @@ import java.util.*;
 ~imports end~
 
 ~template pattern_matching_simple_1_positive start~
-~[VAR_String@1]~ = simplePatternMatchingString1(~[VAR_String@1]~);
+~[VAR_String]~ = simplePatternMatchingString1(~[VAR_String@1]~);
 ~template end~
 
 ~template pattern_matching_simple_1_negative start~
-~[VAR_String@1]~ = simplePatternMatchingString1(~[CONST_String]~);
+~[VAR_String]~ = simplePatternMatchingString1(~[CONST_String]~);
 ~template end~
 
 ~template pattern_matching_simple_2_negative start~
-~[VAR_String@1]~ = simplePatternMatchingString1(~[VAR_Integer@1]~);
+~[VAR_String]~ = simplePatternMatchingString1(~[VAR_Integer@1]~);
 ~template end~
 
 ~template pattern_matching_simple_4_positive start~
-~[VAR_String@1]~ = simplePatternMatchingString2(~[VAR_String@1]~);
+~[VAR_String]~ = simplePatternMatchingString2(~[VAR_String@1]~);
 ~template end~
 
 ~template pattern_matching_simple_4_negative start~
-~[VAR_String@1]~ = simplePatternMatchingString2(~[CONST_String]~);
+~[VAR_String]~ = simplePatternMatchingString2(~[CONST_String]~);
 ~template end~
 
 ~main body end~
