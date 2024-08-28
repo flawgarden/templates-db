@@ -1,18 +1,22 @@
 ~extensions start~
 ~extensions import *~
 
-~[DEFINE_ListName]~ -> list787231
-~[DEFINE_ListName]~ -> list787232
-~[DEFINE_ListName]~ -> list787233
-~[DEFINE_ListName]~ -> list787234
-~[DEFINE_StreamName]~ -> stream787231
-~[DEFINE_StreamName]~ -> stream787231
-~[DEFINE_StreamName]~ -> stream787231
-~[DEFINE_StreamName]~ -> stream787231
-~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName@1]~ = new ArrayList<>();
-~[DEFINE_Create_Stream]~ -> Stream<~[TYPE@1]~> ~[DEFINE_StreamName@1]~ = ~[DEFINE_ListName@1]~.stream();
-~[DEFINE_Add_Element_ToList]~ -> ~[DEFINE_ListName@1]~.add(~[EXPR_~[TYPE@1]~]~);
-~[DEFINE_Add_Element_ToList]~ -> ~[DEFINE_ListName@1]~.add(~[VAR_~[TYPE@1]~]~);
+~[MACRO_ListName]~ -> list787231
+~[MACRO_ListName]~ -> list787232
+~[MACRO_ListName]~ -> list787233
+~[MACRO_ListName]~ -> list787234
+~[MACRO_StreamName]~ -> stream787231
+~[MACRO_StreamName]~ -> stream787231
+~[MACRO_StreamName]~ -> stream787231
+~[MACRO_StreamName]~ -> stream787231
+~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new ArrayList<>();
+~[MACRO_Create_Stream]~ -> Stream<~[TYPE@1]~> ~[MACRO_StreamName@1]~ = ~[MACRO_ListName@1]~.stream();
+~[MACRO_Add_Fixed_EXPR_ToList]~ -> ~[MACRO_ListName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[MACRO_Add_Fixed_VAR_ToList]~ -> ~[MACRO_ListName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[MACRO_Add_Fixed_CONST_ToList]~ -> ~[MACRO_ListName@1]~.add(~[CONST_~[TYPE@1]~@1]~);
+~[MACRO_Add_CONST_ToList]~ -> ~[MACRO_ListName@1]~.add(~[CONST_~[TYPE@1]~]~);
+
+
 
 
 ~extensions end~
@@ -24,49 +28,55 @@ import java.util.*;
 import java.util.stream.*;
 ~imports end~
 
-~template stream_simple start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Create_Stream]~
-~[VAR_TYPE@1]~ = ~[DEFINE_StreamName@1]~.findFirst().get();
+~template stream_simple_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_VAR_ToList]~
+~[MACRO_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.findFirst().get();
 ~template end~
 
-~template stream_map start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Create_Stream]~
-~[DEFINE_StreamName@1]~.map(entry111 -> entry111 + ~[EXPR_~[TYPE@1]~]~);
-~[VAR_TYPE@1]~ = ~[DEFINE_StreamName@1]~.findFirst().get();
+~template stream_simple_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_CONST_ToList]~
+~[MACRO_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.findFirst().get();
 ~template end~
 
-~template stream_filter start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Create_Stream]~
-~[DEFINE_StreamName@1]~.filter(entry111 -> entry111.equals(~[EXPR_~[TYPE@1]~]~));
-~[VAR_TYPE@1]~ = ~[DEFINE_StreamName@1]~.findFirst().get();
+~template stream_map_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_EXPR_ToList]~
+~[MACRO_Add_Fixed_CONST_ToList]~
+~[MACRO_Add_Fixed_VAR_ToList]~
+~[MACRO_Create_Stream]~
+~[MACRO_StreamName@1]~.map(entry111 -> entry111 + ~[CONST_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.findFirst().get();
 ~template end~
 
-~template stream_reduce start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Create_Stream]~
-~[VAR_TYPE@1]~ = ~[DEFINE_StreamName@1]~.reduce((entry1, entry2) -> entry1 + entry2).get();
+~template stream_map_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_VAR_ToList]~
+~[MACRO_Add_CONST_ToList]~
+~[MACRO_Add_CONST_ToList]~
+~[MACRO_Create_Stream]~
+~[MACRO_StreamName@1]~.map(entry111 -> ~[CONST_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.findFirst().get();
 ~template end~
 
-~template stream_max start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Create_Stream]~
-~[VAR_TYPE@1]~ = ~[DEFINE_StreamName@1]~.max(Comparator.naturalOrder()).get();
+
+~template stream_filter_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_VAR_ToList]~
+~[MACRO_Create_Stream]~
+~[MACRO_StreamName@1]~.filter(entry111 -> entry111.equals(~[VAR_~[TYPE@1]~@1]~));
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.findFirst().get();
+~template end~
+
+~template stream_reduce_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_Fixed_VAR_ToList]~
+~[MACRO_Add_CONST_ToList]~
+~[MACRO_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_StreamName@1]~.reduce((entry1, entry2) -> entry1 + entry2).get();
 ~template end~
 
 ~main body end~

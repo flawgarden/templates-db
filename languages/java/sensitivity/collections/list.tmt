@@ -1,15 +1,15 @@
 ~extensions start~
 ~extensions import *~
 
-~[DEFINE_ListName]~ -> list787231
-~[DEFINE_ListName]~ -> list787232
-~[DEFINE_ListName]~ -> list787233
-~[DEFINE_ListName]~ -> list787234
-~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName@1]~ = new ArrayList<>();
-~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName@1]~ = new LinkedList<>();
-~[DEFINE_Add_Element_ToList]~ -> ~[DEFINE_ListName@1]~.add(~[VAR_~[TYPE@1]~]~);
-~[DEFINE_Add_Element_ToList]~ -> ~[DEFINE_ListName@1]~.add(~[EXPR_~[TYPE@1]~]~);
-
+~[MACRO_ListName]~ -> list787231
+~[MACRO_ListName]~ -> list787232
+~[MACRO_ListName]~ -> list787233
+~[MACRO_ListName]~ -> list787234
+~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new ArrayList<>();
+~[MACRO_Create_List]~ -> List<~[TYPE@1]~> ~[MACRO_ListName@1]~ = new LinkedList<>();
+~[MACRO_Add_VAR_ToList]~ -> ~[MACRO_ListName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[MACRO_Add_EXPR_ToList]~ -> ~[MACRO_ListName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[MACRO_Add_CONST_ToList]~ -> ~[MACRO_ListName@1]~.add(~[CONST_~[TYPE@1]~@1]~);
 
 ~extensions end~
 
@@ -19,71 +19,64 @@
 import java.util.*;
 ~imports end~
 
-~template list_set start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.set(0, ~[VAR_~[TYPE@1]~]~);
+~template list_set_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_ListName@1]~.set(0, ~[VAR_~[TYPE@1]~@1]~);
 ~template end~
 
-~template list_add_empty start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-list787234.add("");
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.get(0);
+~template list_set_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_ListName@1]~.set(0, ~[VAR_~[TYPE@1]~@1]~);
 ~template end~
 
-~template list_get_with_condition start~
-~[DEFINE_Create_List]~
-if (~[EXPR_Boolean]~) {
-    ~[DEFINE_Add_Element_ToList]~
-}
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.get(0);
-~template end~
-
-~template list_add_get_at_zero_index_empty start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
+~template list_add_get_at_zero_index_empty_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
 list787234.add(0, "");
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.get(0);
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
-~template list_add_and_remove start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-list787234.add(0, "");
-if (~[EXPR_Boolean]~) {
-    list787234.remove(0);
-}
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.get(0);
+~template list_add_and_remove_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_ListName@1]~.remove(0);
 ~template end~
 
-~template list_to_array_and_get start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[VAR_TYPE@1]~ = (~[TYPE@1]~) ~[DEFINE_ListName@1]~.toArray()[0];
+~template list_to_array_and_get_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = (~[TYPE@1]~) ~[MACRO_ListName@1]~.toArray()[0];
 ~template end~
 
-~template list_filter start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_Add_Element_ToList]~
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.stream().filter(s -> ~[EXPR_Boolean]~).findFirst().get();
+~template list_to_array_and_get_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = (~[TYPE@1]~) ~[MACRO_ListName@1]~.toArray()[0];
 ~template end~
 
-~template list_union start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
+~template list_filter_neutral start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
+~[MACRO_Add_EXPR_ToList]~
+~[MACRO_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~  = ~[MACRO_ListName@1]~.stream().filter(s -> ~[EXPR_Boolean]~).findFirst().get();
+~template end~
+
+~template list_union_positive start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
 List<~[TYPE@1]~> list1234 = new ArrayList<>();
-list1234.addAll(~[DEFINE_ListName@1]~);
-~[VAR_TYPE@1]~ = list1234.get(list1234.size() - 1);
+list1234.addAll(~[MACRO_ListName@1]~);
+~[VAR_~[TYPE@1]~@1]~  = list1234.get(list1234.size() - 1);
 ~template end~
 
-~template list_clear_start start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_Element_ToList]~
-~[DEFINE_ListName@1]~.clear();
-~[VAR_TYPE@1]~ = ~[DEFINE_ListName@1]~.get(0);
+~template list_clear_start_negative start~
+~[MACRO_Create_List]~
+~[MACRO_Add_VAR_ToList]~
+~[MACRO_ListName@1]~.clear();
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_ListName@1]~.get(0);
 ~template end~
 
 ~main body end~

@@ -1,19 +1,20 @@
 ~extensions start~
 ~extensions import *~
 
-~[DEFINE_SetName]~ -> set787231
-~[DEFINE_SetName]~ -> set787232
-~[DEFINE_SetName]~ -> set787233
-~[DEFINE_SetName]~ -> set787234
-~[DEFINE_Create_Set]~ -> Set<~[TYPE@1]~> ~[DEFINE_SetName@1]~ = new HashSet<>();
-~[DEFINE_Create_Set]~ -> Set<~[TYPE@1]~> ~[DEFINE_SetName@1]~ = new TreeSet<>();
-~[DEFINE_Create_Set]~ -> Set<~[TYPE@1]~> ~[DEFINE_SetName@1]~ = new LinkedHashSet<>();
+~[MACRO_SetName]~ -> set787231
+~[MACRO_SetName]~ -> set787232
+~[MACRO_SetName]~ -> set787233
+~[MACRO_SetName]~ -> set787234
+~[MACRO_Create_Set]~ -> Set<~[TYPE@1]~> ~[MACRO_SetName@1]~ = new HashSet<>();
+~[MACRO_Create_Set]~ -> Set<~[TYPE@1]~> ~[MACRO_SetName@1]~ = new TreeSet<>();
+~[MACRO_Create_Set]~ -> Set<~[TYPE@1]~> ~[MACRO_SetName@1]~ = new LinkedHashSet<>();
 
-~[DEFINE_Add_Element_ToSet]~ -> ~[DEFINE_SetName@1]~.add(~[EXPR_~[TYPE@1]~]~);
-~[DEFINE_Add_Fixed_Element_ToSet]~ -> ~[DEFINE_SetName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
-~[DEFINE_Add_Element_ToSet]~ -> ~[DEFINE_SetName@1]~.add(~[VAR_~[TYPE@1]~]~);
-~[DEFINE_Add_Fixed_Element_ToSet]~ -> ~[DEFINE_SetName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
-
+~[MACRO_Add_EXPR_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[EXPR_~[TYPE@1]~]~);
+~[MACRO_Add_Fixed_EXPR_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[MACRO_Add_VAR_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[VAR_~[TYPE@1]~]~);
+~[MACRO_Add_Fixed_VAR_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[MACRO_Add_CONST_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[VAR_~[TYPE@1]~]~);
+~[MACRO_Add_Fixed_CONST_ToSet]~ -> ~[MACRO_SetName@1]~.add(~[VAR_~[TYPE@1]~@1]~);
 ~extensions end~
 
 ~main body start~
@@ -22,65 +23,77 @@
 import java.util.*;
 ~imports end~
 
-~template set_add_simple start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Element_ToSet]~
-~[TYPE@1]~ value7841 = ~[DEFINE_SetName@1]~.iterator().next();
+~template set_add_simple_positive start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_SetName@1]~.iterator().next();
 ~template end~
 
-~template set_add_cond start~
-~[DEFINE_Create_Set]~
-if (~[EXPR_Boolean]~) {
-    ~[DEFINE_SetName@1]~.add(~[VAR_~[TYPE@1]~]~);
-}
-~[VAR_TYPE@1]~ = ~[DEFINE_SetName@1]~.iterator().next();
+~template set_add_simple_negative start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_Fixed_CONST_ToSet]~
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_SetName@1]~.iterator().next();
 ~template end~
 
-~template set_remove_simple start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Element_ToSet]~
-~[DEFINE_Add_Fixed_Element_ToSet]~
-~[DEFINE_SetName@1]~.remove(~[VAR_~[TYPE@1]~@1]~);
-~[VAR_TYPE@1]~ = ~[DEFINE_SetName@1]~.iterator().next();
+~template set_remove_simple_positive start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_Fixed_EXPR_ToSet]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
+~[MACRO_SetName@1]~.remove(~[EXPR_~[TYPE@1]~@1]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_SetName@1]~.iterator().next();
 ~template end~
 
-~template set_contains_1 start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Element_ToSet]~
-~[DEFINE_Add_Fixed_Element_ToSet]~
+~template set_remove_simple_negative start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_Fixed_EXPR_ToSet]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
+~[MACRO_SetName@1]~.remove(~[VAR_~[TYPE@1]~@1]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[MACRO_SetName@1]~.iterator().next();
+~template end~
+
+~template set_contains_positive start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_EXPR_ToSet]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
 ~[TYPE@1]~ value7844 = ~[CONST_~[TYPE@1]~]~;
 
-if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+if (~[MACRO_SetName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
     value7844 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value7844;
+~[VAR_~[TYPE@1]~@1]~ = value7844;
 ~template end~
 
-~template set_contains_2 start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Element_ToSet]~
-~[DEFINE_Add_Fixed_Element_ToSet]~
+~template set_contains_negative start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_CONST_ToSet]~
+~[MACRO_Add_CONST_ToSet]~
 ~[TYPE@1]~ value7845 = ~[CONST_~[TYPE@1]~]~;
 
-if (~[DEFINE_SetName@1]~.contains(~[VAR_~[TYPE@1]~@2]~)) {
-    value7845 = ~[VAR_~[TYPE@1]~@2]~;
+if (~[MACRO_SetName@1]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value7845;
+~[VAR_~[TYPE@1]~@1]~ = value7845;
 ~template end~
 
-~template set_size start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Element_ToSet]~
-~[DEFINE_Add_Fixed_Element_ToSet]~
-~[TYPE@1]~ value7846 = ~[CONST_~[TYPE@1]~]~;
-
-if (~[DEFINE_SetName@1]~.size() == 2) {
-    value7846 = ~[DEFINE_SetName@1]~.iterator().next();
+~template set_size_positive start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_EXPR_ToSet]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
+if (~[MACRO_SetName@1]~.size() != 2) {
+    ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~;
 }
-~[VAR_TYPE@1]~ = value7846;
 ~template end~
 
-~template set_union start~
+~template set_size_negative start~
+~[MACRO_Create_Set]~
+~[MACRO_Add_EXPR_ToSet]~
+~[MACRO_Add_Fixed_VAR_ToSet]~
+if (~[MACRO_SetName@1]~.size() == 2) {
+    ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~;
+}
+~template end~
+
+~template set_union_negative start~
 Set<~[TYPE@1]~> set111 = new HashSet<>();
 Set<~[TYPE@1]~> set222 = new HashSet<>();
 set111.add(~[EXPR_~[TYPE@1]~@1]~);
@@ -88,29 +101,10 @@ set222.add(~[VAR_~[TYPE@1]~@2]~);
 set111.addAll(set222);
 ~[TYPE@1]~ value7847 = ~[CONST_~[TYPE@1]~]~;
 if (set111.contains(~[VAR_~[TYPE@1]~@2]~)) {
-    Iterator<String> it = set111.iterator();
-    it.next();
-    value7847 = it.next();
+    ~[VAR_~[TYPE@1]~@2]~ = ~[CONST_~[TYPE@1]~]~;
 }
-~[VAR_TYPE@1]~ = value7847;
 ~template end~
-
-~template set_retain start~
-Set<~[TYPE@1]~> set111 = new HashSet<>();
-Set<~[TYPE@1]~> set222 = new HashSet<>();
-set111.add(~[EXPR_~[TYPE@1]~@1]~);
-set222.add(~[VAR_~[TYPE@1]~@2]~);
-set111.retainAll(set222);
-~[TYPE@1]~ value7848 = ~[CONST_~[TYPE@1]~]~;
-if (set111.contains(~[VAR_~[TYPE@1]~@2]~)) {
-    Iterator<String> it = set111.iterator();
-    it.next();
-    value7848 = it.next();
-}
-~[VAR_TYPE@1]~ = value7848;
-~template end~
-
-~template set_remove start~
+~template set_remove_positive start~
 Set<~[TYPE@1]~> set111 = new HashSet<>();
 Set<~[TYPE@1]~> set222 = new HashSet<>();
 set111.add(~[VAR_~[TYPE@1]~@1]~);
@@ -121,20 +115,10 @@ set111.removeAll(set222);
 if (set111.size() == 0) {
     value7849 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value7849;
+~[VAR_~[TYPE@1]~@1]~ = value7849;
 ~template end~
 
-~template set_is_added start~
-~[DEFINE_Create_Set]~
-~[DEFINE_Add_Fixed_Element_ToSet]~
-~[TYPE@1]~ value78410 = ~[CONST_~[TYPE@1]~]~;
-if (~[DEFINE_SetName@1]~.add(~[VAR_~[TYPE@1]~@1]~)) {
-    value78410 = ~[VAR_~[TYPE@1]~@1]~;
-}
-~[VAR_TYPE@1]~ = value78410;
-~template end~
-
-~template set_disjoint start~
+~template set_disjoint_positive start~
 Set<~[TYPE@1]~> set111 = new HashSet<>();
 Set<~[TYPE@1]~> set222 = new HashSet<>();
 set111.add(~[VAR_~[TYPE@1]~@1]~);
@@ -143,7 +127,7 @@ set222.add(~[VAR_~[TYPE@1]~@1]~);
 if (Collections.disjoint(set111, set222)) {
     value78411 = ~[VAR_~[TYPE@1]~@1]~;
 }
-~[VAR_TYPE@1]~ = value78411;
+~[VAR_~[TYPE@1]~@1]~ = value78411;
 ~template end~
 
 ~main body end~
