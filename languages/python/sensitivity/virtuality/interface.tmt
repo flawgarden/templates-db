@@ -4,37 +4,31 @@
 
 ~template impl_binary_op_interface_class1_positive start~
 a12341 = ImplBinaryOpInterfaceClass1()
-~[BODY]~
 ~[VAR_str@1]~ = a12341.interface_call(~[VAR_str@1]~, "")
 ~template end~
 
 ~template impl_binary_op_interface_class1_negative start~
 a12341 = ImplBinaryOpInterfaceClass1()
-~[BODY]~
 ~[VAR_str@1]~ = a12341.interface_call("", ~[VAR_str@1]~)
 ~template end~
 
 ~template impl_binary_op_interface_class2_positive start~
 a12341 = ImplBinaryOpInterfaceClass2()
-~[BODY]~
 ~[VAR_str@1]~ = a12341.interface_call("", ~[VAR_str@1]~)
 ~template end~
 
 ~template impl_binary_op_interface_class2_negative start~
 a12341 = ImplBinaryOpInterfaceClass2()
-~[BODY]~
 ~[VAR_str@1]~ = a12341.interface_call(~[VAR_str@1]~, "")
 ~template end~
 
 ~template base_binary_op_interface_positive start~
 a12341 = ImplBinaryOpInterfaceClass1() if ~[EXPR_Boolean]~ else ImplBinaryOpInterfaceClass2()
-~[BODY]~
 ~[VAR_str@1]~ = a12341.interface_call(~[VAR_str@1]~, ~[VAR_str@1]~)
 ~template end~
 
 ~template base_binary_op_interface_negative start~
 a12341 = ImplBinaryOpInterfaceClass1() if ~[EXPR_Boolean]~ else ImplBinaryOpInterfaceClass2()
-~[BODY]~
 ~[VAR_str]~ = a12341.interface_call("", "")
 ~template end~
 

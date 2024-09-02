@@ -7,7 +7,6 @@
 
 ~template try_cath_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 try:
     raise Exception1(~[EXPR_str]~)
 except Exception1 as e:
@@ -23,7 +22,6 @@ except Exception1 as e:
 
 ~template try_cath_finally_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 try:
     raise Exception1(~[EXPR_str]~)
 except Exception1 as e:
@@ -34,7 +32,6 @@ finally:
 
 ~template try_cath_finally_negative start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 try:
     raise Exception1(~[EXPR_str]~)
 except Exception1 as e:
@@ -45,7 +42,6 @@ finally:
 
 ~template try_multi_cath_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 try:
     if ~[EXPR_bool]~:
         raise Exception1(~[EXPR_str]~)
@@ -57,7 +53,6 @@ except (Exception1, Exception2) as e:
 
 ~template try_multi_cath_negative start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 try:
     if ~[EXPR_bool]~:
         raise Exception1(~[EXPR_str]~)

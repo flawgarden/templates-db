@@ -5,7 +5,6 @@
 ~main body start~
 ~template if_operator_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 if ~[EXPR_bool]~:
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
@@ -17,7 +16,6 @@ if ~[EXPR_bool]~:
 
 ~template if_else_operator_neutral start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 if ~[EXPR_bool]~:
     ~[VAR_str@1]~ = tmpUnique42
 else:
@@ -26,7 +24,6 @@ else:
 
 ~template if_else_if_operator_neutral start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 if ~[EXPR_bool@1]~:
     ~[VAR_str@1]~ = tmpUnique42
 elif ~[EXPR_bool@1]~:
@@ -37,7 +34,6 @@ else:
 
 ~template if_operator_with_var_in_condition_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 conditionMet = False
 if ~[EXPR_bool]~:
     conditionMet = True

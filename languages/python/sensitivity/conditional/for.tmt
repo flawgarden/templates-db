@@ -10,7 +10,6 @@
 
 ~template for_operator_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~):
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
@@ -22,7 +21,6 @@ for i in range(~[EXPR_int]~):
 
 ~template for_operator_reverse_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~, -1, -1):
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
@@ -34,7 +32,6 @@ for i in range(~[EXPR_int]~, -1, -1):
 
 ~template for_operator_string_array_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 strArray = ~[MACRO_str_Array]~
 for i in range(len(strArray)):
     if strArray[i] == strArray[i + 1]:
@@ -50,7 +47,6 @@ for i in range(len(strArray)):
 
 ~template for_operator_continue_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~):
     if ~[EXPR_Boolean]~:
         continue
@@ -66,7 +62,6 @@ for i in range(~[EXPR_int]~):
 
 ~template for_operator_break_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~):
     if ~[EXPR_Boolean]~:
         break
@@ -82,7 +77,6 @@ for i in range(~[EXPR_int]~):
 
 ~template for_operator_nested_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~):
     for j in range(~[EXPR_int]~):
         ~[VAR_str@1]~ = tmpUnique42
@@ -96,7 +90,6 @@ for i in range(~[EXPR_int]~):
 
 ~template for_operator_change_index_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(0, ~[EXPR_int]~, ~[EXPR_int]~):
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
@@ -108,7 +101,6 @@ for i in range(0, ~[EXPR_int]~, ~[EXPR_int]~):
 
 ~template for_operator_non_zero_init_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for i in range(~[EXPR_int]~, ~[EXPR_int]~):
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~
@@ -137,7 +129,6 @@ for i in range(len(~[VAR_str@1]~)):
 
 ~template for_operator_collection_positive start~
 tmpUnique42 = ~[VAR_str@1]~
-~[BODY]~
 for el in ~[VAR_Iterable\[~[TYPE]~\]]~:
     ~[VAR_str@1]~ = tmpUnique42
 ~template end~

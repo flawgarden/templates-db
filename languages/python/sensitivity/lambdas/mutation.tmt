@@ -9,7 +9,6 @@ def lmd(s: StringHolder) -> None:
     s.value = s23423
 lambda1231 = UnaryOpMutation(lmd)
 lambda1231.mutate(a12341)
-~[BODY]~
 ~[VAR_str@1]~ = a12341.value
 ~template end~
 
@@ -19,7 +18,6 @@ def lmd(s: StringHolder) -> None:
     s.value = ""
 lambda1231 = UnaryOpMutation(lmd)
 lambda1231.mutate(a12341)
-~[BODY]~
 ~[VAR_str@1]~ = a12341.value
 ~template end~
 
@@ -34,7 +32,6 @@ def lmd(s: StringHolder) -> None:
     s.value = s23423
 lambda1231 = UnaryOpMutation(lmd)
 lambda1231.mutate(a12341)
-~[BODY]~
 ~[VAR_str@1]~ = a12341.value
 ~template end~
 
@@ -49,7 +46,6 @@ def lmd(s: StringHolder) -> None:
     s.value = ""
 lambda1231 = UnaryOpMutation(lmd)
 lambda1231.mutate(a12341)
-~[BODY]~
 ~[VAR_str@1]~ = a12341.value
 ~template end~
 

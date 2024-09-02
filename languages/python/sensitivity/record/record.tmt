@@ -3,13 +3,11 @@
 
 ~template simple_record_positive start~
 record = SimpleRecord(~[VAR_str@1]~)
-~[BODY]~
 ~[VAR_str@1]~ = record.t
 ~template end~
 
 ~template simple_record_negative start~
 record = SimpleRecord("")
-~[BODY]~
 ~[VAR_str]~ = record.t
 ~template end~
 
@@ -17,7 +15,6 @@ record = SimpleRecord("")
 first = SimpleRecord(~[VAR_str@1]~)
 second = SimpleRecord("")
 nested = NestedRecord(first, second)
-~[BODY]~
 ~[VAR_str@1]~ = nested.a.t
 ~template end~
 
@@ -25,7 +22,6 @@ nested = NestedRecord(first, second)
 first = SimpleRecord(~[VAR_str@1]~)
 second = SimpleRecord("")
 nested = NestedRecord(first, second)
-~[BODY]~
 ~[VAR_str@1]~ = nested.b.t
 ~template end~
 

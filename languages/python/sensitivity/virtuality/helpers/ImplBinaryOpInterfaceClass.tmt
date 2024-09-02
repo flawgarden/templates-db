@@ -1,4 +1,6 @@
 ~class ImplBinaryOpInterfaceClass1 start~
+from BinaryOpInterface import *
+
 
 class ImplBinaryOpInterfaceClass1(BinaryOpInterface):
     def interface_call(self, l: str, r: str) -> str:

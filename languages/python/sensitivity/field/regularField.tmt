@@ -5,14 +5,12 @@
 ~template class_with_string_field_positive start~
 sh = StringHolder()
 sh.value = ~[VAR_String@1]~
-~[BODY]~
 ~[VAR_String@1]~ = sh.value
 ~template end~
 
 ~template class_with_string_field_negative start~
 sh = StringHolder()
 sh.value = ""
-~[BODY]~
 ~[VAR_String]~ = sh.value
 ~template end~
 

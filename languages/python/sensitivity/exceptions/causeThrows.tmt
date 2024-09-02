@@ -44,7 +44,6 @@ def get_none() -> Any:
     return None
 tmpUnique42 = ~[VAR_str@1]~
 try:
-    ~[BODY]~
     a = get_none()
     a = a + a
 except TypeError as e:
@@ -55,7 +54,6 @@ except TypeError as e:
 def get_none() -> Any:
     return None
 try:
-    ~[BODY]~
     a = get_none()
     a = a + a
 except TypeError as e:
