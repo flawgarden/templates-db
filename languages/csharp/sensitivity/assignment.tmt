@@ -24,12 +24,12 @@ string tmpUnique42 = "";
 const string uniquePampam = ~[VAR_string@1]~;
 Func<string> lazyValue = () => uniquePampam;
 ~[BODY]~
-~[VAR_String@1]~ = lazyValue();
+~[VAR_string@1]~ = lazyValue();
 ~template end~
 
 ~template lazy_eval_negative start~
 Func<string> lazyValue = () => "";
-~[VAR_String]~ = lazyValue();
+~[VAR_string]~ = lazyValue();
 ~template end~
 
 ~template new_var_assignment_neutral start~

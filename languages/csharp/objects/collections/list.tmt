@@ -41,7 +41,7 @@ var list787234 = new List<~[TYPE]~>();
 ~template end~
 
 ~template list_remove start~
-~[VAR_List<~[TYPE@1]~>]~.RemoveAt(~[EXPR_int]~);
+~[VAR_List<~[TYPE]~>]~.RemoveAt(~[EXPR_int]~);
 ~template end~
 
 ~main body end~

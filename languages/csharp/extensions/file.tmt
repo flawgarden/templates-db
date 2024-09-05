@@ -1,1 +1,1 @@
-~[EXPR_bool]~ -> ~[VAR_FileInfo@1]~.Exists
+~[EXPR_bool]~ -> ~[VAR_FileInfo]~.Exists

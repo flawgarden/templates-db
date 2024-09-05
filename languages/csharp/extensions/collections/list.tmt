@@ -10,8 +10,8 @@
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Find(~[EXPR_Predicate<~[TYPE@1]~>]~)
 ~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.FindLast(~[EXPR_Predicate<~[TYPE@1]~>]~)
 
-~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.IndexOf(~[EXPR_TYPE@1]~)
-~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.LastIndexOf(~[EXPR_TYPE@1]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.IndexOf(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.LastIndexOf(~[EXPR_~[TYPE@1]~]~)
 ~[EXPR_int]~ -> ~[EXPR_List<~[TYPE]~>]~.Count
 ~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.FindIndex(~[EXPR_Predicate<~[TYPE@1]~>]~)
 

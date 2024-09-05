@@ -1,12 +1,3 @@
-~extensions start~
-~[MACRO_Empty_String_Array]~ -> {"", ""}
-~[MACRO_Empty_String_Array]~ -> {"", "", ""}
-~[MACRO_Empty_String_Array]~ -> {"", "", "", ""}
-
-~[MACRO_Zero_Or_One]~ -> 0
-~[MACRO_Zero_Or_One]~ -> 1
-~extensions end~
-
 ~main body start~
 ~helper import sensitivity/field/helpers/StringHolder~
 ~helper import sensitivity/field/helpers/ArrayHolder~

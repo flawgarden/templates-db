@@ -29,7 +29,7 @@ bool b5829 = ~[EXPR_HashSet<~[TYPE@1]~>]~.Add(~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
 ~template set_add_remove start~
-bool b23443 = ~[EXPR_HashSet<~[TYPE@1]~>]~.Remove(~[EXPR_TYPE@1]~);
+bool b23443 = ~[EXPR_HashSet<~[TYPE@1]~>]~.Remove(~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
 ~template set_add_remove_all start~
