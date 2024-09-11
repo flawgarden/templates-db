@@ -1,0 +1,86 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function get_first_string start~
+public String getFirstString(String... lines) {
+    return getStringWithIndex(0, lines);
+}
+~function end~
+
+~function get_string_with_index start~
+public String getStringWithIndex(int ind, String... lines) {
+    return lines[ind];
+}
+~function end~
+
+~function get_first_string_from_array start~
+public String getFirstStringFromArray(String... lines) {
+    return Arrays.asList(lines).get(0);
+}
+~function end~
+
+~function varargs_with_generics start~
+public <T> T varargsWithGenerics(T... elements) {
+    return elements[0];
+}
+~function end~
+
+~function combine_strings start~
+public String combineStrings(String... strings) {
+    return String.join(", ", strings);
+}
+~function end~
+
+
+~helper functions end~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template varargs_get_first_string_positive start~
+~[VAR_String@1]~ = getFirstString(~[VAR_String@1]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_get_first_string_negative start~
+~[VAR_String]~ = getFirstString(~[EXPR_String]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_get_string_with_index_positive start~
+~[VAR_String@1]~ = getStringWithIndex(0, ~[VAR_String@1]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_get_string_with_index_negative start~
+~[VAR_String@1]~ = getStringWithIndex(1, ~[VAR_String@1]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_get_first_string_from_array_positive start~
+~[VAR_String@1]~ = getFirstStringFromArray(~[VAR_String@1]~, ~[VAR_String]~);
+~template end~
+
+~template varargs_get_first_string_from_array_negative start~
+~[VAR_String]~ = getFirstStringFromArray(~[EXPR_String]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_with_generics_positive start~
+~[VAR_String@1]~ = varargsWithGenerics(~[VAR_String@1]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_with_generics_negative start~
+~[VAR_String]~ = varargsWithGenerics(~[EXPR_String]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_combine_strings_positive start~
+~[VAR_String@1]~ = combineStrings(~[VAR_String@1]~, ~[EXPR_String]~);
+~template end~
+
+~template varargs_combine_strings_negative start~
+~[VAR_String]~ = combineStrings(~[EXPR_String]~, ~[EXPR_String]~);
+~template end~
+
+~main body end~

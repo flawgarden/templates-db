@@ -1,0 +1,16 @@
+~class ServiceConst start~
+
+public class ServiceConst implements ServiceI {
+    public ServiceConst(String field) {
+        this.field = field;
+    }
+
+    private String field;
+
+    @Override
+    public String getFieldValue() {
+        return "123";
+    }
+}
+
+~class end~

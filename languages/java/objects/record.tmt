@@ -18,7 +18,7 @@ SimpleRecord record = new SimpleRecord(~[EXPR_String]~);
 ~template end~
 
 ~template create_nested_record start~
-SimpleRecord nested = new NestedRecord(~[EXPR_SimpleRecord]~, ~[EXPR_SimpleRecord]~);
+SimpleRecord nested = new NestedRecord(new SimpleRecord(~[EXPR_String]~), new SimpleRecord(~[EXPR_String]~));
 ~template end~
 
 ~main body end~

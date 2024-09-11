@@ -34,7 +34,7 @@ public class SwitchingTask implements Runnable {
   private Wrapper<String> w;
   private String s;
 
-  public SettingTask(Wrapper<String> w, String s) {
+  public SwitchingTask(Wrapper<String> w, String s) {
     this.w = w;
     this.s = s;
   }
@@ -69,7 +69,7 @@ public class NullAndRestore {
   private ReentrantLock lock = new ReentrantLock();
   private Condition setToNull = lock.newCondition();
 
-  public void null() {
+  public void nullMethod() {
     lock.lock();
     this.s = null;
     setToNull.signalAll();
@@ -79,7 +79,11 @@ public class NullAndRestore {
   public void restore() {
     lock.lock();
     while (this.s != null) {
-      setToNull.await();
+        try {
+          setToNull.await();
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
     }
     this.s = this.original;
     lock.unlock();
