@@ -1,4 +1,5 @@
 ~class DerivedBinaryOpClass1 start~
+namespace HelperClasses;
 
 public class DerivedBinaryOpClass1 : BaseBinaryOpClass {
    public override string VirtualCall(string l, string r) {
@@ -8,6 +9,7 @@ public class DerivedBinaryOpClass1 : BaseBinaryOpClass {
 ~class end~
 
 ~class DerivedBinaryOpClass2 start~
+namespace HelperClasses;
 
 public class DerivedBinaryOpClass2 : BaseBinaryOpClass {
    public override string VirtualCall(string l, string r) {

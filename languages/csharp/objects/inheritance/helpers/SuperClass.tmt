@@ -1,19 +1,27 @@
 ~class SuperClass start~
+namespace HelperSuperClasses;
+
 public class SuperClass {
 }
 ~class end~
 
 ~class SubClass start~
+namespace HelperSuperClasses;
+
 public class SubClass : SuperClass {
 }
 ~class end~
 
 ~class SubSubClass start~
+namespace HelperSuperClasses;
+
 public sealed class SubSubClass : SubClass {
 }
 ~class end~
 
 ~class SiblingClass start~
+namespace HelperSuperClasses;
+
 public class SiblingClass : SuperClass {
 }
 ~class end~

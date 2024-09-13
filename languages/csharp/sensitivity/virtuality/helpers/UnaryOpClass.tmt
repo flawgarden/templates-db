@@ -1,4 +1,5 @@
 ~class UnaryOpClass start~
+namespace HelperClasses;
 
 public class UnaryOpClass {
     public virtual string VirtualCall(string t) {

@@ -5,6 +5,10 @@
 ~main body start~
 ~helper import sensitivity/exceptions/helpers/Exceptions~
 
+~imports start~
+using HelperExceptions;
+~imports end~
+
 ~template try_cath_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
 ~[BODY]~

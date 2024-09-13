@@ -1,4 +1,5 @@
 ~class StringFactory start~
+namespace HelperFields;
 
 public class StringFactory {
     public string val;

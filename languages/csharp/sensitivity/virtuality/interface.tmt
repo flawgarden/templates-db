@@ -2,6 +2,10 @@
 ~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
 ~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
 
+~imports start~
+using HelperClasses;
+~imports end~
+
 ~template impl_binary_op_interface_class1_positive start~
 BinaryOpInterface a12341 = new ImplBinaryOpInterfaceClass1();
 ~[BODY]~

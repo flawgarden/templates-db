@@ -1,4 +1,5 @@
 ~class ImplBinaryOpInterfaceClass1 start~
+namespace HelperClasses;
 
 public class ImplBinaryOpInterfaceClass1 : BinaryOpInterface {
    public string InterfaceCall(string l, string r) {
@@ -8,6 +9,7 @@ public class ImplBinaryOpInterfaceClass1 : BinaryOpInterface {
 ~class end~
 
 ~class ImplBinaryOpInterfaceClass2 start~
+namespace HelperClasses;
 
 public class ImplBinaryOpInterfaceClass2 : BinaryOpInterface {
    public string InterfaceCall(string l, string r) {

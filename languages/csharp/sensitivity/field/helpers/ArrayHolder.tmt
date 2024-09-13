@@ -1,4 +1,5 @@
 ~class ArrayHolder start~
+namespace HelperFields;
 
 public class ArrayHolder {
     public string[] values;

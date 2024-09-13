@@ -1,4 +1,5 @@
 ~class ConstructorChains start~
+namespace HelperFields;
 
 public class ConstructorChains {
 

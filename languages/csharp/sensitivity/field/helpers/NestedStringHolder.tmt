@@ -1,4 +1,5 @@
 ~class NestedStringHolder start~
+namespace HelperFields;
 
 public class NestedStringHolder {
     private InnerStringHolder innerObject;

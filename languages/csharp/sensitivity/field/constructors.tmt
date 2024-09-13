@@ -14,6 +14,9 @@
 ~helper import sensitivity/field/helpers/ConstructorChains~
 ~helper import sensitivity/field/helpers/NestedStringHolder~
 
+~imports start~
+using HelperFields;
+~imports end~
 
 ~template class_with_string_initialization_positive start~
 StringHolder sh = new StringHolder(~[VAR_string@1]~);
