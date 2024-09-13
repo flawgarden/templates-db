@@ -8,13 +8,13 @@ using HelperRecords;
 ~template simple_record_positive start~
 SimpleRecord record = new SimpleRecord(~[VAR_string@1]~);
 ~[BODY]~
-~[VAR_string@1]~ = record.t();
+~[VAR_string@1]~ = record.t;
 ~template end~
 
 ~template simple_record_negative start~
 SimpleRecord record = new SimpleRecord("");
 ~[BODY]~
-~[VAR_string]~ = record.t();
+~[VAR_string]~ = record.t;
 ~template end~
 
 ~template nested_record_positive start~
@@ -22,7 +22,7 @@ SimpleRecord first = new SimpleRecord(~[VAR_string@1]~);
 SimpleRecord second = new SimpleRecord("");
 NestedRecord nested = new NestedRecord(first, second);
 ~[BODY]~
-~[VAR_string@1]~ = nested.a().t();
+~[VAR_string@1]~ = nested.a.t;
 ~template end~
 
 ~template nested_record_negative start~
@@ -30,7 +30,7 @@ SimpleRecord first = new SimpleRecord(~[VAR_string@1]~);
 SimpleRecord second = new SimpleRecord("");
 NestedRecord nested = new NestedRecord(first, second);
 ~[BODY]~
-~[VAR_string@1]~ = nested.b().t();
+~[VAR_string@1]~ = nested.b.t;
 ~template end~
 
 ~main body end~

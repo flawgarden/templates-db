@@ -21,8 +21,11 @@ string tmpUnique42 = "";
 ~template end~
 
 ~template lazy_eval_positive start~
-const string uniquePampam = ~[VAR_string@1]~;
-Func<string> lazyValue = () => uniquePampam;
+Func<string> lazyValue;
+{
+    string uniquePampam = ~[VAR_string@1]~;
+    lazyValue = () => uniquePampam;
+}
 ~[BODY]~
 ~[VAR_string@1]~ = lazyValue();
 ~template end~
