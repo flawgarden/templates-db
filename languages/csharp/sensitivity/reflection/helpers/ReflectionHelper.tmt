@@ -1,4 +1,5 @@
 ~class ReflectionHelper start~
+namespace HelperReflection;
 
 public class ReflectionHelper {
 

@@ -1,0 +1,220 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/concurrency/helpers/concurrency~
+
+~imports start~
+using HelperThreads;
+using System.Threading;
+~imports end~
+
+~template thread_set_negative start~
+Wrapper<string> w = new Wrapper<string>(~[VAR_string@1]~);
+var task = new SettingTask(w, "");
+Thread thread = new(task.run);
+thread.Start();
+try {
+  thread.Join();
+} catch (ThreadInterruptedException e) {
+}
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template thread_set_positive start~
+Wrapper<string> w = new Wrapper<string>("");
+var task = new SettingTask(w, ~[VAR_string@1]~);
+Thread thread = new Thread(task.run);
+thread.Start();
+try {
+  thread.Join();
+} catch (ThreadInterruptedException e) {
+}
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template thread_set_nostart_positive start~
+Wrapper<string> w = new Wrapper<string>(~[VAR_string@1]~);
+var task = new SettingTask(w, "");
+Thread thread = new Thread(task.run);
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template two_set_threads_in_sequence_positive start~
+Wrapper<string> w = new Wrapper<string>(~[VAR_string@1]~);
+var task1 = new SettingTask(w, "");
+var task2 = new SettingTask(w, ~[VAR_string@1]~);
+Thread thread1 = new Thread(task1.run);
+Thread thread2 = new Thread(task2.run);
+
+thread1.Start();
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+thread2.Start();
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template two_set_threads_in_sequence_negative start~
+Wrapper<string> w = new Wrapper<string>(~[VAR_string@1]~);
+var task1 = new SettingTask(w, "");
+var task2 = new SettingTask(w, ~[VAR_string@1]~);
+Thread thread1 = new Thread(task1.run);
+Thread thread2 = new Thread(task2.run);
+thread2.Start();
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+thread1.Start();
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template two_switching_tasks_concurrent_positive start~
+Wrapper<string> w = new Wrapper<string>(~[VAR_string@1]~);
+var task1 = new SwitchingTask(w, ~[VAR_string@1]~);
+var task2 = new SwitchingTask(w, ~[VAR_string@1]~);
+Thread thread1 = new Thread(task1.run);
+Thread thread2 = new Thread(task2.run);
+thread1.Start();
+thread2.Start();
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+~[VAR_string@1]~ = w.i;
+~template end~
+
+~template null_and_restore_condvar_positive start~
+NullAndRestore a = new NullAndRestore(~[VAR_string@1]~);
+
+Thread thread1 = new Thread(() => {
+  a.nullMethod();
+});
+Thread thread2 = new Thread(() => {
+  a.restore();
+});
+
+thread1.Start();
+thread2.Start();
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+~[VAR_string@1]~ = a.get();
+~template end~
+
+~template atomic_integer_negative start~
+
+int counter = 0;
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread1.Start();
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+if (counter == 2) {
+  ~[VAR_string]~ = "";
+}
+
+~template end~
+
+~template atomic_integer_restore_positive start~
+
+int counter = 0;
+string stringCopy = ~[VAR_string@1]~;
+
+if (counter == 0) {
+  ~[VAR_string@1]~ = "";
+}
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread1.Start();
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+if (counter == 2) {
+  ~[VAR_string@1]~ = stringCopy;
+}
+
+~template end~
+
+~template atomic_integer_restore_negative start~
+
+int counter = 0;
+string stringCopy = ~[VAR_string@1]~;
+
+if (counter == 0) {
+  ~[VAR_string@1]~ = "";
+}
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+if (counter == 2) {
+  ~[VAR_string@1]~ = stringCopy;
+}
+
+thread1.Start();
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+~template end~
+
+~main body end~
