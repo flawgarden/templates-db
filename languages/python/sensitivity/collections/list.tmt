@@ -1,0 +1,78 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ListName]~ -> list787231
+~[DEFINE_Create_List]~ -> ~[DEFINE_ListName]~ = []
+~[DEFINE_Add_VAR_ToList]~ -> ~[DEFINE_ListName]~.append(~[VAR_~[TYPE@1]~@1]~)
+~[DEFINE_Add_EXPR_ToList]~ -> ~[DEFINE_ListName]~.append(~[EXPR_~[TYPE@1]~@1]~)
+~[DEFINE_Add_CONST_ToList]~ -> ~[DEFINE_ListName]~.append(~[CONST_~[TYPE@1]~@1]~)
+
+~extensions end~
+
+~main body start~
+
+~template list_set_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+tmp1232141245 = ~[DEFINE_ListName]~[0]
+~[DEFINE_ListName]~[0] = ~[VAR_~[TYPE@1]~@1]~
+~[VAR_~[TYPE@1]~@1]~ = tmp1232141245
+~template end~
+
+~template list_set_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_CONST_ToList]~
+tmp1232141245 = ~[DEFINE_ListName]~[0]
+~[DEFINE_ListName]~[0] = ~[VAR_~[TYPE@1]~@1]~
+~[VAR_~[TYPE@1]~@1]~ = tmp1232141245
+~template end~
+
+~template list_add_get_at_zero_index_empty_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_ListName]~.insert(0, "")
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0]
+~template end~
+
+~template list_add_and_remove_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~.pop(0)
+~template end~
+
+~template list_to_array_and_get_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = list(~[DEFINE_ListName]~)[0]
+~template end~
+
+~template list_to_array_and_get_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = list(~[DEFINE_ListName]~)[0]
+~template end~
+
+~template list_filter_neutral start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_Add_EXPR_ToList]~
+~[DEFINE_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = next(filter(lambda _: ~[EXPR_Boolean]~, ~[DEFINE_ListName]~))
+~template end~
+
+~template list_union_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+list1234 = []
+list1234.extend(~[DEFINE_ListName]~)
+~[VAR_~[TYPE@1]~@1]~ = list1234[-1]
+~template end~
+
+~template list_clear_start_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_ListName]~.clear()
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0]
+~template end~
+
+~main body end~

@@ -15,7 +15,7 @@ record = SimpleRecord(~[EXPR_str]~)
 ~template end~
 
 ~template create_nested_record start~
-nested = NestedRecord(~[EXPR_SimpleRecord]~, ~[EXPR_SimpleRecord]~)
+nested = NestedRecord(SimpleRecord(~[EXPR_str]~), SimpleRecord(~[EXPR_str]~))
 ~template end~
 
 ~main body end~
