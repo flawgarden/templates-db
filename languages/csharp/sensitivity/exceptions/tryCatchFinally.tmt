@@ -1,0 +1,86 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+
+~imports start~
+using HelperExceptions;
+~imports end~
+
+~template try_cath_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_string]~);
+} catch (Exception1 e) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_cath_negative start~
+try {
+  throw new Exception1(~[EXPR_string]~);
+} catch (Exception1 e) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template try_cath_finally_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_string]~);
+} catch (Exception1 e) {
+    ~[VAR_string@1]~ = "";
+} finally {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_cath_finally_negative start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+try {
+  throw new Exception1(~[EXPR_string]~);
+} catch (Exception1 e) {
+    ~[VAR_string@1]~ = tmpUnique42;
+} finally {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template try_multi_cath_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+try {
+  if (~[EXPR_bool]~) {
+     throw new Exception1(~[EXPR_string]~);
+  } else {
+     throw new Exception2(~[EXPR_string]~);
+  }
+} catch (Exception1 e) {
+    ~[VAR_string@1]~ = tmpUnique42;
+} catch (Exception2 e) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template try_multi_cath_negative start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+try {
+  if (~[EXPR_bool]~) {
+     throw new Exception1(~[EXPR_string]~);
+  } else {
+     throw new Exception2(~[EXPR_string]~);
+  }
+} catch (Exception1 e) {
+    ~[VAR_string@1]~ = "";
+} catch (Exception2 e) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~main body end~

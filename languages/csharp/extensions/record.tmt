@@ -1,0 +1,4 @@
+~[EXPR_string]~ -> ~[EXPR_SimpleRecord]~.t
+
+~[EXPR_SimpleRecord]~ -> ~[EXPR_NestedRecord]~.a
+~[EXPR_SimpleRecord]~ -> ~[EXPR_NestedRecord]~.b

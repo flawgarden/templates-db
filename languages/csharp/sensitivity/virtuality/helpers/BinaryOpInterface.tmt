@@ -1,0 +1,7 @@
+~class BinaryOpInterface start~
+namespace HelperClasses;
+
+public interface BinaryOpInterface {
+   public string InterfaceCall(string l, string r);
+}
+~class end~

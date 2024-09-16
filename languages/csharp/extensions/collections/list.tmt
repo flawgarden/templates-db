@@ -1,0 +1,20 @@
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Contains(~[EXPR_TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Remove(~[EXPR_TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Exists(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.TrueForAll(~[EXPR_Predicate<~[TYPE@1]~>]~)
+
+~[EXPR_List<~[TYPE@1]~>]~ -> ~[EXPR_List<~[TYPE@1]~>]~.GetRange(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_List<~[TYPE@1]~>]~ -> ~[EXPR_List<~[TYPE@1]~>]~.FindAll(~[EXPR_Predicate<~[TYPE@1]~>]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~[~[EXPR_int]~]
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Find(~[EXPR_Predicate<~[TYPE@1]~>]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_List<~[TYPE@1]~>]~.FindLast(~[EXPR_Predicate<~[TYPE@1]~>]~)
+
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.IndexOf(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.LastIndexOf(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE]~>]~.Count
+~[EXPR_int]~ -> ~[EXPR_List<~[TYPE@1]~>]~.FindIndex(~[EXPR_Predicate<~[TYPE@1]~>]~)
+
+~[EXPR_object\[\]]~ -> ~[EXPR_List<~[TYPE]~>]~.ToArray()
+
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_List<~[TYPE@1]~>]~

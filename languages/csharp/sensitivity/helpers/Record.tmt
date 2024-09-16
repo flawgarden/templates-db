@@ -1,0 +1,11 @@
+~class SimpleRecord start~
+namespace HelperRecords;
+
+public record SimpleRecord (string t) {}
+~class end~
+
+~class NestedRecord start~
+namespace HelperRecords;
+
+public record NestedRecord (SimpleRecord a, SimpleRecord b) {}
+~class end~

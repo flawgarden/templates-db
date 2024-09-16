@@ -1,0 +1,3 @@
+~[EXPR_Predicate<string>]~ -> e => ~[EXPR_bool]~
+
+~[EXPR_Predicate<~[TYPE]~>]~ -> e => ~[EXPR_bool]~

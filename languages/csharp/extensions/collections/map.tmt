@@ -1,0 +1,11 @@
+~[EXPR_bool]~ -> ~[EXPR_Dictionary<~[TYPE@1]~, ~[TYPE]~>]~.Remove(EXPR_~[TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_Dictionary<~[TYPE@1]~, ~[TYPE]~>]~.ContainsKey(EXPR_~[TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_Dictionary<~[TYPE]~, ~[TYPE@1]~>]~.ContainsValue(EXPR_~[TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_Dictionary<~[TYPE@1]~, ~[TYPE@2]~>]~.TryAdd(EXPR_~[TYPE@1]~, EXPR_~[TYPE@2]~)
+
+~[EXPR_int]~ -> ~[EXPR_Dictionary<~[TYPE]~, ~[TYPE]~>]~.Count
+
+~[EXPR_IEnumerable<KeyValuePair<~[TYPE@1]~, ~[TYPE@2]~>>]~ -> ~[EXPR_Dictionary<~[TYPE@1]~, ~[TYPE@2]~>]~
+
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_Dictionary<~[TYPE@1]~, ~[TYPE]~>]~.Keys
+~[EXPR_IEnumerable<~[TYPE@1]~>]~ -> ~[EXPR_Dictionary<~[TYPE]~, ~[TYPE@1]~>]~.Values

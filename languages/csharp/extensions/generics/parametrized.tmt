@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> ~[VAR_GenericClass<~[TYPE]~>]~ is GenericClass<~[TYPE]~>
+~[EXPR_bool]~ -> ~[VAR_object]~ is GenericClass<~[TYPE]~>
+~[EXPR_bool]~ -> ~[EXPR_GenericClass<~[TYPE]~>]~ is GenericClass<~[TYPE]~>
+~[EXPR_bool]~ -> ~[EXPR_object]~ is GenericClass<~[TYPE]~>
+
+~[EXPR_A]~ -> new A()
+~[EXPR_B]~ -> new B()
+~[EXPR_C]~ -> new C()
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_GenericClass<~[TYPE@1]~>]~.getValue()
+~[EXPR_object]~ -> ~[EXPR_GenericClass<~[TYPE]~>]~.getObjectValue()
+
+~[EXPR_GenericClass<~[TYPE@1]~>]~ -> new GenericClass<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~]~)

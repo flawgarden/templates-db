@@ -1,0 +1,24 @@
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+~helper import sensitivity/field/helpers/ArrayHolder~
+~helper import sensitivity/field/helpers/InstanceInitializer~
+~helper import sensitivity/field/helpers/StringFactory~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+
+~template class_with_instance_initializer_positive start~
+InstanceInitializer ii = new InstanceInitializer(~[VAR_String@1]~);
+~[BODY]~
+~[VAR_String@1]~ = ii.list.get(1);
+~template end~
+
+~template class_with_instance_initializer_negative start~
+InstanceInitializer ii = new InstanceInitializer(~[VAR_String@1]~);
+~[BODY]~
+~[VAR_String@1]~ = ii.list.get(0);
+~template end~
+
+~main body end~

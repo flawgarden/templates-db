@@ -1,0 +1,103 @@
+~class Wrapper start~
+namespace HelperThreads;
+
+public class Wrapper<T> {
+   public Wrapper(T t) {
+       i = t;
+   }
+   public T i;
+}
+
+~class end~
+
+~class SettingTask start~
+namespace HelperThreads;
+
+public class SettingTask {
+  private Wrapper<string> w;
+  private string s;
+
+  public SettingTask(Wrapper<string> w, string s) {
+    this.w = w;
+    this.s = s;
+  }
+
+  public void run() {
+    this.w.i = s;
+  }
+}
+
+~class end~
+
+~class SwitchingTask start~
+namespace HelperThreads;
+
+public class SwitchingTask {
+  private Wrapper<string> w;
+  private string s;
+  private readonly object l;
+
+  public SwitchingTask(Wrapper<string> w, string s) {
+    this.w = w;
+    this.s = s;
+  }
+
+  public void run() {
+    lock(l) {
+      if (this.w.i == "") {
+        this.w.i = s;
+      } else {
+        this.w.i = "";
+      }
+    }
+  }
+}
+
+~class end~
+
+~class NullAndRestore start~
+namespace HelperThreads;
+
+using System.Threading;
+
+public class NullAndRestore {
+  private string s;
+  private string original;
+
+  public NullAndRestore(string s) {
+    this.s = s;
+    this.original = s;
+  }
+
+  private readonly object _lock;
+
+  public void nullMethod() {
+    Monitor.Enter(_lock);
+    this.s = null;
+    Monitor.PulseAll(_lock);
+    Monitor.Exit(_lock);
+  }
+
+  public void restore() {
+    Monitor.Enter(_lock);
+    while (this.s != null) {
+        try {
+          Monitor.Wait(_lock);
+        } catch (ThreadInterruptedException e) {
+          throw;
+        }
+    }
+    this.s = this.original;
+    Monitor.Exit(_lock);
+  }
+
+  public string get() {
+    string ret = null;
+    Monitor.Enter(_lock);
+    ret = this.s;
+    Monitor.Exit(_lock);
+    return ret;
+  }
+}
+
+~class end~

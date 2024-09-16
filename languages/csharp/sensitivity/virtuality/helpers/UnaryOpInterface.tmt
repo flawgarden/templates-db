@@ -1,0 +1,7 @@
+~class UnaryOpInterface start~
+namespace HelperClasses;
+
+public interface UnaryOpInterface {
+    public string InterfaceCall(string t);
+}
+~class end~

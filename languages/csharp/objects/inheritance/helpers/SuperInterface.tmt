@@ -1,0 +1,42 @@
+~class SuperInterface start~
+namespace HelperSuperClasses;
+
+public interface SuperInterface {
+}
+~class end~
+
+~class SubInterface start~
+namespace HelperSuperClasses;
+
+public interface SubInterface : SuperInterface {
+}
+~class end~
+
+~class SideInterface start~
+namespace HelperSuperClasses;
+
+public interface SideInterface {
+}
+~class end~
+
+~class ImplementingSuperClass start~
+namespace HelperSuperClasses;
+
+public class ImplementingSuperClass : SuperInterface {
+}
+~class end~
+
+~class ImplementingSubClass start~
+namespace HelperSuperClasses;
+
+public class ImplementingSubClass : SubInterface {
+}
+~class end~
+
+~class ImplementingSuperSideClass start~
+namespace HelperSuperClasses;
+
+public class ImplementingSuperSideClass : SuperInterface, SideInterface {
+}
+~class end~
+

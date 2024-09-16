@@ -1,0 +1,31 @@
+~class NoOpException start~
+using System;
+
+namespace HelperExceptions;
+
+public class NoOpException : Exception {
+    public NoOpException(string errorMessage) : base(errorMessage) {}
+}
+~class end~
+
+~class Exception1 start~
+using System;
+
+namespace HelperExceptions;
+
+public class Exception1 : Exception {
+    public Exception1(string errorMessage) : base(errorMessage) {}
+}
+~class end~
+
+~class Exception2 start~
+using System;
+
+namespace HelperExceptions;
+
+public class Exception2 : Exception {
+    public Exception2(string errorMessage) : base(errorMessage) {
+        errorMessage = "";
+    }
+}
+~class end~

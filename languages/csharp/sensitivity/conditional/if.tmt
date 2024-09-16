@@ -1,0 +1,65 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template if_operator_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+if (~[EXPR_bool]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template if_operator_negative start~
+if (~[EXPR_bool]~) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~template if_else_operator_neutral start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+if (~[EXPR_bool]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+} else {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template if_else_if_operator_neutral start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+if (~[EXPR_bool@1]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+} else if (~[EXPR_bool@1]~) {
+    ~[VAR_string@1]~ = ~[EXPR_string]~;
+} else {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template if_operator_with_var_in_condition_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+bool conditionMet = false;
+if (~[EXPR_bool]~) {
+    conditionMet = true;
+}
+if (!conditionMet && ~[EXPR_bool]~) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template if_operator_with_var_in_condition_negative start~
+bool conditionMet = false;
+if (~[EXPR_bool]~) {
+    conditionMet = true;
+}
+if (!conditionMet && ~[EXPR_bool]~) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~main body end~

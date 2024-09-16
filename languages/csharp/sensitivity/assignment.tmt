@@ -1,0 +1,42 @@
+~main body start~
+
+~template simple_assignment_positive start~
+~[VAR_string@1]~ = ~[VAR_string@1]~;
+~template end~
+
+~template simple_assignment_negative start~
+~[VAR_string]~ = "";
+~template end~
+
+~template assignment_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+~[BODY]~
+~[VAR_string@1]~ = tmpUnique42;
+~template end~
+
+~template assignment_negative start~
+string tmpUnique42 = "";
+~[BODY]~
+~[VAR_string]~ = tmpUnique42;
+~template end~
+
+~template lazy_eval_positive start~
+Func<string> lazyValue;
+{
+    string uniquePampam = ~[VAR_string@1]~;
+    lazyValue = () => uniquePampam;
+}
+~[BODY]~
+~[VAR_string@1]~ = lazyValue();
+~template end~
+
+~template lazy_eval_negative start~
+Func<string> lazyValue = () => "";
+~[VAR_string]~ = lazyValue();
+~template end~
+
+~template new_var_assignment_neutral start~
+~[TYPE@1]~ val32390 = ~[EXPR_~[TYPE@1]~]~;
+~template end~
+
+~main body end~

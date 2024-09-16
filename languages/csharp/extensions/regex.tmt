@@ -1,0 +1,84 @@
+~[MACRO_RegexOption]~ -> RegexOptions.None
+~[MACRO_RegexOption]~ -> RegexOptions.IgnoreCase
+
+~[MACRO_Regex]~ -> "[a-z]+"
+~[MACRO_Regex]~ -> "\\"
+~[MACRO_Regex]~ -> "\t"
+~[MACRO_Regex]~ -> "\n"
+~[MACRO_Regex]~ -> "\r"
+~[MACRO_Regex]~ -> "\f"
+~[MACRO_Regex]~ -> "\a"
+
+~[MACRO_Regex]~ -> "\\d"
+~[MACRO_Regex]~ -> "\\D"
+~[MACRO_Regex]~ -> "\\s"
+~[MACRO_Regex]~ -> "\\S"
+~[MACRO_Regex]~ -> "\\b"
+~[MACRO_Regex]~ -> "\\B"
+
+~[MACRO_Regex]~ -> "[abc]"
+~[MACRO_Regex]~ -> "[^abc]"
+~[MACRO_Regex]~ -> "[a-zA-Z]"
+~[MACRO_Regex]~ -> "[a-d[m-p]]"
+~[MACRO_Regex]~ -> "[a-z&&[def]]"
+~[MACRO_Regex]~ -> "[a-z&&[^bc]]"
+~[MACRO_Regex]~ -> "[a-z&&[^m-p]]"
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{5}")
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "??")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{5}?")
+
+~[MACRO_Regex]~ -> ("(" + ~[MACRO_Regex]~ + ")")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + ~[MACRO_Regex]~)
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "|" +  ~[MACRO_Regex]~)
+
+~[EXPR_int]~ -> ~[EXPR_Regex]~.Count(~[EXPR_string]~)
+~[EXPR_int]~ -> ~[EXPR_Regex]~.GroupNumberFromName(~[EXPR_string]~)
+
+~[EXPR_string]~ -> ~[EXPR_Regex]~.GroupNameFromNumber(~[EXPR_int]~)
+
+~[EXPR_string\[\]]~ -> ~[EXPR_Regex]~.GetGroupNames()
+
+~[EXPR_int\[\]]~ -> ~[EXPR_Regex]~.GetGroupNumbers()
+
+~[EXPR_bool]~ -> ~[EXPR_Regex]~.IsMatch(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_Regex]~.IsMatch(~[EXPR_string]~, ~[EXPR_int]~)
+
+~[EXPR_Match]~ -> ~[EXPR_Regex]~.Match(~[EXPR_string]~)
+~[EXPR_Match]~ -> ~[EXPR_Regex]~.Match(~[EXPR_string]~, ~[EXPR_int]~)
+~[EXPR_Match]~ -> ~[EXPR_Regex]~.Match(~[EXPR_string]~, ~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_IEnumerable<Match>]~ -> ~[EXPR_Regex]~.Matches(~[EXPR_string]~)
+~[EXPR_IEnumerable<Match>]~ -> ~[EXPR_Regex]~.Matches(~[EXPR_string]~, ~[EXPR_int]~)
+
+~[EXPR_string]~ -> ~[EXPR_Regex]~.Replace(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_string]~ -> ~[EXPR_Regex]~.Replace(~[EXPR_string]~, ~[EXPR_string]~, ~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_Regex]~.Replace(~[EXPR_string]~, ~[EXPR_string]~, ~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_string\[\]]~ -> ~[EXPR_Regex]~.Split(~[EXPR_string]~)
+~[EXPR_string\[\]]~ -> ~[EXPR_Regex]~.Split(~[EXPR_string]~, ~[EXPR_int]~)
+~[EXPR_string\[\]]~ -> ~[EXPR_Regex]~.Split(~[EXPR_string]~, ~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_IEnumerable<Group>]~ -> ~[EXPR_Match]~.Groups
+
+~[EXPR_IEnumerable<Capture>]~ -> ~[EXPR_Group]~.Captures
+
+~[MACRO_MatchScopeNamed]~ -> Match
+~[MACRO_MatchScopeNamed]~ -> Group
+
+~[MACRO_MatchScope]~ -> ~[MACRO_MatchScopeNamed]~
+~[MACRO_MatchScope]~ -> Capture
+
+~[EXPR_int]~ -> ~[MACRO_MatchScope]~.Index
+~[EXPR_int]~ -> ~[MACRO_MatchScope]~.Length
+
+~[EXPR_string]~ -> ~[MACRO_MatchScope]~.Value
+~[EXPR_string]~ -> ~[MACRO_MatchScopeNamed]~.Name
+
+~[EXPR_bool]~ -> ~[MACRO_MatchScopeNamed]~.Success

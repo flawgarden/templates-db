@@ -1,0 +1,59 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function param_or_empty start~
+public string paramOrEmpty(int value, string param) {
+    if (param.Length == value) {
+        return param;
+    } else if (value > param.Length) {
+        paramOrEmpty(--value, param);
+    } else {
+        return "";
+    }
+    return "";
+}
+~function end~
+
+~function param_or_empty_mutual1 start~
+public string paramOrEmptyMutual1(int value, string param) {
+    if (param.Length == value) {
+        return param;
+    } else if (value > param.Length) {
+        paramOrEmptyMutual2(value, param);
+    } else {
+        return "";
+    }
+    return "";
+}
+~function end~
+
+~function param_or_empty_mutual2 start~
+public string paramOrEmptyMutual2(int value, string param) {
+    return paramOrEmptyMutual1(--value, param);
+}
+~function end~
+
+~helper functions end~
+
+~template recursion_simple_positive start~
+~[VAR_string@1]~ = paramOrEmpty(~[VAR_string@1]~.Length, ~[VAR_string@1]~);
+~template end~
+
+~template recursion_simple_negative start~
+~[VAR_string@1]~ = paramOrEmpty(-1, ~[VAR_string@1]~);
+~template end~
+
+~template recursion_mutual_positive start~
+~[VAR_string@1]~ = paramOrEmptyMutual1(~[VAR_string@1]~.Length, ~[VAR_string@1]~);
+~template end~
+
+~template recursion_mutual_negative start~
+~[VAR_string@1]~ = paramOrEmptyMutual2(~[VAR_string@1]~.Length, ~[VAR_string@1]~);
+~template end~
+
+~main body end~

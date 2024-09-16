@@ -1,0 +1,16 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Text.RegularExpressions;
+~imports end~
+
+~template create_pattern_and_matcher start~
+Regex pattern = new(~[MACRO_Regex]~, ~[MACRO_RegexOption]~);
+IEnumerable<Match> matcher = pattern.Matches(~[EXPR_string]~);
+~template end~
+
+~main body end~

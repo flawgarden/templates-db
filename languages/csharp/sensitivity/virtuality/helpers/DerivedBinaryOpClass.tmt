@@ -1,0 +1,19 @@
+~class DerivedBinaryOpClass1 start~
+namespace HelperClasses;
+
+public class DerivedBinaryOpClass1 : BaseBinaryOpClass {
+   public override string VirtualCall(string l, string r) {
+       return l;
+   }
+}
+~class end~
+
+~class DerivedBinaryOpClass2 start~
+namespace HelperClasses;
+
+public class DerivedBinaryOpClass2 : BaseBinaryOpClass {
+   public override string VirtualCall(string l, string r) {
+       return r;
+   }
+}
+~class end~

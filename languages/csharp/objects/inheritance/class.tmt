@@ -1,0 +1,33 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_VarName]~ -> obj12321
+~[MACRO_VarName]~ -> obj21341
+~[MACRO_VarName]~ -> obj09823
+~[MACRO_VarName]~ -> obj39745
+~extensions end~
+
+~main body start~
+~helper import objects/inheritance/helpers/SuperClass~
+
+~imports start~
+using HelperSuperClasses;
+~imports end~
+
+~template create_super_class start~
+SuperClass ~[MACRO_VarName]~ = new SuperClass();
+~template end~
+
+~template create_sub_class start~
+SuperClass ~[MACRO_VarName]~ = new SubClass();
+~template end~
+
+~template create_sub_sub_class start~
+SuperClass ~[MACRO_VarName]~ = new SubSubClass();
+~template end~
+
+~template create_sibling_class start~
+SuperClass ~[MACRO_VarName]~ = new SiblingClass();
+~template end~
+
+~main body end~

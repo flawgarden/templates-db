@@ -1,0 +1,38 @@
+~class GenericClass start~
+namespace HelperGenericClasses;
+
+public class GenericClass<T> {
+    private T value;
+
+    public GenericClass(T value) {
+        this.value = value;
+    }
+
+    public object getObjectValue() {
+        return value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+}
+~class end~
+
+~class A start~
+namespace HelperGenericClasses;
+
+public class A {}
+~class end~
+
+~class B start~
+namespace HelperGenericClasses;
+
+public class B : A {}
+~class end~
+
+~class C start~
+namespace HelperGenericClasses;
+
+public class C : B {}
+~class end~

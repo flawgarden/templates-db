@@ -1,0 +1,72 @@
+~[EXPR_bool]~ -> String.IsNullOrEmpty(~[EXPR_string]~)
+~[EXPR_bool]~ -> String.IsNullOrWhiteSpace(~[EXPR_string]~)
+~[EXPR_bool]~ -> String.IsNullOrEmpty(~[VAR_string@1]~) && ~[VAR_string@1]~ != null && ~[VAR_string@1]~.Contains(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string@1]~ != null && ~[EXPR_string@1]~.Contains(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~.Equals(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~.Equals(~[EXPR_string]~, StringComparison.OrdinalIgnoreCase)
+~[EXPR_bool]~ -> ~[EXPR_string]~.CompareTo(~[EXPR_string]~) == 0
+~[EXPR_bool]~ -> ~[EXPR_string@1]~.CompareTo(~[EXPR_string@1]~) == 0
+~[EXPR_bool]~ -> ~[EXPR_string@1]~ != null && ~[EXPR_string@1]~[~[CONST_int]~] == ~[CONST_char]~
+~[EXPR_bool]~ -> ~[EXPR_string]~.EndsWith(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~.EndsWith(~[EXPR_char]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~.StartsWith(~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~.StartsWith(~[EXPR_char]~)
+
+~[EXPR_string]~ -> ~[EXPR_string]~.Replace(~[EXPR_char]~, ~[EXPR_char]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Replace(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Replace('/', '.')
+~[EXPR_string]~ -> ~[EXPR_string]~.ReplaceLineEndings()
+~[EXPR_string]~ -> ~[EXPR_string]~.ReplaceLineEndings(~[EXPR_string]~)
+~[EXPR_string]~ -> String.Intern(~[EXPR_string]~)
+~[EXPR_string]~ -> String.Empty
+~[EXPR_string]~ -> ~[EXPR_string]~.Substring(~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Substring(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Remove(~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Remove(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.PadLeft(~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.PadLeft(~[EXPR_int]~, ~[EXPR_char]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.PadRight(~[EXPR_int]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.PadRight(~[EXPR_int]~, ~[EXPR_char]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.ToLower()
+~[EXPR_string]~ -> ~[EXPR_string]~.ToString()
+~[EXPR_string]~ -> ~[EXPR_string]~.ToUpper()
+~[EXPR_string]~ -> ~[EXPR_string]~.Trim()
+~[EXPR_string]~ -> ~[EXPR_string]~.Trim(~[EXPR_char]~)
+~[EXPR_string]~ -> ~[EXPR_string]~.Trim(~[EXPR_char\[\]]~)
+~[EXPR_string]~ -> String.Concat(~[EXPR_string\[\]]~)
+~[EXPR_string]~ -> String.Concat(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_string]~ -> String.Concat(~[EXPR_string]~, ~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_string]~ -> String.Join(~[EXPR_char]~, ~[EXPR_string\[\]]~)
+~[EXPR_string]~ -> String.Join(~[EXPR_string]~, ~[EXPR_string\[\]]~)
+
+~[EXPR_int]~ -> ~[EXPR_string]~.Length
+~[EXPR_int]~ -> String.Compare(~[EXPR_string]~, ~[EXPR_string]~, ~[CONST_bool]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_char]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_char]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_char]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOfAny(~[EXPR_char\[\]]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOfAny(~[EXPR_char\[\]]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOfAny(~[EXPR_char\[\]]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_string]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_string]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.IndexOf(~[EXPR_string]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_char]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_char]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_char]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOfAny(~[EXPR_char\[\]]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOfAny(~[EXPR_char\[\]]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOfAny(~[EXPR_char\[\]]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_string]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_string]~, ~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_string]~.LastIndexOf(~[EXPR_string]~, ~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_char]~ -> ~[EXPR_string]~[~[EXPR_int]~]
+
+~[EXPR_char\[\]]~ -> ~[EXPR_string]~.ToCharArray()
+~[EXPR_char\[\]]~ -> ~[EXPR_string]~.ToCharArray(~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_byte\[\]]~ -> Encoding.UTF8.GetBytes(~[EXPR_string]~)
+
+~[MACRO_Any_string]~ -> ~[EXPR_string]~
+~[MACRO_Any_string]~ -> ~[VAR_string]~
+~[MACRO_Any_string]~ -> ~[CONST_string]~
