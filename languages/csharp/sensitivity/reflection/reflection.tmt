@@ -9,9 +9,9 @@ using HelperReflection;
 ~template simple_reflection_positive start~
 try {
     var type = typeof(ReflectionHelper);
-    ReflectionHelper rh = type.GetConstructors()[0].Invoke(~[VAR_String@1]~);
-    type.GetFields()[0].SetValue(rh, ~[VAR_String@1]~);
-    ~[VAR_String@1]~ = rh.getValue();
+    var rh = (ReflectionHelper)type.GetConstructors()[0].Invoke(new object[] { ~[VAR_string@1]~ });
+    type.GetFields()[0].SetValue(rh, ~[VAR_string@1]~);
+    ~[VAR_string@1]~ = rh.getValue();
 } catch (Exception e) {
     throw;
 }
@@ -20,9 +20,9 @@ try {
 ~template simple_reflection_negative start~
 try {
     var type = typeof(ReflectionHelper);
-    ReflectionHelper rh = type.GetConstructors()[0].Invoke(~[VAR_String@1]~);
-    type.GetFields()[0].SetValue(rh, ~[CONST_String]~);
-    ~[VAR_String@1]~ = rh.getValue();
+    var rh = (ReflectionHelper)type.GetConstructors()[0].Invoke(new object[] { ~[VAR_string@1]~ });
+    type.GetFields()[0].SetValue(rh, ~[CONST_string]~);
+    ~[VAR_string@1]~ = rh.getValue();
 } catch (Exception e) {
     throw;
 }

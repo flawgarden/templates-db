@@ -69,33 +69,33 @@ public class NullAndRestore {
     this.original = s;
   }
 
-  private readonly object lock;
+  private readonly object _lock;
 
   public void nullMethod() {
-    Monitor.Enter(lock);
+    Monitor.Enter(_lock);
     this.s = null;
-    Monitor.PulseAll(lock);
-    Monitor.Exit(lock);
+    Monitor.PulseAll(_lock);
+    Monitor.Exit(_lock);
   }
 
   public void restore() {
-    Monitor.Enter(lock);
+    Monitor.Enter(_lock);
     while (this.s != null) {
         try {
-          Monitor.Wait(lock);
+          Monitor.Wait(_lock);
         } catch (ThreadInterruptedException e) {
           throw;
         }
     }
     this.s = this.original;
-    Monitor.Exit(lock);
+    Monitor.Exit(_lock);
   }
 
   public string get() {
     string ret = null;
-    Monitor.Enter(lock);
+    Monitor.Enter(_lock);
     ret = this.s;
-    Monitor.Exit(lock);
+    Monitor.Exit(_lock);
     return ret;
   }
 }

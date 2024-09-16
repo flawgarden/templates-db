@@ -1,5 +1,7 @@
 ~extensions start~
 ~extensions import *~
+
+~[MACRO_DivideByZero]~ -> 1 / (~[VAR_int@1]~ - ~[VAR_int@1]~)
 ~extensions end~
 
 ~main body start~
@@ -13,7 +15,8 @@ using HelperExceptions;
 string tmpUnique42 = ~[VAR_string@1]~;
 try {
 ~[BODY]~
-    int a = 1 / 0;
+    int a = 42;
+    a = ~[MACRO_DivideByZero]~;
 } catch (DivideByZeroException e) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -22,7 +25,8 @@ try {
 ~template arithmetic_exception_negative start~
 try {
 ~[BODY]~
-    int a = 1 / 0;
+    int a = -42;
+    a = ~[MACRO_DivideByZero]~;
 } catch (DivideByZeroException e) {
     ~[VAR_string]~ = "";
 }

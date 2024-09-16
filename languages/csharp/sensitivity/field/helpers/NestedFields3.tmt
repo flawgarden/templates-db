@@ -16,7 +16,7 @@ public class NestedFields3 {
         nested1 = new NestedFields2(initialValues);
     }
 
-    public NestedFields3(String[] initialValues, string value) {
+    public NestedFields3(string[] initialValues, string value) {
         this.values = initialValues;
         this.value = value;
         nested1 = new NestedFields2(initialValues, value);

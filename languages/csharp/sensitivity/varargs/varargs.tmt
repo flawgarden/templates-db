@@ -25,7 +25,7 @@ public String getFirstStringFromArray(params string[] lines) {
 ~function end~
 
 ~function varargs_with_generics start~
-public <T> T varargsWithGenerics(params T[] elements) {
+public T varargsWithGenerics<T>(params T[] elements) {
     return elements[0];
 }
 ~function end~
