@@ -17,7 +17,7 @@ public string simplePatternMatchingString1(object obj) {
 
 ~function simple_pattern_matching_string_2 start~
 public string simplePatternMatchingString2(object obj) {
-    if (obj is string str && str.Length() > 5) {
+    if (obj is string str && str.Length > 5) {
         return str.ToUpper();
     }
     return "";

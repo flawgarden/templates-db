@@ -1,4 +1,6 @@
 ~extensions start~
+~extensions import *~
+
 ~[MACRO_Empty_string_Array]~ -> {"", ""}
 ~[MACRO_Empty_string_Array]~ -> {"", "", ""}
 ~[MACRO_Empty_string_Array]~ -> {"", "", "", ""}

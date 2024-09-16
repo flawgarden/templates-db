@@ -1,4 +1,6 @@
 ~class NoOpException start~
+using System;
+
 namespace HelperExceptions;
 
 public class NoOpException : Exception {
@@ -7,6 +9,8 @@ public class NoOpException : Exception {
 ~class end~
 
 ~class Exception1 start~
+using System;
+
 namespace HelperExceptions;
 
 public class Exception1 : Exception {
@@ -15,6 +19,8 @@ public class Exception1 : Exception {
 ~class end~
 
 ~class Exception2 start~
+using System;
+
 namespace HelperExceptions;
 
 public class Exception2 : Exception {
