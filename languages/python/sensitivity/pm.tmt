@@ -1,0 +1,53 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function simple_pattern_matching_string_1 start~
+def simplePatternMatchingString1(obj: Any) -> str:
+    match obj:
+        case str():
+            return str.upper()
+        case _:
+            return ""
+~function end~
+
+~function simple_pattern_matching_string_2 start~
+def simplePatternMatchingString2(obj: Any) -> str:
+    match obj:
+        case str() if len(a) > 5:
+            return str.upper()
+        case _:
+            return ""
+~function end~
+
+~helper functions end~
+
+~imports start~
+from typing import Any
+~imports end~
+
+~template pattern_matching_simple_1_positive start~
+~[VAR_str@1]~ = simplePatternMatchingString1(~[VAR_str@1]~)
+~template end~
+
+~template pattern_matching_simple_1_negative start~
+~[VAR_str]~ = simplePatternMatchingString1(~[CONST_str]~)
+~template end~
+
+~template pattern_matching_simple_2_negative start~
+~[VAR_str]~ = simplePatternMatchingString1(~[VAR_Integer]~)
+~template end~
+
+~template pattern_matching_simple_4_positive start~
+~[VAR_str@1]~ = simplePatternMatchingString2(~[VAR_str@1]~)
+~template end~
+
+~template pattern_matching_simple_4_negative start~
+~[VAR_str]~ = simplePatternMatchingString2(~[CONST_str]~)
+~template end~
+
+~main body end~

@@ -1,0 +1,17 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_VarName]~ -> genericClass12321
+~[MACRO_VarName]~ -> genericClass21341
+~[MACRO_VarName]~ -> genericClass09823
+~[MACRO_VarName]~ -> genericClass39745
+~extensions end~
+
+~main body start~
+~helper import objects/generics/helpers/GenericClass~
+
+~template create_generic_class start~
+~[MACRO_VarName]~ = GenericClass[~[TYPE@1]~](~[EXPR_~[TYPE@1]~]~)
+~template end~
+
+~main body end~

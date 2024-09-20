@@ -1,0 +1,32 @@
+~class SuperInterface start~
+from abc import ABC
+class SuperInterface(ABC):
+    pass
+~class end~
+
+~class SubInterface start~
+from abc import ABC
+class SubInterface(ABC, SuperInterface):
+    pass
+~class end~
+
+~class SideInterface start~
+from abc import ABC
+class SideInterface(ABC):
+    pass
+~class end~
+
+~class ImplementingSuperClass start~
+class ImplementingSuperClass(SuperInterface):
+    pass
+~class end~
+
+~class ImplementingSubClass start~
+class ImplementingSubClass(SubInterface):
+    pass
+~class end~
+
+~class ImplementingSuperSideClass start~
+class ImplementingSuperSideClass(SuperInterface, SideInterface):
+    pass
+~class end~

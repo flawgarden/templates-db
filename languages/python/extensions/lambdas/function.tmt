@@ -1,0 +1,5 @@
+~[EXPR_Callable\[\[str\], str\]]~ -> lambda e: ~[EXPR_str]~
+~[EXPR_Callable\[\[~[TYPE]~\], ~[TYPE@1]~\]]~ -> lambda e: ~[EXPR_~[TYPE@1]~]~
+
+~[EXPR_Callable\[\[str, str\], str\]]~ -> lambda a, b: ~[EXPR_str]~
+~[EXPR_Callable\[\[~[TYPE@1]~, ~[TYPE@1]~\], ~[TYPE@1]~\]]~ -> lambda a, b: ~[EXPR_~[TYPE@1]~]~

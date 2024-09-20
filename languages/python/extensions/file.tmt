@@ -1,0 +1,1 @@
+~[EXPR_bool]~ -> ~[VAR_Path@1]~.exists() and ~[VAR_Path@1]~.is_file()

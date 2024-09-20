@@ -1,0 +1,16 @@
+~class NoOpException start~
+class NoOpException(Exception):
+    pass
+~class end~
+
+~class Exception1 start~
+class Exception1(Exception):
+    pass
+~class end~
+
+~class Exception2 start~
+class Exception2(Exception):
+    def __init__(self, value: str):
+        super().__init__(value)
+        self.args = ("",)
+~class end~

@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> isinstance(~[VAR_SuperClass]~, SubClass)
+~[EXPR_bool]~ -> isinstance(~[VAR_SuperClass]~, SubSubClass)
+~[EXPR_bool]~ -> isinstance(~[VAR_SuperClass]~, SuperClass)
+~[EXPR_bool]~ -> isinstance(~[VAR_SuperClass]~, SiblingClass)
+~[EXPR_bool]~ -> isinstance(~[EXPR_SuperClass]~, SubClass)
+~[EXPR_bool]~ -> isinstance(~[EXPR_SuperClass]~, SubSubClass)
+~[EXPR_bool]~ -> isinstance(~[EXPR_SuperClass]~, SuperClass)
+~[EXPR_bool]~ -> isinstance(~[EXPR_SuperClass]~, SiblingClass)
+
+~[EXPR_SuperClass]~ -> SuperClass()
+~[EXPR_SuperClass]~ -> SubClass()
+~[EXPR_SuperClass]~ -> SubSubClass()
+~[EXPR_SuperClass]~ -> SiblingClass()

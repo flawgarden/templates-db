@@ -1,0 +1,33 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template array_store_exception_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+try {
+~[BODY]~
+    Object x[] = new String[3];
+    x[0] = new Integer(0);
+} catch (ArrayStoreException e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template array_store_exception_negative start~
+try {
+~[BODY]~
+    Object x[] = new String[3];
+    x[0] = new Integer(0);
+} catch (ArrayStoreException e) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~main body end~

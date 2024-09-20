@@ -5,20 +5,17 @@
 ~main body start~
 ~helper import sensitivity/record/helpers/Record~
 
-~imports start~
-import java.util.*;
-~imports end~
 
 ~template create_simple_record_empty start~
-SimpleRecord recordEmpty = new SimpleRecord("");
+recordEmpty = SimpleRecord("")
 ~template end~
 
 ~template create_simple_record start~
-SimpleRecord record = new SimpleRecord(~[EXPR_String]~);
+record = SimpleRecord(~[EXPR_str]~)
 ~template end~
 
 ~template create_nested_record start~
-SimpleRecord nested = new NestedRecord(new SimpleRecord(~[EXPR_String]~), new SimpleRecord(~[EXPR_String]~));
+nested = NestedRecord(SimpleRecord(~[EXPR_str]~), SimpleRecord(~[EXPR_str]~))
 ~template end~
 
 ~main body end~

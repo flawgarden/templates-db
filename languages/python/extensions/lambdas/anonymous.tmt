@@ -1,0 +1,4 @@
+~[EXPR_str]~ -> ~[EXPR_UnaryOpClass]~.virtual_call(~[EXPR_str]~)
+~[EXPR_str]~ -> ~[EXPR_UnaryOpInterface]~.interface_call(~[EXPR_str]~)
+~[EXPR_str]~ -> ~[EXPR_BinaryOpClass]~.virtual_call(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_str]~ -> ~[EXPR_BinaryOpInterface]~.interface_call(~[EXPR_str]~, ~[EXPR_str]~)

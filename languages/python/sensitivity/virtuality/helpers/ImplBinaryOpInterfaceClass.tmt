@@ -1,0 +1,17 @@
+~class ImplBinaryOpInterfaceClass1 start~
+from BinaryOpInterface import *
+
+
+class ImplBinaryOpInterfaceClass1(BinaryOpInterface):
+    def interface_call(self, l: str, r: str) -> str:
+        return l
+
+~class end~
+
+~class ImplBinaryOpInterfaceClass2 start~
+
+class ImplBinaryOpInterfaceClass2(BinaryOpInterface):
+    def interface_call(self, l: str, r: str) -> str:
+        return r
+
+~class end~

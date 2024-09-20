@@ -1,0 +1,96 @@
+~main body start~
+~helper import sensitivity/field/helpers/NestedFieldsBase~
+~helper import sensitivity/field/helpers/NestedFields1~
+~helper import sensitivity/field/helpers/NestedFields2~
+~helper import sensitivity/field/helpers/NestedFields3~
+~helper import sensitivity/field/helpers/NestedFields4~
+
+~template nested_field_simple_positive start~
+nested7231 = NestedFields1(~[VAR_str@1]~)
+~[VAR_str@1]~ = nested7231.nested1.value
+~template end~
+
+~template nested_field_simple_negative start~
+nested7231 = NestedFields1(~[CONST_str]~)
+~[VAR_str]~ = nested7231.nested1.value
+~template end~
+
+~template nested_field_simple_array_positive start~
+arr4124 = [~[VAR_str@1]~]
+nested7231 = NestedFields1(arr4124)
+~[VAR_str@1]~ = nested7231.nested1.values[0]
+~template end~
+
+~template nested_field_simple_array_negative start~
+arr4124 = [~[CONST_str]~]
+nested7231 = NestedFields1(arr4124)
+~[VAR_str]~ = nested7231.nested1.values[0]
+~template end~
+
+~template nested_field_depth_2_positive start~
+nested7231 = NestedFields2(~[VAR_str@1]~)
+~[VAR_str@1]~ = nested7231.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_2_negative start~
+nested7231 = NestedFields2(~[CONST_str]~)
+~[VAR_str]~ = nested7231.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_2_array_positive start~
+arr4124 = [~[VAR_str@1]~]
+nested7231 = NestedFields2(arr4124)
+~[VAR_str@1]~ = nested7231.nested1.nested1.values[0]
+~template end~
+
+~template nested_field_depth_2_array_negative start~
+arr4124 = [~[CONST_str]~]
+nested7231 = NestedFields2(arr4124)
+~[VAR_str]~ = nested7231.nested1.nested1.values[0]
+~template end~
+
+~template nested_field_depth_3_positive start~
+nested7231 = NestedFields3(~[VAR_str@1]~)
+~[VAR_str@1]~ = nested7231.nested1.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_3_negative start~
+nested7231 = NestedFields3(~[CONST_str]~)
+~[VAR_str]~ = nested7231.nested1.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_3_array_positive start~
+arr4124 = [~[VAR_str@1]~]
+nested7231 = NestedFields3(arr4124)
+~[VAR_str@1]~ = nested7231.nested1.nested1.nested1.values[0]
+~template end~
+
+~template nested_field_depth_3_array_negative start~
+arr4124 = [~[CONST_str]~]
+nested7231 = NestedFields3(arr4124)
+~[VAR_str]~ = nested7231.nested1.nested1.nested1.values[0]
+~template end~
+
+~template nested_field_depth_4_positive start~
+nested7231 = NestedFields4(~[VAR_str@1]~)
+~[VAR_str@1]~ = nested7231.nested1.nested1.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_4_negative start~
+nested7231 = NestedFields4(~[CONST_str]~)
+~[VAR_str]~ = nested7231.nested1.nested1.nested1.nested1.value
+~template end~
+
+~template nested_field_depth_4_array_positive start~
+arr4124 = [~[VAR_str@1]~]
+nested7231 = NestedFields4(arr4124)
+~[VAR_str@1]~ = nested7231.nested1.nested1.nested1.nested1.values[0]
+~template end~
+
+~template nested_field_depth_4_array_negative start~
+arr4124 = [~[CONST_str]~]
+nested7231 = NestedFields4(arr4124)
+~[VAR_str]~ = nested7231.nested1.nested1.nested1.nested1.values[0]
+~template end~
+
+~main body end~

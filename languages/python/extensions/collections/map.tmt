@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> not ~[EXPR_dict\[~[TYPE]~, ~[TYPE]~\]]~
+~[EXPR_bool]~ -> ~[EXPR_~[TYPE@1]~]~ in ~[EXPR_dict\[~[TYPE@1]~, ~[TYPE]~\]]~
+~[EXPR_bool]~ -> ~[EXPR_~[TYPE@1]~]~ in ~[EXPR_dict\[~[TYPE]~, ~[TYPE@1]~\]]~.values()
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_dict\[~[TYPE]~, ~[TYPE@1]~\]]~[~[EXPR_Any]~]
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_dict\[~[TYPE]~, ~[TYPE@1]~\]]~.setdefault(~[EXPR_Any]~, ~[EXPR_~[TYPE@1]~]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_dict\[~[TYPE]~, ~[TYPE@1]~\]]~.pop(~[EXPR_Any]~, ~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_int]~ -> len(~[EXPR_dict\[~[TYPE]~, ~[TYPE]~\]]~)
+
+~[EXPR_Iterable\[tuple\[~[TYPE@1]~, ~[TYPE@2]~\]\]]~ -> ~[EXPR_dict\[~[TYPE@1]~, ~[TYPE@2]~\]]~.items()
+~[EXPR_Iterable\[~[TYPE@1]~\]]~ -> ~[EXPR_dict\[~[TYPE@1]~, ~[TYPE]~\]]~.keys()
+~[EXPR_Iterable\[~[TYPE@1]~\]]~ -> ~[EXPR_dict\[~[TYPE]~, ~[TYPE@1]~\]]~.values()

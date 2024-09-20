@@ -1,0 +1,77 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_MapName]~ -> map787234
+~[DEFINE_Create_Map]~ -> ~[DEFINE_MapName]~ = dict()
+~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[EXPR_~[TYPE@2]~@2]~
+~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName]~[~[VAR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
+
+~extensions end~
+
+~main body start~
+
+~template map_simple_get_1_positive start~
+~[DEFINE_Create_Map]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
+~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~]
+~template end~
+
+~template map_simple_get_1_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[CONST_~[TYPE@2]~]~
+~[VAR_~[TYPE@2]~]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~]
+~template end~
+
+~template map_remove_1_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_EXPR_ToMap]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
+if ~[EXPR_~[TYPE@1]~@1]~ in ~[DEFINE_MapName]~:
+    ~[DEFINE_MapName]~.pop(~[EXPR_~[TYPE@1]~@1]~)
+value7843 = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~)
+if value7843 is None:
+    value7843 = ~[CONST_~[TYPE@2]~]~
+~[VAR_~[TYPE@2]~]~ = value7843
+~template end~
+
+~template map_remove_1_positive start~
+~[DEFINE_Create_Map]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
+if ~[EXPR_~[TYPE@1]~@1]~ in ~[DEFINE_MapName]~:
+    ~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~.pop(~[EXPR_~[TYPE@1]~@1]~)
+~template end~
+
+~template map_merge_1_positive start~
+map111 = dict()
+map222 = dict()
+map111[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@1]~
+map222[~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~
+map111.update(map222)
+~[VAR_~[TYPE@2]~@2]~ = map111[~[EXPR_~[TYPE@1]~@2]~]
+~template end~
+
+~template map_clear_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_EXPR_ToMap]~
+~[DEFINE_MapName]~[(~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~
+~[DEFINE_MapName]~.clear()
+~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@2]~]
+~template end~
+
+~template map_put_if_absent_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[CONST_~[TYPE@1]~@2]~
+~[DEFINE_MapName]~.setdefault(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@3]~)
+~[VAR_~[TYPE@2]~@3]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~]
+~template end~
+
+~template map_merge_2_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_EXPR_ToMap]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
+if ~[EXPR_~[TYPE@1]~@1]~ in ~[DEFINE_MapName]~:
+    ~[DEFINE_MapName]~.update({~[EXPR_~[TYPE@1]~@1]~: ~[CONST_~[TYPE@2]~]~})
+~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~]
+~template end~
+
+~main body end~
