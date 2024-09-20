@@ -4,18 +4,18 @@
 
 ~main body start~
 
-~template while_operator_positive start~
+~template do_while_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
 ~[BODY]~
-while (~[EXPR_bool]~) {
+do {
     ~[VAR_string@1]~ = tmpUnique42;
-}
+} while (~[EXPR_bool]~);
 ~template end~
 
-~template while_operator_negative start~
-while (~[EXPR_bool]~) {
+~template do_while_operator_negative start~
+do {
     ~[VAR_string]~ = "";
-}
+} while (~[EXPR_bool]~);
 ~template end~
 
 ~main body end~

@@ -13,7 +13,6 @@
 ~helper import sensitivity/field/helpers/StringHolder~
 ~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/StringFactory~
-~helper import sensitivity/field/helpers/ConstructorChains~
 ~helper import sensitivity/field/helpers/NestedStringHolder~
 
 ~imports start~
@@ -96,24 +95,6 @@ StringFactory sf = StringFactory.createInstance(~[VAR_string@1]~);
 StringFactory sf = StringFactory.createInstance();
 ~[BODY]~
 ~[VAR_string]~ = sf.val;
-~template end~
-
-~template constructor_chains_positive start~
-ConstructorChains cc = new ConstructorChains(true, ~[VAR_string@1]~);
-~[BODY]~
-~[VAR_string@1]~ = cc.getText(true);
-~template end~
-
-~template constructor_chains_negative start~
-ConstructorChains cc = new ConstructorChains(false, ~[VAR_string@1]~);
-~[BODY]~
-~[VAR_string@1]~ = cc.getText(true);
-~template end~
-
-~template constructor_chains_neutral start~
-ConstructorChains cc = new ConstructorChains(~[EXPR_bool]~, ~[VAR_string@1]~);
-~[BODY]~
-~[VAR_string@1]~ = cc.getText(~[EXPR_bool]~);
 ~template end~
 
 ~main body end~

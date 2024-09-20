@@ -1,0 +1,35 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_DivideByZero]~ -> 1 / (~[VAR_int@1]~ - ~[VAR_int@1]~)
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+
+~imports start~
+using HelperExceptions;
+~imports end~
+
+~template array_store_exception_positive start~
+string tmpUnique42 = ~[VAR_string@1]~;
+try {
+~[BODY]~
+    object[] x = new string[3];
+    x[0] = 0;
+} catch (ArrayTypeMismatchException e) {
+    ~[VAR_string@1]~ = tmpUnique42;
+}
+~template end~
+
+~template array_store_exception_negative start~
+try {
+~[BODY]~
+    object[] x = new string[3];
+    x[0] = 0;
+} catch (ArrayTypeMismatchException e) {
+    ~[VAR_string]~ = "";
+}
+~template end~
+
+~main body end~
