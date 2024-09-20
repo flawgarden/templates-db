@@ -1,0 +1,14 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template if_operator_positive start~
+tmpUnique42 := ~[VAR_String@1]~
+if ~[EXPR_Boolean]~ {
+    ~[VAR_String@1]~ = tmpUnique42
+}
+~template end~
+
+~main body end~

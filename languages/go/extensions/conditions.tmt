@@ -1,0 +1,42 @@
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ""
+~[EXPR_bool]~ -> strings.Contains(~[VAR_str@1]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[VAR_str@1]~ != "" && strings.Contains(~[VAR_str@1]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ~[EXPR_str]~
+~[EXPR_bool]~ -> strings.EqualFold(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> len(~[VAR_str@1]~) > ~[CONST_int]~ && ~[VAR_str@1]~[~[CONST_int]~] == ~[CONST_byte]~
+~[EXPR_bool]~ -> strings.HasSuffix(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_str]~[~[EXPR_int]~:~[EXPR_int]~], ~[EXPR_str]~)
+
+~[EXPR_bool]~ -> ~[EXPR_int]~ == 0
+~[EXPR_bool]~ -> ~[EXPR_int]~ > 0
+~[EXPR_bool]~ -> ~[EXPR_int]~ < 0
+~[EXPR_bool]~ -> ~[EXPR_int]~ >= ~[EXPR_int]~
+~[EXPR_bool]~ -> ~[EXPR_int]~ != ~[EXPR_int]~
+~[EXPR_bool]~ -> ~[EXPR_int]~ % ~[CONST_int]~ == 0
+~[EXPR_bool]~ -> ~[EXPR_int]~ > ~[EXPR_int]~ && ~[EXPR_int]~ < ~[EXPR_int]~
+~[EXPR_bool]~ -> ~[EXPR_int]~ & ~[CONST_int]~ == ~[CONST_int]~
+~[EXPR_bool]~ -> ~[EXPR_int]~ << ~[CONST_int]~ == ~[CONST_int]~
+~[EXPR_bool]~ -> ~[EXPR_int]~^2 == ~[EXPR_int]~
+
+~[EXPR_bool]~ -> math.IsNaN(~[EXPR_float]~)
+~[EXPR_bool]~ -> math.IsInf(~[EXPR_float]~, 1)
+~[EXPR_bool]~ -> ~[EXPR_float]~ == 0.0
+~[EXPR_bool]~ -> ~[EXPR_float]~ > 0.0
+~[EXPR_bool]~ -> ~[EXPR_float]~ < 0.0
+~[EXPR_bool]~ -> ~[EXPR_float]~ == math.Pi
+~[EXPR_bool]~ -> math.Abs(~[EXPR_float]~) < ~[CONST_float]~
+~[EXPR_bool]~ -> ~[EXPR_float]~ == math.Pow(~[EXPR_float]~, ~[CONST_float]~)
+~[EXPR_bool]~ -> ~[EXPR_float]~ > math.Sqrt(~[EXPR_float]~)
+~[EXPR_bool]~ -> math.Mod(~[EXPR_float]~, ~[EXPR_float]~) == ~[CONST_float]~
+
+~[EXPR_bool]~ -> ~[EXPR_bool]~ == true
+~[EXPR_bool]~ -> ~[EXPR_bool]~ != false
+~[EXPR_bool]~ -> (~[EXPR_bool]~ && ~[EXPR_bool]~)
+~[EXPR_bool]~ -> (~[EXPR_bool]~ || ~[EXPR_bool]~)
+~[EXPR_bool]~ -> !~[EXPR_bool]~
+~[EXPR_bool]~ -> (~[EXPR_bool]~ == (~[EXPR_bool]~ && ~[EXPR_bool]~))
+~[EXPR_bool]~ -> (~[EXPR_bool]~ != (~[EXPR_bool]~ || ~[EXPR_bool]~))
+~[EXPR_bool]~ -> (~[EXPR_bool]~ && (~[EXPR_bool]~ || ~[EXPR_bool]~))
+~[EXPR_bool]~ -> (~[EXPR_bool]~ && !~[EXPR_bool]~)
+~[EXPR_bool]~ -> (~[EXPR_bool]~ || !~[EXPR_bool]~)
