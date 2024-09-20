@@ -220,7 +220,9 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         template_diff = diff(fst_template_names, snd_template_names)
 
         for name in template_diff:
-            result.append(DiagnosticResult.error(f"Can't find the same template [{fst.path}, {name}] in the file [{snd.path}]"))
+            result.append(
+                DiagnosticResult.error(f"Can't find the same template [{fst.path}, {name}] in the file [{snd.path}]")
+            )
 
     def compare_helper_file(fst: HelperFile, snd: HelperFile):
         return
