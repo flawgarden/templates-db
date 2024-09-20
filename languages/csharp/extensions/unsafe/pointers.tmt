@@ -1,0 +1,37 @@
+~[MACRO_SimpleType]~ -> bool
+~[MACRO_SimpleType]~ -> decimal
+~[MACRO_SimpleType]~ -> sbyte
+~[MACRO_SimpleType]~ -> byte
+~[MACRO_SimpleType]~ -> short
+~[MACRO_SimpleType]~ -> ushort
+~[MACRO_SimpleType]~ -> int
+~[MACRO_SimpleType]~ -> uint
+~[MACRO_SimpleType]~ -> long
+~[MACRO_SimpleType]~ -> ulong
+~[MACRO_SimpleType]~ -> nint
+~[MACRO_SimpleType]~ -> nuint
+~[MACRO_SimpleType]~ -> char
+~[MACRO_SimpleType]~ -> float
+~[MACRO_SimpleType]~ -> double
+
+~[MACRO_UnmanagedType]~ -> ~[MACRO_SimpleType]~
+~[MACRO_UnmanagedType]~ -> ~[MACRO_Enum]~
+~[MACRO_UnmanagedType]~ -> ~[MACRO_UnmanagedStruct]~
+~[MACRO_UnmanagedType]~ -> ~[MACRO_Tuple]~
+
+~[MACRO_UnmanagedType]~ -> ~[MACRO_UnmanagedType]~*
+
+~[EXPR_void*]~ -> (void*)(~[EXPR_~[MACRO_UnmanagedType]~*]~)
+
+~[EXPR_~[MACRO_UnmanagedType@1]~*]~ -> &~[VAR_~[MACRO_UnmanagedType@1]~]~
+~[EXPR_~[MACRO_UnmanagedType@1]~*]~ -> (~[MACRO_UnmanagedType@1]~*)(~[EXPR_~[MACRO_UnmanagedType]~*]~)
+~[EXPR_~[MACRO_UnmanagedType@1]~*]~ -> (~[MACRO_UnmanagedType@1]~*)(~[EXPR_void*]~)
+
+~[EXPR_~[MACRO_UnmanagedType@1]~]~ -> *(~[EXPR_~[MACRO_UnmanagedType@1]~*]~)
+~[EXPR_~[MACRO_UnmanagedType@1]~]~ -> ~[EXPR_~[MACRO_UnmanagedType@1]~*]~[~[CONST_int]~]
+
+~[EXPR_~[MACRO_UnmanagedType@1]~*]~ -> ~[EXPR_~[MACRO_UnmanagedType@1]~*]~ + ~[CONST_int]~
+~[EXPR_~[MACRO_UnmanagedType@1]~*]~ -> ~[EXPR_~[MACRO_UnmanagedType@1]~*]~ - ~[CONST_int]~
+
+~[EXPR_bool]~ -> (~[EXPR_~[MACRO_UnmanagedType]~*]~) == (~[EXPR_~[MACRO_UnmanagedType]~*]~)
+~[EXPR_bool]~ -> (~[EXPR_~[MACRO_UnmanagedType]~*]~) > (~[EXPR_~[MACRO_UnmanagedType]~*]~)
