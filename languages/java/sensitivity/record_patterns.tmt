@@ -1,0 +1,42 @@
+#Required java version: 21
+~main body start~
+~helper import sensitivity/helpers/Record~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template simple_record_patterns_positive start~
+Object obj = new NestedRecord(new SimpleRecord(~[VAR_String@1]~), new SimpleRecord("fixed_string"));
+
+if (obj instanceof NestedRecord(SimpleRecord r1, SimpleRecord r2)) {
+    ~[VAR_String@1]~ = r1.t();
+}
+~template end~
+
+~template simple_record_patterns_negative start~
+Object obj = new NestedRecord(new SimpleRecord(~[VAR_String@1]~), new SimpleRecord("fixed_string"));
+
+if (obj instanceof NestedRecord(SimpleRecord r1, SimpleRecord r2)) {
+    ~[VAR_String@1]~ = r2.t();
+}
+~template end~
+
+~template simple_record_patterns_nested_positive start~
+Object obj = new NestedRecord(new SimpleRecord(~[VAR_String@1]~), new SimpleRecord("fixed_string"));
+
+if (obj instanceof NestedRecord(SimpleRecord(String s), SimpleRecord(String s1))) {
+    ~[VAR_String@1]~ = s;
+}
+~template end~
+
+~template simple_record_patterns_nested_negative start~
+Object obj = new NestedRecord(new SimpleRecord(~[VAR_String@1]~), new SimpleRecord("fixed_string"));
+
+if (obj instanceof NestedRecord(SimpleRecord(String s), SimpleRecord(String s1))) {
+    ~[VAR_String@1]~ = s1;
+}
+~template end~
+
+
+~main body end~
