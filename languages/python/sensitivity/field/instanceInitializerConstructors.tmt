@@ -1,0 +1,18 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/field/helpers/InstanceInitializer~
+
+~template class_with_instance_initializer_positive start~
+ii = InstanceInitializer(~[VAR_str@1]~)
+~[VAR_str@1]~ = ii.list[1]
+~template end~
+
+~template class_with_instance_initializer_negative start~
+ii = InstanceInitializer(~[VAR_str@1]~)
+~[VAR_str@1]~ = ii.list[0]
+~template end~
+
+~main body end~

@@ -1,0 +1,105 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/concurrency/helpers/concurrency~
+
+~imports start~
+using HelperThreads;
+using System.Threading;
+~imports end~
+
+~template atomic_integer_negative start~
+
+int counter = 0;
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread1.Start();
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+if (counter == 2) {
+  ~[VAR_string]~ = "";
+}
+
+~template end~
+
+~template atomic_integer_restore_positive start~
+
+int counter = 0;
+string stringCopy = ~[VAR_string@1]~;
+
+if (counter == 0) {
+  ~[VAR_string@1]~ = "";
+}
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread1.Start();
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+if (counter == 2) {
+  ~[VAR_string@1]~ = stringCopy;
+}
+
+~template end~
+
+~template atomic_integer_restore_negative start~
+
+int counter = 0;
+string stringCopy = ~[VAR_string@1]~;
+
+if (counter == 0) {
+  ~[VAR_string@1]~ = "";
+}
+
+Thread thread1 = new Thread(() => Interlocked.Increment(ref counter));
+
+Thread thread2 = new Thread(() => Interlocked.Increment(ref counter));
+
+if (counter == 2) {
+  ~[VAR_string@1]~ = stringCopy;
+}
+
+thread1.Start();
+thread2.Start();
+
+try {
+  thread1.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+try {
+  thread2.Join();
+} catch (ThreadInterruptedException e) {
+}
+
+~template end~
+
+~main body end~

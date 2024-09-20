@@ -1,8 +1,9 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
 ~main body start~
-~helper import sensitivity/field/helpers/StringHolder~
-~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/InstanceInitializer~
-~helper import sensitivity/field/helpers/StringFactory~
 
 ~imports start~
 import java.util.*;
