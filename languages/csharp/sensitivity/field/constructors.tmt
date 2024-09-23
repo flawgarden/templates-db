@@ -21,43 +21,36 @@ using HelperFields;
 
 ~template class_with_string_initialization_positive start~
 StringHolder sh = new StringHolder(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = sh.value;
 ~template end~
 
 ~template class_with_string_initialization_negative start~
 StringHolder sh = new StringHolder();
-~[BODY]~
 ~[VAR_string]~ = sh.value;
 ~template end~
 
 ~template class_with_nested_string_initialization_positive start~
 NestedStringHolder nsh = new NestedStringHolder(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = nsh.getValue();
 ~template end~
 
 ~template class_with_nested_string_initialization_negative start~
 NestedStringHolder nsh = new NestedStringHolder();
-~[BODY]~
 ~[VAR_string]~ = nsh.getValue();
 ~template end~
 
 ~template class_with_array_initialization_by_value_positive start~
 ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[0];
 ~template end~
 
 ~template class_with_array_initialization_by_value_negative start~
 ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[1];
 ~template end~
 
 ~template class_with_array_initialization_by_value_neutral start~
 ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
 ~template end~
 
@@ -65,7 +58,6 @@ ArrayHolder ah = new ArrayHolder(~[VAR_string@1]~);
 string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
 tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[0];
 ~template end~
 
@@ -73,7 +65,6 @@ ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
 string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
 tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[1];
 ~template end~
 
@@ -81,19 +72,16 @@ ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
 string[] tmpArrayUnique42 = ~[MACRO_Empty_string_Array]~;
 tmpArrayUnique42[0] = ~[VAR_string@1]~;
 ArrayHolder ah = new ArrayHolder(tmpArrayUnique42);
-~[BODY]~
 ~[VAR_string@1]~ = ah.values[~[MACRO_Zero_Or_One]~];
 ~template end~
 
 ~template string_factory_positive start~
 StringFactory sf = StringFactory.createInstance(~[VAR_string@1]~);
-~[BODY]~
 ~[VAR_string@1]~ = sf.val;
 ~template end~
 
 ~template string_factory_negative start~
 StringFactory sf = StringFactory.createInstance();
-~[BODY]~
 ~[VAR_string]~ = sf.val;
 ~template end~
 

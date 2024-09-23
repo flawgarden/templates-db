@@ -6,7 +6,6 @@
 
 ~template if_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 if (~[EXPR_bool]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -20,7 +19,6 @@ if (~[EXPR_bool]~) {
 
 ~template if_else_operator_neutral start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 if (~[EXPR_bool]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 } else {
@@ -30,7 +28,6 @@ if (~[EXPR_bool]~) {
 
 ~template if_else_if_operator_neutral start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 if (~[EXPR_bool@1]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 } else if (~[EXPR_bool@1]~) {
@@ -42,7 +39,6 @@ if (~[EXPR_bool@1]~) {
 
 ~template if_operator_with_var_in_condition_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 bool conditionMet = false;
 if (~[EXPR_bool]~) {
     conditionMet = true;
