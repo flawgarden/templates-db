@@ -6,7 +6,6 @@
 
 ~template while_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 while (~[EXPR_bool]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 }

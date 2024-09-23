@@ -11,7 +11,6 @@ using HelperExceptions;
 
 ~template try_cath_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 try {
   throw new Exception1(~[EXPR_string]~);
 } catch (Exception1 e) {
@@ -29,7 +28,6 @@ try {
 
 ~template try_cath_finally_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 try {
   throw new Exception1(~[EXPR_string]~);
 } catch (Exception1 e) {
@@ -41,7 +39,6 @@ try {
 
 ~template try_cath_finally_negative start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 try {
   throw new Exception1(~[EXPR_string]~);
 } catch (Exception1 e) {
@@ -53,7 +50,6 @@ try {
 
 ~template try_multi_cath_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 try {
   if (~[EXPR_bool]~) {
      throw new Exception1(~[EXPR_string]~);
@@ -69,7 +65,6 @@ try {
 
 ~template try_multi_cath_negative start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 try {
   if (~[EXPR_bool]~) {
      throw new Exception1(~[EXPR_string]~);

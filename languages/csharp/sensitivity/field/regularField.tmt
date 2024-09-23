@@ -8,14 +8,12 @@ using HelperFields;
 ~template class_with_string_field_positive start~
 StringHolder sh = new StringHolder();
 sh.value = ~[VAR_string@1]~;
-~[BODY]~
 ~[VAR_string@1]~ = sh.value;
 ~template end~
 
 ~template class_with_string_field_negative start~
 StringHolder sh = new StringHolder();
 sh.value = "";
-~[BODY]~
 ~[VAR_string]~ = sh.value;
 ~template end~
 

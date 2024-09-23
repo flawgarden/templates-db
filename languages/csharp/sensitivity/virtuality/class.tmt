@@ -8,37 +8,31 @@ using HelperClasses;
 
 ~template derived_binary_op1_positive start~
 BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, "");
 ~template end~
 
 ~template derived_binary_op1_negative start~
 BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.VirtualCall("", ~[VAR_string@1]~);
 ~template end~
 
 ~template derived_binary_op2_positive start~
 BaseBinaryOpClass a12341 = new DerivedBinaryOpClass2();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.VirtualCall("", ~[VAR_string@1]~);
 ~template end~
 
 ~template derived_binary_op2_negative start~
 BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, "");
 ~template end~
 
 ~template base_binary_op_positive start~
 BaseBinaryOpClass a12341 = (~[EXPR_bool]~) ? new DerivedBinaryOpClass1() : new DerivedBinaryOpClass2();
-~[BODY]~
 ~[VAR_string]~ = a12341.VirtualCall("", "");
 ~template end~
 
 ~template base_binary_op_negative start~
 BaseBinaryOpClass a12341 = new BaseBinaryOpClass();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, ~[VAR_string@1]~);
 ~template end~
 

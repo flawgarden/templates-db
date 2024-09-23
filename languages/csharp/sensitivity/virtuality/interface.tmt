@@ -8,37 +8,31 @@ using HelperClasses;
 
 ~template impl_binary_op_interface_class1_positive start~
 BinaryOpInterface a12341 = new ImplBinaryOpInterfaceClass1();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "");
 ~template end~
 
 ~template impl_binary_op_interface_class1_negative start~
 BinaryOpInterface a12341 = new ImplBinaryOpInterfaceClass1();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~);
 ~template end~
 
 ~template impl_binary_op_interface_class2_positive start~
 BinaryOpInterface a12341 = new ImplBinaryOpInterfaceClass2();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~);
 ~template end~
 
 ~template impl_binary_op_interface_class2_negative start~
 BinaryOpInterface a12341 = new ImplBinaryOpInterfaceClass2();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "");
 ~template end~
 
 ~template base_binary_op_interface_positive start~
 BinaryOpInterface a12341 = (~[EXPR_bool]~) ? new ImplBinaryOpInterfaceClass1() : new ImplBinaryOpInterfaceClass2();
-~[BODY]~
 ~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, ~[VAR_string@1]~);
 ~template end~
 
 ~template base_binary_op_interface_negative start~
 BinaryOpInterface a12341 = (~[EXPR_bool]~) ? new ImplBinaryOpInterfaceClass1() : new ImplBinaryOpInterfaceClass2();
-~[BODY]~
 ~[VAR_string]~ = a12341.InterfaceCall("", "");
 ~template end~
 
