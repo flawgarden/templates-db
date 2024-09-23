@@ -444,7 +444,7 @@ class Parser:
 
         def tmt_rglob(p: Path, pattern: str) -> List[Path]:
             result = []
-            for extension in [".tmt", ".todo", ".unsupported"]:
+            for extension in [".tmt", ".unsupported"]:
                 result.extend(p.rglob(pattern + extension))
             return result
 
