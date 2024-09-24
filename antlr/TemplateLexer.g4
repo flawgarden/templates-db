@@ -106,17 +106,23 @@ INNER_MACROS_OR_HOLE_OPEN
     : '~' -> pushMode(TemplateLanguage), type(TILDA)
     ;
 
-REF_MARKER     : '@';
-UNDERSCORE     : '_';
 HOLE_TYPE
     : 'TYPE' -> type(TYPE)
     ;
 
-NUM
-    : [0-9]+
+UNDERSCORE
+    : '_'
+    ;
+
+REF_MARKER
+    : '@' -> pushMode(Reference)
     ;
 
 mode Macro;
+
+REF_MARKER_MACRO
+    : '@' -> pushMode(Reference), type(REF_MARKER)
+    ;
 
 MACROS_IDENTIFIER
     : (~[~\n\r[\]@ ])+ -> type(IDENTIFIER)
@@ -124,4 +130,10 @@ MACROS_IDENTIFIER
 
 MACROS_CLOSE_BRACKET
     : ']' -> popMode, popMode, type(CLOSE_BRACKET)
+    ;
+
+mode Reference;
+
+NUM
+    : [0-9]+ -> popMode
     ;
