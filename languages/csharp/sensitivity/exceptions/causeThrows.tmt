@@ -14,7 +14,6 @@ using HelperExceptions;
 ~template arithmetic_exception_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
 try {
-~[BODY]~
     int a = 42;
     a = ~[MACRO_DivideByZero]~;
 } catch (DivideByZeroException e) {
@@ -24,7 +23,6 @@ try {
 
 ~template arithmetic_exception_negative start~
 try {
-~[BODY]~
     int a = -42;
     a = ~[MACRO_DivideByZero]~;
 } catch (DivideByZeroException e) {
@@ -32,31 +30,9 @@ try {
 }
 ~template end~
 
-~template array_store_exception_positive start~
-string tmpUnique42 = ~[VAR_string@1]~;
-try {
-~[BODY]~
-    object[] x = new string[3];
-    x[0] = 0;
-} catch (ArrayTypeMismatchException e) {
-    ~[VAR_string@1]~ = tmpUnique42;
-}
-~template end~
-
-~template array_store_exception_negative start~
-try {
-~[BODY]~
-    object[] x = new string[3];
-    x[0] = 0;
-} catch (ArrayTypeMismatchException e) {
-    ~[VAR_string]~ = "";
-}
-~template end~
-
 ~template null_pointer_exception_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
 try {
-~[BODY]~
     int? a = null;
     a = a + a;
 } catch (NullReferenceException e) {
@@ -66,7 +42,6 @@ try {
 
 ~template null_pointer_exception_negative start~
 try {
-~[BODY]~
     int? a = null;
     a = a + a;
 } catch (NullReferenceException e) {

@@ -1,0 +1,18 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template while_operator_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+while ~[EXPR_bool]~:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template while_operator_negative start~
+while ~[EXPR_bool]~:
+    ~[VAR_str]~ = ""
+~template end~
+
+~main body end~

@@ -1,0 +1,141 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_str_Array]~ -> [~[EXPR_str]~]
+~[MACRO_str_Array]~ -> [~[EXPR_str]~, ~[EXPR_str]~]
+~[MACRO_str_Array]~ -> [~[EXPR_str]~, ~[EXPR_str]~, ~[EXPR_str]~]
+~extensions end~
+
+~main body start~
+
+~template for_operator_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~):
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_negative start~
+for i in range(~[EXPR_int]~):
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_reverse_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~, -1, -1):
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_reverse_negative start~
+for i in range(~[EXPR_int]~, -1, -1):
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_string_array_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+strArray = ~[MACRO_str_Array]~
+for i in range(len(strArray)):
+    if strArray[i] == strArray[i + 1]:
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_string_array_negative start~
+strArray = ~[MACRO_str_Array]~
+for i in range(len(strArray)):
+    if strArray[i] == strArray[i + 1]:
+        ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_continue_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~):
+    if ~[EXPR_Boolean]~:
+        continue
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_continue_negative start~
+for i in range(~[EXPR_int]~):
+    if ~[EXPR_Boolean]~:
+        continue
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_break_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~):
+    if ~[EXPR_Boolean]~:
+        break
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_break_negative start~
+for i in range(~[EXPR_int]~):
+    if ~[EXPR_Boolean]~:
+        break
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_nested_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~):
+    for j in range(~[EXPR_int]~):
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_nested_negative start~
+for i in range(~[EXPR_int]~):
+    for j in range(~[EXPR_int]~):
+        ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_change_index_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(0, ~[EXPR_int]~, ~[EXPR_int]~):
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_change_index_negative start~
+for i in range(0, ~[EXPR_int]~, ~[EXPR_int]~):
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_non_zero_init_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for i in range(~[EXPR_int]~, ~[EXPR_int]~):
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_non_zero_init_negative start~
+for i in range(~[EXPR_int]~, ~[EXPR_int]~):
+    ~[VAR_str]~ = ""
+~template end~
+
+~template for_operator_strcpy_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+~[VAR_str@1]~ = ""
+for i in range(len(tmpUnique42)):
+    c = tmpUnique42[i]
+    ~[VAR_str@1]~ = ~[VAR_str@1]~ + c
+~template end~
+
+~template for_operator_strcpy_negative start~
+tmpUnique42 = ""
+for i in range(len(~[VAR_str@1]~)):
+    c = ~[VAR_str@1]~[i]
+    tmpUnique42 = tmpUnique42 + c
+    if i + 1 == len(~[VAR_str@1]~):
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template for_operator_collection_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+for el in ~[VAR_Iterable\[~[TYPE]~\]]~:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template for_operator_collection_negative start~
+for el in ~[VAR_Iterable\[~[TYPE]~\]]~:
+    ~[VAR_str]~ = ""
+~template end~
+
+~main body end~

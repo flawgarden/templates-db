@@ -1,0 +1,7 @@
+~[EXPR_bool]~ -> ~[EXPR_bool]~ and ~[EXPR_bool]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ and ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ and not ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool]~ or ~[EXPR_bool]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ or ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ or not ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> (~[EXPR_bool]~) and (~[EXPR_bool]~)

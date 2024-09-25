@@ -10,13 +10,11 @@
 
 ~template assignment_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 ~[VAR_string@1]~ = tmpUnique42;
 ~template end~
 
 ~template assignment_negative start~
 string tmpUnique42 = "";
-~[BODY]~
 ~[VAR_string]~ = tmpUnique42;
 ~template end~
 
@@ -26,7 +24,6 @@ Func<string> lazyValue;
     string uniquePampam = ~[VAR_string@1]~;
     lazyValue = () => uniquePampam;
 }
-~[BODY]~
 ~[VAR_string@1]~ = lazyValue();
 ~template end~
 

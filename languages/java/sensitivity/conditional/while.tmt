@@ -23,18 +23,4 @@ while (~[EXPR_Boolean]~) {
 }
 ~template end~
 
-~template do_while_operator_positive start~
-String tmpUnique42 = ~[VAR_String@1]~;
-~[BODY]~
-do {
-    ~[VAR_String@1]~ = tmpUnique42;
-} while (~[EXPR_Boolean]~);
-~template end~
-
-~template do_while_operator_negative start~
-do {
-    ~[VAR_String]~ = "";
-} while (~[EXPR_Boolean]~);
-~template end~
-
 ~main body end~

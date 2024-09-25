@@ -6,7 +6,6 @@
 
 ~template while_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 while (~[EXPR_bool]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -16,20 +15,6 @@ while (~[EXPR_bool]~) {
 while (~[EXPR_bool]~) {
     ~[VAR_string]~ = "";
 }
-~template end~
-
-~template do_while_operator_positive start~
-string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
-do {
-    ~[VAR_string@1]~ = tmpUnique42;
-} while (~[EXPR_bool]~);
-~template end~
-
-~template do_while_operator_negative start~
-do {
-    ~[VAR_string]~ = "";
-} while (~[EXPR_bool]~);
 ~template end~
 
 ~main body end~

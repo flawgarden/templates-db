@@ -8,13 +8,11 @@ using HelperFields;
 ~template class_with_static_string_field_positive start~
 StaticFieldHolder.DEFAULT_VALUE = ~[VAR_string@1]~;
 StaticFieldHolder sfh = new StaticFieldHolder();
-~[BODY]~
 ~[VAR_string@1]~ = sfh.value;
 ~template end~
 
 ~template class_with_static_string_field_negative start~
 StaticFieldHolder sfh = new StaticFieldHolder();
-~[BODY]~
 ~[VAR_string]~ = sfh.value;
 ~template end~
 

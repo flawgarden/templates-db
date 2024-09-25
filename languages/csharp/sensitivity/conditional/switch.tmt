@@ -6,7 +6,6 @@
 
 ~template switch_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 switch (~[VAR_string@1]~) {
     case ~[CONST_string]~:
         break;
@@ -21,7 +20,6 @@ switch (~[VAR_string@1]~) {
 
 ~template switch_operator_negative start~
 string tmpUnique42 = "";
-~[BODY]~
 switch (~[VAR_string@1]~) {
     case "":
         break;
@@ -36,7 +34,6 @@ switch (~[VAR_string@1]~) {
 
 ~template switch_operator_any_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 switch (~[MACRO_Any_string]~) {
     case ~[CONST_string]~:
         ~[VAR_string@1]~ = ~[VAR_string@1]~;
@@ -49,7 +46,6 @@ switch (~[MACRO_Any_string]~) {
 
 ~template switch_operator_any_negative start~
 string tmpUnique42 = "";
-~[BODY]~
 switch (~[MACRO_Any_string]~) {
     case ~[CONST_string]~:
         ~[VAR_string@1]~ = "";

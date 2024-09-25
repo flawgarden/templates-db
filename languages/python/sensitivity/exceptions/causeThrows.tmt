@@ -1,0 +1,46 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/exceptions/helpers/Exceptions~
+
+~template arithmetic_exception_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+try:
+    ~[BODY]~
+    a = 1 / 0
+except ZeroDivisionError as e:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template arithmetic_exception_negative start~
+try:
+    ~[BODY]~
+    a = 1 / 0
+except ZeroDivisionError as e:
+    ~[VAR_str]~ = ""
+~template end~
+
+~template null_pointer_exception_positive start~
+def get_none() -> Any:
+    return None
+tmpUnique42 = ~[VAR_str@1]~
+try:
+    a = get_none()
+    a = a + a
+except TypeError as e:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template null_pointer_exception_negative start~
+def get_none() -> Any:
+    return None
+try:
+    a = get_none()
+    a = a + a
+except TypeError as e:
+    ~[VAR_str]~ = ""
+~template end~
+
+~main body end~

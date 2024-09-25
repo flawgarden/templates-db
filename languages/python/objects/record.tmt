@@ -1,0 +1,21 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/record/helpers/Record~
+
+
+~template create_simple_record_empty start~
+recordEmpty = SimpleRecord("")
+~template end~
+
+~template create_simple_record start~
+record = SimpleRecord(~[EXPR_str]~)
+~template end~
+
+~template create_nested_record start~
+nested = NestedRecord(SimpleRecord(~[EXPR_str]~), SimpleRecord(~[EXPR_str]~))
+~template end~
+
+~main body end~

@@ -99,22 +99,4 @@ StringFactory sf = StringFactory.createInstance();
 ~[VAR_String]~ = sf.val;
 ~template end~
 
-~template constructor_chains_positive start~
-ConstructorChains cc = new ConstructorChains(true, ~[VAR_String@1]~);
-~[BODY]~
-~[VAR_String@1]~ = cc.getText(true);
-~template end~
-
-~template constructor_chains_negative start~
-ConstructorChains cc = new ConstructorChains(false, ~[VAR_String@1]~);
-~[BODY]~
-~[VAR_String@1]~ = cc.getText(true);
-~template end~
-
-~template constructor_chains_neutral start~
-ConstructorChains cc = new ConstructorChains(~[EXPR_Boolean]~, ~[VAR_String@1]~);
-~[BODY]~
-~[VAR_String@1]~ = cc.getText(~[EXPR_Boolean]~);
-~template end~
-
 ~main body end~

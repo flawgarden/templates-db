@@ -1,0 +1,27 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/field/helpers/ConstructorChains~
+
+~imports start~
+using HelperFields;
+~imports end~
+
+~template constructor_chains_positive start~
+ConstructorChains cc = new ConstructorChains(true, ~[VAR_string@1]~);
+~[VAR_string@1]~ = cc.getText(true);
+~template end~
+
+~template constructor_chains_negative start~
+ConstructorChains cc = new ConstructorChains(false, ~[VAR_string@1]~);
+~[VAR_string@1]~ = cc.getText(true);
+~template end~
+
+~template constructor_chains_neutral start~
+ConstructorChains cc = new ConstructorChains(~[EXPR_bool]~, ~[VAR_string@1]~);
+~[VAR_string@1]~ = cc.getText(~[EXPR_bool]~);
+~template end~
+
+~main body end~

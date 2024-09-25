@@ -1,0 +1,29 @@
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ""
+~[EXPR_bool]~ -> ~[VAR_str@1]~ == "" and ~[VAR_str@1]~.find(~[EXPR_str]~) != -1
+~[EXPR_bool]~ -> ~[EXPR_str@1]~ is not None and ~[EXPR_str@1]~.find(~[EXPR_str]~) != -1
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ~[EXPR_str]~
+~[EXPR_bool]~ -> ~[EXPR_str]~.casefold() == ~[EXPR_str]~.casefold()
+~[EXPR_bool]~ -> ~[EXPR_str@1]~ is not None and ~[EXPR_str@1]~[~[CONST_int]~] == ~[CONST_str]~
+~[EXPR_bool]~ -> ~[EXPR_str]~.endswith(~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_str]~.startswith(~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_str]~.startswith(~[EXPR_str]~, start=~[EXPR_int]~, end=~[EXPR_int]~)
+
+~[EXPR_str]~ -> ~[EXPR_str]~.replace(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_str]~ -> ~[EXPR_str]~.replace('/', '.')
+~[EXPR_str]~ -> ""
+~[EXPR_str]~ -> ~[EXPR_str]~ + ~[EXPR_str]~
+~[EXPR_str]~ -> ~[EXPR_str]~[~[EXPR_int]~:]
+~[EXPR_str]~ -> ~[EXPR_str]~[~[EXPR_int]~:~[EXPR_int]~]
+~[EXPR_str]~ -> ~[EXPR_str]~.lower()
+~[EXPR_str]~ -> ~[EXPR_str]~.upper()
+~[EXPR_str]~ -> ~[EXPR_str]~.strip()
+
+~[EXPR_int]~ -> len(~[EXPR_str]~)
+~[EXPR_int]~ -> ~[EXPR_str]~.find(~[EXPR_str]~)
+~[EXPR_int]~ -> ~[EXPR_str]~.find(~[EXPR_str]~, start=~[EXPR_int]~, end=~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_str]~.rfind(~[EXPR_str]~)
+~[EXPR_int]~ -> ~[EXPR_str]~.rfind(~[EXPR_str]~, start=~[EXPR_int]~, end=~[EXPR_int]~)
+
+~[MACRO_Any_str]~ -> ~[EXPR_str]~
+~[MACRO_Any_str]~ -> ~[VAR_str]~
+~[MACRO_Any_str]~ -> ~[CONST_str]~

@@ -133,7 +133,7 @@ class DiagnosticsTest:
     class LanguageStructuralEqualityTest:
 
         @staticmethod
-        def test_missed_template_file_cause_error():
+        def test_missed_template_file_cause_warning():
             template_file = DefaultValues.get_template_file()
             first_project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -143,10 +143,10 @@ class DiagnosticsTest:
 
             diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
 
-            assert has_error(diagnostics) and not has_warning(diagnostics)
+            assert not has_error(diagnostics) and has_warning(diagnostics)
 
         @staticmethod
-        def test_missed_helper_file_cause_error():
+        def test_missed_helper_file_cause_warning():
             helper_file = DefaultValues.get_helper_file()
             first_project = ProjectBuilder() \
                 .with_helper_file(helper_file) \
@@ -156,33 +156,15 @@ class DiagnosticsTest:
 
             diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
 
-            assert has_error(diagnostics) and not has_warning(diagnostics)
+            assert not has_error(diagnostics) and has_warning(diagnostics)
 
         @staticmethod
-        def test_missed_extension_file_cause_error():
+        def test_missed_extension_file_cause_warning():
             extension_file = DefaultValues.get_extension_file()
             first_project = ProjectBuilder() \
                 .with_extension_file(extension_file) \
                 .get_project("first_lang")
             second_project = ProjectBuilder() \
-                .get_project("second_lang")
-
-            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
-
-            assert has_error(diagnostics) and not has_warning(diagnostics)
-
-        @staticmethod
-        def test_same_todo_file_cause_warning():
-            template_file = DefaultValues.get_template_file()
-            template_file.name = "some_file"
-            todo_template_file = DefaultValues.get_template_file()
-            todo_template_file.name = "some_file"
-            todo_template_file.kind = TmtFileKind.TODO
-            first_project = ProjectBuilder() \
-                .with_template_file(template_file) \
-                .get_project("first_lang")
-            second_project = ProjectBuilder() \
-                .with_template_file(todo_template_file) \
                 .get_project("second_lang")
 
             diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])

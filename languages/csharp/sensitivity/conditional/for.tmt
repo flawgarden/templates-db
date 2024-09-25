@@ -10,7 +10,6 @@
 
 ~template for_operator_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = 0; i < ~[EXPR_int]~; i++) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -24,7 +23,6 @@ for (int i = 0; i < ~[EXPR_int]~; i++) {
 
 ~template for_operator_reverse_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = ~[EXPR_int]~; i >= 0; i--) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -38,7 +36,6 @@ for (int i = ~[EXPR_int]~; i >= 0; i--) {
 
 ~template for_operator_string_array_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 string[] stringArray = ~[MACRO_string_Array]~;
 for (int i = 0; i < stringArray.Length; i++) {
     if (stringArray[i] == stringArray[i + 1]) {
@@ -58,7 +55,6 @@ for (int i = 0; i < stringArray.Length; i++) {
 
 ~template for_operator_continue_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = 0; i < ~[EXPR_int]~; i++) {
     if (~[EXPR_bool]~) {
         continue;
@@ -78,7 +74,6 @@ for (int i = 0; i < ~[EXPR_int]~; i++) {
 
 ~template for_operator_break_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = 0; i < ~[EXPR_int]~; i++) {
     if (~[EXPR_bool]~) {
         break;
@@ -98,7 +93,6 @@ for (int i = 0; i < ~[EXPR_int]~; i++) {
 
 ~template for_operator_nested_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = 0; i < ~[EXPR_int]~; i++) {
     for (int j = 0; j < ~[EXPR_int]~; j++) {
         ~[VAR_string@1]~ = tmpUnique42;
@@ -116,7 +110,6 @@ for (int i = 0; i < ~[EXPR_int]~; i++) {
 
 ~template for_operator_change_index_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -130,7 +123,6 @@ for (int i = 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~) {
 
 ~template for_operator_non_zero_init_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 for (int i = ~[EXPR_int]~; i < ~[EXPR_int]~; i++) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -164,7 +156,6 @@ for (int i = 0; i < ~[VAR_string@1]~.Length; i++) {
 
 ~template for_operator_collection_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-~[BODY]~
 foreach (var el in ~[VAR_IEnumerable<~[TYPE]~>]~) {
     ~[VAR_string@1]~ = tmpUnique42;
 }

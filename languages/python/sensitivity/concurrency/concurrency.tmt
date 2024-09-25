@@ -1,0 +1,108 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/concurrency/helpers/concurrency~
+
+~imports start~
+from threading import Thread
+~imports end~
+
+~template thread_set_negative start~
+w = Wrapper(~[VAR_str@1]~)
+task = SettingTask(w, "")
+task.start()
+try:
+    task.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template thread_set_positive start~
+w = Wrapper("")
+task = SettingTask(w, ~[VAR_str@1]~)
+task.start()
+try:
+    task.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template thread_set_nostart_positive start~
+w = Wrapper(~[VAR_str@1]~)
+task = SettingTask(w, "")
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template two_set_threads_in_sequence_positive start~
+w = Wrapper(~[VAR_str@1]~)
+task1 = SettingTask(w, "")
+task2 = SettingTask(w, ~[VAR_str@1]~)
+task1.start()
+try:
+    task1.join()
+except RuntimeError:
+    pass
+task2.start()
+try:
+    task2.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template two_set_threads_in_sequence_negative start~
+w = Wrapper(~[VAR_str@1]~)
+task1 = SettingTask(w, "")
+task2 = SettingTask(w, ~[VAR_str@1]~)
+task2.start();
+try:
+    task2.join()
+except RuntimeError:
+    pass
+task2.start()
+try:
+    task1.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template two_switching_tasks_concurrent_positive start~
+w = Wrapper(~[VAR_str@1]~)
+task1 = SwitchingTask(w, ~[VAR_str@1]~)
+task2 = SwitchingTask(w, ~[VAR_str@1]~)
+task1.start()
+task2.start()
+try:
+    task1.join()
+except RuntimeError:
+    pass
+try:
+    task2.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = w.i
+~template end~
+
+~template null_and_restore_condvar_positive start~
+a = NullAndRestore(~[VAR_str@1]~)
+thread1 = Thread(target=(lambda: a.null_method()))
+thread1 = Thread(target=(lambda: a.restore()))
+thread1.start()
+thread2.start()
+try:
+    thread1.join()
+except RuntimeError:
+    pass
+try:
+    thread2.join()
+except RuntimeError:
+    pass
+~[VAR_str@1]~ = a.get()
+~template end~
+
+~main body end~

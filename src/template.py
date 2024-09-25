@@ -6,8 +6,7 @@ from typing import List, Tuple, Callable
 
 class TmtFileKind(Enum):
     UNSUPPORTED = 0
-    TODO = 1
-    TMT = 2
+    TMT = 1
 
 
 @dataclass

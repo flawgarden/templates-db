@@ -1,0 +1,3 @@
+~[EXPR_bool]~ -> ~[EXPR_Any]~ == ~[EXPR_Any]~
+~[EXPR_bool]~ -> ~[EXPR_Any@1]~ == ~[EXPR_Any@1]~
+~[EXPR_bool]~ -> ~[EXPR_Any]~ is None
