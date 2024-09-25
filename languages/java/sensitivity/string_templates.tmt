@@ -1,4 +1,3 @@
-#Required java version: 21
 ~extensions start~
 ~extensions import *~
 ~extensions end~
