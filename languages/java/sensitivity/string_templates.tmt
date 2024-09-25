@@ -1,0 +1,19 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template simple_string_templates_positive start~
+~[VAR_String@1]~ = STR."PREFIX + \{~[VAR_String@1]~}!";
+~template end~
+
+~template simple_string_templates_negative start~
+~[VAR_String@1]~ = STR."fixed_string";
+~template end~
+
+~main body end~
