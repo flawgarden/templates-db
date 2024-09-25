@@ -19,8 +19,6 @@ class Wrapper(Generic[T]):
 ~class SettingTask start~
 
 from threading import Thread
-from Wrapper import Wrapper
-
 
 class SettingTask(Thread):
     _w: Wrapper[str]
@@ -39,10 +37,8 @@ class SettingTask(Thread):
 ~class SwitchingTask start~
 
 from threading import Thread
-from Wrapper import Wrapper
 
-
-class SettingTask(Thread):
+class SwitchingTask(Thread):
     _w: Wrapper[str]
     _s: str
 
@@ -93,7 +89,7 @@ class NullAndRestore:
         self._s = self._original
         self._lock.release()
 
-    def get(self) -> str:
+    def get(self) -> str | None:
         ret = None
         self._lock.acquire()
         ret = self._s

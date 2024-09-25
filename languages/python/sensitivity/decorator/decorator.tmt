@@ -1,0 +1,110 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+~main body start~
+
+~helper functions start~
+
+~function wrapperExample start~
+def wrapperExample(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+~function end~
+
+~function wrapperExample2 start~
+def wrapperExample2(func):
+    def wrapper(*args, **kwargs):
+        args = ("fixed_string",) + args[1:]
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+~function end~
+
+~function wrapperExampleMemoization start~
+def wrapperExampleMemoization(func):
+    cache = ["result"]
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        cache.append(result)
+        return cache[-1]
+    return wrapper
+~function end~
+
+~function wrapperExampleMemoizationNegative start~
+def wrapperExampleMemoizationNegative(func):
+    cache = ["result"]
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        cache.append(result)
+        return cache[0]
+    return wrapper
+~function end~
+
+~function example_function start~
+@wrapperExample
+def example_function(x, y):
+    return x + y
+~function end~
+
+~function example_function_memo_positive start~
+@wrapperExampleMemoization
+def example_function_memo_positive(x, y):
+    return x + y
+~function end~
+
+~function example_function_memo_negative start~
+@wrapperExampleMemoizationNegative
+def example_function_memo_negative(x, y):
+    return x + y
+~function end~
+
+~function example_function_2 start~
+@wrapperExample2
+def example_function_2(x, y):
+    return x + y
+~function end~
+
+~function example_function_with_class_wr start~
+@ClassWrapper
+def example_function_with_class_wr(x, y):
+    return x + y
+~function end~
+
+~function example_function_with_empty_class_wr start~
+@ClassWrapperEmpty
+def example_function_with_empty_class_wr(x, y):
+    return x + y
+~function end~
+
+~helper functions end~
+
+~helper import sensitivity/decorator/helpers/ClassWrappers~
+
+~template simple_function_decorator_positive start~
+~[VAR_~[TYPE@1]~@1]~ = example_function(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+~template simple_function_decorator_negative start~
+~[VAR_~[TYPE@1]~@1]~ = example_function_2(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+~template simple_class_decorator_positive start~
+~[VAR_~[TYPE@1]~@1]~ = example_function_with_class_wr(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+~template simple_class_decorator_negative start~
+~[VAR_~[TYPE@1]~@1]~ = example_function_with_empty_class_wr(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+~template function_decorator_memoization_positive start~
+~[VAR_~[TYPE@1]~@1]~ = example_function_memo_positive(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+~template function_decorator_memoization_negative start~
+~[VAR_~[TYPE@1]~@1]~ = example_function_memo_negative(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~template end~
+
+
+~main body end~

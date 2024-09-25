@@ -8,7 +8,7 @@
 
 ~function get_first_string start~
 def getFirstString(*lines: str) -> str:
-    return getStringWithIndex(0, lines)
+    return getStringWithIndex(0, *lines)
 ~function end~
 
 ~function get_string_with_index start~
@@ -22,8 +22,8 @@ def getFirstStringFromArray(*lines: str) -> str:
 ~function end~
 
 ~function varargs_with_generics start~
-T = TypeVar('T')
-def varargsWithGenerics(*elements: T) -> T:
+TYPEVAR = TypeVar('TYPEVAR')
+def varargsWithGenerics(*elements: TYPEVAR) -> TYPEVAR:
     return elements[0]
 ~function end~
 

@@ -3,14 +3,14 @@
 
 
 ~template class_with_static_string_field_positive start~
-StaticFieldHolder.default_value= ~[VAR_String@1]~
+StaticFieldHolder.default_value= ~[VAR_str@1]~
 sfh = StaticFieldHolder()
-~[VAR_String@1]~ = sfh.value
+~[VAR_str@1]~ = sfh.value
 ~template end~
 
 ~template class_with_static_string_field_negative start~
 sfh = StaticFieldHolder()
-~[VAR_String]~ = sfh.value
+~[VAR_str]~ = sfh.value
 ~template end~
 
 ~main body end~

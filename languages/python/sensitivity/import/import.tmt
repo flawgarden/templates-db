@@ -1,0 +1,55 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+~main body start~
+
+~helper import sensitivity/import/helpers/Imports~
+
+
+~template import_string_module_positive start~
+s123 = SimpleImport()
+~[VAR_str@1]~ = s123.func(~[VAR_str@1]~)
+~template end~
+
+~template import_string_module_negative start~
+s123 = SimpleImport()
+~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~template end~
+
+~template import_string_module_alias_positive start~
+s123 = SimpleImportAlias()
+~[VAR_str@1]~ = s123.func(~[VAR_str@1]~)
+~template end~
+
+~template import_string_module_alias_negative start~
+s123 = SimpleImportAlias()
+~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~template end~
+
+~template import_string_module_from_positive start~
+s123 = SimpleImportFrom()
+~[VAR_str@1]~ = s123.func(~[VAR_str@1]~)
+~template end~
+
+~template import_string_module_from_negative start~
+s123 = SimpleImportFrom()
+~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~template end~
+
+~template import_string_module_from_alias_positive start~
+s123 = SimpleImportFromAs()
+~[VAR_str@1]~ = s123.func(~[VAR_str@1]~)
+~template end~
+
+~template import_string_module_from_alias_negative start~
+s123 = SimpleImportFromAs()
+~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~template end~
+
+~template import_string_not_existing_module_positive start~
+s123 = ImportNotExistingModule()
+~[VAR_str@1]~ = s123.func(~[VAR_str@1]~)
+~template end~
+
+
+~main body end~
