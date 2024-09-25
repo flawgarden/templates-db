@@ -1,5 +1,5 @@
 ~main body start~
-~helper import sensitivity/helpers/Record~
+~helper import sensitivity/record/helpers/Record~
 
 ~imports start~
 import java.util.*;
