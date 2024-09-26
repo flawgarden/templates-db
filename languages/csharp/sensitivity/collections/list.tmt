@@ -11,10 +11,6 @@
 
 ~main body start~
 
-~imports start~
-using System.Collections.Generic;
-~imports end~
-
 ~template list_set_positive start~
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_VAR_ToList]~
@@ -30,7 +26,7 @@ using System.Collections.Generic;
 ~template list_add_get_at_zero_index_empty_negative start~
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_VAR_ToList]~
-list787234.add(0, "");
+~[DEFINE_ListName]~[0] = ~[CONST_~[TYPE@1]~]~;
 ~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0];
 ~template end~
 
