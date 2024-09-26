@@ -14,16 +14,12 @@
 
 ~main body start~
 
-~imports start~
-using System.Collections.Generic;
-~imports end~
-
 ~template set_add_simple_positive start~
 ~[DEFINE_Create_Set]~
 ~[DEFINE_Add_Fixed_VAR_ToSet]~
 var it = ~[DEFINE_SetName]~.GetEnumerator();
 it.MoveNext();
-~[VAR_~[TYPE@1]~@1]~ = it.Current();
+~[VAR_~[TYPE@1]~@1]~ = it.Current;
 ~template end~
 
 ~template set_add_simple_negative start~
@@ -31,7 +27,7 @@ it.MoveNext();
 ~[DEFINE_Add_Fixed_CONST_ToSet]~
 var it = ~[DEFINE_SetName]~.GetEnumerator();
 it.MoveNext();
-~[VAR_~[TYPE@1]~@1]~ = it.Current();
+~[VAR_~[TYPE@1]~@1]~ = it.Current;
 ~template end~
 
 ~template set_remove_simple_positive start~
@@ -41,7 +37,7 @@ it.MoveNext();
 ~[DEFINE_SetName]~.Remove(~[EXPR_~[TYPE@1]~@1]~);
 var it = ~[DEFINE_SetName]~.GetEnumerator();
 it.MoveNext();
-~[VAR_~[TYPE@1]~@1]~ = it.Current();
+~[VAR_~[TYPE@1]~@1]~ = it.Current;
 ~template end~
 
 ~template set_remove_simple_negative start~
@@ -51,7 +47,7 @@ it.MoveNext();
 ~[DEFINE_SetName]~.Remove(~[VAR_~[TYPE@1]~@1]~);
 var it = ~[DEFINE_SetName]~.GetEnumerator();
 it.MoveNext();
-~[VAR_~[TYPE@1]~@1]~ = it.Current();
+~[VAR_~[TYPE@1]~@1]~ = it.Current;
 ~template end~
 
 ~template set_contains_positive start~

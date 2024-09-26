@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 ~template map_simple_get_1_positive start~
 ~[DEFINE_Create_Map]~
-~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~);
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~;
 ~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~];
 ~template end~
 

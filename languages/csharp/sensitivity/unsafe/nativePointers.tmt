@@ -2,6 +2,7 @@
 
 ~imports start~
 using System.Runtime.InteropServices;
+using System.Text;
 ~imports end~
 
 ~template unmanaged_store_positive start~
@@ -32,7 +33,7 @@ Marshal.FreeHGlobal(tmpBlock42);
 
 ~template unmanaged_copy_negative start~
 byte[] bytes100500 = Encoding.UTF8.GetBytes(~[VAR_string@1]~);
-bytes100500.Clear();
+Array.Clear(bytes100500);
 var length425 = bytes100500.Length;
 IntPtr tmpBlock42 = Marshal.AllocHGlobal(length425);
 Marshal.Copy(bytes100500, 0, tmpBlock42, length425);

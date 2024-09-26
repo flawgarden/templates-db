@@ -7,34 +7,38 @@
 ~helper functions start~
 
 ~function return_first_argument start~
-public static T fst<T>(T a, T b) => a;
+public unsafe static T fst<T>(T a, T b) => a;
 ~function end~
 
 ~function return_second_argument start~
-public static T snd<T>(T a, T b) => b;
+public unsafe static T snd<T>(T a, T b) => b;
 ~function end~
 
 ~function function_applicator_2_args start~
-public T apply<T>(delegate*<T, T, T> func, T a, T b) => func(a, b);
+public unsafe T apply<T>(delegate*<T, T, T> func, T a, T b) => func(a, b);
 ~function end~
 
 ~helper functions end~
 
 ~template pointer_assignment_positive start~
 ~[TYPE@1]~ tmpVar156 = ~[VAR_~[TYPE@1]~@1]~;
-~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~;
-*ptr524 = tmpVar156;
+fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~)
+{
+    *ptr524 = tmpVar156;
+}
 ~template end~
 
 ~template pointer_assignment_negative start~
 ~[TYPE@1]~ tmpVar156 = ~[EXPR_~[TYPE@1]~]~;
-~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~;
-*ptr524 = tmpVar156;
+fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~)
+{
+    *ptr524 = tmpVar156;
+}
 ~template end~
 
 ~template pointer_addition_positive start~
 ~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
-fixed (~[TYPE@1]~* ptr524)
+fixed (~[TYPE@1]~* ptr524 = arr524)
 {
     ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 1);
 }
@@ -42,7 +46,7 @@ fixed (~[TYPE@1]~* ptr524)
 
 ~template pointer_addition_negative start~
 ~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
-fixed (~[TYPE@1]~* ptr524)
+fixed (~[TYPE@1]~* ptr524 = arr524)
 {
     ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 2);
 }
