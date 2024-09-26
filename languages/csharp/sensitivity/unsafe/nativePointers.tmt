@@ -13,7 +13,7 @@ Marshal.FreeHGlobal(tmpBlock42);
 Marshal.FreeHGlobal(tmpBlock24);
 ~template end~
 
-~template unmanaged_store_positive start~
+~template unmanaged_store_negative start~
 IntPtr tmpBlock42 = (IntPtr)Marshal.StringToHGlobalAnsi(~[VAR_string@1]~);
 IntPtr tmpBlock24 = (IntPtr)Marshal.StringToHGlobalAnsi("");
 ~[VAR_string@1]~ = Marshal.PtrToStringAnsi(tmpBlock24);
