@@ -1,0 +1,30 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_Create_Queue]~ -> var ~[DEFINE_QueueName]~ = new Queue<~[TYPE@1]~>();
+
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.Enqueue(~[EXPR_~[TYPE@1]~]~);
+
+~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.Enqueue(~[VAR_~[TYPE@1]~@1]~);
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+~imports end~
+
+~template queue_contains_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[TYPE@1]~ value7845 = ~[CONST_~[TYPE@1]~]~;
+if (~[DEFINE_QueueName]~.Contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
+}
+~[VAR_~[TYPE@1]~@1]~ = value7845;
+~template end~
+
+
+~main body end~
