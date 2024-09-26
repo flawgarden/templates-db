@@ -1,0 +1,71 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ListName]~ -> list787231
+~[DEFINE_StreamName]~ -> stream787231
+~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName]~ = new();
+~[DEFINE_Create_Stream]~ -> IEnumerable<~[TYPE@1]~> ~[DEFINE_StreamName]~ = ~[DEFINE_ListName]~;
+~[DEFINE_Add_Fixed_EXPR_ToList]~ -> ~[DEFINE_ListName]~.Add(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_VAR_ToList]~ -> ~[DEFINE_ListName]~.Add(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_CONST_ToList]~ -> ~[DEFINE_ListName]~.Add(~[CONST_~[TYPE@1]~@1]~);
+~[DEFINE_Add_CONST_ToList]~ -> ~[DEFINE_ListName]~.Add(~[CONST_~[TYPE@1]~]~);
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+~imports end~
+
+~template stream_simple_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_VAR_ToList]~
+~[DEFINE_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.First();
+~template end~
+
+~template stream_simple_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_CONST_ToList]~
+~[DEFINE_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.First();
+~template end~
+
+~template stream_map_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_EXPR_ToList]~
+~[DEFINE_Add_Fixed_CONST_ToList]~
+~[DEFINE_Add_Fixed_VAR_ToList]~
+~[DEFINE_Create_Stream]~
+~[DEFINE_StreamName]~.Select(entry111 => entry111 + ~[CONST_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.First();
+~template end~
+
+~template stream_map_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_VAR_ToList]~
+~[DEFINE_Add_CONST_ToList]~
+~[DEFINE_Add_CONST_ToList]~
+~[DEFINE_Create_Stream]~
+~[DEFINE_StreamName]~.Select(entry111 => ~[CONST_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.First();
+~template end~
+
+~template stream_filter_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_VAR_ToList]~
+~[DEFINE_Create_Stream]~
+~[DEFINE_StreamName]~.Where(entry111 => entry111.Equals(~[VAR_~[TYPE@1]~@1]~));
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.First();
+~template end~
+
+~template stream_reduce_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_Fixed_VAR_ToList]~
+~[DEFINE_Add_CONST_ToList]~
+~[DEFINE_Create_Stream]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_StreamName]~.Aggregate((entry1, entry2) => entry1 + entry2);
+~template end~
+
+~main body end~

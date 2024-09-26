@@ -1,0 +1,78 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ListName]~ -> list787231
+~[DEFINE_Create_List]~ -> var ~[DEFINE_ListName]~ = new List<~[TYPE@1]~>();
+~[DEFINE_Add_VAR_ToList]~ -> ~[DEFINE_ListName]~.Add(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_EXPR_ToList]~ -> ~[DEFINE_ListName]~.Add(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_CONST_ToList]~ -> ~[DEFINE_ListName]~.Add(~[CONST_~[TYPE@1]~@1]~);
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Collections.Generic;
+~imports end~
+
+~template list_set_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0];
+~template end~
+
+~template list_set_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0];
+~template end~
+
+~template list_add_get_at_zero_index_empty_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+list787234.add(0, "");
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0];
+~template end~
+
+~template list_add_and_remove_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_ListName]~.RemoveAt(0);
+~template end~
+
+~template list_to_array_and_get_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~.ToArray()[0];
+~template end~
+
+~template list_to_array_and_get_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~.ToArray()[0];
+~template end~
+
+~template list_filter_neutral start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_Add_EXPR_ToList]~
+~[DEFINE_Add_CONST_ToList]~
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~.Where(s => ~[EXPR_bool]~).First();
+~template end~
+
+~template list_union_positive start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+var list1234 = new List<~[TYPE@1]~>();
+list1234.AddRange(~[DEFINE_ListName]~);
+~[VAR_~[TYPE@1]~@1]~ = list1234[^1];
+~template end~
+
+~template list_clear_start_negative start~
+~[DEFINE_Create_List]~
+~[DEFINE_Add_VAR_ToList]~
+~[DEFINE_ListName]~.Clear();
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_ListName]~[0];
+~template end~
+
+~main body end~
