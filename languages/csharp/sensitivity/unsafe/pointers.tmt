@@ -21,41 +21,39 @@ public T apply<T>(delegate*<T, T, T> func, T a, T b) => func(a, b);
 ~helper functions end~
 
 ~template pointer_assignment_positive start~
-~[MACRO_UnmanagedType@1]~ tmpVar156 = ~[VAR_~[MACRO_UnmanagedType@1]~@1]~;
-~[MACRO_UnmanagedType@1]~* ptr524 = &~[VAR_~[MACRO_UnmanagedType@1]~@1]~;
-~[BODY]~
+~[TYPE@1]~ tmpVar156 = ~[VAR_~[TYPE@1]~@1]~;
+~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~;
 *ptr524 = tmpVar156;
 ~template end~
 
 ~template pointer_assignment_negative start~
-~[MACRO_UnmanagedType@1]~ tmpVar156 = ~[EXPR_~[MACRO_UnmanagedType@1]~]~;
-~[MACRO_UnmanagedType@1]~* ptr524 = &~[VAR_~[MACRO_UnmanagedType@1]~@1]~;
-~[BODY]~
+~[TYPE@1]~ tmpVar156 = ~[EXPR_~[TYPE@1]~]~;
+~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~;
 *ptr524 = tmpVar156;
 ~template end~
 
 ~template pointer_addition_positive start~
-~[MACRO_UnmanagedType@1]~[] arr524 = { ~[EXPR_~[MACRO_UnmanagedType@1]~]~, ~[VAR_~[MACRO_UnmanagedType@1]~@1]~, ~[EXPR_~[MACRO_UnmanagedType@1]~]~ };
-fixed (~[MACRO_UnmanagedType@1]~* ptr524)
+~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
+fixed (~[TYPE@1]~* ptr524)
 {
-    ~[VAR_~[MACRO_UnmanagedType@1]~@1]~ = *(ptr524 + 1);
+    ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 1);
 }
 ~template end~
 
 ~template pointer_addition_negative start~
-~[MACRO_UnmanagedType@1]~[] arr524 = { ~[EXPR_~[MACRO_UnmanagedType@1]~]~, ~[VAR_~[MACRO_UnmanagedType@1]~@1]~, ~[EXPR_~[MACRO_UnmanagedType@1]~]~ };
-fixed (~[MACRO_UnmanagedType@1]~* ptr524)
+~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
+fixed (~[TYPE@1]~* ptr524)
 {
-    ~[VAR_~[MACRO_UnmanagedType@1]~@1]~ = *(ptr524 + 2);
+    ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 2);
 }
 ~template end~
 
 ~template function_pointer_positive start~
-~[VAR_~[TYPE@1]~@1]~ -> apply(&fst, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = apply(&fst, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
 ~template function_pointer_negative start~
-~[VAR_~[TYPE@1]~@1]~ -> apply(&snd, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
+~[VAR_~[TYPE@1]~@1]~ = apply(&snd, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
 ~template end~
 
 ~main body end~
