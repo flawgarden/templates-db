@@ -1,0 +1,52 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_MapName]~ -> map787234
+~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new HashMap<>();
+~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new TreeMap<>();
+~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
+~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[VAR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName]~ = new PriorityQueue<>();
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName]~ = new ArrayDeque<>();
+~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName]~ = new LinkedList<>();
+
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[EXPR_~[TYPE@1]~]~);
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[EXPR_~[TYPE@1]~]~);
+~[DEFINE_Add_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[CONST_~[TYPE@1]~]~);
+~[DEFINE_Add_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[CONST_~[TYPE@1]~]~);
+~[DEFINE_Add_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[VAR_~[TYPE@1]~]~);
+~[DEFINE_Add_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[VAR_~[TYPE@1]~]~);
+
+~[DEFINE_Add_Fixed_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[EXPR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[CONST_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[CONST_~[TYPE@1]~@1]~);
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.*;
+import java.util.concurrent.*;
+~imports end~
+
+~template map_merge_2_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_EXPR_ToMap]~
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[VAR_TYPE@2]~ = ~[DEFINE_MapName]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
+~template end~
+
+~template queue_remove_if_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_QueueName]~.removeIf(item -> item.equals(~[CONST_~[TYPE@1]~@1]~));
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_QueueName]~.poll();
+~template end~
+
+~main body end~
