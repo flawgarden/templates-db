@@ -226,6 +226,15 @@ class Parser:
         code = self._parse_code(ctx.code())
         return template.Template(name, code)
 
+    def _parse_unsupported_template(self, ctx: TemplateParser.UnsupportedTemplateContext) -> template.Template:
+        name = ctx.IDENTIFIER().getText()
+        return template.Template(name, None)
+
+    def _parse_templates(self, ctx: TemplateParser.TemplatesContext) -> list[template.Template]:
+        normal_templates = Parser._map_option(self._parse_template, ctx.template())
+        unsupported_templates = Parser._map_option(self._parse_unsupported_template, ctx.unsupportedTemplate())
+        return normal_templates + unsupported_templates
+
     def _parse_extension_definition(self, ctx: TemplateParser.ExtensionDefinitionContext) -> template.Extension:
         hole = self._parse_hole_body(ctx.holeArrow().holeBody())
         code = self._parse_code_string(ctx.codeString())
@@ -321,7 +330,7 @@ class Parser:
             helper_functions = Parser._map_option(self._parse_helper_function, helper_functions_ctx.helperFunction())
 
         helper_imports = Parser._map_option(self._parse_helper_import, main_class_ctx.helperImport())
-        templates = Parser._map_option(self._parse_template, main_class_ctx.template())
+        templates = self._parse_templates(main_class_ctx.templates())
 
         return template.TemplateFile(
             get_kind(self._current_file),

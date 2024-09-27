@@ -37,6 +37,7 @@ OPEN_BRACKET
     ;
 
 WHITESPACE     : ' ';
+UNSUPPORTED    : 'unsupported';
 CLASS          : 'class';
 EXTENSIONS     : 'extensions';
 HELPER         : 'helper';

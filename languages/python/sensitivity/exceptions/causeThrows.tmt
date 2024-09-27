@@ -5,6 +5,26 @@
 ~main body start~
 ~helper import sensitivity/exceptions/helpers/Exceptions~
 
+~unsupported template array_store_exception_positive~
+~unsupported template array_store_exception_negative~
+
+~template class_not_found_exception_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+try:
+    ~[BODY]~
+    __import__(~[EXPR_str]~)
+except ModuleNotFoundError as e:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template class_not_found_exception_negative start~
+try:
+    ~[BODY]~
+    __import__(~[EXPR_str]~)
+except ModuleNotFoundError as e:
+    ~[VAR_str]~ = ""
+~template end~
+
 ~template arithmetic_exception_positive start~
 tmpUnique42 = ~[VAR_str@1]~
 try:

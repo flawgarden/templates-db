@@ -8,11 +8,21 @@
 ~extensions end~
 
 ~main body start~
+~helper import sensitivity/field/helpers/InstanceInitializer~
 ~helper import sensitivity/field/helpers/StringHolder~
 ~helper import sensitivity/field/helpers/NestedStringHolder~
 ~helper import sensitivity/field/helpers/ArrayHolder~
 ~helper import sensitivity/field/helpers/StringFactory~
 
+~template class_with_instance_initializer_positive start~
+ii = InstanceInitializer(~[VAR_str@1]~)
+~[VAR_str@1]~ = ii.list[1]
+~template end~
+
+~template class_with_instance_initializer_negative start~
+ii = InstanceInitializer(~[VAR_str@1]~)
+~[VAR_str@1]~ = ii.list[0]
+~template end~
 
 ~template class_with_string_initialization_positive start~
 sh = StringHolder(~[VAR_str@1]~)
