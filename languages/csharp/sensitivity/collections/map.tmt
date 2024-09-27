@@ -10,10 +10,6 @@
 
 ~main body start~
 
-~imports start~
-using System.Collections.Generic;
-~imports end~
-
 ~template map_simple_get_1_positive start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~;
@@ -52,7 +48,7 @@ var map222 = new Dictionary<~[TYPE@1]~, ~[TYPE@2]~>();
 map111[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@1]~;
 map222[~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~;
 var mapMerged = map111.Concat(map222).ToDictionary(pair => pair.Key, pair => pair.Value);
-~[VAR_~[TYPE@2]~@2]~ = mapMerged.get(~[EXPR_~[TYPE@1]~@2]~);
+~[VAR_~[TYPE@2]~@2]~ = mapMerged[~[EXPR_~[TYPE@1]~@2]~];
 ~template end~
 
 ~template map_clear_negative start~
