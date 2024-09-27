@@ -19,6 +19,9 @@
 using HelperFields;
 ~imports end~
 
+~unsupported template class_with_instance_initializer_positive~
+~unsupported template class_with_instance_initializer_negative~
+
 ~template class_with_string_initialization_positive start~
 StringHolder sh = new StringHolder(~[VAR_string@1]~);
 ~[VAR_string@1]~ = sh.value;

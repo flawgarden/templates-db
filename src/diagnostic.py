@@ -157,6 +157,14 @@ def diff(fst: List[T], snd: List[T]) -> List[T]:
     return result
 
 
+def supported(templates: List[Template]) -> List[Template]:
+    result = []
+    for template in templates:
+        if template.code is not None:
+            result.append(template)
+    return result
+
+
 @nerd.pre_parsing_diagnostic("Unescaped tilda")
 def unescaped_tilda_diagnostic(paths: List[Path]) -> List[DiagnosticResult]:
     results = []
@@ -291,7 +299,7 @@ def undefined_macro_diagnostic(project: LanguageProject, template_file: Template
 
     available_macro_names = [macro.name for macro in available_macros]
     available_define_names = [define.name for define in available_defines]
-    for template in template_file.templates:
+    for template in supported(template_file.templates):
         for macro_usage in template.code.macros:
             if macro_usage.name not in available_macro_names:
                 result.append(DiagnosticResult.error(
@@ -312,7 +320,7 @@ def unused_local_macro_diagnostic(project: LanguageProject, template_file: Templ
 
     used_macro = []
     used_define = []
-    for template in template_file.templates:
+    for template in supported(template_file.templates):
         used_macro.extend(template.code.macros)
         used_define.extend(template.code.defines)
 
@@ -390,7 +398,7 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
     for template_file in project.template_files:
         for extension in template_file.local_extensions:
             check_extension(template_file.path, extension)
-        for template in template_file.templates:
+        for template in supported(template_file.templates):
             check_template(template_file.path, template)
 
     for extension_file in project.extension_files:

@@ -63,7 +63,7 @@ class DefineDefinition:
 @dataclass
 class Template:
     name: str
-    code: Code
+    code: Code | None
 
 
 @dataclass
