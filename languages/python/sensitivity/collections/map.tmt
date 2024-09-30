@@ -4,7 +4,6 @@
 ~[DEFINE_MapName]~ -> map787234
 ~[DEFINE_Create_Map]~ -> ~[DEFINE_MapName]~ = dict()
 ~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[EXPR_~[TYPE@2]~@2]~
-~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName]~[~[VAR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~
 
 ~extensions end~
 

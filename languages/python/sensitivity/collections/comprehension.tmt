@@ -1,0 +1,56 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template simple_list_comprehension_positive start~
+tmpList = [~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+compList = [~[CONST_~[TYPE@1]~]~ + x for x in tmpList]
+~[VAR_~[TYPE@1]~@1]~ = compList[0]
+~template end~
+
+~template simple_list_comprehension_negative start~
+tmpList = [~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+compList = [~[CONST_~[TYPE@1]~]~ + x for x in tmpList]
+~[VAR_~[TYPE@1]~@1]~ = compList[1]
+~template end~
+
+~template list_comprehension_with_condition_positive start~
+tmpList = [~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+compList = [x for x in tmpList if "prefix" in x]
+~[VAR_~[TYPE@1]~@1]~ = compList[0]
+~template end~
+
+~template list_comprehension_with_condition_neg_index_positive start~
+tmpList = [~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~, ~[EXPR_~[TYPE@1]~]~]
+compList = [x for x in tmpList if "prefix" in x]
+~[VAR_~[TYPE@1]~@1]~ = compList[-1]
+~template end~
+
+~template list_comprehension_with_condition_negative start~
+tmpList = [~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+compList = [x for x in tmpList if "prefix" in x]
+~[VAR_~[TYPE@1]~@1]~ = compList[1]
+~template end~
+
+~template nested_list_comprehension_positive start~
+tmpList = [[~[VAR_~[TYPE@1]~@1]~], [~[CONST_~[TYPE@1]~]~], [~[CONST_~[TYPE@1]~]~]]
+compList = [x for x in tmpList]
+~[VAR_~[TYPE@1]~@1]~ = compList[0][0]
+~template end~
+
+~template nested_list_comprehension_negative start~
+tmpList = [[~[VAR_~[TYPE@1]~@1]~], [~[CONST_~[TYPE@1]~]~], [~[CONST_~[TYPE@1]~]~]]
+compList = [x for x in tmpList if len(x) == 0]
+~[VAR_~[TYPE@1]~@1]~ = compList[0][0]
+~template end~
+
+~template list_comprehension_with_zip_positive start~
+tmpList1 = [~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+tmpList2 = [~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~]
+compList = [x + y for x, y in zip(tmpList1, tmpList2)]
+~[VAR_~[TYPE@1]~@1]~ = compList[0]
+~template end~
+
+~main body end~

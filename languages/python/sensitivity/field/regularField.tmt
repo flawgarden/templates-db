@@ -4,14 +4,14 @@
 
 ~template class_with_string_field_positive start~
 sh = StringHolder()
-sh.value = ~[VAR_String@1]~
-~[VAR_String@1]~ = sh.value
+sh.value = ~[VAR_str@1]~
+~[VAR_str@1]~ = sh.value
 ~template end~
 
 ~template class_with_string_field_negative start~
 sh = StringHolder()
 sh.value = ""
-~[VAR_String]~ = sh.value
+~[VAR_str]~ = sh.value
 ~template end~
 
 ~main body end~

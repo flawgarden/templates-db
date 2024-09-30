@@ -3,7 +3,7 @@
 ~extensions end~
 
 ~main body start~
-~helper import sensitivity/concurrency/helpers/concurrency~
+~helper import sensitivity/concurrency/helpers/Concurrency~
 
 ~imports start~
 from threading import Thread

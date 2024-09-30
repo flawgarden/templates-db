@@ -1,0 +1,85 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function get_value start~
+def get_value(value=None):
+    if value is None:
+        value = "fixed_string"
+    return value
+~function end~
+
+~function get_value_two_args start~
+def get_value_two_args(arg1, arg2=None):
+    if arg2 is None:
+        arg1 = "fixed_string"
+    return arg1
+~function end~
+
+~helper functions end~
+
+~template simple_none_positive start~
+value = None
+if value is not None:
+    ~[VAR_~[TYPE@1]~]~ = ~[CONST_~[TYPE@1]~]~
+~template end~
+
+~template simple_none_negative start~
+value = None
+if value is None:
+    ~[VAR_~[TYPE@1]~]~ = ~[CONST_~[TYPE@1]~]~
+~template end~
+
+~template none_in_function_positive start~
+~[VAR_str]~ = get_value(~[VAR_str]~)
+~template end~
+
+~template none_in_function_negative start~
+~[VAR_str]~ = get_value()
+~template end~
+
+~template none_in_function_with_two_args_positive start~
+~[VAR_str]~ = get_value_two_args(~[VAR_str]~, "1")
+~template end~
+
+~template none_in_function_with_two_args_negative start~
+~[VAR_str]~ = get_value_two_args(~[VAR_str]~)
+~template end~
+
+~template or_operator_for_none_positive start~
+value = None
+~[VAR_~[TYPE@1]~@1]~ = ~[VAR_~[TYPE@1]~@1]~ or value
+~template end~
+
+~template or_operator_for_none_negative start~
+value = None
+~[VAR_~[TYPE@1]~@1]~ = ~[VAR_~[TYPE@1]~@1]~ and value
+~template end~
+
+~template conditional_expression_none_positive start~
+value = None
+~[VAR_~[TYPE@1]~@1]~ = ~[VAR_~[TYPE@1]~@1]~ if value is None else ~[CONST_~[TYPE@1]~]~
+~template end~
+
+~template conditional_expression_none_negative start~
+value = None
+~[VAR_~[TYPE@1]~@1]~ = ~[VAR_~[TYPE@1]~@1]~ if value is not None else ~[CONST_~[TYPE@1]~]~
+~template end~
+
+~template list_with_none_handling_positive start~
+values = [~[CONST_~[TYPE@1]~@1]~, None, ~[CONST_~[TYPE@1]~@1]~, None, ~[VAR_~[TYPE@1]~@1]~]
+filtered_values = [v for v in values if v is not None]
+~[VAR_~[TYPE@1]~@1]~ = filtered_values[-1]
+~template end~
+
+~template list_with_none_handling_negative start~
+values = [~[CONST_~[TYPE@1]~@1]~, None, ~[CONST_~[TYPE@1]~@1]~, None, ~[VAR_~[TYPE@1]~@1]~]
+filtered_values = [v for v in values if v is None]
+~[VAR_~[TYPE@1]~@1]~ = filtered_values[0]
+~template end~
+
+~main body end~
