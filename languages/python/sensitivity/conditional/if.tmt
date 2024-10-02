@@ -1,0 +1,52 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~template if_operator_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+if ~[EXPR_bool]~:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template if_operator_negative start~
+if ~[EXPR_bool]~:
+    ~[VAR_str]~ = ""
+~template end~
+
+~template if_else_operator_neutral start~
+tmpUnique42 = ~[VAR_str@1]~
+if ~[EXPR_bool]~:
+    ~[VAR_str@1]~ = tmpUnique42
+else:
+    ~[VAR_str@1]~ = ""
+~template end~
+
+~template if_else_if_operator_neutral start~
+tmpUnique42 = ~[VAR_str@1]~
+if ~[EXPR_bool@1]~:
+    ~[VAR_str@1]~ = tmpUnique42
+elif ~[EXPR_bool@1]~:
+    ~[VAR_str@1]~ = ~[EXPR_str]~
+else:
+    ~[VAR_str@1]~ = ""
+~template end~
+
+~template if_operator_with_var_in_condition_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+conditionMet = False
+if ~[EXPR_bool]~:
+    conditionMet = True
+if not conditionMet and ~[EXPR_bool]~:
+    ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template if_operator_with_var_in_condition_negative start~
+conditionMet = False
+if ~[EXPR_bool]~:
+    conditionMet = True
+if not conditionMet and ~[EXPR_bool]~:
+    ~[VAR_str]~ = ""
+~template end~
+
+~main body end~

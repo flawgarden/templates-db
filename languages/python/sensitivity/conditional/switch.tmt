@@ -1,0 +1,47 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template switch_operator_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+match ~[VAR_str@1]~:
+    case ~[CONST_str]~:
+        pass
+    case ~[CONST_str]~:
+        ~[VAR_str@1]~ = ~[VAR_str@1]~
+    case _:
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template switch_operator_negative start~
+tmpUnique42 = ""
+match ~[VAR_str@1]~:
+    case "":
+        pass
+    case ~[CONST_str]~:
+        ~[VAR_str@1]~ = ""
+    case _:
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template switch_operator_any_positive start~
+tmpUnique42 = ~[VAR_str@1]~
+match ~[MACRO_Any_str]~:
+    case ~[CONST_str]~:
+        ~[VAR_str@1]~ = ~[VAR_str@1]~
+    case _:
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~template switch_operator_any_negative start~
+tmpUnique42 = ""
+match ~[MACRO_Any_str]~:
+    case ~[CONST_str]~:
+        ~[VAR_str@1]~ = ""
+    case _:
+        ~[VAR_str@1]~ = tmpUnique42
+~template end~
+
+~main body end~

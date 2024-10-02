@@ -131,6 +131,10 @@ template
     : templateStart code templateEnd
     ;
 
+unsupportedTemplate
+    : TILDA UNSUPPORTED WHITESPACE TEMPLATE WHITESPACE IDENTIFIER TILDA LINE_BREAK+
+    ;
+
 helperFunctionsStart
     : TILDA HELPER WHITESPACE FUNCTIONS WHITESPACE START TILDA LINE_BREAK+
     ;
@@ -163,8 +167,12 @@ mainClassEnd
     : TILDA MAIN WHITESPACE BODY_LK WHITESPACE END TILDA LINE_BREAK+
     ;
 
+templates
+    : (template | unsupportedTemplate)+
+    ;
+
 mainClass
-    : mainClassStart helperFunctions? helperImport* languageImports? template+ mainClassEnd
+    : mainClassStart helperFunctions? helperImport* languageImports? templates mainClassEnd
     ;
 
 helperClassStart

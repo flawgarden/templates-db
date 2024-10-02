@@ -1,0 +1,52 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function param_or_empty start~
+def param_or_empty(value: int, param: str) -> str:
+    if len(param) == value:
+        return param
+    elif value > len(param):
+        return param_or_empty(value - 1, param)
+    else:
+        return ""
+~function end~
+
+~function param_or_empty_mutual1 start~
+def param_or_empty_mutual1(value: int, param: str) -> str:
+    if len(param) == value:
+        return param
+    elif value > len(param):
+        return param_or_empty_mutual2(value - 1, param)
+    else:
+        return ""
+~function end~
+
+~function param_or_empty_mutual2 start~
+def param_or_empty_mutual2(value: int, param: str) -> str:
+    return param_or_empty_mutual1(value - 1, param)
+~function end~
+
+~helper functions end~
+
+~template recursion_simple_positive start~
+~[VAR_str@1]~ = param_or_empty(len(~[VAR_str@1]~), ~[VAR_str@1]~)
+~template end~
+
+~template recursion_simple_negative start~
+~[VAR_str@1]~ = param_or_empty(-1, ~[VAR_str@1]~)
+~template end~
+
+~template recursion_mutual_positive start~
+~[VAR_str@1]~ = param_or_empty_mutual1(len(~[VAR_str@1]~), ~[VAR_str@1]~)
+~template end~
+
+~template recursion_mutual_negative start~
+~[VAR_str@1]~ = param_or_empty_mutual2(len(~[VAR_str@1]~), ~[VAR_str@1]~)
+~template end~
+
+~main body end~

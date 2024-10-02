@@ -1,0 +1,35 @@
+~main body start~
+~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+
+~template derived_binary_op1_positive start~
+a12341 = DerivedBinaryOpClass1()
+~[VAR_str@1]~ = a12341.virtual_call(~[VAR_str@1]~, "")
+~template end~
+
+~template derived_binary_op1_negative start~
+a12341 = DerivedBinaryOpClass1()
+~[VAR_str@1]~ = a12341.virtual_call("", ~[VAR_str@1]~)
+~template end~
+
+~template derived_binary_op2_positive start~
+a12341 = DerivedBinaryOpClass2()
+~[VAR_str@1]~ = a12341.virtual_call("", ~[VAR_str@1]~)
+~template end~
+
+~template derived_binary_op2_negative start~
+a12341 = DerivedBinaryOpClass1()
+~[VAR_str@1]~ = a12341.virtual_call(~[VAR_str@1]~, "")
+~template end~
+
+~template base_binary_op_positive start~
+a12341 = DerivedBinaryOpClass1() if ~[EXPR_bool]~ else DerivedBinaryOpClass2()
+~[VAR_str]~ = a12341.virtual_call("", "")
+~template end~
+
+~template base_binary_op_negative start~
+a12341 = BaseBinaryOpClass()
+~[VAR_str@1]~ = a12341.virtual_call(~[VAR_str@1]~, ~[VAR_str@1]~)
+~template end~
+
+~main body end~

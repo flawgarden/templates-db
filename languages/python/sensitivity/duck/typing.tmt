@@ -1,0 +1,93 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+~main body start~
+
+~helper functions start~
+
+~function make_it_quack start~
+def make_it_quack(duck, arg):
+    return duck.quack(arg)
+~function end~
+
+~function make_it_quack_attr start~
+def make_it_quack_attr(duck, arg):
+    if hasattr(duck, 'quack'):
+        return duck.quack(arg)
+    return "fixed string"
+~function end~
+
+~function add_quack_method start~
+def add_quack_method(duck):
+    duck.quack = lambda a: "Some_ prefix " + a
+~function end~
+
+~function make_it_quack_field_attr start~
+def make_it_quack_field_attr(duck, arg):
+    if hasattr(duck, 'constant'):
+        return duck.quack(arg)
+    else:
+        return "fixed_string"
+~function end~
+
+~helper functions end~
+~helper import sensitivity/duck/helpers/Duck~
+
+~template duck_typing_quack_method_positive start~
+duck_like = Duck()
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+~template end~
+
+~template duck_typing_quack_method_negative start~
+duck_like = NotADuck()
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+~template end~
+
+~template duck_typing_hasattr_check_positive start~
+duck_like = Duck()
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack_attr(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+~template end~
+
+~template duck_typing_hasattr_check_negative start~
+duck_like = DefinitelyNotADuck()
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack_attr(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+~template end~
+
+~template duck_typing_missing_method_exception_positive start~
+try:
+    duck_like = Duck()
+    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+except AttributeError:
+    ~[VAR_~[TYPE@1]~@1]~ = "fixed_string"
+~template end~
+
+~template duck_typing_dynamic_method_addition_positive start~
+dynamic_duck = DynamicDuck()
+add_quack_method(dynamic_duck)
+try:
+    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+except AttributeError:
+    ~[VAR_~[TYPE@1]~@1]~ = "fixed_string"
+~template end~
+
+~template duck_typing_dynamic_method_addition_exception_negative start~
+dynamic_duck = DynamicDuck()
+add_quack_method(dynamic_duck)
+try:
+    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[CONST_~[TYPE@1]~]~)
+except AttributeError:
+    pass
+~template end~
+
+~template duck_typing_multiple_attributes_positive start~
+d = DuckWithAttribute(~[VAR_~[TYPE@1]~@1]~)
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack_field_attr(d, "tmp_str")
+~template end~
+
+~template duck_typing_multiple_attributes_negative start~
+d = FakeDuckWithAttribute(~[VAR_~[TYPE@1]~@1]~)
+~[VAR_~[TYPE@1]~@1]~ = make_it_quack_field_attr(d, "tmp_str")
+~template end~
+
+
+~main body end~

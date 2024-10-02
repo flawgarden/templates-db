@@ -1,0 +1,24 @@
+~main body start~
+~helper import sensitivity/reflection/helpers/ReflectionHelper~
+
+~template simple_reflection_positive start~
+try:
+    rh = ReflectionHelper.__new__(ReflectionHelper)
+    ReflectionHelper.__init__(rh, ~[VAR_str@1]~)
+    setattr(rh, "value", ~[VAR_str@1]~)
+    ~[VAR_str@1]~ = rh.get_value()
+except Exception:
+    raise
+~template end~
+
+~template simple_reflection_negative start~
+try:
+    rh = ReflectionHelper.__new__(ReflectionHelper)
+    ReflectionHelper.__init__(rh, ~[VAR_str@1]~)
+    setattr(rh, "value", ~[CONST_str]~)
+    ~[VAR_str@1]~ = rh.get_value()
+except Exception:
+    raise
+~template end~
+
+~main body end~

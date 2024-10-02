@@ -1,0 +1,6 @@
+~[EXPR_int]~ -> 0
+~[EXPR_int]~ -> -1
+~[EXPR_int]~ -> 42
+~[EXPR_int]~ -> 1000
+~[EXPR_int]~ -> ~[EXPR_int]~ + ~[EXPR_int]~
+~[EXPR_int]~ -> ~[EXPR_int]~ - ~[EXPR_int]~

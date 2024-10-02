@@ -157,6 +157,14 @@ def diff(fst: List[T], snd: List[T]) -> List[T]:
     return result
 
 
+def supported(templates: List[Template]) -> List[Template]:
+    result = []
+    for template in templates:
+        if template.code is not None:
+            result.append(template)
+    return result
+
+
 @nerd.pre_parsing_diagnostic("Unescaped tilda")
 def unescaped_tilda_diagnostic(paths: List[Path]) -> List[DiagnosticResult]:
     results = []
@@ -206,12 +214,6 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         return None
 
     def compare_template_file(fst: TemplateFile, snd: TemplateFile):
-        if fst.kind == TmtFileKind.TODO:
-            result.append(DiagnosticResult.warning(f"TODO file {fst.path}"))
-            return
-        if snd.kind == TmtFileKind.TODO:
-            result.append(DiagnosticResult.warning(f"TODO file {snd.path}"))
-            return
         if fst.kind != TmtFileKind.TMT or snd.kind != TmtFileKind.TMT:
             return
         fst_template_names = [x.name for x in fst.templates]
@@ -220,7 +222,9 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         template_diff = diff(fst_template_names, snd_template_names)
 
         for name in template_diff:
-            result.append(DiagnosticResult.error(f"Can't find same template [{fst.path}, {name}] in file [{snd.path}]"))
+            result.append(
+                DiagnosticResult.error(f"Can't find the same template [{fst.path}, {name}] in the file [{snd.path}]")
+            )
 
     def compare_helper_file(fst: HelperFile, snd: HelperFile):
         return
@@ -233,7 +237,7 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         for proj_file in fst.files:
             same_file = find_same(second_files, proj_file)
             if same_file is None:
-                result.append(DiagnosticResult.error(f"Can't find same file [{proj_file.path}] for [{snd.name}]"))
+                result.append(DiagnosticResult.warning(f"TODO: Add the same file [{proj_file.path}] for [{snd.name}]"))
             elif isinstance(same_file, TemplateFile):
                 assert isinstance(proj_file, TemplateFile)
                 compare_template_file(proj_file, same_file)
@@ -295,7 +299,7 @@ def undefined_macro_diagnostic(project: LanguageProject, template_file: Template
 
     available_macro_names = [macro.name for macro in available_macros]
     available_define_names = [define.name for define in available_defines]
-    for template in template_file.templates:
+    for template in supported(template_file.templates):
         for macro_usage in template.code.macros:
             if macro_usage.name not in available_macro_names:
                 result.append(DiagnosticResult.error(
@@ -316,7 +320,7 @@ def unused_local_macro_diagnostic(project: LanguageProject, template_file: Templ
 
     used_macro = []
     used_define = []
-    for template in template_file.templates:
+    for template in supported(template_file.templates):
         used_macro.extend(template.code.macros)
         used_define.extend(template.code.defines)
 
@@ -394,7 +398,7 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
     for template_file in project.template_files:
         for extension in template_file.local_extensions:
             check_extension(template_file.path, extension)
-        for template in template_file.templates:
+        for template in supported(template_file.templates):
             check_template(template_file.path, template)
 
     for extension_file in project.extension_files:

@@ -1,0 +1,142 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template empty_tuple_operation_positive start~
+empty_tuple = ()
+if len(empty_tuple) == 0:
+    empty_tuple += (~[VAR_~[TYPE@1]~@1]~,)
+~[VAR_~[TYPE@1]~@1]~ = empty_tuple[0]
+~template end~
+
+~template empty_tuple_operation_negative start~
+empty_tuple = ()
+if len(empty_tuple) == 0:
+    empty_tuple += (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+~[VAR_~[TYPE@1]~@1]~ = empty_tuple[1]
+~template end~
+
+~template tuple_to_list_conversion_negative start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+my_list = list(my_tuple)
+my_list[0] = ~[CONST_~[TYPE@1]~]~
+new_tuple = tuple(my_list)
+~[VAR_~[TYPE@1]~@1]~ = new_tuple[0]
+~template end~
+
+~template tuple_to_list_conversion_positive start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+my_list = list(my_tuple)
+new_tuple = tuple(my_list)
+~[VAR_~[TYPE@1]~@1]~ = new_tuple[0]
+~template end~
+
+~template tuple_unpacking_positive start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+a, b, c = my_tuple
+~[VAR_~[TYPE@1]~@1]~ = a
+~template end~
+
+~template tuple_unpacking_negative start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+a, b, c = my_tuple
+~[VAR_~[TYPE@1]~@1]~ = b
+~template end~
+
+~template tuple_concatenation_positive start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+combined_tuple = tuple1 + tuple2
+if len(combined_tuple) > 1:
+    ~[VAR_~[TYPE@1]~@1]~ = combined_tuple[0]
+~template end~
+
+~template tuple_concatenation_negative start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+combined_tuple = tuple2 + tuple1
+if len(combined_tuple) > 1:
+    ~[VAR_~[TYPE@1]~@1]~ = combined_tuple[0]
+~template end~
+
+~template nested_tuples_positive start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+nested_tuple = ((tuple1,), (tuple2,))
+~[VAR_~[TYPE@1]~@1]~ = nested_tuple[0][0]
+~template end~
+
+~template nested_tuples_negative start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+nested_tuple = ((tuple1,), (tuple2,))
+~[VAR_~[TYPE@1]~@1]~ = nested_tuple[1][0]
+~template end~
+
+~template tuple_iteration_negative start~
+tmpUnique = ""
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~,)
+for value in my_tuple:
+    tmpUnique = value
+~[VAR_~[TYPE@1]~@1]~ = tmpUnique
+~template end~
+
+~template tuple_iteration_positive start~
+tmpUnique = ""
+my_tuple = (~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~,)
+for value in my_tuple:
+    tmpUnique = value
+~[VAR_~[TYPE@1]~@1]~ = tmpUnique
+~template end~
+
+~template tuple_as_dict_key_positive start~
+tuple1 = ("aaaa",)
+tuple2 = ("bbbb",)
+my_dict = { (tuple1): ~[VAR_~[TYPE@1]~@1]~, (tuple2): ~[CONST_~[TYPE@1]~]~ }
+~[VAR_~[TYPE@1]~@1]~ = my_dict[("aaaa",)]
+~template end~
+
+~template tuple_as_dict_key_negative start~
+tuple1 = ("aaaa",)
+tuple2 = ("bbbb",)
+my_dict = { (tuple1): ~[VAR_~[TYPE@1]~@1]~, (tuple2): ~[CONST_~[TYPE@1]~]~ }
+~[VAR_~[TYPE@1]~@1]~ = my_dict[("bbbb",)]
+~template end~
+
+~template tuple_with_none_positive start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, None, ~[CONST_~[TYPE@1]~]~,)
+if my_tuple[1] is None:
+    ~[VAR_~[TYPE@1]~@1]~ = my_tuple[0]
+~template end~
+
+~template swap_values_with_tuple_positive start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+a, b = tuple1, tuple2
+a, b = b, a
+if a == (~[CONST_~[TYPE@1]~]~,):
+    ~[VAR_~[TYPE@1]~@1]~ = b[0]
+~template end~
+
+~template swap_values_with_tuple_negative start~
+tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
+tuple2 = (~[CONST_~[TYPE@1]~]~,)
+a, b = tuple1, tuple2
+a, b = b, a
+if a == (~[CONST_~[TYPE@1]~]~,):
+    ~[VAR_~[TYPE@1]~@1]~ = a[0]
+~template end~
+
+~template tuple_negative_index_access_negative start~
+my_tuple = (~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~,)
+~[VAR_~[TYPE@1]~@1]~ = my_tuple[-1]
+~template end~
+
+~template tuple_negative_index_access_positive start~
+my_tuple = (~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~,)
+~[VAR_~[TYPE@1]~@1]~ = my_tuple[-1]
+~template end~
+
+~main body end~

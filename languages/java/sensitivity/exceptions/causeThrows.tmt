@@ -9,25 +9,6 @@
 import java.util.*;
 ~imports end~
 
-~template arithmetic_exception_positive start~
-String tmpUnique42 = ~[VAR_String@1]~;
-try {
-~[BODY]~
-    int a = 1 / 0;
-} catch (ArithmeticException e) {
-    ~[VAR_String@1]~ = tmpUnique42;
-}
-~template end~
-
-~template arithmetic_exception_negative start~
-try {
-~[BODY]~
-    int a = 1 / 0;
-} catch (ArithmeticException e) {
-    ~[VAR_String]~ = "";
-}
-~template end~
-
 ~template array_store_exception_positive start~
 String tmpUnique42 = ~[VAR_String@1]~;
 try {
@@ -45,6 +26,44 @@ try {
     Object x[] = new String[3];
     x[0] = new Integer(0);
 } catch (ArrayStoreException e) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template class_not_found_exception_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+try {
+~[BODY]~
+    Class.forName(~[EXPR_String]~);
+} catch (ClassNotFoundException e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template class_not_found_exception_negative start~
+try {
+~[BODY]~
+    Class.forName(~[EXPR_String]~);
+} catch (ClassNotFoundException e) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template arithmetic_exception_positive start~
+String tmpUnique42 = ~[VAR_String@1]~;
+try {
+~[BODY]~
+    int a = 1 / 0;
+} catch (ArithmeticException e) {
+    ~[VAR_String@1]~ = tmpUnique42;
+}
+~template end~
+
+~template arithmetic_exception_negative start~
+try {
+~[BODY]~
+    int a = 1 / 0;
+} catch (ArithmeticException e) {
     ~[VAR_String]~ = "";
 }
 ~template end~

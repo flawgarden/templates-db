@@ -1,0 +1,22 @@
+~class ClassWrapper start~
+
+class ClassWrapper:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        return self.func(*args, **kwargs)
+
+~class end~
+
+
+~class ClassWrapperEmpty start~
+
+class ClassWrapperEmpty:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        return "fixed_string"
+
+~class end~

@@ -1,0 +1,16 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import re
+~imports end~
+
+~template create_pattern_and_matcher start~
+pattern = re.compile(~[MACRO_Regex]~)
+matcher = pattern.match(~[EXPR_str]~)
+~template end~
+
+~main body end~

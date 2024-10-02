@@ -1,0 +1,13 @@
+~[EXPR_bool]~ -> ~[EXPR_Any]~ == ~[EXPR_Any]~
+~[EXPR_bool]~ -> ~[EXPR_Any@1]~ == ~[EXPR_Any@1]~
+~[EXPR_bool]~ -> ~[EXPR_Any]~ is None
+
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ""
+~[EXPR_bool]~ -> ~[VAR_str@1]~ == "" and ~[VAR_str@1]~.find(~[EXPR_str]~) != -1
+~[EXPR_bool]~ -> ~[EXPR_str@1]~ is not None and ~[EXPR_str@1]~.find(~[EXPR_str]~) != -1
+~[EXPR_bool]~ -> ~[EXPR_str]~ == ~[EXPR_str]~
+~[EXPR_bool]~ -> ~[EXPR_str]~.casefold() == ~[EXPR_str]~.casefold()
+~[EXPR_bool]~ -> ~[EXPR_str@1]~ is not None and ~[EXPR_str@1]~[~[CONST_int]~] == ~[CONST_str]~
+~[EXPR_bool]~ -> ~[EXPR_str]~.endswith(~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_str]~.startswith(~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_str]~.startswith(~[EXPR_str]~, start=~[EXPR_int]~, end=~[EXPR_int]~)

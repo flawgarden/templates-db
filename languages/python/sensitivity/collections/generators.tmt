@@ -1,0 +1,69 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function simple_gen start~
+def simple_generator(arg1, arg2, arg3):
+    yield arg1
+    yield arg2
+    yield arg3
+~function end~
+
+
+~function infinite_gen start~
+def infinite_gen(arg1, arg2):
+    yield arg1
+    while True:
+        yield arg2
+~function end~
+
+~function generator_from start~
+def generator_from(arg1, arg2, arg3, arg4):
+    yield from simple_generator(arg1, arg2, arg3)
+    yield arg4
+~function end~
+
+~helper functions end~
+
+~template generator_simple_positive start~
+gen = simple_generator(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+genToList = list(gen)
+~[VAR_~[TYPE@1]~@1]~ = genToList[0]
+~template end~
+
+~template generator_simple_negative start~
+gen = simple_generator(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+genToList = list(gen)
+~[VAR_~[TYPE@1]~@1]~ = genToList[1]
+~template end~
+
+~template generator_infinite_positive start~
+gen = infinite_gen(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+genToList = [next(gen) for _ in range(5)]
+~[VAR_~[TYPE@1]~@1]~ = genToList[0]
+~template end~
+
+~template generator_infinite_negative start~
+gen = infinite_gen(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~)
+genToList = [next(gen) for _ in range(1000)]
+~[VAR_~[TYPE@1]~@1]~ = genToList[1000]
+~template end~
+
+~template generator_yield_from_positive start~
+gen = generator_from(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+genToList = list(gen)
+~[VAR_~[TYPE@1]~@1]~ = genToList[0]
+~template end~
+
+~template generator_yield_from_negative start~
+gen = generator_from(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~, ~[CONST_~[TYPE@1]~]~)
+genToList = list(gen)
+~[VAR_~[TYPE@1]~@1]~ = genToList[2]
+~template end~
+
+
+~main body end~

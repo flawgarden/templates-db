@@ -1,0 +1,52 @@
+~[MACRO_Regex]~ -> "[a-z]+"
+~[MACRO_Regex]~ -> "\\"
+~[MACRO_Regex]~ -> "\t"
+~[MACRO_Regex]~ -> "\n"
+~[MACRO_Regex]~ -> "\r"
+~[MACRO_Regex]~ -> "\f"
+~[MACRO_Regex]~ -> "\a"
+
+~[MACRO_Regex]~ -> "[abc]"
+~[MACRO_Regex]~ -> "[^abc]"
+~[MACRO_Regex]~ -> "[a-zA-Z]"
+~[MACRO_Regex]~ -> "[a-d[m-p]]"
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{5}")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{2,5}")
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "??")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "+?")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{2,5}?")
+
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "?+")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "*+")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "++")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "{2,5}+")
+
+~[MACRO_Regex]~ -> ("(" + ~[MACRO_Regex]~ + ")")
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + ~[MACRO_Regex]~)
+~[MACRO_Regex]~ -> (~[MACRO_Regex]~ + "|" +  ~[MACRO_Regex]~)
+
+~[EXPR_Match]~ -> ~[EXPR_Pattern]~.match(~[EXPR_String]~)
+
+~[EXPR_str]~ -> ~[EXPR_Match]~.group(~[EXPR_int]~)
+~[EXPR_str]~ -> ~[EXPR_Match]~.group(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_str]~ -> ~[EXPR_Match]~.group(~[EXPR_int]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_str]~ -> ~[EXPR_Match]~.string
+
+~[EXPR_tuple\[str | None, ...\]]~ -> ~[EXPR_Match]~.groups()
+~[EXPR_tuple\[str, ...\]]~ -> ~[EXPR_Match]~.groups(~[EXPR_str]~)
+~[EXPR_tuple\[int, int\]]~ -> ~[EXPR_Match]~.span()
+~[EXPR_tuple\[int, int\]]~ -> ~[EXPR_Match]~.span(~[EXPR_int]~)
+
+~[EXPR_dict\[str, str | None\]]~ -> ~[EXPR_Match]~.groupdict()
+~[EXPR_dict\[str, str\]]~ -> ~[EXPR_Match]~.groupdict(~[EXPR_str]~)
+
+~[EXPR_int]~ -> ~[EXPR_Match]~.start(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_Match]~.end(~[EXPR_int]~)
+~[EXPR_int]~ -> ~[EXPR_Match]~.pos
+~[EXPR_int]~ -> ~[EXPR_Match]~.endpos

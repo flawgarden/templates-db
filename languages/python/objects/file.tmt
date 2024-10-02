@@ -1,0 +1,11 @@
+~main body start~
+
+~imports start~
+from pathlib import Path
+~imports end~
+
+~template create_file start~
+p = Path(~[EXPR_String]~)
+~template end~
+
+~main body end~
