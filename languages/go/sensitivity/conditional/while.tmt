@@ -1,0 +1,26 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import (
+    "fmt"
+)
+~imports end~
+
+~template while_operator_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for ~[EXPR_bool]~ {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template while_operator_negative start~
+for ~[EXPR_bool]~ {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~main body end~

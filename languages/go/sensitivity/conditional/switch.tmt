@@ -1,0 +1,57 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import (
+    "fmt"
+)
+~imports end~
+
+~template switch_operator_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+switch ~[VAR_string@1]~ {
+case ~[CONST_string]~:
+    // No operation
+case ~[CONST_string]~:
+    // Do something with ~[VAR_string@1]~
+default:
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template switch_operator_negative start~
+tmpUnique42 := ""
+switch ~[VAR_string@1]~ {
+case "":
+    // No operation
+case ~[CONST_string]~:
+    ~[VAR_string@1]~ = ""
+default:
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template switch_operator_any_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+switch ~[MACRO_Any_string]~ {
+case ~[CONST_string]~:
+    // Do something with ~[VAR_string@1]~
+default:
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template switch_operator_any_negative start~
+tmpUnique42 := ""
+switch ~[MACRO_Any_string]~ {
+case ~[CONST_string]~:
+    ~[VAR_string@1]~ = ""
+default:
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~main body end~

@@ -1,0 +1,157 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_QueueName]~ -> queue787231
+~[DEFINE_Create_Queue]~ -> ~[DEFINE_QueueName]~ := list.New()
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.PushBack(~[EXPR_~[TYPE@1]~]~)
+~[DEFINE_Add_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.PushBack(~[VAR_~[TYPE@1]~]~)
+~[DEFINE_Add_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.PushBack(~[CONST_~[TYPE@1]~]~)
+~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.PushBack(~[VAR_~[TYPE@1]~@1]~)
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.PushBack(~[CONST_~[TYPE@1]~@1]~)
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+import (
+    "container/list"
+    "fmt"
+)
+~imports end~
+
+~template simple_poll_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+element := ~[DEFINE_QueueName]~.Front()
+if element != nil {
+    ~[VAR_~[TYPE@1]~@1]~ = element.Value.(~[TYPE@1]~)
+    ~[DEFINE_QueueName]~.Remove(element)
+}
+~template end~
+
+~template simple_poll_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+element := ~[DEFINE_QueueName]~.Front()
+if element != nil {
+    ~[VAR_~[TYPE@1]~@1]~ = element.Value.(~[TYPE@1]~)
+    ~[DEFINE_QueueName]~.Remove(element)
+}
+~template end~
+
+~template simple_peek_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+element := ~[DEFINE_QueueName]~.Front()
+if element != nil {
+    ~[VAR_~[TYPE@1]~@1]~ = element.Value.(~[TYPE@1]~)
+}
+~template end~
+
+~template queue_is_empty_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+value7843 := ~[CONST_~[TYPE@1]~]~
+if ~[DEFINE_QueueName]~.Len() > 0 {
+    value7843 = ~[DEFINE_QueueName]~.Front().Value.(~[TYPE@1]~)
+}
+~[VAR_~[TYPE@1]~@1]~ = value7843
+~template end~
+
+~template queue_is_empty_1_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+value7843 := ~[CONST_~[TYPE@1]~]~
+if ~[DEFINE_QueueName]~.Len() > 0 {
+    value7843 = ~[DEFINE_QueueName]~.Front().Value.(~[TYPE@1]~)
+    ~[DEFINE_QueueName]~.Remove(~[DEFINE_QueueName]~.Front())
+}
+~[VAR_~[TYPE@1]~@1]~ = value7843
+~template end~
+
+~template queue_poll_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_CONST_ToQueue]~
+~[DEFINE_Add_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+element := ~[DEFINE_QueueName]~.Front()
+if element != nil {
+    ~[VAR_~[TYPE@1]~@1]~ = element.Value.(~[TYPE@1]~)
+    ~[DEFINE_QueueName]~.Remove(element)
+}
+~template end~
+
+~template queue_poll_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_Add_CONST_ToQueue]~
+~[DEFINE_Add_CONST_ToQueue]~
+element := ~[DEFINE_QueueName]~.Front()
+if element != nil {
+    ~[VAR_~[TYPE@1]~@1]~ = element.Value.(~[TYPE@1]~)
+    ~[DEFINE_QueueName]~.Remove(element)
+}
+~template end~
+
+~template queue_poll_all_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+value7847 := ~[CONST_~[TYPE@1]~]~
+for ~[DEFINE_QueueName]~.Len() > 0 {
+    element := ~[DEFINE_QueueName]~.Front()
+    if element != nil {
+        value7847 = element.Value.(~[TYPE@1]~)
+        ~[DEFINE_QueueName]~.Remove(element)
+    }
+}
+~[VAR_~[TYPE@1]~@1]~ = value7847
+~template end~
+
+~template two_queues_positive start~
+sourceQueue := list.New()
+targetQueue := list.New()
+sourceQueue.PushBack(~[EXPR_~[TYPE@1]~]~)
+sourceQueue.PushBack(~[EXPR_~[TYPE@1]~]~)
+targetQueue.PushBack(~[VAR_~[TYPE@1]~@1]~)
+targetQueue.PushBack(~[EXPR_~[TYPE@1]~]~)
+for sourceQueue.Len() > 0 {
+    element := sourceQueue.Front()
+    if element != nil {
+        targetQueue.PushBack(element.Value)
+        sourceQueue.Remove(element)
+    }
+}
+~[VAR_~[TYPE@1]~@1]~ = targetQueue.Front().Value.(~[TYPE@1]~)
+~template end~
+
+~template queue_contains_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+value7845 := ~[CONST_~[TYPE@1]~]~
+for e := ~[DEFINE_QueueName]~.Front(); e != nil; e = e.Next() {
+    if e.Value == ~[VAR_~[TYPE@1]~@1]~ {
+        value7845 = e.Value.(~[TYPE@1]~)
+        break
+    }
+}
+~[VAR_~[TYPE@1]~@1]~ = value7845
+~template end~
+
+~template queue_remove_if_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+for e := ~[DEFINE_QueueName]~.Front(); e != nil; {
+    next := e.Next()
+    if e.Value == ~[CONST_~[TYPE@1]~@1]~ {
+        ~[DEFINE_QueueName]~.Remove(e)
+    }
+    e = next
+}
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_QueueName]~.Front().Value.(~[TYPE@1]~)
+~template end~
+
+~main body end~

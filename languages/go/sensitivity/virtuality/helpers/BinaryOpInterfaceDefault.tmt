@@ -1,0 +1,72 @@
+~class BinaryOpInterface start~
+
+type BinaryOpInterface interface {
+    InterfaceCall(l, r string) string
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefaultBase start~
+
+type BinaryOpInterfaceDefaultBase interface {
+    InterfaceCall(l, r string) string
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefault1 start~
+
+type BinaryOpInterfaceDefault1 interface{
+    InterfaceCall(l, r string) string
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefault1Implementation start~
+
+type BinaryOpInterfaceDefault1Implementation struct{}
+
+func (b BinaryOpInterfaceDefault1Implementation) InterfaceCall(l, r string) string {
+    return l
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefault2 start~
+
+type BinaryOpInterfaceDefault2 interface{
+    InterfaceCall(l, r string) string
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefault2Implementation start~
+
+type BinaryOpInterfaceDefault2Implementation struct {
+    BinaryOpInterfaceDefault2
+}
+
+func (b BinaryOpInterfaceDefault2Implementation) InterfaceCall(l, r string) string {
+    return r
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefault start~
+
+type BinaryOpInterfaceDefault interface {
+    BinaryOpInterfaceDefault1
+    BinaryOpInterfaceDefault2
+}
+
+~class end~
+
+~class BinaryOpInterfaceDefaultImplementation start~
+
+type BinaryOpInterfaceDefaultImplementation struct{}
+
+func (b BinaryOpInterfaceDefaultImplementation) InterfaceCall(l, r string) string {
+    return ""
+}
+
+~class end~

@@ -1,0 +1,7 @@
+~[EXPR_bool]~ -> ~[EXPR_bool]~ && ~[EXPR_bool]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ && ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ && !~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool]~ || ~[EXPR_bool]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ || ~[EXPR_bool@1]~
+~[EXPR_bool]~ -> ~[EXPR_bool@1]~ || !~[EXPR_bool@1]~
+~[EXPR_bool]~ -> (~[EXPR_bool]~) && (~[EXPR_bool]~)
