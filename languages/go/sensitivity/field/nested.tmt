@@ -1,9 +1,6 @@
 ~main body start~
 ~helper import sensitivity/field/helpers/NestedFields~
 
-~imports start~
-import "fmt"
-~imports end~
 
 ~template nested_field_simple_positive start~
 nested7231 := NewNestedFields1(~[VAR_string@1]~)

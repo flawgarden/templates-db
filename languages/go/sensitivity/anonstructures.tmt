@@ -1,0 +1,129 @@
+~main body start~
+~helper functions start~
+
+~function createPoint start~
+func createPoint(x, y string) struct {
+    X string
+    Y string
+} {
+    return struct {
+        X string
+        Y string
+    }{
+        X: x,
+        Y: y,
+    }
+}
+~function end~
+
+~helper functions end~
+
+~template simple_anonymous_structure_positive start~
+simpleStructure := struct {
+    Field1 string
+    Field2 string
+}{
+    Field1: ~[VAR_string@1]~,
+    Field2:  ~[CONST_string]~,
+}
+
+~[VAR_string@1]~ = simpleStructure.Field1
+~template end~
+
+~template simple_anonymous_structure_negative start~
+simpleStructure := struct {
+    Field1 string
+    Field2 string
+}{
+    Field1: ~[VAR_string@1]~,
+    Field2:  ~[CONST_string]~,
+}
+
+~[VAR_string@1]~ = simpleStructure.Field2
+~template end~
+
+~template anonymous_structure_with_nested_fields_positive start~
+car := struct {
+    Make  string
+    Model string
+    Specs struct {
+        Year int
+        Color string
+    }
+}{
+    Make:  "Toyota",
+    Model: "X5 AMG",
+    Specs: struct {
+        Year  int
+        Color string
+    }{
+        Year:  2020,
+        Color: ~[VAR_string@1]~,
+    },
+}
+
+~[VAR_string@1]~ = car.Specs.Color
+~template end~
+
+~template anonymous_structure_with_nested_fields_negative start~
+car := struct {
+    Make  string
+    Model string
+    Specs struct {
+        Year int
+        Color string
+    }
+}{
+    Make:  "Toyota",
+    Model: "X5 AMG",
+    Specs: struct {
+        Year  int
+        Color string
+    }{
+        Year:  2020,
+        Color: ~[VAR_string@1]~,
+    },
+}
+
+~[VAR_string@1]~ = car.Make
+~template end~
+
+
+~template anonymous_structure_in_slice_positive start~
+people := []struct {
+    Name string
+    Age  int
+}{
+    {Name: ~[VAR_string@1]~, Age: 30},
+    {Name: "Bob", Age: 25},
+}
+
+~[VAR_string@1]~ = people[0].Name
+~template end~
+
+~template anonymous_structure_in_slice_negative start~
+people := []struct {
+    Name string
+    Age  int
+}{
+    {Name: ~[VAR_string@1]~, Age: 30},
+    {Name: "Bob", Age: 25},
+}
+
+~[VAR_string@1]~ = people[1].Name
+~template end~
+
+~template anonymous_structure_as_return_value_positive start~
+point := createPoint(~[VAR_string@1]~, ~[CONST_string]~)
+~[VAR_string@1]~ = point.X
+~template end~
+
+~template anonymous_structure_as_return_value_negative start~
+point := createPoint(~[VAR_string@1]~, ~[CONST_string]~)
+~[VAR_string@1]~ = point.X
+~template end~
+
+
+
+
+~main body end~

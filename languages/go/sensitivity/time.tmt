@@ -1,0 +1,14 @@
+~main body start~
+
+~imports start~
+import "time"
+~imports end~
+
+~template simple_time_neutral start~
+time := time.Now()
+if time.Hour() > 12 {
+    ~[VAR_string]~ = "fixed_string"
+}
+~template end~
+
+~main body end~

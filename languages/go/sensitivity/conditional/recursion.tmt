@@ -38,11 +38,6 @@ func paramOrEmptyMutual2(value int, param string) string {
 
 ~helper functions end~
 
-~imports start~
-import (
-    "fmt"
-)
-~imports end~
 
 ~template recursion_simple_positive start~
 ~[VAR_string@1]~ = paramOrEmpty(len(~[VAR_string@1]~), ~[VAR_string@1]~)

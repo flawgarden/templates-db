@@ -1,30 +1,25 @@
 ~extensions start~
 ~extensions import *~
 
-~[MACRO_SetName]~ -> set787231
-~[MACRO_Create_Set]~ -> ~[MACRO_SetName]~ := make(map[~[TYPE@1]~]struct{})
+~[DEFINE_SetName]~ -> set787231
+~[DEFINE_Create_Set]~ -> ~[DEFINE_SetName]~ := make(map[~[TYPE@1]~]struct{})
 
-~[MACRO_Add_EXPR_ToSet]~ -> ~[MACRO_SetName]~[~[EXPR_~[TYPE@1]~]~] = struct{}{}
-~[MACRO_Add_Fixed_EXPR_ToSet]~ -> ~[MACRO_SetName]~[~[EXPR_~[TYPE@1]~@1]~] = struct{}{}
-~[MACRO_Add_Fixed_VAR_ToSet]~ -> ~[MACRO_SetName]~[~[VAR_~[TYPE@1]~@1]~] = struct{}{}
-~[MACRO_Add_Fixed_CONST_ToSet]~ -> ~[MACRO_SetName]~[~[CONST_~[TYPE@1]~@1]~] = struct{}{}
-~[MACRO_Add_CONST_ToSet]~ -> ~[MACRO_SetName]~[~[CONST_~[TYPE@1]~]~] = struct{}{}
+~[DEFINE_Add_EXPR_ToSet]~ -> ~[DEFINE_SetName]~[~[EXPR_~[TYPE@1]~]~] = struct{}{}
+~[DEFINE_Add_Fixed_EXPR_ToSet]~ -> ~[DEFINE_SetName]~[~[EXPR_~[TYPE@1]~@1]~] = struct{}{}
+~[DEFINE_Add_Fixed_VAR_ToSet]~ -> ~[DEFINE_SetName]~[~[VAR_~[TYPE@1]~@1]~] = struct{}{}
+~[DEFINE_Add_Fixed_CONST_ToSet]~ -> ~[DEFINE_SetName]~[~[CONST_~[TYPE@1]~@1]~] = struct{}{}
+~[DEFINE_Add_CONST_ToSet]~ -> ~[DEFINE_SetName]~[~[CONST_~[TYPE@1]~]~] = struct{}{}
 
 ~extensions end~
 
 ~main body start~
 
-~imports start~
-import (
-    "fmt"
-)
-~imports end~
 
 ~template set_add_simple_positive start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
 ~[VAR_~[TYPE@1]~@1]~ = func() ~[TYPE@1]~ {
-    for k := range ~[MACRO_SetName]~ {
+    for k := range ~[DEFINE_SetName]~ {
         return k
     }
     return ~[CONST_~[TYPE@1]~]~
@@ -32,10 +27,10 @@ import (
 ~template end~
 
 ~template set_add_simple_negative start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_Fixed_CONST_ToSet]~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
 ~[VAR_~[TYPE@1]~@1]~ = func() ~[TYPE@1]~ {
-    for k := range ~[MACRO_SetName]~ {
+    for k := range ~[DEFINE_SetName]~ {
         return k
     }
     return ~[CONST_~[TYPE@1]~]~
@@ -43,12 +38,12 @@ import (
 ~template end~
 
 ~template set_remove_simple_positive start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_Fixed_EXPR_ToSet]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
-delete(~[MACRO_SetName]~, ~[EXPR_~[TYPE@1]~@1]~)
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_EXPR_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+delete(~[DEFINE_SetName]~, ~[EXPR_~[TYPE@1]~@1]~)
 ~[VAR_~[TYPE@1]~@1]~ = func() ~[TYPE@1]~ {
-    for k := range ~[MACRO_SetName]~ {
+    for k := range ~[DEFINE_SetName]~ {
         return k
     }
     return ~[CONST_~[TYPE@1]~]~
@@ -56,12 +51,12 @@ delete(~[MACRO_SetName]~, ~[EXPR_~[TYPE@1]~@1]~)
 ~template end~
 
 ~template set_remove_simple_negative start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_Fixed_EXPR_ToSet]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
-delete(~[MACRO_SetName]~, ~[VAR_~[TYPE@1]~@1]~)
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_EXPR_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+delete(~[DEFINE_SetName]~, ~[VAR_~[TYPE@1]~@1]~)
 ~[VAR_~[TYPE@1]~@1]~ = func() ~[TYPE@1]~ {
-    for k := range ~[MACRO_SetName]~ {
+    for k := range ~[DEFINE_SetName]~ {
         return k
     }
     return ~[CONST_~[TYPE@1]~]~
@@ -69,41 +64,41 @@ delete(~[MACRO_SetName]~, ~[VAR_~[TYPE@1]~@1]~)
 ~template end~
 
 ~template set_contains_positive start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_EXPR_ToSet]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_EXPR_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
 var value7844 ~[TYPE@1]~ = ~[CONST_~[TYPE@1]~]~
-if _, exists := ~[MACRO_SetName]~[~[VAR_~[TYPE@1]~@1]~]; exists {
+if _, exists := ~[DEFINE_SetName]~[~[VAR_~[TYPE@1]~@1]~]; exists {
     value7844 = ~[VAR_~[TYPE@1]~@1]~
 }
 ~[VAR_~[TYPE@1]~@1]~ = value7844
 ~template end~
 
 ~template set_contains_negative start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_CONST_ToSet]~
-~[MACRO_Add_CONST_ToSet]~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_CONST_ToSet]~
+~[DEFINE_Add_CONST_ToSet]~
 var value7845 ~[TYPE@1]~ = ~[CONST_~[TYPE@1]~]~
-if _, exists := ~[MACRO_SetName]~[~[VAR_~[TYPE@1]~@1]~]; exists {
+if _, exists := ~[DEFINE_SetName]~[~[VAR_~[TYPE@1]~@1]~]; exists {
     value7845 = ~[VAR_~[TYPE@1]~@1]~
 }
 ~[VAR_~[TYPE@1]~@1]~ = value7845
 ~template end~
 
 ~template set_size_positive start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_EXPR_ToSet]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
-if len(~[MACRO_SetName]~) != 2 {
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_EXPR_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+if len(~[DEFINE_SetName]~) != 2 {
     ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~
 }
 ~template end~
 
 ~template set_size_negative start~
-~[MACRO_Create_Set]~
-~[MACRO_Add_EXPR_ToSet]~
-~[MACRO_Add_Fixed_VAR_ToSet]~
-if len(~[MACRO_SetName]~) == 2 {
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_EXPR_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+if len(~[DEFINE_SetName]~) == 2 {
     ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~
 }
 ~template end~

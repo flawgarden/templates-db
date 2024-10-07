@@ -2,9 +2,6 @@
 ~helper import sensitivity/field/helpers/StringHolder~
 ~helper import sensitivity/lambdas/helpers/UnaryOpMutationInterface~
 
-~imports start~
-import "fmt"
-~imports end~
 
 ~template unary_lambda_mutation_positive start~
 s23423 := ~[VAR_string@1]~

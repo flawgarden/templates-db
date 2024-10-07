@@ -1,10 +1,6 @@
 ~main body start~
 ~helper import sensitivity/virtuality/helpers/BinaryOpInterfaceDefault~
 
-~imports start~
-import "fmt"
-~imports end~
-
 ~template binary_op_interface_default1_positive start~
 var a12341 BinaryOpInterfaceDefault1 = &BinaryOpInterfaceDefault1Implementation{}
 ~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "")

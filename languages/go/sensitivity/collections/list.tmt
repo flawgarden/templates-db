@@ -11,12 +11,6 @@
 
 ~main body start~
 
-~imports start~
-import (
-    "fmt"
-)
-~imports end~
-
 ~template list_set_positive start~
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_VAR_ToList]~

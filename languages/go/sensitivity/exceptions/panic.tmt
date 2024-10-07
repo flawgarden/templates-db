@@ -47,7 +47,6 @@ func handlePanic(err *error) {
 ~imports start~
 import (
     "errors"
-    "fmt"
 )
 ~imports end~
 

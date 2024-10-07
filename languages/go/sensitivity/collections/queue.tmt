@@ -16,7 +16,6 @@
 ~imports start~
 import (
     "container/list"
-    "fmt"
 )
 ~imports end~
 

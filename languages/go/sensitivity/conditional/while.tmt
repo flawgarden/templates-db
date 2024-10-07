@@ -4,12 +4,6 @@
 
 ~main body start~
 
-~imports start~
-import (
-    "fmt"
-)
-~imports end~
-
 ~template while_operator_positive start~
 tmpUnique42 := ~[VAR_string@1]~
 for ~[EXPR_bool]~ {

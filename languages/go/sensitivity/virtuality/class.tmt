@@ -1,9 +1,6 @@
 ~main body start~
 ~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
 
-~imports start~
-import "fmt"
-~imports end~
 
 ~template derived_binary_op1_positive start~
 var a12341 BaseBinaryOpClass = &DerivedBinaryOpClass1{}
