@@ -1,0 +1,213 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import "sync"
+~imports end~
+
+~template channel_string_positive start~
+message123 := make(chan string, 1)
+message123 <- ~[VAR_string@1]~
+
+var wg sync.WaitGroup
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    rmsg := <-message123
+    message123 <- rmsg + "constant_string"
+}()
+
+wg.Wait()
+
+~[VAR_string@1]~ = <-message123
+~template end~
+
+~template channel_string_negative start~
+message123 := make(chan string, 1)
+message123 <- ~[VAR_string@1]~
+
+var wg sync.WaitGroup
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    _ = <-message123
+    message123 <- "constant_string"
+}()
+
+wg.Wait()
+
+~[VAR_string@1]~ = <-message123
+~template end~
+
+~template channel_struct_positive start~
+dataChannel := make(chan Data, 1)
+dataChannel <- Data{Value: ~[VAR_string@1]~}
+
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    data := <-dataChannel
+    data.Value += "suffix"
+    dataChannel <- data
+}()
+
+wg.Wait()
+
+readData := <-dataChannel
+~[VAR_string@1]~ = readData.Value
+~template end~
+
+~template channel_struct_negative start~
+dataChannel := make(chan Data, 1)
+dataChannel <- Data{Value: ~[VAR_string@1]~}
+
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    data := <-dataChannel
+    data.Value = "constant_string"
+    dataChannel <- data
+}()
+
+wg.Wait()
+
+readData := <-dataChannel
+~[VAR_string@1]~ = readData.Value
+~template end~
+
+~template channel_struct_data_int_positive start~
+dataChannel := make(chan DataInt, 1)
+dataChannel <- DataInt{Value: 1}
+
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    data := <-dataChannel
+    data.Value += 1
+    dataChannel <- data
+}()
+
+wg.Wait()
+
+result := <-dataChannel
+if (result.Value == 1) {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~template channel_struct_data_int_negative start~
+dataChannel := make(chan DataInt, 1)
+dataChannel <- DataInt{Value: 1}
+
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    data := <-dataChannel
+    data.Value += 1
+    dataChannel <- data
+}()
+
+wg.Wait()
+
+result := <-dataChannel
+if (result.Value == 2) {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~template channel_bool_positive start~
+flag := make(chan bool, 1)
+flag <- false
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    val := <-flag
+    flag <- !val
+}()
+
+wg.Wait()
+if readValue := <-flag; !readValue {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~template channel_bool_negative start~
+flag := make(chan bool, 1)
+flag <- false
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    val := <-flag
+    flag <- !val
+}()
+
+wg.Wait()
+if readValue := <-flag; readValue {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~template channel_with_cycle_positive start~
+dataChannel := make(chan int, 5)
+dataChannel <- 3
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    ind123 := <- dataChannel
+    for i:=0; i < ind123; i++ {
+        dataChannel <- i
+    }
+    close(dataChannel)
+}()
+
+wg.Wait()
+readData := 0
+for d := range dataChannel {
+    readData = d
+}
+if readData != 2 {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~template channel_with_cycle_negative start~
+dataChannel := make(chan int, 5)
+dataChannel <- 3
+var wg sync.WaitGroup
+wg.Add(1)
+
+go func() {
+    defer wg.Done()
+    ind123 := <- dataChannel
+    for i:=0; i < ind123; i++ {
+        dataChannel <- i
+    }
+    close(dataChannel)
+}()
+
+wg.Wait()
+readData := 0
+for d := range dataChannel {
+    readData = d
+}
+if readData != 2 {
+    ~[VAR_string]~ = "constant_string"
+}
+~template end~
+
+~main body end~

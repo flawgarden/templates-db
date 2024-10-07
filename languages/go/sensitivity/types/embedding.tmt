@@ -1,0 +1,64 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/types/helpers/Base~
+~helper import sensitivity/types/helpers/AnonFields~
+
+
+~template embedding_simple_positive start~
+d123 := Derived{
+    Base: Base{Value: ~[VAR_string@1]~},
+}
+~[VAR_string@1]~ = d123.Value
+~template end~
+
+~template embedding_simple_negative start~
+d123 := Derived{
+    Base: Base{Value: ~[VAR_string@1]~},
+}
+d123.Value = "const_string"
+~[VAR_string@1]~ = d123.Value
+~template end~
+
+~template embedding_method_not_override_positive start~
+d := Derived{
+    Base: Base{Value: ~[VAR_string@1]~},
+}
+~[VAR_string@1]~ = d.Concat("prefix", ~[VAR_string@1]~)
+~template end~
+
+~template embedding_anonymous_fields_positive start~
+a := AnonFieldHolder{
+    Value2: "const_str",
+    Anon: Anon{
+        Value1: ~[VAR_string@1]~,
+    },
+}
+~[VAR_string@1]~ = a.Value1
+~template end~
+
+~template embedding_anonymous_fields_negative start~
+a := AnonFieldHolder{
+    Value2: "const_str",
+    Anon: Anon{
+        Value1: ~[VAR_string@1]~,
+    },
+}
+~[VAR_string@1]~ = a.Value2
+~template end~
+
+~template embedding_field_shadowing_positive start~
+d := Derived2{Value: ~[VAR_string@1]~}
+~[VAR_string@1]~ = d.Value
+~template end~
+
+~template embedding_field_shadowing_negative start~
+d := Derived2{Value: ~[VAR_string@1]~}
+~[VAR_string@1]~ = d.Base.Value
+~template end~
+
+
+
+~main body end~

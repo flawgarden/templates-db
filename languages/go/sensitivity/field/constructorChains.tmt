@@ -1,0 +1,19 @@
+~main body start~
+~helper import sensitivity/field/helpers/ConstructorChains~
+
+~template constructor_chains_positive start~
+cc := NewConstructorChainsWithText(~[VAR_string@1]~)
+~[VAR_string@1]~ = cc.GetText(true)
+~template end~
+
+~template constructor_chains_negative start~
+cc := NewConstructorChains()
+~[VAR_string@1]~ = cc.GetText(true)
+~template end~
+
+~template constructor_chains_neutral start~
+cc := NewConstructorChainsWithParams(~[EXPR_bool]~, ~[VAR_string@1]~)
+~[VAR_string@1]~ = cc.GetText(~[EXPR_bool]~)
+~template end~
+
+~main body end~
