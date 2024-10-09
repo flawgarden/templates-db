@@ -1,0 +1,26 @@
+~main body start~
+~helper import sensitivity/reflection/helpers/ReflectionHelper~
+
+~imports start~
+import (
+    "reflect"
+)
+~imports end~
+
+~template simple_reflection_positive start~
+rh := NewReflectionHelper(~[VAR_string@1]~)
+v := reflect.ValueOf(rh)
+field := v.Elem().Field(0)
+field.Set(reflect.ValueOf(~[VAR_string@1]~))
+~[VAR_string@1]~ = rh.GetValue()
+~template end~
+
+~template simple_reflection_negative start~
+rh := NewReflectionHelper(~[VAR_string@1]~)
+v := reflect.ValueOf(rh)
+field := v.Elem().Field(0)
+field.Set(reflect.ValueOf(~[CONST_string]~))
+~[VAR_string@1]~ = rh.GetValue()
+~template end~
+
+~main body end~

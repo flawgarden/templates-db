@@ -5,13 +5,11 @@ class SuperInterface(ABC):
 ~class end~
 
 ~class SubInterface start~
-from abc import ABC
-class SubInterface(ABC, SuperInterface):
+class SubInterface(SuperInterface):
     pass
 ~class end~
 
 ~class SideInterface start~
-from abc import ABC
 class SideInterface(ABC):
     pass
 ~class end~

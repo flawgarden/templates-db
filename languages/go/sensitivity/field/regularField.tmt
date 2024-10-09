@@ -1,0 +1,17 @@
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+
+
+~template class_with_string_field_positive start~
+sh := NewStringHolder()
+sh.value = ~[VAR_string@1]~
+~[VAR_string@1]~ = sh.value
+~template end~
+
+~template class_with_string_field_negative start~
+sh := NewStringHolder()
+sh.value = ""
+~[VAR_string]~ = sh.value
+~template end~
+
+~main body end~

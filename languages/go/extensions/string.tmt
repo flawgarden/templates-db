@@ -1,0 +1,49 @@
+~[EXPR_bool]~ -> len(~[EXPR_string]~) == 0
+~[EXPR_bool]~ -> len(~[VAR_string@1]~) == 0 && strings.Contains(~[VAR_string@1]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string@1]~ != nil && strings.Contains(~[EXPR_string@1]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~ == ~[EXPR_string]~
+~[EXPR_bool]~ -> strings.EqualFold(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> strings.Compare(~[EXPR_string]~, ~[EXPR_string]~) == 0
+~[EXPR_bool]~ -> strings.Compare(~[EXPR_string@1]~, ~[EXPR_string@1]~) == 0
+~[EXPR_bool]~ -> ~[EXPR_string@1]~ != nil && ~[EXPR_string@1]~[~[CONST_int]~] == ~[CONST_char]~
+~[EXPR_bool]~ -> strings.HasSuffix(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> strings.Index(~[EXPR_string]~, ~[EXPR_string]~) >= 0
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_string]~, ~[EXPR_string]~)
+
+~[EXPR_string]~ -> strings.Replace(~[EXPR_string]~, ~[EXPR_char]~, ~[EXPR_char]~, -1)
+~[EXPR_string]~ -> strings.Replace(~[EXPR_string]~, "/", ".", -1)
+~[EXPR_string]~ -> ""
+~[EXPR_string]~ -> strings.Join([]string{~[EXPR_string]~, ~[EXPR_string]~}, "")
+~[EXPR_string]~ -> ~[EXPR_string]~ // исправьте опечатку с 'intert'
+~[EXPR_string]~ -> ~[EXPR_string]~[~[EXPR_int]~:]
+~[EXPR_string]~ -> ~[EXPR_string]~[~[EXPR_int]~:~[EXPR_int]~]
+~[EXPR_string]~ -> strings.ToLower(~[EXPR_string]~)
+~[EXPR_string]~ -> string(~[EXPR_string]~) // необходимо использовать для преобразования byte
+~[EXPR_string]~ -> strings.ToUpper(~[EXPR_string]~)
+~[EXPR_string]~ -> strings.TrimSpace(~[EXPR_string]~)
+
+~[EXPR_int]~ -> len(~[EXPR_string]~)
+~[EXPR_int]~ -> int(~[EXPR_string]~[~[EXPR_int]~])
+~[EXPR_int]~ -> int(~[EXPR_string]~[~[EXPR_int]~ - 1])
+~[EXPR_int]~ -> strings.Compare(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_int]~ -> strings.Compare(strings.ToLower(~[EXPR_string]~), strings.ToLower(~[EXPR_string]~))
+~[EXPR_int]~ -> strings.IndexByte(~[EXPR_string]~, ~[EXPR_char]~)
+~[EXPR_int]~ -> strings.IndexByte(~[EXPR_string]~, ~[EXPR_char]~)
+~[EXPR_int]~ -> strings.Index(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_int]~ -> strings.Index(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_int]~ -> strings.LastIndexByte(~[EXPR_string]~, ~[EXPR_char]~)
+~[EXPR_int]~ -> strings.LastIndexByte(~[EXPR_string]~, ~[EXPR_char]~)
+~[EXPR_int]~ -> strings.LastIndex(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_int]~ -> strings.LastIndex(~[EXPR_string]~, ~[EXPR_string]~)
+
+~[EXPR_char]~ -> ~[EXPR_string]~[~[EXPR_int]~]
+
+~[EXPR_char\[\]]~ -> []rune(~[EXPR_string]~)
+
+~[EXPR_byte\[\]]~ -> []byte(~[EXPR_string]~)
+~[EXPR_byte\[\]]~ -> []byte(~[EXPR_string]~)
+
+~[MACRO_Any_string]~ -> ~[EXPR_string]~
+~[MACRO_Any_string]~ -> ~[VAR_string]~
+~[MACRO_Any_string]~ -> ~[CONST_string]~

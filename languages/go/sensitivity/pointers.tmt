@@ -1,0 +1,117 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function addSuffix start~
+func addSuffix(s *string, suf string) {
+	*s = *s + suf
+}
+~function end~
+
+~function addSuffixDoublePointer start~
+func addSuffixDoublePointer(s **string, suf *string) {
+	**s = **s + *suf
+}
+~function end~
+
+~function addSuffixDoublePointerBroken start~
+func addSuffixDoublePointerBroken(s **string, suf *string) {
+	*s = new(string)
+	**s = **s + *suf
+}
+~function end~
+
+~function swapStrings start~
+func swapStrings(a, b *string) {
+	temp := *a
+	*a = *b
+	*b = temp
+}
+~function end~
+
+~function removeSpaces start~
+func removeSpaces(s *string) {
+    *s = strings.ReplaceAll(*s, " ", "")
+}
+~function end~
+
+
+~helper functions end~
+
+~template string_pointer_simple_positive start~
+addSuffix(&~[VAR_string]~, "_suffix")
+~template end~
+
+~template string_pointer_simple_negative start~
+str123 := "str123"
+addSuffix(&str123, "_suffix")
+~[VAR_string]~ = str123
+~template end~
+
+~template double_string_pointer_positive start~
+ptr123 := &~[VAR_string@1]~
+str123 := "suffix"
+addSuffixDoublePointer(&ptr123, &str123)
+~template end~
+
+~template double_string_pointer_negative start~
+ptr123 := &~[VAR_string@1]~
+str123 := "suffix"
+addSuffixDoublePointerBroken(&ptr123, &str123)
+~[VAR_string@1]~ = *ptr123
+~template end~
+
+~template swap_strings_positive start~
+str123 := "const_string"
+swapStrings(&~[VAR_string@1]~, &str123)
+~[VAR_string@1]~ = str123
+~template end~
+
+~template swap_strings_negative start~
+str123 := "const_string"
+swapStrings(&~[VAR_string@1]~, &str123)
+~template end~
+
+~template remove_spaces_positive start~
+removeSpaces(&~[VAR_string]~)
+~template end~
+
+~template arr_pointer_positive start~
+var arr123 = []string{~[VAR_string@1]~, ~[CONST_string]~, ~[CONST_string]~}
+var ptr123 *[]string = &arr123
+~[VAR_string@1]~ = (*ptr123)[0]
+~template end~
+
+~template arr_pointer_negative start~
+var arr123 = []string{~[VAR_string@1]~, ~[CONST_string]~, ~[CONST_string]~}
+var ptr123 *[]string = &arr123
+~[VAR_string@1]~ = (*ptr123)[1]
+~template end~
+
+~template pointer_init_positive start~
+var ptr123 *string = new(string)
+*ptr123 = ~[VAR_string@1]~
+~[VAR_string@1]~ = *ptr123
+~template end~
+
+~template pointer_init_negative start~
+var ptr123 *string = new(string)
+var ptr234 *string = new(string)
+*ptr123 = ~[VAR_string@1]~
+ptr123 = ptr234
+~[VAR_string@1]~ = *ptr123
+~template end~
+
+~template pointer_init2_positive start~
+var ptr123 *string = new(string)
+var ptr234 *string = new(string)
+*ptr234 = ~[VAR_string@1]~
+ptr123 = ptr234
+~[VAR_string@1]~ = *ptr123
+~template end~
+
+~main body end~

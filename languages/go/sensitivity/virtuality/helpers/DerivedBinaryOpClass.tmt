@@ -1,0 +1,42 @@
+~class BaseBinaryOpClass start~
+
+type BaseBinaryOpClass interface{
+    VirtualCall(l string, r string) string
+}
+
+~class end~
+~class DerivedBinaryOpClass1 start~
+
+type DerivedBinaryOpClass1 struct {
+    BaseBinaryOpClass
+}
+
+func (d DerivedBinaryOpClass1) VirtualCall(l string, r string) string {
+    return l
+}
+
+~class end~
+
+~class DerivedBinaryOpClass2 start~
+
+type DerivedBinaryOpClass2 struct {
+    BaseBinaryOpClass
+}
+
+func (d DerivedBinaryOpClass2) VirtualCall(l string, r string) string {
+    return r
+}
+
+~class end~
+
+~class DerivedBinaryOpClassDefault start~
+
+type DerivedBinaryOpClassDefault struct {
+    BaseBinaryOpClass
+}
+
+func (d DerivedBinaryOpClassDefault) VirtualCall(l string, r string) string {
+    return ""
+}
+
+~class end~

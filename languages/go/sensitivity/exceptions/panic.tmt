@@ -1,0 +1,135 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function raisePanic start~
+func raisePanic() error {
+    panic("PANIC")
+}
+~function end~
+
+~function divide_simple start~
+func divide_simple(num int) int {
+	return 1 / num
+}
+~function end~
+
+~function dereferencing start~
+func dereferencing(num *int) int {
+	return *num
+}
+~function end~
+
+~function getElWithIndex start~
+func getElWithIndex(ind int) error {
+	slice := []int{1, 2, 3}
+	_ = slice[ind]
+	return nil
+}
+~function end~
+
+~function handlePanic start~
+func handlePanic(err *error) {
+	if r := recover(); r != nil {
+		// Преобразуем panic в error
+		*err = errors.New(fmt.Sprint(r))
+	}
+}
+~function end~
+
+
+~helper functions end~
+
+~imports start~
+import (
+    "errors"
+)
+~imports end~
+
+~template simple_panic_positive start~
+var err error
+func() {
+    defer handlePanic(&err) // Отложенный вызов для обработки паники
+    raisePanic()
+}()
+if err != nil {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+} else {
+    ~[VAR_string@1]~ = "777"
+}
+~template end~
+
+~template simple_panic_negative start~
+var err error
+func() {
+    defer handlePanic(&err) // Отложенный вызов для обработки паники
+    raisePanic()
+}()
+if err != nil {
+    ~[VAR_string@1]~ = "777"
+} else {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+}
+~template end~
+
+
+~template arithmetic_panic_positive start~
+var err error
+func() {
+    defer handlePanic(&err) // Отложенный вызов для обработки паники
+    divide_simple(0)
+}()
+if err != nil {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+} else {
+    ~[VAR_string@1]~ = "777"
+}
+~template end~
+
+~template arithmetic_panic_negative start~
+var err error
+func() {
+    defer handlePanic(&err) // Отложенный вызов для обработки паники
+    divide_simple(1)
+}()
+if err != nil {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+} else {
+    ~[VAR_string@1]~ = "777"
+}
+~template end~
+
+~template dereferencing_panic_positive start~
+var err error
+func() {
+		defer handlePanic(&err) // Отложенный вызов для обработки паники
+		dereferencing(new(int))
+}()
+if err != nil {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+} else {
+    ~[VAR_string@1]~ = "777"
+}
+~template end~
+
+~template dereferencing_panic_negative start~
+var err error
+func() {
+		defer handlePanic(&err) // Отложенный вызов для обработки паники
+		a := 1
+		ptr := &a
+		dereferencing(ptr)
+}()
+if err != nil {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "suffix"
+} else {
+    ~[VAR_string@1]~ = "777"
+}
+~template end~
+
+
+~main body end~

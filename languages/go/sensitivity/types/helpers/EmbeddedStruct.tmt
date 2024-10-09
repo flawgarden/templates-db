@@ -1,0 +1,5 @@
+~class EmbeddedStruct start~
+type EmbeddedStruct struct {
+    Field1 string
+}
+~class end~
