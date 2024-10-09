@@ -116,8 +116,7 @@ tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
 tuple2 = (~[CONST_~[TYPE@1]~]~,)
 a, b = tuple1, tuple2
 a, b = b, a
-if a == (~[CONST_~[TYPE@1]~]~,):
-    ~[VAR_~[TYPE@1]~@1]~ = b[0]
+~[VAR_~[TYPE@1]~@1]~ = b[0]
 ~template end~
 
 ~template swap_values_with_tuple_negative start~
@@ -125,8 +124,7 @@ tuple1 = (~[VAR_~[TYPE@1]~@1]~,)
 tuple2 = (~[CONST_~[TYPE@1]~]~,)
 a, b = tuple1, tuple2
 a, b = b, a
-if a == (~[CONST_~[TYPE@1]~]~,):
-    ~[VAR_~[TYPE@1]~@1]~ = a[0]
+~[VAR_~[TYPE@1]~@1]~ = a[0]
 ~template end~
 
 ~template tuple_negative_index_access_negative start~

@@ -58,7 +58,7 @@ except RuntimeError:
 w = Wrapper(~[VAR_str@1]~)
 task1 = SettingTask(w, "")
 task2 = SettingTask(w, ~[VAR_str@1]~)
-task2.start();
+task2.start()
 try:
     task2.join()
 except RuntimeError:
@@ -91,7 +91,7 @@ except RuntimeError:
 ~template null_and_restore_condvar_positive start~
 a = NullAndRestore(~[VAR_str@1]~)
 thread1 = Thread(target=(lambda: a.null_method()))
-thread1 = Thread(target=(lambda: a.restore()))
+thread2 = Thread(target=(lambda: a.restore()))
 thread1.start()
 thread2.start()
 try:
