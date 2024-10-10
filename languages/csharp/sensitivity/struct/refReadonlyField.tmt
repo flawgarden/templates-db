@@ -1,0 +1,25 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> structRefRdField12321
+
+~[DEFINE_AnyField]~ -> str
+~[DEFINE_AnyField]~ -> strRef
+~[DEFINE_AnyField]~ -> strRd
+~[DEFINE_AnyField]~ -> strRefRd
+~[DEFINE_AnyField]~ -> strRdRef
+~extensions end~
+
+~main body start~
+~helper import objects/struct/helpers/RefReadonlyFieldStruct~
+
+~imports start~
+using HelperStructs;
+~imports end~
+
+~template ref_or_and_readonly_field_positive start~
+var ~[DEFINE_VarName]~ = new RefReadonlyFieldStruct(ref ~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.~[DEFINE_AnyField]~;
+~template end~
+
+~main body end~

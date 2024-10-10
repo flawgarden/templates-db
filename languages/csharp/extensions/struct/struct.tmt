@@ -1,0 +1,11 @@
+~[EXPR_string]~ -> ~[VAR_SimpleRecord]~.str
+~[EXPR_int]~ -> ~[VAR_SimpleRecord]~.count
+
+~[EXPR_string]~ -> ~[VAR_ReadonlyStruct]~.str
+~[EXPR_int]~ -> ~[VAR_ReadonlyStruct]~.count
+
+~[EXPR_string]~ -> ~[VAR_RefStruct]~.str
+~[EXPR_int]~ -> ~[VAR_RefStruct]~.count
+
+~[EXPR_string]~ -> ~[VAR_SerializableSkippedStringStruct]~.str
+~[EXPR_int]~ -> ~[VAR_SerializableSkippedStringStruct]~.count

@@ -1,0 +1,35 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> structNormal12321
+~[DEFINE_StructType]~ -> SimpleStruct
+~[DEFINE_StructType]~ -> RefStruct
+~[DEFINE_StructType]~ -> ReadonlyStruct
+~[DEFINE_StructType]~ -> SerializableSkippedStringStruct
+
+~[DEFINE_CreateAnyStruct_FixedVar]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_StructType@1]~(~[VAR_string@1]~, ~[CONST_int]~);
+~[DEFINE_CreateAnyStruct_Const]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_StructType@1]~(~[CONST_string]~, ~[CONST_int]~);
+~extensions end~
+
+~main body start~
+~helper import objects/struct/helpers/SimpleStruct~
+~helper import objects/struct/helpers/ReadonlyStruct~
+~helper import objects/struct/helpers/RefStruct~
+~helper import objects/struct/helpers/SerializableStruct~
+
+~imports start~
+using HelperStructs;
+using System.Runtime.InteropServices;
+~imports end~
+
+~template struct_get_positive start~
+~[DEFINE_CreateAnyStruct_FixedVar]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.str;
+~template end~
+
+~template struct_get_negative start~
+~[DEFINE_CreateAnyStruct_Const]~
+~[VAR_string]~ = ~[DEFINE_VarName]~.str;
+~template end~
+
+~main body end~
