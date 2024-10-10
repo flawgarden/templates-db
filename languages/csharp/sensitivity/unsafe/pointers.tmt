@@ -29,8 +29,8 @@ fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~)
 ~template end~
 
 ~template pointer_assignment_negative start~
-~[TYPE@1]~ tmpVar156 = ~[EXPR_~[TYPE@1]~]~;
-fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~)
+~[TYPE@1]~ tmpVar156 = ~[CONST_~[TYPE@1]~]~;
+fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~]~)
 {
     *ptr524 = tmpVar156;
 }
