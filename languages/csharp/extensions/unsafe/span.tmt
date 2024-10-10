@@ -1,0 +1,15 @@
+~[EXPR_~[TYPE@1]~\[\]]~ -> ~[EXPR_Span<~[TYPE@1]~>]~.ToArray()
+
+~[EXPR_Span<~[TYPE@1]~>]~ -> stackalloc ~[TYPE@1]~[~[CONST_int]~]
+~[EXPR_Span<~[TYPE@1]~>]~ -> new ~[TYPE@1]~[~[EXPR_int]~]
+~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~\[\]]~)
+~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~\[\]]~, ~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_IntPtr]~.ToPointer(), ~[EXPR_int]~)
+~[EXPR_Span<~[TYPE@1]~>]~ -> ~[EXPR_Span<~[TYPE@1]~>]~.Slice(~[EXPR_int]~)
+~[EXPR_Span<~[TYPE@1]~>]~ -> ~[EXPR_Span<~[TYPE@1]~>]~.Slice(~[EXPR_int]~, ~[EXPR_int]~)
+
+~[EXPR_bool]~ -> ~[EXPR_Span<~[TYPE]~>]~.IsEmpty
+
+~[EXPR_int]~ -> ~[EXPR_Span<~[TYPE]~>]~.Length
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Span<~[TYPE@1]~>]~[~[EXPR_int]~]

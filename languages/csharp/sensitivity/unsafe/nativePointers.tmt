@@ -1,0 +1,45 @@
+~main body start~
+
+~imports start~
+using System.Runtime.InteropServices;
+using System.Text;
+~imports end~
+
+~template unmanaged_store_positive start~
+IntPtr tmpBlock42 = (IntPtr)Marshal.StringToHGlobalAnsi(~[VAR_string@1]~);
+IntPtr tmpBlock24 = (IntPtr)Marshal.StringToHGlobalAnsi("");
+~[VAR_string@1]~ = Marshal.PtrToStringAnsi(tmpBlock42);
+Marshal.FreeHGlobal(tmpBlock42);
+Marshal.FreeHGlobal(tmpBlock24);
+~template end~
+
+~template unmanaged_store_negative start~
+IntPtr tmpBlock42 = (IntPtr)Marshal.StringToHGlobalAnsi(~[VAR_string@1]~);
+IntPtr tmpBlock24 = (IntPtr)Marshal.StringToHGlobalAnsi("");
+~[VAR_string@1]~ = Marshal.PtrToStringAnsi(tmpBlock24);
+Marshal.FreeHGlobal(tmpBlock42);
+Marshal.FreeHGlobal(tmpBlock24);
+~template end~
+
+~template unmanaged_copy_positive start~
+byte[] bytes100500 = Encoding.UTF8.GetBytes(~[VAR_string@1]~);
+var length425 = bytes100500.Length;
+IntPtr tmpBlock42 = Marshal.AllocHGlobal(length425);
+Marshal.Copy(bytes100500, 0, tmpBlock42, length425);
+Marshal.Copy(tmpBlock42, bytes100500, 0, length425);
+~[VAR_string@1]~ = Encoding.UTF8.GetString(bytes100500);
+Marshal.FreeHGlobal(tmpBlock42);
+~template end~
+
+~template unmanaged_copy_negative start~
+byte[] bytes100500 = Encoding.UTF8.GetBytes(~[VAR_string@1]~);
+Array.Clear(bytes100500);
+var length425 = bytes100500.Length;
+IntPtr tmpBlock42 = Marshal.AllocHGlobal(length425);
+Marshal.Copy(bytes100500, 0, tmpBlock42, length425);
+Marshal.Copy(tmpBlock42, bytes100500, 0, length425);
+~[VAR_string@1]~ = Encoding.UTF8.GetString(bytes100500);
+Marshal.FreeHGlobal(tmpBlock42);
+~template end~
+
+~main body end~
