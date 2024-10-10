@@ -1,0 +1,122 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ForgetFixedVarValue]~ -> ~[VAR_string@1]~ = "";
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function ref_out_function_assign start~
+public void FuncOutAssign(string value, out string param)
+{
+    param = value;
+}
+~function end~
+
+~function ref_out_function_overwrite start~
+public void FuncOutOverwrite(string value, out string param)
+{
+    param = "";
+}
+~function end~
+
+~function ref_in_function_return start~
+public string FuncInReturn(in string value)
+{
+    return value;
+}
+~function end~
+
+~function ref_in_function_return_empty start~
+public string FuncInReturnEmpty(in string value)
+{
+    return "";
+}
+~function end~
+
+~function ref_function_assign start~
+public void FuncRefAssign(string value, ref string param)
+{
+    param = value;
+}
+~function end~
+
+~function ref_function_do_nothing start~
+public void FuncRefDoNothing(string value, ref string param)
+{
+    return;
+}
+~function end~
+
+~function ref_readonly_function_return start~
+public string FuncRefReadonlyReturn(ref readonly string param)
+{
+    return param;
+}
+~function end~
+
+~function ref_readonly_function_return_empty start~
+public string FuncRefReadonlyEmpty(ref readonly string param)
+{
+    return "";
+}
+~function end~
+
+~helper functions end~
+
+~template ref_param_out_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+FuncOutAssign(copy41412, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_out_negative start~
+var copy41412 = ~[VAR_string@1]~;
+FuncOutAssign(~[CONST_string]~, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_out_negative_2 start~
+var copy41412 = ~[VAR_string@1]~;
+FuncOutOverwrite(copy41412, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_in_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = FuncInReturn(in copy41412);
+~template end~
+
+~template ref_param_in_negative start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = FuncInReturnEmpty(in copy41412);
+~template end~
+
+~template ref_param_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+FuncRefAssign(copy41412, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_negative_1 start~
+var copy41412 = ~[VAR_string@1]~;
+FuncRefAssign(~[CONST_string]~, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_negative_2 start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+FuncRefDoNothing(copy41412, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_readonly_param_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = FuncRefReadonlyReturn(ref copy41412);
+~template end~
+
+~template ref_readonly_param_negative start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = FuncRefReadonlyReturnEmpty(ref copy41412);
+~template end~
+
+~main body end~
