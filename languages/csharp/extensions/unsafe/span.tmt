@@ -4,9 +4,9 @@
 ~[EXPR_Span<~[TYPE@1]~>]~ -> new ~[TYPE@1]~[~[EXPR_int]~]
 ~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~\[\]]~)
 ~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_~[TYPE@1]~\[\]]~, ~[EXPR_int]~, ~[EXPR_int]~)
-~[EXPR_Span<~[TYPE@1]~>]~ -> new Span<~[TYPE@1]~>(~[EXPR_IntPtr]~.ToPointer(), ~[EXPR_int]~)
 ~[EXPR_Span<~[TYPE@1]~>]~ -> ~[EXPR_Span<~[TYPE@1]~>]~.Slice(~[EXPR_int]~)
 ~[EXPR_Span<~[TYPE@1]~>]~ -> ~[EXPR_Span<~[TYPE@1]~>]~.Slice(~[EXPR_int]~, ~[EXPR_int]~)
+~[EXPR_Span<~[TYPE@1]~>]~ -> CollectionsMarshal.AsSpan(~[EXPR_List<~[TYPE@1]~>]~)
 
 ~[EXPR_bool]~ -> ~[EXPR_Span<~[TYPE]~>]~.IsEmpty
 
