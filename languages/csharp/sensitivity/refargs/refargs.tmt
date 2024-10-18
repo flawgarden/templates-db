@@ -2,6 +2,9 @@
 ~extensions import *~
 
 ~[DEFINE_ForgetFixedVarValue]~ -> ~[VAR_string@1]~ = "";
+
+~[DEFINE_FuncType]~ -> Func
+~[DEFINE_FuncType]~ -> Lambda
 ~extensions end~
 
 ~main body start~
@@ -64,59 +67,99 @@ public string FuncRefReadonlyEmpty(ref readonly string param)
 }
 ~function end~
 
+~function ref_out_lambda_assign start~
+delegate void LOutAssign(string value, out string param);
+LOutAssign LambdaOutAssign = (string value, out string param) => param = value;
+~function end~
+
+~function ref_out_lambda_overwrite start~
+delegate void LOutOverwrite(string value, out string param);
+LOutOverwrite LambdaOutOverwrite(string value, out string param) => param = "";
+~function end~
+
+~function ref_in_lambda_return start~
+delegate string LInReturn(in string value);
+LInReturn LambdaInReturn(in string value) => value;
+~function end~
+
+~function ref_in_lambda_return_empty start~
+delegate string LInReturnEmpty(in string value);
+LInReturnEmpty LambdaInReturnEmpty(in string value) => "";
+~function end~
+
+~function ref_lambda_assign start~
+delegate void LRefAssign(string value, ref string param);
+LRefAssign LambdaRefAssign(string value, ref string param) => param = value;
+~function end~
+
+~function ref_lambda_do_nothing start~
+delegate void LRefDoNothing(string value, ref string param);
+LRefDoNothing LambdaRefDoNothing(string value, ref string param) => { return; };
+~function end~
+
+~function ref_readonly_lambda_return start~
+delegate string LRefReadonlyReturn(ref readonly string param);
+LRefReadonlyReturn LambdaRefReadonlyReturn(ref readonly string param) => param;
+~function end~
+
+~function ref_readonly_lambda_return_empty start~
+delegate string LRefReadonlyEmpty(ref readonly string param)
+LRefReadonlyEmpty LambdaRefReadonlyEmpty(ref readonly string param) => "";
+~function end~
+
 ~helper functions end~
 
 ~template ref_param_out_positive start~
 var copy41412 = ~[VAR_string@1]~;
 ~[DEFINE_ForgetFixedVarValue]~
-FuncOutAssign(copy41412, out ~[VAR_string@1]~);
+~[DEFINE_FuncType]~OutAssign(copy41412, out ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_param_out_negative start~
 var copy41412 = ~[VAR_string@1]~;
-FuncOutAssign(~[CONST_string]~, out ~[VAR_string@1]~);
+~[DEFINE_FuncType]~OutAssign(~[CONST_string]~, out ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_param_out_negative_2 start~
 var copy41412 = ~[VAR_string@1]~;
-FuncOutOverwrite(copy41412, out ~[VAR_string@1]~);
+~[DEFINE_FuncType]~OutOverwrite(copy41412, out ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_param_in_positive start~
 var copy41412 = ~[VAR_string@1]~;
-~[VAR_string@1]~ = FuncInReturn(in copy41412);
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~InReturn(in copy41412);
 ~template end~
 
 ~template ref_param_in_negative start~
 var copy41412 = ~[VAR_string@1]~;
-~[VAR_string@1]~ = FuncInReturnEmpty(in copy41412);
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~InReturnEmpty(in copy41412);
 ~template end~
 
 ~template ref_param_positive start~
 var copy41412 = ~[VAR_string@1]~;
 ~[DEFINE_ForgetFixedVarValue]~
-FuncRefAssign(copy41412, ref ~[VAR_string@1]~);
+~[DEFINE_FuncType]~RefAssign(copy41412, ref ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_param_negative_1 start~
 var copy41412 = ~[VAR_string@1]~;
-FuncRefAssign(~[CONST_string]~, ref ~[VAR_string@1]~);
+~[DEFINE_FuncType]~RefAssign(~[CONST_string]~, ref ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_param_negative_2 start~
 var copy41412 = ~[VAR_string@1]~;
 ~[DEFINE_ForgetFixedVarValue]~
-FuncRefDoNothing(copy41412, ref ~[VAR_string@1]~);
+~[DEFINE_FuncType]~RefDoNothing(copy41412, ref ~[VAR_string@1]~);
 ~template end~
 
 ~template ref_readonly_param_positive start~
 var copy41412 = ~[VAR_string@1]~;
-~[VAR_string@1]~ = FuncRefReadonlyReturn(ref copy41412);
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~RefReadonlyReturn(ref copy41412);
 ~template end~
 
 ~template ref_readonly_param_negative start~
 var copy41412 = ~[VAR_string@1]~;
-~[VAR_string@1]~ = FuncRefReadonlyReturnEmpty(ref copy41412);
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~RefReadonlyReturnEmpty(ref copy41412);
 ~template end~
 
 ~main body end~
