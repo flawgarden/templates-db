@@ -1,0 +1,42 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+~function AsyncId start~
+async Task<string> AsyncId(string x) {
+    return x;
+}
+~function end~
+~helper functions end~
+
+~imports start~
+using System.Threading.Tasks;
+~imports end~
+
+~template simple_async_negative start~
+await Task.Run(() =>
+{
+    ~[VAR_string]~ = "";
+});
+~template end~
+
+~template simple_async_positive start~
+var tmp42 = await Task.Run(() => ~[VAR_string@1]~);
+await Task.Run(() =>
+{
+    ~[VAR_string@1]~ = tmp42;
+});
+~template end~
+
+~template simple_async_call_negative start~
+~[VAR_string]~ = await AsyncId("42");
+~template end~
+
+~template simple_async_call_positive start~
+~[VAR_string@1]~ = await AsyncId(~[VAR_string@1]~);
+~template end~
+
+~main body end~
