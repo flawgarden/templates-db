@@ -1,0 +1,43 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template define_simple_negative start~
+#if SOME_DEFINED
+~[VAR_string]~ = "";
+#endif
+~template end~
+
+~template define_expr_negative start~
+#if SOME_NOT_DEFINED || !SOME_NOT_DEFINED
+~[VAR_string]~ = "";
+#endif
+~template end~
+
+~template define_expr_positive start~
+#if SOME_NOT_DEFINED && !SOME_NOT_DEFINED
+~[VAR_string]~ = "";
+#endif
+~template end~
+
+~template define_if_negative start~
+var tmp42 = ~[VAR_string@1]~; 
+#if SOME_DEFINED
+~[VAR_string@1]~ = "";
+#else
+~[VAR_string@1]~ = tmp42;
+#endif
+~template end~
+
+~template define_if_positive start~
+var tmp42 = ~[VAR_string@1]~; 
+#if SOME_NOT_DEFINED
+~[VAR_string@1]~ = "";
+#else
+~[VAR_string@1]~ = tmp42;
+#endif
+~template end~
+
+~main body end~
