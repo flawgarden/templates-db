@@ -13,6 +13,17 @@
 
 ~main body start~
 
+~unsupported template set_except_with_positive~
+~unsupported template set_except_with_negative~
+~unsupported template set_intersect_with_positive~
+~unsupported template set_intersect_with_negative~
+~unsupported template set_xor_positive~
+~unsupported template set_xor_negative~
+~unsupported template set_super_positive~
+~unsupported template set_super_negative~
+~unsupported template set_subset_positive~
+~unsupported template set_subset_negative~
+
 ~template set_add_simple_positive start~
 ~[DEFINE_Create_Set]~
 ~[DEFINE_Add_Fixed_VAR_ToSet]~
