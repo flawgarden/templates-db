@@ -1,0 +1,22 @@
+~[EXPR_bool]~ -> ~[VAR_~[TYPE]~]~ is null
+~[EXPR_bool]~ -> ~[VAR_~[TYPE]~]~ is not null
+~[EXPR_bool]~ -> ~[VAR_Nullable<~[TYPE]~>]~.HasValue
+
+~[EXPR_bool]~ -> ~[EXPR_int]~ > null
+~[EXPR_bool]~ -> ~[EXPR_int]~ < null
+~[EXPR_bool]~ -> ~[EXPR_int]~ >= null
+~[EXPR_bool]~ -> ~[EXPR_int]~ <= null
+~[EXPR_bool]~ -> ~[EXPR_int]~ == null
+
+~[EXPR_bool]~ -> null > ~[EXPR_int]~
+~[EXPR_bool]~ -> null < ~[EXPR_int]~
+~[EXPR_bool]~ -> null >= ~[EXPR_int]~
+~[EXPR_bool]~ -> null <= ~[EXPR_int]~
+~[EXPR_bool]~ -> null == ~[EXPR_int]~
+
+~[EXPR_bool]~ -> null > null
+~[EXPR_bool]~ -> null < null
+~[EXPR_bool]~ -> null >= null
+~[EXPR_bool]~ -> null <= null
+~[EXPR_bool]~ -> null == null
+ 
