@@ -53,14 +53,6 @@ list787234.add(0, "");
 ~[VAR_~[TYPE@1]~@1]~ = (~[TYPE@1]~) ~[DEFINE_ListName]~.toArray()[0];
 ~template end~
 
-~template list_filter_neutral start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_VAR_ToList]~
-~[DEFINE_Add_EXPR_ToList]~
-~[DEFINE_Add_CONST_ToList]~
-~[VAR_~[TYPE@1]~@1]~  = ~[DEFINE_ListName]~.stream().filter(s -> ~[EXPR_Boolean]~).findFirst().get();
-~template end~
-
 ~template list_union_positive start~
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_VAR_ToList]~
