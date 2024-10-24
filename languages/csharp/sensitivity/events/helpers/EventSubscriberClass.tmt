@@ -1,6 +1,8 @@
 ~class RewriteOnEvent start~
 namespace DelegateHelpers;
 
+using System;
+
 public class EventSubscriberRewriter
 {
     public string str;

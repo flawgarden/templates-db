@@ -1,9 +1,3 @@
-~extensions start~
-~[DEFINE_VarName]~ -> staticmagic9128
-
-~[DEFINE_Create]~
-~extensions end~
-
 ~main body start~
 
 ~helper functions start~

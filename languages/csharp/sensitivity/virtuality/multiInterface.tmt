@@ -1,11 +1,11 @@
 ~extensions start~
 ~extensions import *~
-~extensions end~
 
 ~[DEFINE_VarName]~ -> multinterface12
 
 ~[DEFINE_ClassWith2Positive]~ -> var ~[DEFINE_VarName]~ = new MultipleInterfaceClass_2Pos();
 ~[DEFINE_ClassWith2Negative]~ -> var ~[DEFINE_VarName]~ = new MultipleInterfaceClass_2Neg();
+~extensions end~
 
 ~main body start~
 

@@ -1,4 +1,4 @@
-~class start~
+~class PositiveClass start~
 namespace HelperOperators;
 
 public class SAIPositive : StaticAbstractInterface<SAIPositive>
@@ -18,7 +18,7 @@ public class SAIPositive : StaticAbstractInterface<SAIPositive>
 }
 ~class end~
 
-~class start~
+~class NegativeClass start~
 namespace HelperOperators;
 
 public class SAINegative : StaticAbstractInterface<SAINegative>
@@ -46,7 +46,7 @@ public class SAINegative : StaticAbstractInterface<SAINegative>
 }
 ~class end~
 
-~class start~
+~class ReversedClass start~
 namespace HelperOperators;
 
 public class SAIReversed : StaticAbstractInterface<SAIReversed>
