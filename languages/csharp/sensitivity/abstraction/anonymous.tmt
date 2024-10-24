@@ -1,18 +1,18 @@
 ~extensions start~
 ~extensions import *~
 ~[DEFINE_AnonTypeVarName]~ -> anon42342
+~[DEFINE_MutatedName]~ -> mutated919
 
 ~[DEFINE_GoodAccessor]~ -> Good
-~[DEFINE_GoodAccessor]~ -> Item2
 ~[DEFINE_BadAccessor]~ -> Bad
-~[DEFINE_BadAccessor]~ -> Item1
 
 ~[DEFINE_CreateNamedTuple]~ -> var ~[DEFINE_AnonTypeVarName]~ = (Bad: ~[VAR_string@1]~, Good: ~[CONST_string]~);
 ~[DEFINE_CreateNamedTuple]~ -> (string Bad, string Good) ~[DEFINE_AnonTypeVarName]~ = (~[VAR_string@1]~, ~[CONST_string]~);
-~[DEFINE_CreateNamedTuple]~ -> var ~[DEFINE_AnonTypeVarName]~ = (Bad, Good: ~[VAR_string@1]~, ~[CONST_string]~);
+
+~[DEFINE_CreateSimpleTuple]~ -> var ~[DEFINE_AnonTypeVarName]~ = (~[VAR_string@1]~, ~[CONST_string]~);
 
 ~[DEFINE_CreateTupleFirstFixed]~ -> ~[DEFINE_CreateNamedTuple]~
-~[DEFINE_CreateTupleFirstFixed]~ -> var ~[DEFINE_AnonTypeVarName]~ = (~[VAR_string@1]~, ~[CONST_string]~);
+~[DEFINE_CreateTupleFirstFixed]~ -> ~[DEFINE_CreateSimpleTuple]~
 
 ~[DEFINE_Positive]~ -> Bad
 ~[DEFINE_Negative]~ -> Good
@@ -25,12 +25,12 @@
 ~main body start~
 
 ~template tuple_assignment_positive start~
-~[DEFINE_CreateTupleFirstFixed]~
+~[DEFINE_CreateSimpleTuple]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.Item1;
 ~template end~
 
 ~template tuple_assignment_negative start~
-~[DEFINE_CreateTupleFirstFixed]~
+~[DEFINE_CreateSimpleTuple]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.Item2;
 ~template end~
 
@@ -46,14 +46,14 @@
 
 ~template named_anon_type_mutation_positive start~
 ~[DEFINE_CreateNamedAnonVar]~
-var mutated919 = ~[DEFINE_AnonTypeVarName]~ with { Good = ~[VAR_string@1]~ };
-~[VAR_string@1]~ = mutated.~[DEFINE_GoodAccessor]~;
+var ~[DEFINE_MutatedName]~ = ~[DEFINE_AnonTypeVarName]~ with { Good = ~[VAR_string@1]~ };
+~[VAR_string@1]~ = ~[DEFINE_MutatedName]~.~[DEFINE_GoodAccessor]~;
 ~template end~
 
 ~template named_anon_type_mutation_negative start~
 ~[DEFINE_CreateNamedAnonVar]~
-var mutated919 = ~[DEFINE_AnonTypeVarName]~ with { Bad = ~[CONST_string]~ };
-~[VAR_string@1]~ = mutated.~[DEFINE_BadAccessor]~;
+var ~[DEFINE_MutatedName]~ = ~[DEFINE_AnonTypeVarName]~ with { Bad = ~[CONST_string]~ };
+~[VAR_string@1]~ = ~[DEFINE_MutatedName]~.~[DEFINE_BadAccessor]~;
 ~template end~
 
 ~template named_tuples_self_assignment_positive start~

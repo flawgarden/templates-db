@@ -5,7 +5,7 @@
 ~[DEFINE_VirtualizedName]~ -> virtual666
 
 ~[DEFINE_CreateInherited]~ -> var ~[DEFINE_InstanceName]~ = new ClassInherited();
-~[DEFINE_CreateInherited]~ -> var ~[DEFINE_InstanceName]~ = new SealedClassMember();
+~[DEFINE_CreateInherited]~ -> var ~[DEFINE_InstanceName]~ = new SealedMemberClass();
 ~[DEFINE_CreateInverted]~ -> var ~[DEFINE_InstanceName]~ = new ClassInverted();
 
 ~[DEFINE_CreateVirtualized]~ -> AClass ~[DEFINE_VirtualizedName]~ = (AClass)~[DEFINE_InstanceName]~;
