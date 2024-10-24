@@ -5,7 +5,7 @@ public static class MyExtensions
 {
     public static string ReturnThyself(this string you)
     {
-        return you
+        return you;
     }
 
     public static string ReturnEmpty(this string you)
