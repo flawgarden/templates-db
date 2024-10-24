@@ -1,0 +1,4 @@
+~[EXPR_string]~ -> (~[EXPR_string]~).ReturnThyself()
+~[EXPR_string]~ -> (~[EXPR_string]~).ReturnEmpty()
+~[EXPR_string]~ -> (~[EXPR_string]~).ReturnArg(~[EXPR_string]~)
+~[EXPR_string]~ -> (~[EXPR_string]~).ReturnAdd(~[EXPR_string]~)
