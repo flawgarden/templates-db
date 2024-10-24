@@ -1,6 +1,8 @@
 ~class DisposableHolder start~
 namespace DisposableHelpers;
 
+using System;
+
 public class DisposableStringHolder : IDisposable
 {
     public string value;

@@ -2,7 +2,7 @@
 ~extensions import *~
 
 ~[DEFINE_HolderName]~ -> disposed9201
-~[DEFINE_CreateHolderFixed]~ -> var ~[DEFINE_HolderName]~ = DisposableStringHolder(~[VAR_string@1]~);
+~[DEFINE_CreateHolderFixed]~ -> var ~[DEFINE_HolderName]~ = new DisposableStringHolder(~[VAR_string@1]~);
 ~extensions end~
 
 ~main body start~
