@@ -1,0 +1,20 @@
+~main body start~
+~helper import sensitivity/field/helpers/SealedStringHolder~
+
+~imports start~
+using HelperFields;
+~imports end~
+
+~template class_with_sealed_string_field_positive start~
+var sh = new SealedStringHolder();
+sh.value = ~[VAR_string@1]~;
+~[VAR_string@1]~ = sh.value;
+~template end~
+
+~template class_with_sealed_string_field_negative start~
+var sh = new SealedStringHolder();
+sh.value = "";
+~[VAR_string]~ = sh.value;
+~template end~
+
+~main body end~
