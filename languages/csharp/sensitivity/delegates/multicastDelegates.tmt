@@ -1,0 +1,91 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_OuterScopeVar]~ -> outer1094
+
+~[DEFINE_DelegateVar]~ -> action194392
+
+~[DEFINE_ActionAdd_Positive]~ -> Action<string> ~[DEFINE_DelegateVar]~_pos (string s) => ~[DEFINE_OuterScopeVar]~ += s;
+~[DEFINE_ActionAdd_Negative]~ -> Action<string> ~[DEFINE_DelegateVar]~_neg (string s) => ~[DEFINE_OuterScopeVar]~ += " ";
+
+~[DEFINE_MulticastAction_PN]~ -> Action<string> ~[DEFINE_DelegateVar]~ = ~[DEFINE_DelegateVar]~_pos + ~[DEFINE_DelegateVar]~_neg;
+~extensions end~
+
+~main body start~
+
+~template multicast_call_positive start~
+~[DEFINE_ActionAdd_Positive]~
+~[DEFINE_ActionAdd_Negative]~
+~[DEFINE_MulticastAction_PN]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template multicast_call_negative start~
+~[DEFINE_ActionAdd_Positive]~
+~[DEFINE_ActionAdd_Negative]~
+~[DEFINE_MulticastAction_PN]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+~[DEFINE_DelegateVar]~(~[CONST_string]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template subtracted_multicast_call_positive start~
+~[DEFINE_ActionAdd_Positive]~
+~[DEFINE_ActionAdd_Negative]~
+~[DEFINE_MulticastAction_PN]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+~[DEFINE_DelegateVar]~ -= ~[DEFINE_DelegateVar]~_neg;
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template subtracted_multicast_call_negative start~
+~[DEFINE_ActionAdd_Positive]~
+~[DEFINE_ActionAdd_Negative]~
+~[DEFINE_MulticastAction_PN]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+~[DEFINE_DelegateVar]~ -= ~[DEFINE_DelegateVar]~_pos;
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template added_multicast_call_positive_1 start~
+~[DEFINE_ActionAdd_Positive]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+Action<string> ~[DEFINE_DelegateVar]~;
+~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_pos;
+
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template added_multicast_call_positive_2 start~
+~[DEFINE_ActionAdd_Negative]~
+var ~[DEFINE_OuterScopeVar]~ = ~[VAR_srting@1]~;
+
+Action<string> ~[DEFINE_DelegateVar]~;
+~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_neg;
+
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~template added_multicast_call_negative start~
+~[DEFINE_ActionAdd_Negative]~
+var ~[DEFINE_OuterScopeVar]~ = "";
+
+Action<string> ~[DEFINE_DelegateVar]~;
+~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_neg;
+
+~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
+~template end~
+
+~main body end~
