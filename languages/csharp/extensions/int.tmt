@@ -4,3 +4,13 @@
 ~[EXPR_int]~ -> 1000
 ~[EXPR_int]~ -> ~[EXPR_int]~ + ~[EXPR_int]~
 ~[EXPR_int]~ -> ~[EXPR_int]~ - ~[EXPR_int]~
+
+~[EXPR_int]~ -> 1_000
+~[EXPR_int]~ -> 1_2_3
+
+~[EXPR_int]~ -> 0xff
+~[EXPR_int]~ -> 0XFA
+~[EXPR_int]~ -> 0x1a_b
+
+~[EXPR_int]~ -> 0b1011
+~[EXPR_int]~ -> 0B1001
