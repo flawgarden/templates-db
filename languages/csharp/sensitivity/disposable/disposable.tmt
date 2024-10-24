@@ -1,0 +1,32 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_HolderName]~ -> disposed9201
+~[DEFINE_CreateHolderFixed]~ -> var ~[DEFINE_HolderName]~ = DisposableStringHolder(~[VAR_string@1]~);
+~extensions end~
+
+~main body start~
+~helper import sensitivity/disposable/helpers/DisposableStringHolder~
+
+~imports start~
+using DisposableHelpers;
+~imports end~
+
+~template disposable_interface_positive start~
+~[DEFINE_CreateHolderFixed]~
+using (~[DEFINE_HolderName]~)
+{
+    ~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
+}
+~template end~
+
+~template disposable_interface_negative start~
+~[DEFINE_CreateHolderFixed]~
+using (~[DEFINE_HolderName]~)
+{
+
+}
+~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
+~template end~
+
+~main body end~
