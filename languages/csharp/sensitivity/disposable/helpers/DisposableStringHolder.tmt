@@ -1,0 +1,18 @@
+~class DisposableHolder start~
+namespace DisposableHelpers;
+
+public class DisposableStringHolder : IDisposable
+{
+    public string value;
+
+    public DisposableStringHolder(string s)
+    {
+        value = s;
+    }
+
+    public void Dispose()
+    {
+        value = "";
+    }
+}
+~class end~
