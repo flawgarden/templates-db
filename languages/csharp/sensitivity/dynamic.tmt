@@ -1,0 +1,63 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~[DEFINE_DynamicVar]~ -> dynamic9871
+~main body start~
+
+~helper import sensitivity/field/helpers/StringHolder~
+~helper import sensitivity/field/helpers/ArrayHolder~
+
+~imports start~
+using HelperFields;
+~imports end~
+
+~template dynamic_cast_positive start~
+dynamic ~[DEFINE_DynamicVar]~ = ~[VAR_~[TYPE@1]~@1]~;
+if (~[DEFINE_DynamicVar]~ is ~[TYPE@1]~)
+{
+    ~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_DynamicVar]~;
+}
+else
+{
+    ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~;
+}
+~template end~
+
+~template dynamic_cast_negative start~
+dynamic ~[DEFINE_DynamicVar]~ = ~[VAR_~[TYPE@1]~@1]~;
+if (~[DEFINE_DynamicVar]~ is ~[TYPE@1]~)
+{
+    ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~;
+}
+else
+{
+    ~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_DynamicVar]~;
+}
+~template end~
+
+~template dynamic_binding_exception_positive start~
+try
+{
+    dynamic ~[DEFINE_DynamicVar]~ = new StringHolder(~[VAR_string@1]~);
+    ~[VAR_string@1]~ = ~[DEFINE_DynamicVar]~.value;
+}
+catch (RuntimeBinderException _)
+{
+    ~[VAR_srting@1]~ = ~[CONST_string]~;
+}
+~template end~
+
+~template dynamic_binding_exception_negative start~
+try
+{
+    dynamic ~[DEFINE_DynamicVar]~ = new ArrayHolder(~[VAR_string@1]~);
+    ~[VAR_string@1]~ = ~[DEFINE_DynamicVar]~.value;
+}
+catch (RuntimeBinderException _)
+{
+    ~[VAR_srting@1]~ = ~[CONST_string]~;
+}
+~template end~
+
+~main body end~
