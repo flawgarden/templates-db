@@ -1,6 +1,8 @@
 ~class InterfaceConstrained start~
 namespace HelperGenerics;
 
+using HelperClasses;
+
 public class InterfaceConstrainedClass<T> where T : BinaryOpInterface
 {
     private T chooser;
