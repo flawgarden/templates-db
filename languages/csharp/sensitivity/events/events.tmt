@@ -1,0 +1,68 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ClassicEventCaller]~ -> EventStringCaller
+~[DEFINE_ClassicEventCaller]~ -> EventClassic
+~[DEFINE_CreateSubscriberNegative]~ -> new EventSubscriberRewriter(~[CONST_string]~)
+~[DEFINE_CreateSubscriberPositive]~ -> new EventSubscriberRewriter(~[VAR_string@1]~)
+~extensions end~
+
+~main body start~
+~helper import sensitivity/events/helpers/EventCallerClass~
+~helper import sensitivity/events/helpers/EventSubscriberClass~
+~helper import sensitivity/events/helpers/EventCallerCustomClass~
+
+~imports start~
+using DelegateHelpers;
+~imports end~
+
+~template event_call_simple_positive_1 start~
+var sub1 = ~[DEFINE_CreateSubscriberNegative]~;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += sub1.Rewrite;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[VAR_string@1]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+
+~template event_call_simple_positive_2 start~
+var sub1 = ~[DEFINE_CreateSubscriberPositive]~;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += sub1.Rewrite;
+~[VAR_string@1]~ = sub1.str;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[CONST_string]~);
+~template end~
+
+~template event_call_simple_negative start~
+var sub1 = ~[DEFINE_CreateSubscriberPositive]~;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += sub1.Rewrite;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[CONST_string]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+
+~template event_call_lambda_positive start~
+var innerStr = "";
+var copy31 = ~[VAR_string@1]~;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += (string s) => innerStr = s;
+~[VAR_string@1]~ = ~[CONST_string]~;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(copy31);
+~[VAR_string@1]~ = innerStr;
+~template end~
+
+~template event_call_lambda_neutral start~
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += (string s) => ~[VAR_string@1]~ = s;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[VAR_string@1]~);
+~template end~
+
+~template event_call_lambda_negative start~
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += (string s) => ~[VAR_string]~ = s;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[CONST_string]~);
+~template end~
+
+~template event_call_unsubscribed_neutral start~
+var sub1 = ~[DEFINE_CreateSubscriberPositive]~;
+var sub2 = ~[DEFINE_CreateSubscriberNegative]~;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += sub1.Rewrite;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress += sub2.Rewrite;
+~[DEFINE_ClassicEventCaller@1]~.OnProgress -= sub1.Rewrite;
+~[DEFINE_ClassicEventCaller@1]~.ProgressCall(~[CONST_string]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+~main body end~
