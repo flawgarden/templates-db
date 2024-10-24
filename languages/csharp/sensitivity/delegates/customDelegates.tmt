@@ -23,11 +23,11 @@ SimpleDelegate ShortBodyNegative = s => "";
 ~function end~
 
 ~function delegate_static_body_positive start~
-SimpleDelegate ShortBodyPositive = static s => s;
+SimpleDelegate StaticBodyPositive = static s => s;
 ~function end~
 
 ~function delegate_static_body_negative start~
-SimpleDelegate ShortBodyNegative = static s => "";
+SimpleDelegate StaticBodyNegative = static s => "";
 ~function end~
 
 ~function delegate_explicit_return_positive start~
@@ -35,7 +35,7 @@ SimpleDelegate ExplicitReturnBodyPositive = string (string s) => s;
 ~function end~
 
 ~function delegate_explicit_return_negative start~
-SimpleDelegate ExplicitReturnShortBodyNegative = string (string s) => "";
+SimpleDelegate ExplicitReturnBodyNegative = string (string s) => "";
 ~function end~
 
 ~function delegate_typed_body_positive start~
