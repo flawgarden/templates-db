@@ -1,0 +1,55 @@
+~extensions start~
+~[DEFINE_VarName]~ -> constrained09143
+
+~[DEFINE_CreateInterfaceConstrained]~ -> var ~[DEFINE_VarName]~ = new InterfaceConstrainedClass<ImplBinaryOpInterfaceClass1>();
+~[DEFINE_CreateInheritanceConstrained]~ -> var ~[DEFINE_VarName]~ = new InheritanceConstrainedClass<DerivedBinaryOpClass1, BaseBinaryOpClass>();
+~[DEFINE_CreateNewConstrained]~ -> var ~[DEFINE_VarName]~ = new NewConstrainedClass<DerivedBinaryOpClass1>();
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/generics/helpers/InheritanceConstrainedClass~
+~helper import sensitivity/generics/helpers/NewConstrainedClass~
+~helper import sensitivity/generics/helpers/InterfaceConstrainedClass~
+
+~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterface~
+
+~imports start~
+using HelperClasses;
+using HelperGenerics;
+~imports end~
+
+~template interface_constrained_generic_class_positive start~
+~[DEFINE_CreateInterfaceConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.ChooseFrom(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template interface_constrained_generic_class_negative start~
+~[DEFINE_CreateInterfaceConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.ChooseNone(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template inheritance_constrained_generic_class_positive start~
+~[DEFINE_CreateInheritanceConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.ChooseFrom(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template inheritance_constrained_generic_class_negative start~
+~[DEFINE_CreateInheritanceConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.ChooseNone(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template new_constrained_generic_class_positive start~
+~[DEFINE_CreateInterfaceConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.GetInstance().VirtualCall(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template new_constrained_generic_class_negative start~
+~[DEFINE_CreateNewConstrained]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.GetInstance().VirtualCall(~[CONST_string]~, ~[VAR_string@1]~);
+~template end~
+
+~main body end~

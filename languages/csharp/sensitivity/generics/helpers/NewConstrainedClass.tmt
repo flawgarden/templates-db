@@ -1,0 +1,18 @@
+~class NewConstrained start~
+namespace HelperGenerics;
+
+public class NewConstrainedClass<T> where T : new(), notnull
+{
+    private T instance;
+
+    public InheritanceConstrainedClass()
+    {
+        instance = new T();
+    }
+
+    public T GetInstance()
+    {
+        return instance;
+    }
+}
+~class end~
