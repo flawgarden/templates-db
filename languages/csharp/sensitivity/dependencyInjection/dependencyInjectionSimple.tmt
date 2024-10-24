@@ -5,7 +5,7 @@
 ~[DEFINE_KeeperName]~ -> keeper14983
 
 ~[DEFINE_CreateSvc]~ -> var ~[DEFINE_SvcName]~ = new ServiceCollection();
-~[DEFINE_CreateProvider]~ -> var ~[DEFINE_ProviderName]~ = svc.BuildServiceProvider();
+~[DEFINE_CreateProvider]~ -> var ~[DEFINE_ProviderName]~ = ~[DEFINE_SvcName]~.BuildServiceProvider();
 
 ~[DEFINE_GetRetriever]~ -> var ~[DEFINE_RetrieverName]~ = ~[DEFINE_ProviderName]~.GetRequiredService<IRetriever>();
 ~[DEFINE_GetKeeper]~ -> var ~[DEFINE_KeeperName]~ = ~[DEFINE_ProviderName]~.GetRequiredService<IKeeper>();
@@ -27,7 +27,7 @@ using Microsoft.Extensions.DependencyInjection;
 ~template di_retriever_positive start~
 Give.Item = ~[VAR_string@1]~;
 ~[DEFINE_CreateSvc]~
-svc.AddSingleton<IRetriever, Give>();
+~[DEFINE_SvcName]~.AddSingleton<IRetriever, Give>();
 ~[DEFINE_CreateProvider]~
 ~[DEFINE_GetRetriever]~
 ~[VAR_string@1]~ = ~[DEFINE_Retrieve]~;
@@ -35,7 +35,7 @@ svc.AddSingleton<IRetriever, Give>();
 
 ~template di_retriever_negative start~
 ~[DEFINE_CreateSvc]~
-svc.AddSingleton<IRetriever, Hide>();
+~[DEFINE_SvcName]~.AddSingleton<IRetriever, Hide>();
 ~[DEFINE_CreateProvider]~
 ~[DEFINE_GetRetriever]~
 ~[VAR_string]~ = ~[DEFINE_Retrieve]~;
@@ -43,7 +43,7 @@ svc.AddSingleton<IRetriever, Hide>();
 
 ~template di_keeper_positive start~
 ~[DEFINE_CreateSvc]~
-svc.AddSingleton<IKeeper, Store>();
+~[DEFINE_SvcName]~.AddSingleton<IKeeper, Store>();
 Store.Vault = ~[VAR_string@1]~;
 ~[DEFINE_CreateProvider]~
 ~[DEFINE_GetKeeper]~
@@ -52,7 +52,7 @@ Store.Vault = ~[VAR_string@1]~;
 
 ~template di_keeper_negative start~
 ~[DEFINE_CreateSvc]~
-svc.AddSingleton<IKeeper, Forget>();
+~[DEFINE_SvcName]~.AddSingleton<IKeeper, Forget>();
 ~[DEFINE_CreateProvider]~
 ~[DEFINE_GetKeeper]~
 ~[VAR_string]~ = ~[DEFINE_Unstore]~;
