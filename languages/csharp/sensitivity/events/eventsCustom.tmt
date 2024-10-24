@@ -1,0 +1,43 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_CreateSubscriberNegative]~ -> new EventSubscriberRewriter(~[CONST_string]~)
+~[DEFINE_CreateSubscriberPositive]~ -> new EventSubscriberRewriter(~[VAR_string@1]~)
+~extensions end~
+
+~main body start~
+~helper import sensitivity/events/helpers/EventSubscriberClass~
+~helper import sensitivity/events/helpers/EventCallerCustomClass~
+
+~imports start~
+using DelegateHelpers;
+~imports end~
+
+~template custom_event_call_empty_add_neutral start~
+var sub1 = ~[DEFINE_CreateSubscriberPositive]~;
+EventEmptyAdd.OnProgress += sub1.Rewrite;
+EventEmptyAdd.ProgressCall(~[EXPR_string]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+
+~template custom_event_call_empty_remove_negative start~
+var sub1 = ~[DEFINE_CreateSubscriberPositive]~;
+var sub2 = ~[DEFINE_CreateSubscriberNegative]~;
+EventEmptyRemove.OnProgress += sub1.Rewrite;
+EventEmptyRemove.OnProgress += sub2.Rewrite;
+EventEmptyRemove.OnProgress -= sub1.Rewrite;
+EventEmptyRemove.ProgressCall(~[CONST_string]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+
+~template custom_event_call_empty_remove_positive start~
+var sub1 = ~[DEFINE_CreateSubscriberNegative]~;
+var sub2 = ~[DEFINE_CreateSubscriberNegative]~;
+EventEmptyRemove.OnProgress += sub1.Rewrite;
+EventEmptyRemove.OnProgress += sub2.Rewrite;
+EventEmptyRemove.OnProgress -= sub1.Rewrite;
+EventEmptyRemove.ProgressCall(~[VAR_string@1]~);
+~[VAR_string@1]~ = sub1.str;
+~template end~
+
+~main body end~
