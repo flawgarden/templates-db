@@ -1,0 +1,34 @@
+~class PositiveInterface start~
+namespace HelperClasses;
+
+public interface IPositive
+{
+    public string InterfaceCall(string s);
+}
+~class end~
+
+~class NegativeInterface start~
+namespace HelperClasses;
+
+public interface INegative
+{
+    public string InterfaceCall(string s);
+}
+~class end~
+
+~class ExplicitInterfaceClass start~
+namespace HelperClasses;
+
+public class ExplicitInterfaceClass : IPositive, INegative
+{
+    string IPositive.InterfaceCall(string s)
+    {
+        return s;
+    }
+
+    string INegative.InterfaceCall(string s)
+    {
+        return "";
+    }
+}
+~class end~
