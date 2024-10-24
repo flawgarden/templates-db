@@ -28,7 +28,7 @@ var ~[DEFINE_OuterScopeVar]~ = ~[VAR_~[TYPE@1]~]~;
 ~[DEFINE_DelegateVar]~();
 ~template end~
 
-~template action_delegate_call_negative_1 start~
+~template action_delegate_call_negative_2 start~
 var ~[DEFINE_OuterScopeVar]~ = ~[CONST_~[TYPE@1]~]~;
 ~[DEFINE_ActionReassignVar_Fixed]~
 ~[DEFINE_DelegateVar]~();
