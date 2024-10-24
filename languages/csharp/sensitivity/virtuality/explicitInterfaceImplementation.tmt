@@ -1,0 +1,23 @@
+~extensions start~
+~[DEFINE_VarName]~ -> explicit15323
+~[DEFINE_CreateExplicitClass]~ -> var ~[DEFINE_VarName]~ = new ExplicitInterfaceClass();
+~extensions end~
+
+~main body start~
+~helper import sensitivity/virtuality/helpers/ExplicitInterfaceClasses~
+
+~imports start~
+using HelperClasses;
+~imports end~
+
+~template explicit_interface_implementation_positive start~
+~[DEFINE_CreateExplicitClass]~
+~[VAR_string@1]~ = ((IPositive)~[DEFINE_VarName]~).InterfaceCall(~[VAR_string@1]~);
+~template end~
+
+~template explicit_interface_implementation_negative start~
+~[DEFINE_CreateExplicitClass]~
+~[VAR_string@1]~ = ((INegative)~[DEFINE_VarName]~).InterfaceCall(~[VAR_string@1]~);
+~template end~
+
+~main body end~
