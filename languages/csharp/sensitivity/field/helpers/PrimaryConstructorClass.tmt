@@ -1,0 +1,24 @@
+~class PrimaryConstructorClass start~
+namespace HelperFields;
+
+public class PrimaryConstructorClass(string val)
+{
+    public string Positive { get; } = val;
+    public string Negative { get; } = "";
+}
+~class end~
+
+~class PrimaryPropertiesClass start~
+namespace HelperFields;
+
+public class PrimaryPropertiesClass(string val)
+{
+    public string Positive => val;
+    public string Negative => "";
+
+    public void Append(string input)
+    {
+        val += input;
+    }
+}
+~class end~
