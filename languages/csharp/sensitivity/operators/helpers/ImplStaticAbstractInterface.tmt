@@ -9,7 +9,7 @@ public class SAIPositive : StaticAbstractInterface<SAIPositive>
 
     public string value;
 
-    public SAIPositive() : this("");
+    public SAIPositive() : this("") {}
 
     public SAIPositive(string s)
     {
@@ -31,13 +31,13 @@ public class SAINegative : StaticAbstractInterface<SAINegative>
     {
         get => _property;
         set => _property = new();
-    };
+    }
 
-    public static override SAINegative VGetInner(bool b) => _property;
+    public static SAINegative VGetInner(bool b) => _property;
 
     public string value;
 
-    public SAINegative() : this("");
+    public SAINegative() : this("") {}
 
     public SAINegative(string s)
     {
@@ -53,13 +53,13 @@ public class SAIReversed : StaticAbstractInterface<SAIReversed>
 {
     public static SAIReversed GetEmptyT() => new();
 
-    public static SAINegative ATProperty { get; set; };
+    public static SAIReversed ATProperty { get; set; }
 
-    public static override SAIReversed VGetInner(bool b) => b ? SAIReversed.GetEmptyT() : SAIReversed.AProperty;
+    public static SAIReversed VGetInner(bool b) => b ? SAIReversed.GetEmptyT() : SAIReversed.ATProperty;
 
     public string value;
 
-    public SAIReversed() : this("");
+    public SAIReversed() : this("") {}
 
     public SAIReversed(string s)
     {
