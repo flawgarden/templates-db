@@ -3,111 +3,17 @@
 
 ~[DEFINE_ForgetFixedVarValue]~ -> ~[VAR_string@1]~ = "";
 
-~[DEFINE_FuncType]~ -> Func
-~[DEFINE_FuncType]~ -> Lambda
+~[DEFINE_FuncType]~ -> RefargFunctions.Func
+~[DEFINE_FuncType]~ -> RefargFunctions.Lambda
 ~extensions end~
 
 ~main body start~
 
-~helper functions start~
+~helper import sensitivity/refargs/helpers/refargFunctions~
 
-~function ref_out_function_assign start~
-public void FuncOutAssign(string value, out string param)
-{
-    param = value;
-}
-~function end~
-
-~function ref_out_function_overwrite start~
-public void FuncOutOverwrite(string value, out string param)
-{
-    param = "";
-}
-~function end~
-
-~function ref_in_function_return start~
-public string FuncInReturn(in string value)
-{
-    return value;
-}
-~function end~
-
-~function ref_in_function_return_empty start~
-public string FuncInReturnEmpty(in string value)
-{
-    return "";
-}
-~function end~
-
-~function ref_function_assign start~
-public void FuncRefAssign(string value, ref string param)
-{
-    param = value;
-}
-~function end~
-
-~function ref_function_do_nothing start~
-public void FuncRefDoNothing(string value, ref string param)
-{
-    return;
-}
-~function end~
-
-~function ref_readonly_function_return start~
-public string FuncRefReadonlyReturn(ref readonly string param)
-{
-    return param;
-}
-~function end~
-
-~function ref_readonly_function_return_empty start~
-public string FuncRefReadonlyEmpty(ref readonly string param)
-{
-    return "";
-}
-~function end~
-
-~function ref_out_lambda_assign start~
-delegate void LOutAssign(string value, out string param);
-LOutAssign LambdaOutAssign = (string value, out string param) => param = value;
-~function end~
-
-~function ref_out_lambda_overwrite start~
-delegate void LOutOverwrite(string value, out string param);
-LOutOverwrite LambdaOutOverwrite(string value, out string param) => param = "";
-~function end~
-
-~function ref_in_lambda_return start~
-delegate string LInReturn(in string value);
-LInReturn LambdaInReturn(in string value) => value;
-~function end~
-
-~function ref_in_lambda_return_empty start~
-delegate string LInReturnEmpty(in string value);
-LInReturnEmpty LambdaInReturnEmpty(in string value) => "";
-~function end~
-
-~function ref_lambda_assign start~
-delegate void LRefAssign(string value, ref string param);
-LRefAssign LambdaRefAssign(string value, ref string param) => param = value;
-~function end~
-
-~function ref_lambda_do_nothing start~
-delegate void LRefDoNothing(string value, ref string param);
-LRefDoNothing LambdaRefDoNothing(string value, ref string param) => { return; };
-~function end~
-
-~function ref_readonly_lambda_return start~
-delegate string LRefReadonlyReturn(ref readonly string param);
-LRefReadonlyReturn LambdaRefReadonlyReturn(ref readonly string param) => param;
-~function end~
-
-~function ref_readonly_lambda_return_empty start~
-delegate string LRefReadonlyEmpty(ref readonly string param)
-LRefReadonlyEmpty LambdaRefReadonlyEmpty(ref readonly string param) => "";
-~function end~
-
-~helper functions end~
+~imports start~
+using HelperRefargs;
+~imports end~
 
 ~template ref_param_out_positive start~
 var copy41412 = ~[VAR_string@1]~;
