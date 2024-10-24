@@ -1,0 +1,25 @@
+~class InheritanceConstrained start~
+namespace HelperGenerics;
+
+public class InheritanceConstrainedClass<T, V>
+    where T : V
+    where V : BaseBinaryOpClass
+{
+    private T chooser;
+
+    public InheritanceConstrainedClass(T ch)
+    {
+        chooser = ch;
+    }
+
+    public string ChooseFrom(string l, string r)
+    {
+        return chooser.InterfaceCall(l, r);
+    }
+
+    public string ChooseNone(string l, string r)
+    {
+        return chooser.InterfaceCall("", "");
+    }
+}
+~class end~
