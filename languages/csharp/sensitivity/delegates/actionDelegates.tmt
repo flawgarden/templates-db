@@ -46,12 +46,12 @@ var ~[DEFINE_OuterScopeVar]~ = ~[CONST_~[TYPE@1]~]~;
 
 ~template binary_action_call_positive start~
 ~[DEFINE_ActionReassignVar_LeftArg]~
-~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
+~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
 ~template end~
 
 ~template binary_action_call_negative start~
 ~[DEFINE_ActionReassignVar_RightArg]~
-~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
+~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
 ~template end~
 
 ~main body end~

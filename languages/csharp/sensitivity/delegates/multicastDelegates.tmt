@@ -5,8 +5,11 @@
 
 ~[DEFINE_DelegateVar]~ -> action194392
 
-~[DEFINE_ActionAdd_Positive]~ -> Action<string> ~[DEFINE_DelegateVar]~_pos (string s) => ~[DEFINE_OuterScopeVar]~ += s;
-~[DEFINE_ActionAdd_Negative]~ -> Action<string> ~[DEFINE_DelegateVar]~_neg (string s) => ~[DEFINE_OuterScopeVar]~ += " ";
+~[DEFINE_DoNothingName]~ -> donothing235
+
+~[DEFINE_ActionAdd_Positive]~ -> Action<string> ~[DEFINE_DelegateVar]~_pos = (string s) => ~[DEFINE_OuterScopeVar]~ += s;
+~[DEFINE_ActionAdd_Negative]~ -> Action<string> ~[DEFINE_DelegateVar]~_neg = (string s) => ~[DEFINE_OuterScopeVar]~ += " ";
+~[DEFINE_DoNothingDelegate]~ -> Action<string> ~[DEFINE_DoNothingName]~ = (string s) => {};
 
 ~[DEFINE_MulticastAction_PN]~ -> Action<string> ~[DEFINE_DelegateVar]~ = ~[DEFINE_DelegateVar]~_pos + ~[DEFINE_DelegateVar]~_neg;
 ~extensions end~
@@ -14,30 +17,30 @@
 ~main body start~
 
 ~template multicast_call_positive start~
+var ~[DEFINE_OuterScopeVar]~ = "";
 ~[DEFINE_ActionAdd_Positive]~
 ~[DEFINE_ActionAdd_Negative]~
 ~[DEFINE_MulticastAction_PN]~
-var ~[DEFINE_OuterScopeVar]~ = "";
 
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
 ~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
 ~template end~
 
 ~template multicast_call_negative start~
+var ~[DEFINE_OuterScopeVar]~ = "";
 ~[DEFINE_ActionAdd_Positive]~
 ~[DEFINE_ActionAdd_Negative]~
 ~[DEFINE_MulticastAction_PN]~
-var ~[DEFINE_OuterScopeVar]~ = "";
 
 ~[DEFINE_DelegateVar]~(~[CONST_string]~);
 ~[VAR_string@1]~ = ~[DEFINE_OuterScopeVar]~;
 ~template end~
 
 ~template subtracted_multicast_call_positive start~
+var ~[DEFINE_OuterScopeVar]~ = "";
 ~[DEFINE_ActionAdd_Positive]~
 ~[DEFINE_ActionAdd_Negative]~
 ~[DEFINE_MulticastAction_PN]~
-var ~[DEFINE_OuterScopeVar]~ = "";
 
 ~[DEFINE_DelegateVar]~ -= ~[DEFINE_DelegateVar]~_neg;
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
@@ -45,10 +48,10 @@ var ~[DEFINE_OuterScopeVar]~ = "";
 ~template end~
 
 ~template subtracted_multicast_call_negative start~
+var ~[DEFINE_OuterScopeVar]~ = "";
 ~[DEFINE_ActionAdd_Positive]~
 ~[DEFINE_ActionAdd_Negative]~
 ~[DEFINE_MulticastAction_PN]~
-var ~[DEFINE_OuterScopeVar]~ = "";
 
 ~[DEFINE_DelegateVar]~ -= ~[DEFINE_DelegateVar]~_pos;
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
@@ -56,10 +59,11 @@ var ~[DEFINE_OuterScopeVar]~ = "";
 ~template end~
 
 ~template added_multicast_call_positive_1 start~
-~[DEFINE_ActionAdd_Positive]~
 var ~[DEFINE_OuterScopeVar]~ = "";
+~[DEFINE_DoNothingDelegate]~
+~[DEFINE_ActionAdd_Positive]~
 
-Action<string> ~[DEFINE_DelegateVar]~;
+Action<string> ~[DEFINE_DelegateVar]~ = ~[DEFINE_DoNothingName]~;
 ~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_pos;
 
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
@@ -67,10 +71,11 @@ Action<string> ~[DEFINE_DelegateVar]~;
 ~template end~
 
 ~template added_multicast_call_positive_2 start~
+var ~[DEFINE_OuterScopeVar]~ = ~[VAR_string@1]~;
 ~[DEFINE_ActionAdd_Negative]~
-var ~[DEFINE_OuterScopeVar]~ = ~[VAR_srting@1]~;
+~[DEFINE_DoNothingDelegate]~
 
-Action<string> ~[DEFINE_DelegateVar]~;
+Action<string> ~[DEFINE_DelegateVar]~ = ~[DEFINE_DoNothingName]~;
 ~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_neg;
 
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);
@@ -78,10 +83,11 @@ Action<string> ~[DEFINE_DelegateVar]~;
 ~template end~
 
 ~template added_multicast_call_negative start~
-~[DEFINE_ActionAdd_Negative]~
 var ~[DEFINE_OuterScopeVar]~ = "";
+~[DEFINE_DoNothingDelegate]~
+~[DEFINE_ActionAdd_Negative]~
 
-Action<string> ~[DEFINE_DelegateVar]~;
+Action<string> ~[DEFINE_DelegateVar]~ = ~[DEFINE_DoNothingName]~;
 ~[DEFINE_DelegateVar]~ += ~[DEFINE_DelegateVar]~_neg;
 
 ~[DEFINE_DelegateVar]~(~[VAR_string@1]~);

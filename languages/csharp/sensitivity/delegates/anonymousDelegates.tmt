@@ -9,12 +9,12 @@
 ~main body start~
 
 ~template get_from_argless_delegate_neutral_1 start~
-Action ~[DEFINE_AnonMethodName]~ = ~[DEFINE_ArglessDelegate]~;
+Func<string> ~[DEFINE_AnonMethodName]~ = ~[DEFINE_ArglessDelegate]~;
 ~[VAR_string@1]~ = ~[DEFINE_AnonMethodName]~();
 ~template end~
 
 ~template get_from_argless_delegate_neutral_2 start~
-Action<int, int> ~[DEFINE_AnonMethodName]~ = ~[DEFINE_ArglessDelegate]~;
+Func<int, int, string> ~[DEFINE_AnonMethodName]~ = ~[DEFINE_ArglessDelegate]~;
 ~[VAR_string@1]~ = ~[DEFINE_AnonMethodName]~(~[CONST_int]~, ~[CONST_int]~);
 ~template end~
 
