@@ -16,8 +16,8 @@
 
 ~main body start~
 
-~helper import sensitivity/dependencyInjection/helpers/ProviderInterface~
-~helper import sensitivity/dependencyInjection/helpers/StorerInterface~
+~helper import sensitivity/dependencyInjection/helpers/ProvideInterface~
+~helper import sensitivity/dependencyInjection/helpers/StoreInterface~
 
 ~imports start~
 using HelperDI;

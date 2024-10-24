@@ -24,22 +24,22 @@
 
 ~main body start~
 
-~template tuple_assignment_positive~
+~template tuple_assignment_positive start~
 ~[DEFINE_CreateTupleFirstFixed]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.Item1;
 ~template end~
 
-~template tuple_assignment_negative~
+~template tuple_assignment_negative start~
 ~[DEFINE_CreateTupleFirstFixed]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.Item2;
 ~template end~
 
-~template tuple_deconstruction_positive~
+~template tuple_deconstruction_positive start~
 ~[DEFINE_CreateTupleFirstFixed]~
 (~[VAR_string@1]~, var someOtherString3232) = ~[DEFINE_AnonTypeVarName]~;
 ~template end~
 
-~template tuple_deconstruction_negative~
+~template tuple_deconstruction_negative start~
 ~[DEFINE_CreateTupleFirstFixed]~
 (var someOtherString3232, ~[VAR_string@1]~) = ~[DEFINE_AnonTypeVarName]~;
 ~template end~
@@ -68,12 +68,12 @@ var mutated919 = ~[DEFINE_AnonTypeVarName]~ with { Bad = ~[CONST_string]~ };
 ~[VAR_string@1]~ = difNaming412.Pupa;
 ~template end~
 
-~template anonymous_type_creation_positive~
+~template anonymous_type_creation_positive start~
 ~[DEFINE_CreateAnonTypeVarName]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.~[DEFINE_Positive]~;
 ~template end~
 
-~template anonymous_type_creation_negative~
+~template anonymous_type_creation_negative start~
 ~[DEFINE_CreateAnonTypeVarName]~
 ~[VAR_string@1]~ = ~[DEFINE_AnonTypeVarName]~.~[DEFINE_Negative]~;
 ~template end~

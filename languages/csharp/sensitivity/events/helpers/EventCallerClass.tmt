@@ -1,6 +1,8 @@
 ~class EventStringCaller start~
 namespace DelegateHelpers;
 
+using System;
+
 public static class EventStringCaller
 {
     public static event Action<string>? OnProgress;

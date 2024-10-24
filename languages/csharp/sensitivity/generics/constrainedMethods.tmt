@@ -33,7 +33,7 @@ private static string InheritanceConstrainedMethod<T, V>(string l, string r)
 ~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
 ~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
 ~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
-~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterface~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
 
 ~template interface_constrained_generic_method_positive start~
 ~[VAR_string@1]~ = InterfaceConstrainedMethod<ImplBinaryOpInterfaceClass1>(~[VAR_string@1]~, ~[CONST_string]~);

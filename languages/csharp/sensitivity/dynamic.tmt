@@ -1,8 +1,8 @@
 ~extensions start~
 ~extensions import *~
-~extensions end~
 
 ~[DEFINE_DynamicVar]~ -> dynamic9871
+~extensions end~
 ~main body start~
 
 ~helper import sensitivity/field/helpers/StringHolder~

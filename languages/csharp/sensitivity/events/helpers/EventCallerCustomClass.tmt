@@ -1,6 +1,8 @@
 ~class EventEmptyAdd start~
 namespace DelegateHelpers;
 
+using System;
+
 public static class EventEmptyAdd
 {
     private static event Action<string>? _onProgress;
@@ -20,6 +22,8 @@ public static class EventEmptyAdd
 ~class EventEmptyRemove start~
 namespace DelegateHelpers;
 
+using System;
+
 public static class EventEmptyRemove
 {
     private static event Action<string>? _onProgress;
@@ -38,6 +42,8 @@ public static class EventEmptyRemove
 
 ~class EventClassic start~
 namespace DelegateHelpers;
+
+using System;
 
 public static class EventClassic
 {
