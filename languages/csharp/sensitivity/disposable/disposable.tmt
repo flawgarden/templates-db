@@ -19,12 +19,12 @@ using (~[DEFINE_HolderName]~)
 ~template end~
 
 ~template disposable_interface_declaration_inside_positive start~
-using (var ~[DEFINE_HolderName]~ = new DisposableStringHolder(~[VAR_string@1]~))
+using var ~[DEFINE_HolderName]~ = new DisposableStringHolder(~[VAR_string@1]~);
 ~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
 ~template end~
 
 ~template disposable_interface_declaration_inside_negative start~
-using (var ~[DEFINE_HolderName]~ = new DisposableStringHolder(~[CONST_string]~))
+using var ~[DEFINE_HolderName]~ = new DisposableStringHolder(~[CONST_string]~);
 ~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
 ~template end~
 
