@@ -1,0 +1,14 @@
+~[EXPR_void*]~ -> (void*)(~[EXPR_~[TYPE]~*]~)
+
+~[EXPR_~[TYPE@1]~*]~ -> &~[VAR_~[TYPE@1]~]~
+~[EXPR_~[TYPE@1]~*]~ -> (~[TYPE@1]~*)(~[EXPR_~[TYPE]~*]~)
+~[EXPR_~[TYPE@1]~*]~ -> (~[TYPE@1]~*)(~[EXPR_void*]~)
+
+~[EXPR_~[TYPE@1]~]~ -> *(~[EXPR_~[TYPE@1]~*]~)
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_~[TYPE@1]~*]~[~[CONST_int]~]
+
+~[EXPR_~[TYPE@1]~*]~ -> ~[EXPR_~[TYPE@1]~*]~ + ~[CONST_int]~
+~[EXPR_~[TYPE@1]~*]~ -> ~[EXPR_~[TYPE@1]~*]~ - ~[CONST_int]~
+
+~[EXPR_bool]~ -> (~[EXPR_~[TYPE]~*]~) == (~[EXPR_~[TYPE]~*]~)
+~[EXPR_bool]~ -> (~[EXPR_~[TYPE]~*]~) > (~[EXPR_~[TYPE]~*]~)

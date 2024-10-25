@@ -1,0 +1,24 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Runtime.InteropServices;
+~imports end~
+
+~template create_span start~
+Span<~[TYPE@1]~> span41414 = ~[EXPR_Span<~[TYPE@1]~>]~;
+~template end~
+
+~template create_span_unsafe start~
+Span<~[TYPE@1]~> span14141;
+unsafe
+{
+    ~[TYPE@1]~* tmp = stackalloc ~[TYPE@1]~[~[CONST_int@1]~];
+    span14141 = new Span<~[TYPE@1]~>(tmp, ~[CONST_int@1]~);
+}
+~template end~
+
+~main body end~
