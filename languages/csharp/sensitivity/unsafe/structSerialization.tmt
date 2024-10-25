@@ -1,0 +1,71 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> struct12321
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function serialize_to_stream start~
+public MemoryStream SerializeToStream(object obj)
+{
+    MemoryStream stream = new MemoryStream();
+    IFormatter formatter = new BinaryFormatter();
+    formatter.Serialize(stream, obj);
+    return stream;
+}
+~function end~
+
+~function deserialize_from_stream start~
+public object DeserializeFromStream(MemoryStream stream)
+{
+    IFormatter formatter = new BinaryFormatter();
+    stream.Seek(0, SeekOrigin.Begin);
+    object obj = formatter.Deserialize(stream);
+    return obj;
+}
+~function end~
+
+~helper functions end~
+
+~helper import objects/struct/helpers/SerializableStruct~
+
+~imports start~
+using HelperStructs;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+~imports end~
+
+~template serialize_struct_positive start~
+var ~[DEFINE_VarName]~ = new SerializableStruct();
+~[DEFINE_VarName]~.str = ~[VAR_string@1]~;
+var stream52432 = SerializeToStream(~[DEFINE_VarName]~);
+var object52432 = (SerializableStruct)DeserializeFromStream(stream52432);
+~[VAR_string@1]~ = object52432.str;
+~template end~
+
+~template serialize_struct_negative start~
+var ~[DEFINE_VarName]~ = new SerializableSkippedStringStruct();
+~[DEFINE_VarName]~.str = ~[VAR_string@1]~;
+var stream52432 = SerializeToStream(~[DEFINE_VarName]~);
+var object52432 = (SerializableSkippedStringStruct)DeserializeFromStream(stream52432);
+~[VAR_string@1]~ = object52432.str;
+~template end~
+
+~template overlapped_struct_fields_positive start~
+var ~[DEFINE_VarName]~ = new OverlappedStringsStruct();
+~[DEFINE_VarName]~.str1 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.str2;
+~template end~
+
+~template overlapped_struct_fields_negative start~
+var ~[DEFINE_VarName]~ = new OverlappedStringsStruct();
+~[DEFINE_VarName]~.str1 = ~[CONST_string]~;
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.str2;
+~template end~
+
+~main body end~

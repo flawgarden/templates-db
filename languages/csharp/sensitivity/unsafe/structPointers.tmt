@@ -1,0 +1,29 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> struct12321
+~[DEFINE_CreateStruct]~ -> var ~[DEFINE_VarName]~ = new SimpleStruct();
+~extensions end~
+
+~main body start~
+~helper import objects/struct/helpers/SimpleStruct~
+
+~imports start~
+using HelperStructs;
+~imports end~
+
+~template struct_pointer_positive start~
+~[DEFINE_CreateStruct]~
+~[DEFINE_VarName]~.str = ~[VAR_string@1]~;
+SimpleStruct* structPtr = &~[DEFINE_VarName]~;
+~[VAR_string@1]~ = structPtr->str;
+~template end~
+
+~template struct_pointer_negative start~
+~[DEFINE_CreateStruct]~
+~[DEFINE_VarName]~.str = ~[CONST_string]~;
+SimpleStruct* structPtr = &~[DEFINE_VarName]~;
+~[VAR_string]~ = structPtr->str;
+~template end~
+
+~main body end~
