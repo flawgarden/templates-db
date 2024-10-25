@@ -15,9 +15,7 @@ using DisposableHelpers;
 ~template disposable_interface_positive start~
 ~[DEFINE_CreateHolderFixed]~
 using (~[DEFINE_HolderName]~)
-{
-    ~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
-}
+~[VAR_string@1]~ = ~[DEFINE_HolderName]~.value;
 ~template end~
 
 ~template disposable_interface_negative start~
