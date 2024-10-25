@@ -1,0 +1,57 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_OuterScopeVar]~ -> outer9148
+
+~[DEFINE_DelegateVar]~ -> delegate9194
+
+~[DEFINE_ActionReassignVar_Fixed]~ -> Action ~[DEFINE_DelegateVar]~ = () => ~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_OuterScopeVar]~;
+~[DEFINE_ActionReassignVar_Const]~ -> Action ~[DEFINE_DelegateVar]~ = () => ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~;
+
+~[DEFINE_ActionReassignVar_Arg]~ -> Action<~[TYPE@1]~> ~[DEFINE_DelegateVar]~ = (~[TYPE@1]~ v) => ~[VAR_~[TYPE@1]~]~ = v;
+
+~[DEFINE_ActionReassignVar_LeftArg]~ -> Action<~[TYPE@1]~, ~[TYPE@1]~> ~[DEFINE_DelegateVar]~ = (~[TYPE@1]~ v1, ~[TYPE@1]~ v2) => ~[VAR_~[TYPE@1]~@1]~ = v1;
+~[DEFINE_ActionReassignVar_RightArg]~ -> Action<~[TYPE@1]~, ~[TYPE@1]~> ~[DEFINE_DelegateVar]~ = (~[TYPE@1]~ v1, ~[TYPE@1]~ v2) => ~[VAR_~[TYPE@1]~@1]~ = v2;
+~extensions end~
+
+~main body start~
+
+~template action_delegate_call_positive start~
+var ~[DEFINE_OuterScopeVar]~ = ~[VAR_~[TYPE@1]~]~;
+~[DEFINE_ActionReassignVar_Fixed]~
+~[DEFINE_DelegateVar]~();
+~template end~
+
+~template action_delegate_call_negative_1 start~
+var ~[DEFINE_OuterScopeVar]~ = ~[VAR_~[TYPE@1]~]~;
+~[DEFINE_ActionReassignVar_Const]~
+~[DEFINE_DelegateVar]~();
+~template end~
+
+~template action_delegate_call_negative_2 start~
+var ~[DEFINE_OuterScopeVar]~ = ~[CONST_~[TYPE@1]~]~;
+~[DEFINE_ActionReassignVar_Fixed]~
+~[DEFINE_DelegateVar]~();
+~template end~
+
+~template unary_action_call_positive start~
+~[DEFINE_ActionReassignVar_Arg]~
+~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~);
+~template end~
+
+~template unary_action_call_negative start~
+~[DEFINE_ActionReassignVar_Arg]~
+~[DEFINE_DelegateVar]~(~[CONST_~[TYPE@1]~]~);
+~template end~
+
+~template binary_action_call_positive start~
+~[DEFINE_ActionReassignVar_LeftArg]~
+~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
+~template end~
+
+~template binary_action_call_negative start~
+~[DEFINE_ActionReassignVar_RightArg]~
+~[DEFINE_DelegateVar]~(~[VAR_~[TYPE@1]~@1]~, ~[CONST_~[TYPE@1]~]~);
+~template end~
+
+~main body end~

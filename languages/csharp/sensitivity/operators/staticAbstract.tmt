@@ -1,0 +1,63 @@
+~main body start~
+
+~helper functions start~
+
+~function outer_sai_getter start~
+public static T OuterSAIGetter<T>(bool b) where T : StaticAbstractInterface<T>
+{
+    return b ? T.ATProperty : T.GetEmptyT();
+}
+~function end~
+
+~function virtualized_vget start~
+public static T VirtualizedVGet<T>(bool b) where T : StaticAbstractInterface<T>
+{
+    return T.VGetInner(b);
+}
+~function end~
+
+~helper functions end~
+
+~helper import sensitivity/operators/helpers/StaticAbstractInterface~
+~helper import sensitivity/operators/helpers/ImplStaticAbstractInterface~
+
+~imports start~
+using HelperOperators;
+~imports end~
+
+~template static_abstract_good_store_positive start~
+SAIPositive.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = VirtualizedVGet<SAIPositive>(true).value;
+~template end~
+
+~template static_abstract_good_store_negative start~
+SAIPositive.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = VirtualizedVGet<SAIPositive>(false).value;
+~template end~
+
+~template static_abstract_good_store_outer_get_positive start~
+SAIPositive.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = OuterSAIGetter<SAIPositive>(true).value;
+~template end~
+
+~template static_abstract_good_store_outer_get_negative start~
+SAIPositive.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = OuterSAIGetter<SAIPositive>(false).value;
+~template end~
+
+~template static_abstract_bad_store_negative start~
+SAINegative.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = SAINegative.VGetInner(true).value;
+~template end~
+
+~template static_abstract_reversed_store_positive start~
+SAIReversed.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = SAIReversed.VGetInner(false).value;
+~template end~
+
+~template static_abstract_reversed_store_negative start~
+SAIReversed.ATProperty = new(~[VAR_string@1]~);
+~[VAR_string@1]~ = SAIReversed.VGetInner(true).value;
+~template end~
+
+~main body end~

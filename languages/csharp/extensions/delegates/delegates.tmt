@@ -1,0 +1,5 @@
+~[EXPR_bool]~ -> ~[EXPR_Predicate<~[TYPE@1]~>]~(~[EXPR_~[TYPE@1]~]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Func<~[TYPE@2]~, ~[TYPE@1]~>]~(~[EXPR_~[TYPE@2]~]~)
+
+~[EXPR_~[TYPE@1]~]~ -> ~[EXPR_Func<~[TYPE@3]~, ~[TYPE@2]~, ~[TYPE@1]~>]~(~[EXPR_~[TYPE@3]~]~, ~[EXPR_~[TYPE@2]~]~)

@@ -1,0 +1,69 @@
+~class PositiveClass start~
+namespace HelperOperators;
+
+public class SAIPositive : StaticAbstractInterface<SAIPositive>
+{
+    public static SAIPositive GetEmptyT() => new();
+
+    public static SAIPositive ATProperty { get; set; } = new();
+
+    public string value;
+
+    public SAIPositive() : this("") {}
+
+    public SAIPositive(string s)
+    {
+        value = s;
+    }
+}
+~class end~
+
+~class NegativeClass start~
+namespace HelperOperators;
+
+public class SAINegative : StaticAbstractInterface<SAINegative>
+{
+    public static SAINegative GetEmptyT() => new();
+
+    private static SAINegative _property = new();
+
+    public static SAINegative ATProperty
+    {
+        get => _property;
+        set => _property = new();
+    }
+
+    public static SAINegative VGetInner(bool b) => _property;
+
+    public string value;
+
+    public SAINegative() : this("") {}
+
+    public SAINegative(string s)
+    {
+        value = "";
+    }
+}
+~class end~
+
+~class ReversedClass start~
+namespace HelperOperators;
+
+public class SAIReversed : StaticAbstractInterface<SAIReversed>
+{
+    public static SAIReversed GetEmptyT() => new();
+
+    public static SAIReversed ATProperty { get; set; }
+
+    public static SAIReversed VGetInner(bool b) => b ? SAIReversed.GetEmptyT() : SAIReversed.ATProperty;
+
+    public string value;
+
+    public SAIReversed() : this("") {}
+
+    public SAIReversed(string s)
+    {
+        value = "";
+    }
+}
+~class end~

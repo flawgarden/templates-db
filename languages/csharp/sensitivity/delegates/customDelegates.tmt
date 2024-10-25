@@ -1,0 +1,67 @@
+~extensions start~
+~[DEFINE_BodyType]~ -> Short
+~[DEFINE_BodyType]~ -> ExplicitReturn
+~[DEFINE_BodyType]~ -> Static
+~[DEFINE_BodyType]~ -> Typed
+~[DEFINE_BodyType]~ -> Full
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function simple_delegate start~
+delegate string SimpleDelegate(string s);
+~function end~
+
+~function delegate_short_body_positive start~
+SimpleDelegate ShortBodyPositive = s => s;
+~function end~
+
+~function delegate_short_body_negative start~
+SimpleDelegate ShortBodyNegative = s => "";
+~function end~
+
+~function delegate_static_body_positive start~
+SimpleDelegate StaticBodyPositive = static s => s;
+~function end~
+
+~function delegate_static_body_negative start~
+SimpleDelegate StaticBodyNegative = static s => "";
+~function end~
+
+~function delegate_explicit_return_positive start~
+SimpleDelegate ExplicitReturnBodyPositive = string (string s) => s;
+~function end~
+
+~function delegate_explicit_return_negative start~
+SimpleDelegate ExplicitReturnBodyNegative = string (string s) => "";
+~function end~
+
+~function delegate_typed_body_positive start~
+SimpleDelegate TypedBodyPositive = (string s) => s;
+~function end~
+
+~function delegate_typed_body_negative start~
+SimpleDelegate TypedBodyNegative = (string s) => "";
+~function end~
+
+~function delegate_full_body_positive start~
+SimpleDelegate FullBodyPositive = (string s) => { return s; };
+~function end~
+
+~function delegate_full_body_negative start~
+SimpleDelegate FullBodyNegative = (string s) => { return ""; };
+~function end~
+
+~helper functions end~
+
+~template custom_delegate_positive start~
+~[VAR_string@1]~ = ~[DEFINE_BodyType]~BodyPositive(~[VAR_string@1]~);
+~template end~
+
+~template custom_delegate_negative start~
+~[VAR_string@1]~ = ~[DEFINE_BodyType]~BodyNegative(~[VAR_string@1]~);
+~template end~
+
+~main body end~
