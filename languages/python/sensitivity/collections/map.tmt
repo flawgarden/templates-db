@@ -9,6 +9,9 @@
 
 ~main body start~
 
+~unsupported template map_values_positive~
+~unsupported template map_values_negative~
+
 ~template map_simple_get_1_positive start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@2]~

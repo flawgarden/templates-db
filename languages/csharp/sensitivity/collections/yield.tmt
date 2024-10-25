@@ -1,0 +1,66 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function YieldId start~
+IEnumerable<string> YieldId(string x) {
+    yield return x;
+}
+~function end~
+
+~function YieldMultiple start~
+IEnumerable<string> YieldMultiple(string x, string y) {
+    yield return x;
+    yield return y;
+}
+~function end~
+
+~function YieldBreak start~
+IEnumerable<string> YieldBreak(string x, string y) {
+    yield return x;
+    if (x == "42") {
+        yield break;
+    }
+    yield return y;
+}
+~function end~
+
+~helper functions end~
+
+~template yield_simple_negative start~
+~[VAR_string]~ = YieldId("42").First();
+~template end~
+
+~template yield_simple_positive start~
+~[VAR_string@1]~ = YieldId(~[VAR_string@1]~).First();
+~template end~
+
+~template yield_multiple_take_first_negative start~
+~[VAR_string@1]~ = YieldMultiple("42", ~[VAR_string@1]~).First();
+~template end~
+
+~template yield_multiple_take_first_positive start~
+~[VAR_string@1]~ = YieldMultiple(~[VAR_string@1]~, "42").First();
+~template end~
+
+~template yield_multiple_take_last_negative start~
+~[VAR_string@1]~ = YieldMultiple(~[VAR_string@1]~, "42").Last();
+~template end~
+
+~template yield_multiple_take_last_positive start~
+~[VAR_string@1]~ = YieldMultiple("42", ~[VAR_string@1]~).Last();
+~template end~
+
+~template yield_break_negative start~
+~[VAR_string@1]~ = YieldBreak("424242", ~[VAR_string@1]~).Last();
+~template end~
+
+~template yield_break_positive start~
+~[VAR_string@1]~ = YieldBreak("42", ~[VAR_string@1]~).Last();
+~template end~
+
+~main body end~

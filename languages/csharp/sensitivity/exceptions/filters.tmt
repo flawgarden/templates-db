@@ -1,0 +1,44 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+
+~template exception_filter_positive start~
+var tmp42 = ~[VAR_string@1]~;
+int[] tmpArray42 = [0, 1, 2, 3, 4];
+var index = 5;
+try
+{
+    var tmp43 = tmpArray42[index];
+}   
+catch (IndexOutOfRangeException e) when (index < 0)
+{
+    ~[VAR_string@1]~ = "data";
+}
+catch (IndexOutOfRangeException e)
+{
+    ~[VAR_string@1]~ = tmp42;
+}
+~template end~
+
+~template exception_filter_negative start~
+var tmp42 = ~[VAR_string@1]~;
+int[] tmpArray42 = [0, 1, 2, 3, 4];
+var index = -1;
+try
+{
+    var tmp43 = tmpArray42[index];
+}   
+catch (IndexOutOfRangeException e) when (index < 0)
+{
+    ~[VAR_string@1]~ = "data";
+}
+catch (IndexOutOfRangeException e)
+{
+    ~[VAR_string@1]~ = tmp42;
+}
+~template end~
+
+~main body end~

@@ -55,8 +55,8 @@ try {
 ~template null_pointer_exception_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
 try {
-    int? a = null;
-    a = a + a;
+    string s42 = null;
+    var i42 = s42.Length;
 } catch (NullReferenceException e) {
     ~[VAR_string@1]~ = tmpUnique42;
 }
@@ -64,8 +64,8 @@ try {
 
 ~template null_pointer_exception_negative start~
 try {
-    int? a = null;
-    a = a + a;
+    string s42 = null;
+    var i42 = s42.Length;
 } catch (NullReferenceException e) {
     ~[VAR_string]~ = "";
 }

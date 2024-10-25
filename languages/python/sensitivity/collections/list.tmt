@@ -11,6 +11,8 @@
 
 ~main body start~
 
+~unsupported template list_index_positive~
+
 ~template list_set_positive start~
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_VAR_ToList]~
@@ -50,14 +52,6 @@ tmp1232141245 = ~[DEFINE_ListName]~[0]
 ~[DEFINE_Create_List]~
 ~[DEFINE_Add_CONST_ToList]~
 ~[VAR_~[TYPE@1]~@1]~ = list(~[DEFINE_ListName]~)[0]
-~template end~
-
-~template list_filter_neutral start~
-~[DEFINE_Create_List]~
-~[DEFINE_Add_VAR_ToList]~
-~[DEFINE_Add_EXPR_ToList]~
-~[DEFINE_Add_CONST_ToList]~
-~[VAR_~[TYPE@1]~@1]~ = next(filter(lambda _: ~[EXPR_Boolean]~, ~[DEFINE_ListName]~))
 ~template end~
 
 ~template list_union_positive start~
