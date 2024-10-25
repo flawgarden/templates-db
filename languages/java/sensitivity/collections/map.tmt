@@ -73,4 +73,11 @@ map111.putAll(map222);
 ~[VAR_~[TYPE@2]~@3]~ = ~[DEFINE_MapName]~.get(~[EXPR_~[TYPE@1]~@1]~);
 ~template end~
 
+~template map_merge_2_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_EXPR_ToMap]~
+~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
+~[VAR_TYPE@2]~ = ~[DEFINE_MapName]~.merge(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~, (a, b) -> ~[CONST_~[TYPE@2]~]~);
+~template end~
+
 ~main body end~

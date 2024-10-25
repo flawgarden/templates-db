@@ -6,6 +6,9 @@
 ~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName]~ = new ArrayDeque<>();
 ~[DEFINE_Create_Queue]~ -> Queue<~[TYPE@1]~> ~[DEFINE_QueueName]~ = new LinkedList<>();
 
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[EXPR_~[TYPE@1]~]~);
+~[DEFINE_Add_EXPR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[EXPR_~[TYPE@1]~]~);
+
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[VAR_~[TYPE@1]~@1]~);
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[VAR_~[TYPE@1]~@1]~);
 ~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[CONST_~[TYPE@1]~@1]~);
@@ -18,6 +21,17 @@
 import java.util.*;
 import java.util.concurrent.*;
 ~imports end~
+
+~template queue_contains_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[TYPE@1]~ value7845 = ~[CONST_TYPE@1]~;
+if (~[DEFINE_QueueName]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
+}
+~[VAR_~[TYPE@1]~@1]~ = value7845;
+~template end~
 
 ~template queue_remove_if_positive start~
 ~[DEFINE_Create_Queue]~
