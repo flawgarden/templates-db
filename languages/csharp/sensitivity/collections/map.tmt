@@ -1,0 +1,78 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_MapName]~ -> map42
+~[DEFINE_ExistedKey]~ -> ~[VAR_~[TYPE@1]~@1]~
+~[DEFINE_Create_Map]~ -> var ~[DEFINE_MapName]~ = new Dictionary<~[TYPE@1]~, string>();
+~[DEFINE_ValueAccess]~ -> ~[DEFINE_MapName]~[~[DEFINE_ExistedKey]~]
+~[DEFINE_Add_CONST_ToMap]~ -> ~[DEFINE_ValueAccess]~ = "const string";
+~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_ValueAccess]~ = ~[VAR_string@1]~;
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Linq;
+~imports end~
+
+~unsupported template map_merge_2_negative~
+~unsupported template map_merge_1_positive~
+
+~template map_clear_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_VAR_ToMap]~
+~[DEFINE_MapName]~.Clear();
+var value = "";
+~[DEFINE_MapName]~.TryGetValue(~[DEFINE_ExistedKey]~, out value);
+~[VAR_string]~ = value;
+~template end~
+
+~template map_simple_get_1_positive start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_VAR_ToMap]~
+~[VAR_string@1]~ = ~[DEFINE_ValueAccess]~;
+~template end~
+
+~template map_simple_get_1_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_CONST_ToMap]~
+~[VAR_string@1]~ = ~[DEFINE_ValueAccess]~;
+~template end~
+
+~template map_remove_1_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_CONST_ToMap]~
+if (~[DEFINE_MapName]~.Remove(~[DEFINE_ExistedKey]~, out var value)) {
+    ~[VAR_string@1]~ = value;
+}
+~template end~
+
+~template map_remove_1_positive start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_VAR_ToMap]~
+if (~[DEFINE_MapName]~.Remove(~[DEFINE_ExistedKey]~, out var value)) {
+    ~[VAR_string@1]~ = value;
+}
+~template end~
+
+~template map_put_if_absent_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_CONST_ToMap]~
+~[DEFINE_MapName]~.TryAdd(~[DEFINE_ExistedKey]~, ~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_ValueAccess]~;
+~template end~
+
+~template map_values_positive start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_VAR_ToMap]~
+~[VAR_string@1]~ = ~[DEFINE_MapName]~.First().Value;
+~template end~
+
+~template map_values_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_CONST_ToMap]~
+~[VAR_string@1]~ = ~[DEFINE_MapName]~.First().Value;
+~template end~
+
+~main body end~

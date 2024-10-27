@@ -1,0 +1,52 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template nullification_operator_negative start~
+string tmp42 = null;
+~[VAR_string@1]~ = (~[VAR_string@1]~ + tmp42) ?? "";
+~template end~
+
+~template coalescing_operator_negative start~
+var tmp42 = "not null string" ?? ~[VAR_string@1]~;
+~[VAR_string@1]~ = tmp42;
+~template end~
+
+~template coalescing_operator_positive start~
+var tmp42 = null ?? ~[VAR_string@1]~;
+~[VAR_string@1]~ = tmp42;
+~template end~
+
+~template cast_nullable_positive start~
+try {
+    int? tmp42 = null;
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + $"{(int) tmp42}";
+} catch (InvalidOperationException) {
+}
+~template end~
+
+~template coalescing_assignment_positive start~
+string? tmp42 = null;
+tmp42 ??= ~[VAR_string@1]~;
+~[VAR_string@1]~ = tmp42;
+~template end~
+
+~template coalescing_assignment_negative start~
+string? tmp42 = "not null string";
+tmp42 ??= ~[VAR_string@1]~;
+~[VAR_string@1]~ = tmp42;
+~template end~
+
+~template nullable_default_positive start~
+string tmp42 = default;
+~[VAR_string@1]~ = tmp42 ?? ~[VAR_string@1]~;
+~template end~
+
+~template nullable_default_negative start~
+string tmp42 = default;
+~[VAR_string@1]~ = tmp42 ?? "";
+~template end~
+
+~main body end~

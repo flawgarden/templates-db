@@ -1,0 +1,60 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_CollectionName]~ -> stream42
+~[DEFINE_Create_Collection]~ -> ICollection<string> ~[DEFINE_CollectionName]~ = new List<string>();
+~[DEFINE_Create_Collection]~ -> ICollection<string> ~[DEFINE_CollectionName]~ = new HashSet<string>();
+
+~[DEFINE_FixedVar]~ -> ~[VAR_string@1]~
+~[DEFINE_FixedConst]~ -> ~[CONST_string@1]~
+
+~[DEFINE_Add_Fixed_VAR_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[DEFINE_FixedVar]~);
+~[DEFINE_Add_Fixed_CONST_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[DEFINE_FixedConst]~);
+~[DEFINE_Add_CONST_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[CONST_string]~);
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Linq;
+~imports end~
+
+~template stream_simple_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.First();
+~template end~
+
+~template stream_simple_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_CONST_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.First();
+~template end~
+
+~template stream_map_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.Select(entry111 => entry111 + "42").First();
+~template end~
+
+~template stream_map_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.Select(entry111 => "42").First();
+~template end~
+
+~template stream_filter_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.Where(entry111 => entry111 == ~[DEFINE_FixedVar]~).First();
+~template end~
+
+~template stream_reduce_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_CONST_ToCollection]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_CollectionName]~.Aggregate("", (entry11, entry22) => entry11 + entry22);
+~template end~
+
+~main body end~

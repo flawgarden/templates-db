@@ -1,0 +1,97 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_QueueName]~ -> queue42
+~[DEFINE_Create_Queue]~ -> var ~[DEFINE_QueueName]~ = new Queue<string>();
+
+~[DEFINE_FixedVar]~ -> ~[VAR_string@1]~
+~[DEFINE_FixedConst]~ -> ~[CONST_string@1]~
+
+~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.Enqueue(~[DEFINE_FixedVar]~);
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.Enqueue(~[DEFINE_FixedConst]~);
+~extensions end~
+
+~main body start~
+
+~template simple_poll_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueueName]~.Dequeue();
+~template end~
+
+~template simple_poll_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueueName]~.Dequeue();
+~template end~
+
+~template simple_peek_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_QueueName]~.Dequeue();
+~[DEFINE_QueueName]~.TryPeek(out var result42);
+~[DEFINE_FixedVar]~ = result42;
+~template end~
+
+~template queue_is_empty_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+var value42 = ~[DEFINE_QueueName]~.Peek();
+if (~[DEFINE_QueueName]~.Count == 0) {
+    value42 = ~[DEFINE_FixedConst]~;
+}
+~[DEFINE_FixedVar]~ = value42;
+~template end~
+
+~template queue_is_empty_1_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+var value42 = ~[DEFINE_QueueName]~.Dequeue();
+if (~[DEFINE_QueueName]~.Count == 0) {
+    value42 = ~[DEFINE_FixedConst]~;
+}
+~[DEFINE_FixedVar]~ = value42;
+~template end~
+
+~template queue_poll_negative start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueueName]~.Dequeue();
+~template end~
+
+~template queue_poll_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueueName]~.Dequeue();
+~template end~
+
+~template queue_poll_all_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+var value42 = "";
+while (~[DEFINE_QueueName]~.Count != 0) {
+    value42 = ~[DEFINE_QueueName]~.Dequeue();
+}
+~[DEFINE_FixedVar]~ = value42;
+~template end~
+
+~template two_queues_positive start~
+var sourceQueue42 = new Queue<string>();
+var targetQueue42 = new Queue<string>();
+sourceQueue42.Enqueue(~[CONST_string]~);
+sourceQueue42.Enqueue(~[CONST_string]~);
+targetQueue42.Enqueue(~[DEFINE_FixedVar]~);
+targetQueue42.Enqueue(~[CONST_string]~);
+while (sourceQueue42.Count != 0) {
+    targetQueue42.Enqueue(sourceQueue42.Dequeue());
+}
+~[DEFINE_FixedVar]~ = targetQueue42.Dequeue();
+~template end~
+
+~main body end~
