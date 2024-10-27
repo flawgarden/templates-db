@@ -1,0 +1,37 @@
+~class StoreInterface start~
+namespace HelperDI;
+
+public interface IKeeper
+{
+    public void Keep(string value);
+
+    public string Get();
+}
+~class end~
+
+~class StorerPositive start~
+namespace HelperDI;
+
+public class Store : IKeeper
+{
+    public static string Vault = "";
+
+    public void Keep(string v)
+    {
+        Vault = v;
+    }
+
+    public string Get() => Vault;
+}
+~class end~
+
+~class StorerNegative start~
+namespace HelperDI;
+
+public class Forget : IKeeper
+{
+    public void Keep(string v) {}
+
+    public string Get() => "";
+}
+~class end~
