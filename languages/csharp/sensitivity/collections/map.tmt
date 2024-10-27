@@ -18,7 +18,15 @@ using System.Linq;
 
 ~unsupported template map_merge_2_negative~
 ~unsupported template map_merge_1_positive~
-~unsupported template map_clear_negative~
+
+~template map_clear_negative start~
+~[DEFINE_Create_Map]~
+~[DEFINE_Add_VAR_ToMap]~
+~[DEFINE_MapName]~.Clear();
+var value = "";
+~[DEFINE_MapName]~.TryGetValue(~[DEFINE_ExistedKey]~, out value);
+~[VAR_string]~ = value;
+~template end~
 
 ~template map_simple_get_1_positive start~
 ~[DEFINE_Create_Map]~

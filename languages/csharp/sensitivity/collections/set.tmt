@@ -17,8 +17,6 @@
 using System.Linq;
 ~imports end~
 
-~unsupported template set_remove_positive~
-~unsupported template set_disjoint_positive~
 
 ~template set_add_simple_positive start~
 ~[DEFINE_Create_Set]~
@@ -30,6 +28,20 @@ using System.Linq;
 ~[DEFINE_Create_Set]~
 ~[DEFINE_Add_Fixed_CONST_ToSet]~
 ~[DEFINE_FixedVar]~ = ~[DEFINE_SetName]~.First();
+~template end~
+
+~template set_remove_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.ExceptWith(set222);
+var tmp42 = "";
+if (set111.Count == 0) {
+    tmp42 = ~[DEFINE_FixedVar]~;
+}
+~[DEFINE_FixedVar]~ = tmp42;
 ~template end~
 
 ~template set_remove_simple_positive start~
@@ -201,6 +213,16 @@ set111.Add(~[DEFINE_FixedConst]~);
 set111.Add(~[DEFINE_FixedVar]~);
 set222.Add(~[DEFINE_FixedVar]~);
 if (set222.IsProperSubsetOf(set111)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+~template set_disjoint_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedConst]~);
+if (!set111.Overlaps(set222)) {
     ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
 }
 ~template end~

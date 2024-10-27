@@ -23,7 +23,7 @@ var tmp42 = null ?? ~[VAR_string@1]~;
 try {
     int? tmp42 = null;
     ~[VAR_string@1]~ = ~[VAR_string@1]~ + $"{(int) tmp42}";
-} catch (NullReferenceException) {
+} catch (InvalidOperationException) {
 }
 ~template end~
 
