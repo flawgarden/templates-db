@@ -65,7 +65,7 @@ except AttributeError:
 dynamic_duck = DynamicDuck()
 add_quack_method(dynamic_duck)
 try:
-    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
+    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(dynamic_duck, ~[VAR_~[TYPE@1]~@1]~)
 except AttributeError:
     ~[VAR_~[TYPE@1]~@1]~ = "fixed_string"
 ~template end~
@@ -74,7 +74,7 @@ except AttributeError:
 dynamic_duck = DynamicDuck()
 add_quack_method(dynamic_duck)
 try:
-    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[CONST_~[TYPE@1]~]~)
+    ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(dynamic_duck, ~[CONST_~[TYPE@1]~]~)
 except AttributeError:
     pass
 ~template end~

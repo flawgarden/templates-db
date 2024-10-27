@@ -43,11 +43,11 @@ if value is None:
 ~template end~
 
 ~template none_in_function_with_two_args_positive start~
-~[VAR_str]~ = get_value_two_args(~[VAR_str]~, "1")
+~[VAR_str@1]~ = get_value_two_args(~[VAR_str@1]~, "1")
 ~template end~
 
 ~template none_in_function_with_two_args_negative start~
-~[VAR_str]~ = get_value_two_args(~[VAR_str]~)
+~[VAR_str@1]~ = get_value_two_args(~[VAR_str@1]~)
 ~template end~
 
 ~template or_operator_for_none_positive start~
