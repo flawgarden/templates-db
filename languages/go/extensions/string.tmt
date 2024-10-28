@@ -15,11 +15,11 @@
 ~[EXPR_string]~ -> strings.Replace(~[EXPR_string]~, "/", ".", -1)
 ~[EXPR_string]~ -> ""
 ~[EXPR_string]~ -> strings.Join([]string{~[EXPR_string]~, ~[EXPR_string]~}, "")
-~[EXPR_string]~ -> ~[EXPR_string]~ // исправьте опечатку с 'intert'
+~[EXPR_string]~ -> ~[EXPR_string]~
 ~[EXPR_string]~ -> ~[EXPR_string]~[~[EXPR_int]~:]
 ~[EXPR_string]~ -> ~[EXPR_string]~[~[EXPR_int]~:~[EXPR_int]~]
 ~[EXPR_string]~ -> strings.ToLower(~[EXPR_string]~)
-~[EXPR_string]~ -> string(~[EXPR_string]~) // необходимо использовать для преобразования byte
+~[EXPR_string]~ -> string(~[EXPR_string]~)
 ~[EXPR_string]~ -> strings.ToUpper(~[EXPR_string]~)
 ~[EXPR_string]~ -> strings.TrimSpace(~[EXPR_string]~)
 

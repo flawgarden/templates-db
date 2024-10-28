@@ -1,12 +1,12 @@
-~[EXPR_bool]~ -> ~[EXPR_str]~ == ""
-~[EXPR_bool]~ -> strings.Contains(~[VAR_str@1]~, ~[EXPR_str]~)
-~[EXPR_bool]~ -> ~[VAR_str@1]~ != "" && strings.Contains(~[VAR_str@1]~, ~[EXPR_str]~)
-~[EXPR_bool]~ -> ~[EXPR_str]~ == ~[EXPR_str]~
-~[EXPR_bool]~ -> strings.EqualFold(~[EXPR_str]~, ~[EXPR_str]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~ == ""
+~[EXPR_bool]~ -> strings.Contains(~[VAR_str@1]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[VAR_str@1]~ != "" && strings.Contains(~[VAR_str@1]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> ~[EXPR_string]~ == ~[EXPR_string]~
+~[EXPR_bool]~ -> strings.EqualFold(~[EXPR_string]~, ~[EXPR_string]~)
 ~[EXPR_bool]~ -> len(~[VAR_str@1]~) > ~[CONST_int]~ && ~[VAR_str@1]~[~[CONST_int]~] == ~[CONST_byte]~
-~[EXPR_bool]~ -> strings.HasSuffix(~[EXPR_str]~, ~[EXPR_str]~)
-~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_str]~, ~[EXPR_str]~)
-~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_str]~[~[EXPR_int]~:~[EXPR_int]~], ~[EXPR_str]~)
+~[EXPR_bool]~ -> strings.HasSuffix(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_string]~, ~[EXPR_string]~)
+~[EXPR_bool]~ -> strings.HasPrefix(~[EXPR_string]~[~[EXPR_int]~:~[EXPR_int]~], ~[EXPR_string]~)
 
 ~[EXPR_bool]~ -> ~[EXPR_int]~ == 0
 ~[EXPR_bool]~ -> ~[EXPR_int]~ > 0
