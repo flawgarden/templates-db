@@ -1,9 +1,4 @@
 ~extensions start~
-~[DEFINE_VarName]~ -> constrained09143
-
-~[DEFINE_CreateInterfaceConstrained]~ -> var ~[DEFINE_VarName]~ = new InterfaceConstrainedClass<ImplBinaryOpInterfaceClass1>();
-~[DEFINE_CreateInheritanceConstrained]~ -> var ~[DEFINE_VarName]~ = new InheritanceConstrainedClass<DerivedBinaryOpClass1, BaseBinaryOpClass>();
-~[DEFINE_CreateNewConstrained]~ -> var ~[DEFINE_VarName]~ = new NewConstrainedClass<DerivedBinaryOpClass1>();
 ~extensions end~
 
 ~main body start~

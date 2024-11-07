@@ -1,5 +1,5 @@
-~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Contains(~[EXPR_TYPE@1]~)
-~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Remove(~[EXPR_TYPE@1]~)
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Contains(~[EXPR_~[TYPE@1]~]~)
+~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Remove(~[EXPR_~[TYPE@1]~]~)
 ~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.Exists(~[EXPR_Predicate<~[TYPE@1]~>]~)
 ~[EXPR_bool]~ -> ~[EXPR_List<~[TYPE@1]~>]~.TrueForAll(~[EXPR_Predicate<~[TYPE@1]~>]~)
 

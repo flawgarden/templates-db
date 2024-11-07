@@ -23,7 +23,6 @@
 ~[DEFINE_OrderByLengthDescending]~ -> orderby ~[DEFINE_Item]~.Length descending
 
 ~[DEFINE_WhereEmptyString]~ -> where ~[DEFINE_Item]~.Length == 0
-~[DEFINE_WhereStringLengthLessThenOne]~ -> where ~[DEFINE_Item]~.Length < 1
 ~[DEFINE_WhereStringLengthMoreThenZero]~ -> where ~[DEFINE_Item]~.Length > 0
 
 ~[DEFINE_GetItem]~ -> query42.First()

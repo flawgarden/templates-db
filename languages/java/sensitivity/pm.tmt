@@ -39,7 +39,7 @@ import java.util.*;
 ~template end~
 
 ~template pattern_matching_simple_2_negative start~
-~[VAR_String]~ = simplePatternMatchingString1(~[VAR_Integer@1]~);
+~[VAR_String]~ = simplePatternMatchingString1(~[VAR_Integer]~);
 ~template end~
 
 ~template pattern_matching_simple_4_positive start~

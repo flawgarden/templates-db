@@ -5,7 +5,6 @@
 ~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName]~ = new ArrayList<>();
 ~[DEFINE_Create_List]~ -> List<~[TYPE@1]~> ~[DEFINE_ListName]~ = new LinkedList<>();
 ~[DEFINE_Add_VAR_ToList]~ -> ~[DEFINE_ListName]~.add(~[VAR_~[TYPE@1]~@1]~);
-~[DEFINE_Add_EXPR_ToList]~ -> ~[DEFINE_ListName]~.add(~[EXPR_~[TYPE@1]~@1]~);
 ~[DEFINE_Add_CONST_ToList]~ -> ~[DEFINE_ListName]~.add(~[CONST_~[TYPE@1]~@1]~);
 
 ~extensions end~

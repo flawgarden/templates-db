@@ -46,7 +46,7 @@ string tmp42 = default;
 
 ~template nullable_default_negative start~
 string tmp42 = default;
-~[VAR_string@1]~ = tmp42 ?? "";
+~[VAR_string]~ = tmp42 ?? "";
 ~template end~
 
 ~main body end~

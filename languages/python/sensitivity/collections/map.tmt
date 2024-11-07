@@ -46,7 +46,7 @@ if ~[EXPR_~[TYPE@1]~@1]~ in ~[DEFINE_MapName]~:
 ~template map_merge_1_positive start~
 map111 = dict()
 map222 = dict()
-map111[~[EXPR_~[TYPE@1]~@1]~] = ~[VAR_~[TYPE@2]~@1]~
+map111[~[EXPR_~[TYPE@1]~]~] = ~[VAR_~[TYPE@2]~]~
 map222[~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~
 map111.update(map222)
 ~[VAR_~[TYPE@2]~@2]~ = map111[~[EXPR_~[TYPE@1]~@2]~]
