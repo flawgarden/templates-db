@@ -1,0 +1,94 @@
+~extensions start~
+~[MACRO_Empty_string_Array]~ -> []string{"", ""}
+~[MACRO_Empty_string_Array]~ -> []string{"", "", ""}
+~[MACRO_Empty_string_Array]~ -> []string{"", "", "", ""}
+
+~[MACRO_Zero_Or_One]~ -> 0
+~[MACRO_Zero_Or_One]~ -> 1
+~extensions end~
+
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+~helper import sensitivity/field/helpers/ArrayHolder~
+~helper import sensitivity/field/helpers/InstanceInitializer~
+~helper import sensitivity/field/helpers/StringFactory~
+~helper import sensitivity/field/helpers/ConstructorChains~
+~helper import sensitivity/field/helpers/NestedStringHolder~
+
+~template class_with_instance_initializer_positive start~
+ii := NewInstanceInitializer(~[VAR_string@1]~)
+~[VAR_string@1]~ = ii.list[1]
+~template end~
+
+~template class_with_instance_initializer_negative start~
+ii := NewInstanceInitializer(~[VAR_string@1]~)
+~[VAR_string@1]~ = ii.list[0]
+~template end~
+
+~template class_with_string_initialization_positive start~
+sh := NewStringHolderWithValue(~[VAR_string@1]~)
+~[VAR_string@1]~ = sh.value
+~template end~
+
+~template class_with_string_initialization_negative start~
+sh := NewStringHolder()
+~[VAR_string]~ = sh.value
+~template end~
+
+~template class_with_nested_string_initialization_positive start~
+nsh := NewNestedStringHolder(~[VAR_string@1]~)
+~[VAR_string@1]~ = nsh.GetValue()
+~template end~
+
+~template class_with_nested_string_initialization_negative start~
+nsh := NewNestedStringHolder("")
+~[VAR_string]~ = nsh.GetValue()
+~template end~
+
+~template class_with_array_initialization_by_value_positive start~
+ah := NewArrayHolder(~[VAR_string@1]~)
+~[VAR_string@1]~ = ah.Values[0]
+~template end~
+
+~template class_with_array_initialization_by_value_negative start~
+ah := NewArrayHolder(~[VAR_string@1]~)
+~[VAR_string@1]~ = ah.Values[1]
+~template end~
+
+~template class_with_array_initialization_by_value_neutral start~
+ah := NewArrayHolder(~[VAR_string@1]~)
+~[VAR_string@1]~ = ah.Values[~[MACRO_Zero_Or_One]~]
+~template end~
+
+~template class_with_array_initialization_positive start~
+tmpArrayUnique42 := ~[MACRO_Empty_string_Array]~
+tmpArrayUnique42[0] = ~[VAR_string@1]~
+ah := NewArrayHolderWithValues(tmpArrayUnique42)
+~[VAR_string@1]~ = ah.Values[0]
+~template end~
+
+~template class_with_array_initialization_negative start~
+tmpArrayUnique42 := ~[MACRO_Empty_string_Array]~
+tmpArrayUnique42[0] = ~[VAR_string@1]~
+ah := NewArrayHolderWithValues(tmpArrayUnique42)
+~[VAR_string@1]~ = ah.Values[1]
+~template end~
+
+~template class_with_array_initialization_neutral start~
+tmpArrayUnique42 := ~[MACRO_Empty_string_Array]~
+tmpArrayUnique42[0] = ~[VAR_string@1]~
+ah := NewArrayHolderWithValues(tmpArrayUnique42)
+~[VAR_string@1]~ = ah.Values[~[MACRO_Zero_Or_One]~]
+~template end~
+
+~template string_factory_positive start~
+sf := CreateStringFactoryWithValue(~[VAR_string@1]~)
+~[VAR_string@1]~ = sf.val
+~template end~
+
+~template string_factory_negative start~
+sf := CreateStringFactory()
+~[VAR_string]~ = sf.val
+~template end~
+
+~main body end~

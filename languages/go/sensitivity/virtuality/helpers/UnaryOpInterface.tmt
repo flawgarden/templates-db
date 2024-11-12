@@ -1,0 +1,7 @@
+~class UnaryOpInterface start~
+
+type UnaryOpInterface interface {
+    InterfaceCall(t string) string
+}
+
+~class end~

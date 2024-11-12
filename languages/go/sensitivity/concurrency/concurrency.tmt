@@ -1,0 +1,128 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/concurrency/helpers/ConcurrencyHelper~
+
+~imports start~
+import "sync"
+~imports end~
+
+~template thread_set_negative start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task := NewSettingTask(w, "")
+var wg sync.WaitGroup
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    task.Run()
+}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template thread_set_positive start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task := NewSettingTask(w, ~[VAR_string@1]~)
+var wg sync.WaitGroup
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    task.Run()
+}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template thread_set_nostart_positive start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task := NewSettingTask(w, "")
+var wg sync.WaitGroup
+wg.Add(1)
+	go func() {
+		defer wg.Done()
+		if false {
+			_ = task
+		}
+	}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template two_set_threads_in_sequence_positive start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task1 := NewSettingTask(w, "")
+task2 := NewSettingTask(w, ~[VAR_string@1]~)
+var wg sync.WaitGroup
+wg.Add(2) // Добавляем 2 задачи в WaitGroup
+go func() {
+    defer wg.Done()
+    task1.Run()
+}()
+go func() {
+    defer wg.Done()
+    task2.Run()
+}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template two_set_threads_in_sequence_negative start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task1 := NewSettingTask(w, "")
+task2 := NewSettingTask(w, ~[VAR_string@1]~)
+var wg sync.WaitGroup
+wg.Add(2)
+done := make(chan struct{})
+go func() {
+    defer wg.Done()
+    task2.Run()
+    close(done)
+}()
+go func() {
+    defer wg.Done()
+    <-done
+    task1.Run()
+}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template two_switching_tasks_concurrent_positive start~
+w := &Wrapper[string]{Value: ~[VAR_string@1]~}
+task1 := NewSwitchingTask(w, ~[VAR_string@1]~)
+task2 := NewSwitchingTask(w, ~[VAR_string@1]~)
+var wg sync.WaitGroup
+wg.Add(2)
+go func() {
+    defer wg.Done()
+    task2.Run()
+}()
+go func() {
+    defer wg.Done()
+    task1.Run()
+}()
+wg.Wait()
+~[VAR_string@1]~ = w.Value
+~template end~
+
+~template null_and_restore_condvar_positive start~
+a := NewNullAndRestore(~[VAR_string@1]~)
+var wg sync.WaitGroup
+wg.Add(2)
+go func() {
+    defer wg.Done()
+	a.NullMethod()
+}()
+go func() {
+    defer wg.Done()
+	a.Restore()
+}()
+wg.Wait()
+
+~[VAR_string@1]~ = a.Get()
+~template end~
+
+
+~main body end~

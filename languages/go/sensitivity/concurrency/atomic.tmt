@@ -1,0 +1,97 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import "sync"
+import "sync/atomic"
+~imports end~
+
+~template atomic_integer_negative start~
+counter := int32(0)
+
+var wg sync.WaitGroup
+
+wg.Add(2)
+go func() {
+    defer wg.Done()
+    atomic.AddInt32(&counter, 1)
+
+}()
+
+go func() {
+    defer     wg.Done()
+    atomic.AddInt32(&counter, 1)
+}()
+
+wg.Wait()
+
+if atomic.LoadInt32(&counter) == 2 {
+    ~[VAR_string]~ = ""
+}
+
+~template end~
+
+~template atomic_integer_restore_positive start~
+counter := int32(0)
+stringCopy := ~[VAR_string@1]~
+
+if atomic.LoadInt32(&counter) == 0 {
+    ~[VAR_string@1]~ = ""
+}
+
+var wg sync.WaitGroup
+wg.Add(2)
+
+go func() {
+    defer wg.Done()
+    atomic.AddInt32(&counter, 1)
+}()
+
+go func() {
+    defer wg.Done()
+    atomic.AddInt32(&counter, 1)
+}()
+
+wg.Wait()
+
+if atomic.LoadInt32(&counter) == 2 {
+    ~[VAR_string@1]~ = stringCopy
+}
+
+~template end~
+
+~template atomic_integer_restore_negative start~
+counter := int32(0)
+stringCopy := ~[VAR_string@1]~
+
+if atomic.LoadInt32(&counter) == 0 {
+    ~[VAR_string@1]~ = ""
+}
+
+var wg sync.WaitGroup
+wg.Add(2)
+done := make(chan struct{})
+
+go func() {
+    defer wg.Done()
+    atomic.AddInt32(&counter, 1)
+}()
+
+go func() {
+    defer wg.Done()
+    atomic.AddInt32(&counter, 1)
+}()
+
+if atomic.LoadInt32(&counter) == 2 {
+    ~[VAR_string@1]~ = stringCopy
+}
+close(done)
+<-done
+wg.Wait()
+
+~template end~
+
+~main body end~

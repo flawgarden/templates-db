@@ -1,0 +1,52 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function foo start~
+func foo(f string) (s string) {
+	defer func() {
+		s = "constant_string"
+	}()
+	s = f + " suffix"
+	return s
+}
+~function end~
+
+~function foo2 start~
+func foo2(f string) (s string) {
+	defer func() {
+		s = s + f
+	}()
+	s = f + " suffix"
+	return s
+}
+~function end~
+
+~helper functions end~
+
+~template simple_defer_neutral start~
+defer func() {
+    ~[VAR_~[TYPE@1]~]~ = ~[CONST_~[TYPE@1]~]~
+}()
+~template end~
+
+~template simple_non_defer_negative start~
+func() {
+    ~[VAR_~[TYPE@1]~]~ = ~[CONST_~[TYPE@1]~]~
+}()
+~template end~
+
+~template defer_in_func_negative start~
+~[VAR_string@1]~ = foo(~[VAR_string@1]~)
+~template end~
+
+~template defer_in_func_positive start~
+~[VAR_string@1]~ = foo2(~[VAR_string@1]~)
+~template end~
+
+
+~main body end~

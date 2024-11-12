@@ -1,0 +1,10 @@
+~class fsafsdf start~
+type Anon struct {
+    Value1  string
+}
+
+type AnonFieldHolder struct {
+    Value2 string
+    Anon
+}
+~class end~
