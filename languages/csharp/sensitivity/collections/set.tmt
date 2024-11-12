@@ -1,0 +1,230 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_SetName]~ -> set42
+~[DEFINE_SetConstructor]~ -> new HashSet<string>()
+~[DEFINE_SetConstructor]~ -> new SortedSet<string>()
+~[DEFINE_Create_Set]~ -> ISet<string> ~[DEFINE_SetName]~ = ~[DEFINE_SetConstructor]~;
+~[DEFINE_FixedVar]~ -> ~[VAR_string@1]~
+~[DEFINE_FixedConst]~ -> "awesome string"
+~[DEFINE_Add_Fixed_VAR_ToSet]~ -> ~[DEFINE_SetName]~.Add(~[DEFINE_FixedVar]~);
+~[DEFINE_Add_Fixed_CONST_ToSet]~ -> ~[DEFINE_SetName]~.Add(~[DEFINE_FixedConst]~);
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Linq;
+~imports end~
+
+
+~template set_add_simple_positive start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_SetName]~.First();
+~template end~
+
+~template set_add_simple_negative start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+~[DEFINE_FixedVar]~ = ~[DEFINE_SetName]~.First();
+~template end~
+
+~template set_remove_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.ExceptWith(set222);
+var tmp42 = "";
+if (set111.Count == 0) {
+    tmp42 = ~[DEFINE_FixedVar]~;
+}
+~[DEFINE_FixedVar]~ = tmp42;
+~template end~
+
+~template set_remove_simple_positive start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+~[DEFINE_SetName]~.Remove(~[DEFINE_FixedConst]~);
+~[DEFINE_FixedVar]~ = ~[DEFINE_SetName]~.First();
+~template end~
+
+~template set_remove_simple_negative start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+~[DEFINE_SetName]~.Remove(~[DEFINE_FixedVar]~);
+~[DEFINE_FixedVar]~ = ~[DEFINE_SetName]~.First();
+~template end~
+
+~template set_contains_positive start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+var value42 = "";
+if (~[DEFINE_SetName]~.Contains(~[DEFINE_FixedVar]~)) {
+    value42 = ~[DEFINE_FixedVar]~;
+}
+~[DEFINE_FixedVar]~ = value42;
+~template end~
+
+~template set_contains_negative start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+var value42 = "";
+if (~[DEFINE_SetName]~.Contains(~[DEFINE_FixedVar]~)) {
+    value42 = ~[DEFINE_FixedVar]~;
+}
+~[DEFINE_FixedVar]~ = value42;
+~template end~
+
+~template set_size_positive start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+if (~[DEFINE_SetName]~.Count != 2) {
+    ~[DEFINE_FixedVar]~ = "42";
+}
+~template end~
+
+~template set_size_negative start~
+~[DEFINE_Create_Set]~
+~[DEFINE_Add_Fixed_CONST_ToSet]~
+~[DEFINE_Add_Fixed_VAR_ToSet]~
+if (~[DEFINE_SetName]~.Count == 2) {
+    ~[DEFINE_FixedVar]~ = "42";
+}
+~template end~
+
+~template set_union_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.UnionWith(set222);
+if (set111.Contains(~[DEFINE_FixedVar]~)) {
+    ~[DEFINE_FixedVar]~ = "42";
+}
+~template end~
+
+
+~template set_except_with_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedConst]~);
+set111.ExceptWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_except_with_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.ExceptWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_intersect_with_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.IntersectWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_intersect_with_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedConst]~);
+set111.IntersectWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_xor_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedConst]~);
+set111.SymmetricExceptWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_xor_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+set111.SymmetricExceptWith(set222);
+~[DEFINE_FixedVar]~ = set111.First();
+~template end~
+
+~template set_super_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+if (set222.IsProperSupersetOf(set111)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+~template set_super_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+if (set111.IsProperSupersetOf(set222)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+
+~template set_subset_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+if (set111.IsProperSubsetOf(set222)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+~template set_subset_negative start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set111.Add(~[DEFINE_FixedVar]~);
+set222.Add(~[DEFINE_FixedVar]~);
+if (set222.IsProperSubsetOf(set111)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+~template set_disjoint_positive start~
+ISet<string> set111 = ~[DEFINE_SetConstructor]~;
+ISet<string> set222 = ~[DEFINE_SetConstructor]~;
+set111.Add(~[DEFINE_FixedConst]~);
+set222.Add(~[DEFINE_FixedConst]~);
+if (!set111.Overlaps(set222)) {
+    ~[DEFINE_FixedVar]~ = ~[DEFINE_FixedConst]~;
+}
+~template end~
+
+~main body end~

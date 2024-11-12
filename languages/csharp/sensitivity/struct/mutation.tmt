@@ -1,0 +1,51 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> structMutated12321
+~[DEFINE_StructType]~ -> SimpleStruct
+~[DEFINE_StructType]~ -> RefStruct
+~[DEFINE_StructType]~ -> ReadonlyStruct
+~[DEFINE_StructType]~ -> SerializableSkippedStringStruct
+
+~[DEFINE_CreateAnyStruct]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_StructType]~();
+~extensions end~
+
+~main body start~
+~helper import objects/struct/helpers/SimpleStruct~
+~helper import objects/struct/helpers/ReadonlyStruct~
+~helper import objects/struct/helpers/RefStruct~
+~helper import objects/struct/helpers/SerializableStruct~
+
+~imports start~
+using HelperStructs;
+using System.Runtime.InteropServices;
+~imports end~
+
+~template struct_mutation_positive_1 start~
+~[DEFINE_CreateAnyStruct]~
+var newStruct123 = ~[DEFINE_VarName]~ with { str = ~[VAR_string@1]~ };
+~[VAR_string@1]~ = newStruct123.str;
+~template end~
+
+~template struct_mutation_negative_1 start~
+~[DEFINE_CreateAnyStruct]~
+~[DEFINE_VarName]~.str = ~[VAR_string@1]~;
+var newStruct123 = ~[DEFINE_VarName]~ with { str = ~[CONST_string]~ };
+~[VAR_string@1]~ = newStruct123.str;
+~template end~
+
+~template struct_mutation_positive_2 start~
+~[DEFINE_CreateAnyStruct]~
+~[DEFINE_VarName]~.str = ~[VAR_string@1]~;
+var newStruct123 = ~[DEFINE_VarName]~ with { count = ~[CONST_int]~ };
+~[VAR_string@1]~ = newStruct123.str;
+~template end~
+
+~template struct_mutation_negative_2 start~
+~[DEFINE_CreateAnyStruct]~
+~[DEFINE_VarName]~.str = ~[CONST_string]~;
+var newStruct123 = ~[DEFINE_VarName]~ with { count = ~[CONST_int]~ };
+~[VAR_string@1]~ = newStruct123.str;
+~template end~
+
+~main body end~

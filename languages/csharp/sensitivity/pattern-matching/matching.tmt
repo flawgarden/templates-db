@@ -1,0 +1,247 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_Int]~ -> 42
+~[MACRO_IntConstPattern]~ -> 42
+~[MACRO_IntSimpleRelationalPattern]~ -> < 50
+~[MACRO_IntComplexRelationalPattern]~ -> < 50 and >= 42 or 35
+~[MACRO_IntComplexRelationalPattern]~ -> < 50 and > 50 or 42
+~[MACRO_IntComplexRelationalPattern]~ -> < 50 and > 45 or 42
+~[MACRO_IntComplexRelationalPattern]~ -> < 50 and (>= 42 or 35)
+~[MACRO_IntUniversalPattern]~ -> ~[MACRO_IntConstPattern]~
+~[MACRO_IntUniversalPattern]~ -> ~[MACRO_IntSimpleRelationalPattern]~
+~[MACRO_IntUniversalPattern]~ -> ~[MACRO_IntComplexRelationalPattern]~
+~[MACRO_IntIfPattern]~ -> ~[MACRO_IntUniversalPattern]~
+~[MACRO_IntSwitchPattern]~ -> ~[MACRO_IntUniversalPattern]~
+
+~[MACRO_IntList]~ -> new List<int> {1, 2, 3, 4, 5}
+~[MACRO_IntListSimpleTypePattern]~ -> List<int>
+~[MACRO_IntListComplexTypePattern]~ -> IEnumerable<int>
+~[MACRO_IntListComplexTypePattern]~ -> ICollection<int>
+~[MACRO_IntListListPattern]~ -> [1, 2, 3, 4, 5]
+~[MACRO_IntListMixedListPattern]~ -> [1, 2 or 7, 3, 4, > 4]
+~[MACRO_IntListMixedListPattern]~ -> [1, .., > 4]
+~[MACRO_IntListMixedListPattern]~ -> [1, > 2 or < 3, .., > 4]
+~[MACRO_IntListUniversalPattern]~ -> ~[MACRO_IntListMixedListPattern]~
+~[MACRO_IntListUniversalPattern]~ -> ~[MACRO_IntListListPattern]~
+~[MACRO_IntListIfPattern]~ -> ~[MACRO_IntListUniversalPattern]~
+~[MACRO_IntListSwitchPattern]~ -> ~[MACRO_IntListUniversalPattern]~
+~[MACRO_IntListTypePattern]~ -> ~[MACRO_IntListSimpleTypePattern]~
+~[MACRO_IntListTypePattern]~ -> ~[MACRO_IntListComplexTypePattern]~
+
+~[MACRO_Point]~ -> new Point(42, -42)
+~[MACRO_PointPositionalPattern]~ -> (42, -42)
+~[MACRO_PointVarWithWhenPattern]~ -> var (x, y) when x == -y
+~[MACRO_PointVarWithWhenPattern]~ -> var (x, y) when x == y || x == 42
+~[MACRO_PointVarWithWhenPattern]~ -> var (x, y) when x == 42 && (y == 42 || y == -42)
+~[MACRO_PointUniversalPattern]~ -> ~[MACRO_PointPositionalPattern]~
+~[MACRO_PointIfPattern]~ -> ~[MACRO_PointUniversalPattern]~
+~[MACRO_PointSwitchPattern]~ -> ~[MACRO_PointUniversalPattern]~
+~[MACRO_PointSwitchPattern]~ -> ~[MACRO_PointVarWithWhenPattern]~
+
+~[MACRO_String]~ -> "12345"
+~[MACRO_StringPropertyPattern]~ -> string { Length: 5 }
+~[MACRO_StringSimpleListPattern]~ -> ['1', '2', '3', '4', '5']
+~[MACRO_StringComplexListPattern]~ -> ['1', '2', .. , '5']
+~[MACRO_StringComplexListPattern]~ -> ['1' or '2', .. , '5']
+~[MACRO_StringUniversalPattern]~ -> ~[MACRO_StringPropertyPattern]~
+~[MACRO_StringUniversalPattern]~ -> ~[MACRO_StringSimpleListPattern]~
+~[MACRO_StringUniversalPattern]~ -> ~[MACRO_StringComplexListPattern]~
+~[MACRO_StringIfPattern]~ -> ~[MACRO_StringUniversalPattern]~
+~[MACRO_StringSwitchPattern]~ -> ~[MACRO_StringUniversalPattern]~
+
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/pattern-matching/helpers/Point~
+
+~imports start~
+using HelperPatterns;
+~imports end~
+
+~template if_int_pattern_positive start~
+var tmp42 = ~[MACRO_Int]~;
+if (tmp42 is ~[MACRO_IntIfPattern]~) {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~;
+}
+~template end~
+
+~template if_int_pattern_negative start~
+var tmp42 = ~[MACRO_Int]~;
+if (tmp42 is ~[MACRO_IntIfPattern]~) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template switch_int_pattern_positive start~
+var tmp42 = ~[MACRO_Int]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntSwitchPattern]~ => ~[VAR_string@1]~,
+    _ => ""
+};
+~template end~
+
+~template switch_int_pattern_negative start~
+var tmp42 = ~[MACRO_Int]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntSwitchPattern]~ => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~template if_int_list_pattern_positive start~
+var tmp42 = ~[MACRO_IntList]~;
+if (tmp42 is ~[MACRO_IntListIfPattern]~) {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~;
+}
+~template end~
+
+~template if_int_list_pattern_negative start~
+var tmp42 = ~[MACRO_IntList]~;
+if (tmp42 is ~[MACRO_IntListIfPattern]~) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template if_int_list_type_pattern_positive start~
+object tmp42 = ~[MACRO_IntList]~;
+if (tmp42 is ~[MACRO_IntListTypePattern]~) {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~;
+}
+~template end~
+
+~template if_int_list_type_pattern_negative start~
+object tmp42 = ~[MACRO_IntList]~;
+if (tmp42 is ~[MACRO_IntListTypePattern]~) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template switch_int_list_pattern_positive start~
+var tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntListSwitchPattern]~ => ~[VAR_string@1]~,
+    _ => ""
+};
+~template end~
+
+~template switch_int_list_pattern_negative start~
+var tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntListSwitchPattern]~ => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~template switch_int_list_type_pattern_positive start~
+object tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntListTypePattern]~ => ~[VAR_string@1]~,
+    _ => ""
+};
+~template end~
+
+~template switch_int_list_type_pattern_negative start~
+object tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_IntListTypePattern]~ => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~template if_point_pattern_positive start~
+var tmp42 = ~[MACRO_Point]~;
+if (tmp42 is ~[MACRO_PointIfPattern]~) {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~;
+}
+~template end~
+
+~template if_point_pattern_negative start~
+var tmp42 = ~[MACRO_Point]~;
+if (tmp42 is ~[MACRO_PointIfPattern]~) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template switch_point_pattern_positive start~
+var tmp42 = ~[MACRO_Point]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_PointSwitchPattern]~ => ~[VAR_string@1]~,
+    _ => ""
+};
+~template end~
+
+~template switch_point_pattern_negative start~
+var tmp42 = ~[MACRO_Point]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_PointSwitchPattern]~ => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~template if_string_pattern_positive start~
+var tmp42 = ~[MACRO_String]~;
+if (tmp42 is ~[MACRO_StringIfPattern]~) {
+    ~[VAR_string@1]~ = ~[VAR_string@1]~;
+}
+~template end~
+
+~template if_string_pattern_negative start~
+var tmp42 = ~[MACRO_String]~;
+if (tmp42 is ~[MACRO_StringIfPattern]~) {
+    ~[VAR_string@1]~ = "";
+}
+~template end~
+
+~template switch_string_pattern_positive start~
+var tmp42 = ~[MACRO_String]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_StringSwitchPattern]~ => ~[VAR_string@1]~,
+    _ => ""
+};
+~template end~
+
+~template switch_string_pattern_negative start~
+var tmp42 = ~[MACRO_String]~;
+~[VAR_string@1]~ = tmp42 switch {
+    ~[MACRO_StringSwitchPattern]~ => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~template multiple_matches_pattern_negative start~
+object tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    IList<int> => "",
+    IReadOnlyCollection<int> => ~[VAR_string@1]~,
+    _ => "42"
+};
+~template end~
+
+~template multiple_matches_pattern_positive start~
+object tmp42 = ~[MACRO_IntList]~;
+~[VAR_string@1]~ = tmp42 switch {
+    IList<int> => ~[VAR_string@1]~,
+    IReadOnlyCollection<int> => "",
+    _ => "42"
+};
+~template end~
+
+~template regex_matches_pattern_positive start~
+var tmp42 = "A" + ~[VAR_string@1]~ + "b";
+~[VAR_string@1]~ = tmp42 switch {
+    ['a' or 'A', .. var s, 'b' or 'B'] => s,
+    _ => ""
+};
+~template end~
+
+~template regex_matches_pattern_negative start~
+var tmp42 = "A" + ~[VAR_string@1]~ + "b";
+~[VAR_string@1]~ = tmp42 switch {
+    ['a' or 'A', .. var s, 'b' or 'B'] => "",
+    _ => ~[VAR_string@1]~
+};
+~template end~
+
+~main body end~

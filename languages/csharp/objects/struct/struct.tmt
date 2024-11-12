@@ -1,0 +1,26 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_VarName]~ -> struct12321
+~[MACRO_VarName]~ -> struct21341
+~[MACRO_VarName]~ -> struct09823
+~[MACRO_VarName]~ -> struct39745
+~extensions end~
+
+~main body start~
+~helper import objects/struct/helpers/SimpleStruct~
+~helper import objects/struct/helpers/SimpleRecord~
+
+~imports start~
+using HelperStructs;
+~imports end~
+
+~template create_simple_struct start~
+var ~[MACRO_VarName]~ = new SimpleStruct();
+~template end~
+
+~template create_simple_record_2 start~
+var ~[MACRO_VarName]~ = new SimpleRecord2(~[CONST_string]~, 0);
+~template end~
+
+~main body end~

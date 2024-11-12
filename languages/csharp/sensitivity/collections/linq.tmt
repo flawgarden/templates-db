@@ -1,0 +1,258 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_CollectionName]~ -> collection42
+~[DEFINE_Create_Collection]~ -> ICollection<string> ~[DEFINE_CollectionName]~ = new List<string>();
+~[DEFINE_Create_Collection]~ -> ICollection<string> ~[DEFINE_CollectionName]~ = new HashSet<string>();
+
+~[DEFINE_FixedVar]~ -> ~[VAR_string@1]~
+~[DEFINE_FixedConst]~ -> ~[CONST_string@1]~
+
+~[DEFINE_Add_Fixed_VAR_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[DEFINE_FixedVar]~);
+~[DEFINE_Add_Fixed_CONST_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[DEFINE_FixedConst]~);
+~[DEFINE_Add_CONST_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add(~[CONST_string]~);
+~[DEFINE_Add_EmptyString_ToCollection]~ -> ~[DEFINE_CollectionName]~.Add("");
+
+~[DEFINE_Item]~ -> item42
+~[DEFINE_QueryName]~ -> query42
+~[DEFINE_From]~ -> from ~[DEFINE_Item]~ in ~[DEFINE_CollectionName]~
+~[DEFINE_SimpleSelect]~ -> select ~[DEFINE_Item]~
+
+~[DEFINE_OrderByLength]~ -> orderby ~[DEFINE_Item]~.Length
+~[DEFINE_OrderByLength]~ -> orderby ~[DEFINE_Item]~.Length ascending
+~[DEFINE_OrderByLengthDescending]~ -> orderby ~[DEFINE_Item]~.Length descending
+
+~[DEFINE_WhereEmptyString]~ -> where ~[DEFINE_Item]~.Length == 0
+~[DEFINE_WhereStringLengthMoreThenZero]~ -> where ~[DEFINE_Item]~.Length > 0
+
+~[DEFINE_GetItem]~ -> query42.First()
+
+~extensions end~
+
+~main body start~
+
+~imports start~
+using System.Linq;
+~imports end~
+
+~template linq_simple_select_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_select_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_CONST_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_let_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    let res42 = ~[DEFINE_Item]~.ToString()
+    select res42;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_let_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_CONST_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    let res42 = ~[DEFINE_Item]~.ToString()
+    select res42;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_multiple_from_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    from item43 in ~[DEFINE_CollectionName]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_multiple_from_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_CONST_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    from item43 in ~[DEFINE_CollectionName]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_where_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_WhereStringLengthMoreThenZero]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_where_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_WhereEmptyString]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_multiple_where_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_WhereStringLengthMoreThenZero]~
+    where ~[DEFINE_Item]~ != ""
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_multiple_where_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_WhereEmptyString]~
+    where ~[DEFINE_Item]~ == ""
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_orderby_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_OrderByLengthDescending]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_orderby_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_Add_Fixed_VAR_ToCollection]~
+~[DEFINE_Add_EmptyString_ToCollection]~
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    ~[DEFINE_OrderByLength]~
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_orderby_thenby_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_CollectionName]~.Add("a");
+~[DEFINE_CollectionName]~.Add("a" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    orderby ~[DEFINE_Item]~[0], ~[DEFINE_Item]~.Length descending
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_orderby_thenby_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_CollectionName]~.Add("a");
+~[DEFINE_CollectionName]~.Add("a" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    orderby ~[DEFINE_Item]~[0], ~[DEFINE_Item]~.Length
+    ~[DEFINE_SimpleSelect]~;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~;
+~template end~
+
+~template linq_simple_groupby_positive start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_CollectionName]~.Add("a");
+~[DEFINE_CollectionName]~.Add("b" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    group ~[DEFINE_Item]~ by ~[DEFINE_Item]~[0] into group42
+    where group42.Key == 'b'
+    select group42;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~.First();
+~template end~
+
+~template linq_simple_groupby_negative start~
+~[DEFINE_Create_Collection]~
+~[DEFINE_CollectionName]~.Add("a");
+~[DEFINE_CollectionName]~.Add("b" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    ~[DEFINE_From]~
+    group ~[DEFINE_Item]~ by ~[DEFINE_Item]~[0] into group42
+    where group42.Key == 'a'
+    select group42;
+~[DEFINE_FixedVar]~ = ~[DEFINE_GetItem]~.First();
+~template end~
+
+~template linq_simple_join_positive start~
+var collection111 = new List<string>();
+var collection222 = new List<string>();
+collection111.Add("a");
+collection222.Add("a" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    from item111 in collection111
+    join item222 in collection222 on item111[0] equals item222[0]
+    select item222;
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueryName]~.First();
+~template end~
+
+~template linq_simple_join_negative start~
+var collection111 = new List<string>();
+var collection222 = new List<string>();
+collection111.Add("a");
+collection222.Add("abc");
+var ~[DEFINE_QueryName]~ =
+    from item111 in collection111
+    join item222 in collection222 on item111[0] equals item222[0]
+    select item222;
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueryName]~.First();
+~template end~
+
+~template linq_simple_join_into_positive start~
+var collection111 = new List<string>();
+var collection222 = new List<string>();
+collection111.Add("a");
+collection222.Add("a" + ~[DEFINE_FixedVar]~);
+var ~[DEFINE_QueryName]~ =
+    from item111 in collection111
+    join item222 in collection222 on item111[0] equals item222[0] into itemsss
+    select itemsss;
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueryName]~.First().First();
+~template end~
+
+~template linq_simple_join_into_negative start~
+var collection111 = new List<string>();
+var collection222 = new List<string>();
+collection111.Add("a");
+collection222.Add("abc");
+var ~[DEFINE_QueryName]~ =
+    from item111 in collection111
+    join item222 in collection222 on item111[0] equals item222[0] into itemsss
+    select itemsss;
+~[DEFINE_FixedVar]~ = ~[DEFINE_QueryName]~.First().First();
+~template end~
+
+~main body end~

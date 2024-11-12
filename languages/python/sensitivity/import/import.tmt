@@ -13,7 +13,7 @@ s123 = SimpleImport()
 
 ~template import_string_module_negative start~
 s123 = SimpleImport()
-~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~[VAR_str]~ = s123.func(~[CONST_str]~)
 ~template end~
 
 ~template import_string_module_alias_positive start~
@@ -23,7 +23,7 @@ s123 = SimpleImportAlias()
 
 ~template import_string_module_alias_negative start~
 s123 = SimpleImportAlias()
-~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~[VAR_str]~ = s123.func(~[CONST_str]~)
 ~template end~
 
 ~template import_string_module_from_positive start~
@@ -33,7 +33,7 @@ s123 = SimpleImportFrom()
 
 ~template import_string_module_from_negative start~
 s123 = SimpleImportFrom()
-~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~[VAR_str]~ = s123.func(~[CONST_str]~)
 ~template end~
 
 ~template import_string_module_from_alias_positive start~
@@ -43,7 +43,7 @@ s123 = SimpleImportFromAs()
 
 ~template import_string_module_from_alias_negative start~
 s123 = SimpleImportFromAs()
-~[VAR_str@1]~ = s123.func(~[CONST_str]~)
+~[VAR_str]~ = s123.func(~[CONST_str]~)
 ~template end~
 
 ~template import_string_not_existing_module_positive start~

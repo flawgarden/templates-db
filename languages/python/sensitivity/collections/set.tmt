@@ -13,6 +13,17 @@
 
 ~main body start~
 
+~unsupported template set_except_with_positive~
+~unsupported template set_except_with_negative~
+~unsupported template set_intersect_with_positive~
+~unsupported template set_intersect_with_negative~
+~unsupported template set_xor_positive~
+~unsupported template set_xor_negative~
+~unsupported template set_super_positive~
+~unsupported template set_super_negative~
+~unsupported template set_subset_positive~
+~unsupported template set_subset_negative~
+
 ~template set_add_simple_positive start~
 ~[DEFINE_Create_Set]~
 ~[DEFINE_Add_Fixed_VAR_ToSet]~
@@ -80,7 +91,7 @@ if len(~[DEFINE_SetName]~) == 2:
 ~template set_union_negative start~
 set111 = set()
 set222 = set()
-set111.add(~[EXPR_~[TYPE@1]~@1]~)
+set111.add(~[EXPR_~[TYPE@1]~]~)
 set222.add(~[VAR_~[TYPE@1]~@2]~)
 set111 |= set222
 value7847 = ~[CONST_~[TYPE@1]~]~
@@ -93,7 +104,7 @@ set111 = set()
 set222 = set()
 set111.add(~[VAR_~[TYPE@1]~@1]~)
 set222.add(~[VAR_~[TYPE@1]~@1]~)
-set222.add(~[EXPR_~[TYPE@1]~@2]~)
+set222.add(~[EXPR_~[TYPE@1]~]~)
 set111 -= set222
 value7849 = ~[CONST_~[TYPE@1]~]~
 if len(set111) == 0:

@@ -1,0 +1,50 @@
+~extensions start~
+
+~[DEFINE_SPHName]~ -> property787231
+
+~[DEFINE_Create_SPH_Empty]~ -> var ~[DEFINE_SPHName]~ = new StringPropertyHolder();
+~[DEFINE_Create_SPH_Var_Positive]~ -> var ~[DEFINE_SPHName]~ = new StringPropertyHolder(~[VAR_string@1]~);
+~[DEFINE_Create_SPH_Var_Negative]~ -> var ~[DEFINE_SPHName]~ = new StringPropertyHolder(~[CONST_string]~);
+~[DEFINE_Create_SPH_Var_InitPositive]~ -> var ~[DEFINE_SPHName]~ = new StringPropertyHolder(~[VAR_string@1]~, ~[VAR_string@1]~);
+~[DEFINE_Create_SPH_Var_InitNegative]~ -> var ~[DEFINE_SPHName]~ = new StringPropertyHolder(~[CONST_string]~, ~[CONST_string]~);
+
+~[DEFINE_GetValue]~ -> ~[DEFINE_SPHName]~.value
+~[DEFINE_GetValue]~ -> ~[DEFINE_SPHName]~.ValueReturner
+~[DEFINE_GetValue]~ -> ~[DEFINE_SPHName]~.ProperValue
+
+~extensions end~
+
+~main body start~
+~helper import sensitivity/field/helpers/StringPropertyHolder~
+
+~imports start~
+using HelperFields;
+~imports end~
+
+~template string_property_positive start~
+~[DEFINE_Create_SPH_Var_Positive]~
+~[VAR_string@1]~ = ~[DEFINE_GetValue]~;
+~template end~
+
+~template string_property_negative start~
+~[DEFINE_Create_SPH_Var_Negative]~
+~[VAR_string@1]~ = ~[DEFINE_GetValue]~;
+~template end~
+
+~template string_unchangeable_property_negative start~
+~[DEFINE_Create_SPH_Empty]~
+~[DEFINE_SPHName]~.ForgetfulValue = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_SPHName]~.ForgetfulValue;
+~template end~
+
+~template string_init_property_negative start~
+~[DEFINE_Create_SPH_Var_InitNegative]~
+~[VAR_string@1]~ = ~[DEFINE_SPHName]~.InitValue;
+~template end~
+
+~template string_init_property_positive start~
+~[DEFINE_Create_SPH_Var_InitPositive]~
+~[VAR_string@1]~ = ~[DEFINE_SPHName]~.InitValue;
+~template end~
+
+~main body end~

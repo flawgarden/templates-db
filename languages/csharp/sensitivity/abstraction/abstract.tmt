@@ -1,0 +1,99 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_InstanceName]~ -> abstract999
+~[DEFINE_VirtualizedName]~ -> virtual666
+
+~[DEFINE_CreateInherited]~ -> var ~[DEFINE_InstanceName]~ = new ClassInherited();
+~[DEFINE_CreateInherited]~ -> var ~[DEFINE_InstanceName]~ = new SealedMemberClass();
+~[DEFINE_CreateInverted]~ -> var ~[DEFINE_InstanceName]~ = new ClassInverted();
+
+~[DEFINE_CreateVirtualized]~ -> AClass ~[DEFINE_VirtualizedName]~ = (AClass)~[DEFINE_InstanceName]~;
+
+~[DEFINE_ChooseOverride]~ -> Overridden
+~[DEFINE_ChooseOverride]~ -> NonOverridden
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/abstraction/helpers/AbstractClass~
+~helper import sensitivity/abstraction/helpers/InheritedAbstractClass~
+~helper import sensitivity/abstraction/helpers/InvertedAbstractClass~
+~helper import sensitivity/abstraction/helpers/SealedMemberClass~
+
+~imports start~
+using AbstractHelpers;
+~imports end~
+
+~template inherited_from_abstract_positive start~
+~[DEFINE_CreateInherited]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.~[DEFINE_ChooseOverride]~Positive(~[VAR_string@1]~);
+~template end~
+
+~template inherited_from_abstract_negative_1 start~
+~[DEFINE_CreateInherited]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.~[DEFINE_ChooseOverride]~Negative(~[VAR_string@1]~);
+~template end~
+
+~template inherited_from_abstract_negative_2 start~
+~[DEFINE_CreateInherited]~
+~[VAR_string]~ = ~[DEFINE_InstanceName]~.~[DEFINE_ChooseOverride]~Positive(~[CONST_string]~);
+~template end~
+
+~template abstract_method_positive start~
+~[DEFINE_CreateInherited]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_VirtualizedName]~.APositive(~[VAR_string@1]~);
+~template end~
+
+~template abstract_method_negative start~
+~[DEFINE_CreateInherited]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_VirtualizedName]~.ANegative(~[VAR_string@1]~);
+~template end~
+
+~template overridden_from_abstract_positive start~
+~[DEFINE_CreateInverted]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.OverriddenNegative(~[VAR_string@1]~);
+~template end~
+
+~template overridden_from_abstract_negative start~
+~[DEFINE_CreateInverted]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.OverriddenPositive(~[VAR_string@1]~);
+~template end~
+
+~template overridden_accessed_as_abstract_positive start~
+~[DEFINE_CreateInverted]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_VirtualizedName]~.OverriddenNegative(~[VAR_string@1]~);
+~template end~
+
+~template overridden_accessed_as_abstract_negative start~
+~[DEFINE_CreateInverted]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_VirtualizedName]~.OverriddenPositive(~[VAR_string@1]~);
+~template end~
+
+~template shadowed_from_abstract_positive start~
+~[DEFINE_CreateInverted]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.NonOverriddenNegative(~[VAR_string@1]~);
+~template end~
+
+~template shadowed_from_abstract_negative start~
+~[DEFINE_CreateInverted]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.NonOverriddenPositive(~[VAR_string@1]~);
+~template end~
+
+~template shadowed_accessed_as_abstract_positive start~
+~[DEFINE_CreateInverted]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_VirtualizedName]~.NonOverriddenPositive(~[VAR_string@1]~);
+~template end~
+
+~template shadowed_accessed_as_abstract_negative start~
+~[DEFINE_CreateInverted]~
+~[DEFINE_CreateVirtualized]~
+~[VAR_string@1]~ = ~[DEFINE_InstanceName]~.NonOverriddenNegative(~[VAR_string@1]~);
+~template end~
+
+~main body end~

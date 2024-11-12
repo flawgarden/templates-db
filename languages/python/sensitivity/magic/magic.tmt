@@ -12,7 +12,7 @@ mc = MagicClass(~[VAR_~[TYPE@1]~@1]~)
 
 ~template magic_method_init_negative start~
 mc = MagicClass(~[CONST_~[TYPE@1]~]~)
-~[VAR_~[TYPE@1]~@1]~ = mc.arg
+~[VAR_~[TYPE@1]~]~ = mc.arg
 ~template end~
 
 ~template magic_method_str_positive start~

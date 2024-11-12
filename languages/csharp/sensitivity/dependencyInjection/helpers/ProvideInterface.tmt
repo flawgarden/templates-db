@@ -1,0 +1,28 @@
+~class ProviderInterface start~
+namespace HelperDI;
+
+public interface IRetriever
+{
+    public string Retrieve();
+}
+~class end~
+
+~class ProviderPositive start~
+namespace HelperDI;
+
+public class Give : IRetriever
+{
+    public static string Item;
+
+    public string Retrieve() => Item;
+}
+~class end~
+
+~class ProviderNegative start~
+namespace HelperDI;
+
+public class Hide : IRetriever
+{
+    public string Retrieve() => "";
+}
+~class end~

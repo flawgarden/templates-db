@@ -1,0 +1,63 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function return_first_argument start~
+public unsafe static T fst<T>(T a, T b) => a;
+~function end~
+
+~function return_second_argument start~
+public unsafe static T snd<T>(T a, T b) => b;
+~function end~
+
+~function function_applicator_2_args start~
+public unsafe T apply<T>(delegate*<T, T, T> func, T a, T b) => func(a, b);
+~function end~
+
+~helper functions end~
+
+~template pointer_assignment_positive start~
+~[TYPE@1]~ tmpVar156 = ~[VAR_~[TYPE@1]~@1]~;
+fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~@1]~)
+{
+    *ptr524 = tmpVar156;
+}
+~template end~
+
+~template pointer_assignment_negative start~
+~[TYPE@1]~ tmpVar156 = ~[CONST_~[TYPE@1]~]~;
+fixed (~[TYPE@1]~* ptr524 = &~[VAR_~[TYPE@1]~]~)
+{
+    *ptr524 = tmpVar156;
+}
+~template end~
+
+~template pointer_addition_positive start~
+~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
+fixed (~[TYPE@1]~* ptr524 = arr524)
+{
+    ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 1);
+}
+~template end~
+
+~template pointer_addition_negative start~
+~[TYPE@1]~[] arr524 = { ~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~ };
+fixed (~[TYPE@1]~* ptr524 = arr524)
+{
+    ~[VAR_~[TYPE@1]~@1]~ = *(ptr524 + 2);
+}
+~template end~
+
+~template function_pointer_positive start~
+~[VAR_~[TYPE@1]~@1]~ = apply(&fst, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~template function_pointer_negative start~
+~[VAR_~[TYPE@1]~@1]~ = apply(&snd, ~[VAR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@1]~]~);
+~template end~
+
+~main body end~

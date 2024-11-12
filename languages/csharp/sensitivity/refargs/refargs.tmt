@@ -1,0 +1,71 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_ForgetFixedVarValue]~ -> ~[VAR_string@1]~ = "";
+
+~[DEFINE_FuncType]~ -> RefargFunctions.Func
+~[DEFINE_FuncType]~ -> RefargFunctions.Lambda
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/refargs/helpers/refargFunctions~
+
+~imports start~
+using HelperRefargs;
+~imports end~
+
+~template ref_param_out_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+~[DEFINE_FuncType]~OutAssign(copy41412, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_out_negative start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_FuncType]~OutAssign(~[CONST_string]~, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_out_negative_2 start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_FuncType]~OutOverwrite(copy41412, out ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_in_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~InReturn(in copy41412);
+~template end~
+
+~template ref_param_in_negative start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~InReturnEmpty(in copy41412);
+~template end~
+
+~template ref_param_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+~[DEFINE_FuncType]~RefAssign(copy41412, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_negative_1 start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_FuncType]~RefAssign(~[CONST_string]~, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_param_negative_2 start~
+var copy41412 = ~[VAR_string@1]~;
+~[DEFINE_ForgetFixedVarValue]~
+~[DEFINE_FuncType]~RefDoNothing(copy41412, ref ~[VAR_string@1]~);
+~template end~
+
+~template ref_readonly_param_positive start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~RefReadonlyReturn(ref copy41412);
+~template end~
+
+~template ref_readonly_param_negative start~
+var copy41412 = ~[VAR_string@1]~;
+~[VAR_string@1]~ = ~[DEFINE_FuncType]~RefReadonlyReturnEmpty(ref copy41412);
+~template end~
+
+~main body end~

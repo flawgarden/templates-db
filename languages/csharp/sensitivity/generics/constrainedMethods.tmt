@@ -1,0 +1,53 @@
+~extensions start~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function interface_constrained_method start~
+private static string InterfaceConstrainedMethod<T>(string l, string r) where T : BinaryOpInterface, new()
+{
+    var tmpWorker = new T();
+    return tmpWorker.InterfaceCall(l, r);
+}
+~function end~
+
+~function inheritance_constrained_method start~
+private static string InheritanceConstrainedMethod<T, V>(string l, string r)
+    where T : V, new()
+    where V : BaseBinaryOpClass
+{
+    var tmpWorker = new T();
+    return tmpWorker.VirtualCall(l, r);
+}
+~function end~
+
+~helper functions end~
+
+~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
+
+~imports start~
+using HelperClasses;
+~imports end~
+
+~template interface_constrained_generic_method_positive start~
+~[VAR_string@1]~ = InterfaceConstrainedMethod<ImplBinaryOpInterfaceClass1>(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template interface_constrained_generic_method_negative start~
+~[VAR_string@1]~ = InterfaceConstrainedMethod<ImplBinaryOpInterfaceClass1>(~[CONST_string]~, ~[VAR_string@1]~);
+~template end~
+
+~template inheritance_constrained_generic_method_positive start~
+~[VAR_string@1]~ = InheritanceConstrainedMethod<DerivedBinaryOpClass1, BaseBinaryOpClass>(~[VAR_string@1]~, ~[CONST_string]~);
+~template end~
+
+~template inheritance_constrained_generic_method_negative start~
+~[VAR_string@1]~ = InheritanceConstrainedMethod<DerivedBinaryOpClass1, BaseBinaryOpClass>(~[CONST_string]~, ~[VAR_string@1]~);
+~template end~
+
+~main body end~

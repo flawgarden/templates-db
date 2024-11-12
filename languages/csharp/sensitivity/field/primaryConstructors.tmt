@@ -1,0 +1,48 @@
+~extensions start~
+~[DEFINE_VarName]~ -> primary987
+
+~[DEFINE_PrimaryClass]~ -> PrimaryConstructorClass
+~[DEFINE_PrimaryClass]~ -> PrimaryPropertiesClass
+
+~[DEFINE_AnyPrimaryClass_Fixed]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_PrimaryClass]~(~[VAR_string@1]~);
+
+~[DEFINE_PrimaryPropertiesClass_Fixed]~ -> var ~[DEFINE_VarName]~ = new PrimaryPropertiesClass(~[VAR_string@1]~);
+~[DEFINE_PrimaryPropertiesClass_Const]~ -> var ~[DEFINE_VarName]~ = new PrimaryPropertiesClass(~[CONST_string]~);
+~extensions end~
+
+~main body start~
+~helper import sensitivity/field/helpers/PrimaryConstructorClass~
+
+~imports start~
+using HelperFields;
+~imports end~
+
+~template primary_constructor_init_positive start~
+~[DEFINE_AnyPrimaryClass_Fixed]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.Positive;
+~template end~
+
+~template primary_constructor_init_negative start~
+~[DEFINE_AnyPrimaryClass_Fixed]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.Negative;
+~template end~
+
+~template primary_property_changed_positive_1 start~
+~[DEFINE_PrimaryPropertiesClass_Const]~
+~[DEFINE_VarName]~.Append(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.Positive;
+~template end~
+
+~template primary_property_changed_positive_2 start~
+~[DEFINE_PrimaryPropertiesClass_Fixed]~
+~[DEFINE_VarName]~.Append(~[CONST_string]~);
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.Positive;
+~template end~
+
+~template primary_property_changed_negative start~
+~[DEFINE_PrimaryPropertiesClass_Fixed]~
+~[DEFINE_VarName]~.Append(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.Negative;
+~template end~
+
+~main body end~
