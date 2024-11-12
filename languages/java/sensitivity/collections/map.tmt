@@ -5,7 +5,6 @@
 ~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new HashMap<>();
 ~[DEFINE_Create_Map]~ -> Map<~[TYPE@1]~, ~[TYPE@2]~> ~[DEFINE_MapName]~ = new TreeMap<>();
 ~[DEFINE_Add_EXPR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[EXPR_~[TYPE@1]~@1]~, ~[EXPR_~[TYPE@2]~@2]~);
-~[DEFINE_Add_VAR_ToMap]~ -> ~[DEFINE_MapName]~.put(~[VAR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@2]~);
 
 ~extensions end~
 
@@ -55,7 +54,7 @@ if (~[DEFINE_MapName]~.containsKey(~[EXPR_~[TYPE@1]~@1]~)) {
 ~template map_merge_1_positive start~
 Map<~[TYPE@1]~, ~[TYPE@2]~> map111 = new HashMap<>();
 Map<~[TYPE@1]~, ~[TYPE@2]~> map222 = new HashMap<>();
-map111.put(~[EXPR_~[TYPE@1]~@1]~, ~[VAR_~[TYPE@2]~@1]~);
+map111.put(~[EXPR_~[TYPE@1]~]~, ~[VAR_~[TYPE@2]~]~);
 map222.put(~[EXPR_~[TYPE@1]~@2]~, ~[VAR_~[TYPE@2]~@2]~);
 map111.putAll(map222);
 ~[VAR_~[TYPE@2]~@2]~ = map111.get(~[EXPR_~[TYPE@1]~@2]~);

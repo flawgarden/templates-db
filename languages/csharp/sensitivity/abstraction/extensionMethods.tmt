@@ -31,7 +31,7 @@ using ExtensionHelpers;
 ~template end~
 
 ~template extension_method_one_arg_negative start~
-~[VAR_string@1]~ = (~[EXPR_string]~).ReturnArg(~[CONST_string]~);
+~[VAR_string]~ = (~[EXPR_string]~).ReturnArg(~[CONST_string]~);
 ~template end~
 
 ~template extension_method_addition_neutral start~

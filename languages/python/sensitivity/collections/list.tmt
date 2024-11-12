@@ -4,7 +4,6 @@
 ~[DEFINE_ListName]~ -> list787231
 ~[DEFINE_Create_List]~ -> ~[DEFINE_ListName]~ = []
 ~[DEFINE_Add_VAR_ToList]~ -> ~[DEFINE_ListName]~.append(~[VAR_~[TYPE@1]~@1]~)
-~[DEFINE_Add_EXPR_ToList]~ -> ~[DEFINE_ListName]~.append(~[EXPR_~[TYPE@1]~@1]~)
 ~[DEFINE_Add_CONST_ToList]~ -> ~[DEFINE_ListName]~.append(~[CONST_~[TYPE@1]~@1]~)
 
 ~extensions end~

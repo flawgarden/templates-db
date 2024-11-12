@@ -79,7 +79,7 @@ instance = MonkeyClass(~[VAR_~[TYPE@1]~@1]~)
 ~template end~
 
 ~template monkey_patch_class_property_negative start~
-MonkeyClass.arg = new_arg(~[CONST_~[TYPE@1]~@1]~)
+MonkeyClass.arg = new_arg(~[CONST_~[TYPE@1]~]~)
 instance = MonkeyClass(~[VAR_~[TYPE@1]~@1]~)
 ~[VAR_~[TYPE@1]~@1]~ = instance.arg
 ~template end~

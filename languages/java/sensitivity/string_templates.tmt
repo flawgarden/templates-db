@@ -17,7 +17,7 @@ import java.util.*;
 ~template end~
 
 ~template simple_string_templates_negative start~
-~[VAR_String@1]~ = STR."fixed_string";
+~[VAR_String]~ = STR."fixed_string";
 ~template end~
 
 ~main body end~

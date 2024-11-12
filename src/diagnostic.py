@@ -237,7 +237,7 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         for proj_file in fst.files:
             same_file = find_same(second_files, proj_file)
             if same_file is None:
-                result.append(DiagnosticResult.warning(f"TODO: Add the same file [{proj_file.path}] for [{snd.name}]"))
+                result.append(DiagnosticResult.warning(f"TODO[{snd.name}]: Add the same file [{proj_file.path}]"))
             elif isinstance(same_file, TemplateFile):
                 assert isinstance(proj_file, TemplateFile)
                 compare_template_file(proj_file, same_file)
@@ -318,25 +318,41 @@ def undefined_macro_diagnostic(project: LanguageProject, template_file: Template
 def unused_local_macro_diagnostic(project: LanguageProject, template_file: TemplateFile) -> List[DiagnosticResult]:
     result = []
 
-    used_macro = []
-    used_define = []
-    for template in supported(template_file.templates):
-        used_macro.extend(template.code.macros)
-        used_define.extend(template.code.defines)
+    visited_macros = set()
+    visited_defines = set()
 
-    used_macro_names = [macro.name for macro in used_macro]
-    used_define_names = [define.name for define in used_define]
+    local_macro_names = set([m.name for m in template_file.local_macros])
+    local_define_names = set([d.name for d in template_file.local_defines])
 
-    for macro in template_file.local_macros:
-        if macro.name not in used_macro_names:
-            result.append(
-                DiagnosticResult.warning(f"Local macro [{macro.name}] in [{template_file.path}] defined but not used")
-            )
-    for define in template_file.local_defines:
-        if define.name not in used_define_names:
-            result.append(
-                DiagnosticResult.warning(f"Local macro [{define.name}] in [{template_file.path}] defined but not used")
-            )
+    def get_codes(name, collection):
+        codes = []
+        for v in collection:
+            if v.name == name:
+                codes.append(v.code)
+        return codes
+
+    def traverse_code(codes, n):
+        for code in codes:
+            for macro in code.macros:
+                if macro.name not in visited_macros and macro.name in local_macro_names:
+                    visited_macros.add(macro.name)
+                    traverse_code(get_codes(macro.name, template_file.local_macros), n + 1)
+            for define in code.defines:
+                if define.name not in visited_defines and define.name in local_define_names:
+                    visited_defines.add(define.name)
+                    traverse_code(get_codes(define.name, template_file.local_defines), n + 1)
+
+    traverse_code([template.code for template in supported(template_file.templates)], 0)
+
+    for m in local_macro_names.difference(visited_macros):
+        result.append(
+            DiagnosticResult.warning(f"Local macro [{m}] in [{template_file.path}] defined but not used")
+        )
+
+    for d in local_define_names.difference(visited_defines):
+        result.append(
+            DiagnosticResult.warning(f"Local define [{d}] in [{template_file.path}] defined but not used")
+        )
     return result
 
 
@@ -382,6 +398,8 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
         return result_holes
 
     def check_extension(path: Path, e: Extension):
+        if e.target.kind == "DEFINE":
+            return
         for ref in get_dangling_refs(traverse_holes([*e.target.type_.types, *e.code.holes])):
             result.append(
                 DiagnosticResult.warning(f"Dangling ref [{ref}] inside extensions in file [{path}]")
@@ -408,15 +426,35 @@ def dangling_ref_diagnostic(project: LanguageProject) -> List[DiagnosticResult]:
     return result
 
 
+@nerd.language_diagnostic("Duplicated template names (globally)")
+def duplicated_names_globally(project: LanguageProject) -> List[DiagnosticResult]:
+    result = []
+
+    templates_to_files = {}
+    for template_file in project.template_files:
+        for template in template_file.templates:
+            if template.name not in templates_to_files:
+                templates_to_files[template.name] = [template_file.path]
+            else:
+                templates_to_files[template.name].append(template_file.path)
+
+    for template_name in templates_to_files:
+        files = templates_to_files[template_name]
+        if len(files) > 1:
+            result.append(DiagnosticResult.error(f"Duplicated template name [{template_name}] in files [{files}]"))
+
+    return result
+
+
 @nerd.language_diagnostic("Duplicated names")
 def duplicated_names(project: LanguageProject) -> List[DiagnosticResult]:
     result = []
 
     def check_names(
-            files: List[ProjectFile],
-            get_named_objects: Callable[[ProjectFile], T],
-            get_name: Callable[[T], str],
-            object_name: str
+        files: List[ProjectFile],
+        get_named_objects: Callable[[ProjectFile], T],
+        get_name: Callable[[T], str],
+        object_name: str
     ):
         name_to_file = {}
         names = set()

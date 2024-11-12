@@ -5,7 +5,6 @@
 ~[DEFINE_PrimaryClass]~ -> PrimaryPropertiesClass
 
 ~[DEFINE_AnyPrimaryClass_Fixed]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_PrimaryClass]~(~[VAR_string@1]~);
-~[DEFINE_AnyPrimaryClass_Const]~ -> var ~[DEFINE_VarName]~ = new ~[DEFINE_PrimaryClass]~(~[CONST_string]~);
 
 ~[DEFINE_PrimaryPropertiesClass_Fixed]~ -> var ~[DEFINE_VarName]~ = new PrimaryPropertiesClass(~[VAR_string@1]~);
 ~[DEFINE_PrimaryPropertiesClass_Const]~ -> var ~[DEFINE_VarName]~ = new PrimaryPropertiesClass(~[CONST_string]~);
