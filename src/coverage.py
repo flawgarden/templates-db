@@ -4,17 +4,23 @@ import metadata
 import template
 import console
 
-def calculate_coverage(project: template.LanguageProject, metadata_list: List[metadata.Metadata]) -> Tuple[float, dict[str, Tuple[float, dict[str, bool]]]]:
+
+def calculate_coverage(project: template.LanguageProject, metadata_list: List[metadata.Metadata], exclude_objects: bool) -> Tuple[
+    float, dict[str, Tuple[float, dict[str, bool]]]]:
     covered = {}
     for tf in project.template_files:
+        if exclude_objects and tf.parents.count("objects") > 0:
+            continue
         template_canonical_name = "/".join(tf.parents[::-1]) + "/" + tf.name
         covered[template_canonical_name] = {}
         for t in tf.templates:
             covered[template_canonical_name][t.name] = False
 
     for m in metadata_list:
-        used_templates = m.mutated_file_metadata.used_templates
+        used_templates = [(x.template_file, x.template_name) for x in m.mutated_file_metadata.used_templates]
         for tf, t in used_templates:
+            if exclude_objects and tf.count("objects") > 0:
+                continue
             if tf not in covered:
                 console.Console.warn(f"WARNING: project doesn't contain template [{tf} {t}] from metadata")
                 continue

@@ -1,3 +1,4 @@
 antlr4-python3-runtime
 flake8
 pytest
+mashumaro

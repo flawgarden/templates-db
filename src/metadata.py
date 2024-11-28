@@ -1,14 +1,16 @@
-import dataclasses
+import json
 from dataclasses import dataclass
 from typing import List
-import json
+from mashumaro.mixins.json import DataClassJSONMixin
+
 
 @dataclass
 class CodeRegion:
-    start_line: int
-    end_line: int
+    start_line: int | None
+    end_line: int | None
     start_column: int | None
     end_column: int | None
+
 
 @dataclass
 class OriginalFileMetadata:
@@ -17,37 +19,44 @@ class OriginalFileMetadata:
     kind: str
     region: CodeRegion | None
 
+
 @dataclass
 class ToolResult:
     tool_name: str
     original_found_CWEs: List[int]
     mutated_found_CWEs: List[int]
 
+
+@dataclass(unsafe_hash=True)
+class TemplateMetadata:
+    template_file: str
+    template_name: str
+
+
 @dataclass
 class MutatedFileMetadata:
-    used_templates: List[List[str]] # Actually tuple inside, but its ruin (serialize . deserialize = id)
+    used_templates: List[TemplateMetadata]
     used_extensions: List[str]
     region: CodeRegion | None
 
+
 @dataclass
-class Metadata:
+class Metadata(DataClassJSONMixin):
     original_file_metadata: OriginalFileMetadata
     mutated_file_metadata: MutatedFileMetadata
     tool_results: List[ToolResult]
 
-
-def _dataclass_from_dict(klass, d):
-    try:
-        field_types = {f.name:f.type for f in dataclasses.fields(klass)}
-        return klass(**{f:_dataclass_from_dict(field_types[f], d[f]) for f in d})
-    except TypeError:
-        return d
+def _prettify_json(text: str) -> str:
+    return json.dumps(json.loads(text), indent=4)
 
 def metadata_to_json(metadata: Metadata) -> str:
-    return json.dumps(dataclasses.asdict(metadata), indent=4)
+    return _prettify_json(metadata.to_json())
 
 def metadata_from_json(text: str) -> Metadata:
-    return _dataclass_from_dict(Metadata, json.loads(text))
+    return Metadata.from_json(text)
+
+def copy(metadata: Metadata) -> Metadata:
+    return metadata_from_json(metadata_to_json(metadata))
 
 if __name__ == "__main__":
     obj = Metadata(
@@ -58,9 +67,9 @@ if __name__ == "__main__":
             region=CodeRegion(10, 20, None, None)
         ),
         mutated_file_metadata=MutatedFileMetadata(
-            used_templates=[("sensitivity/if", "if_simple_negative")],
+            used_templates=[TemplateMetadata("sensitivity/if", "if_simple_negative")],
             used_extensions=["~[EXPR_int]~ -> 42", "~[EXPR_bool]~ -> true"],
-            region = CodeRegion(15, 25, None, None)
+            region=CodeRegion(15, 25, None, None)
         ),
         tool_results=[
             ToolResult(tool_name="Semgrep", original_found_CWEs=[100, 200, 300], mutated_found_CWEs=[100]),
@@ -69,4 +78,5 @@ if __name__ == "__main__":
     )
     s = metadata_to_json(obj)
     print(s)
+    print(obj)
     print(metadata_from_json(s))
