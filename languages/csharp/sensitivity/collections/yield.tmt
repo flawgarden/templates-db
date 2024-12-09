@@ -56,11 +56,11 @@ IEnumerable<string> YieldBreak(string x, string y) {
 ~template end~
 
 ~template yield_break_negative start~
-~[VAR_string@1]~ = YieldBreak("424242", ~[VAR_string@1]~).Last();
+~[VAR_string@1]~ = YieldBreak("42", ~[VAR_string@1]~).Last();
 ~template end~
 
 ~template yield_break_positive start~
-~[VAR_string@1]~ = YieldBreak("42", ~[VAR_string@1]~).Last();
+~[VAR_string@1]~ = YieldBreak("424242", ~[VAR_string@1]~).Last();
 ~template end~
 
 ~main body end~

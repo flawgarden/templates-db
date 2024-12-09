@@ -245,7 +245,6 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
                 assert isinstance(same_file, TemplateFile)
                 compare_template_file(proj_file, same_file)
 
-
     for first_lang_proj in projects:
         for second_lang_proj in projects:
 

@@ -36,8 +36,8 @@ for (int i = ~[EXPR_int]~; i >= 0; i--) {
 
 ~template for_operator_string_array_positive start~
 string tmpUnique42 = ~[VAR_string@1]~;
-string[] stringArray = ~[MACRO_string_Array]~;
-for (int i = 0; i < stringArray.Length; i++) {
+string[] stringArray = {~[EXPR_string@1]~, ~[EXPR_string@1]~};
+for (int i = 0; i < stringArray.Length - 1; i++) {
     if (stringArray[i] == stringArray[i + 1]) {
         ~[VAR_string@1]~ = tmpUnique42;
     }
