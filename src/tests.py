@@ -146,32 +146,6 @@ class DiagnosticsTest:
             assert not has_error(diagnostics) and has_warning(diagnostics)
 
         @staticmethod
-        def test_missed_helper_file_cause_warning():
-            helper_file = DefaultValues.get_helper_file()
-            first_project = ProjectBuilder() \
-                .with_helper_file(helper_file) \
-                .get_project("first_lang")
-            second_project = ProjectBuilder() \
-                .get_project("second_lang")
-
-            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
-
-            assert not has_error(diagnostics) and has_warning(diagnostics)
-
-        @staticmethod
-        def test_missed_extension_file_cause_warning():
-            extension_file = DefaultValues.get_extension_file()
-            first_project = ProjectBuilder() \
-                .with_extension_file(extension_file) \
-                .get_project("first_lang")
-            second_project = ProjectBuilder() \
-                .get_project("second_lang")
-
-            diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
-
-            assert not has_error(diagnostics) and has_warning(diagnostics)
-
-        @staticmethod
         def test_same_unsupported_file_doesnt_cause_error_or_warning():
             template_file = DefaultValues.get_template_file()
             template_file.name = "some_file"

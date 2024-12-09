@@ -236,19 +236,14 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         second_files = snd.files
         for proj_file in fst.files:
             same_file = find_same(second_files, proj_file)
+            if not isinstance(proj_file, TemplateFile):
+                continue
+
             if same_file is None:
                 result.append(DiagnosticResult.warning(f"TODO[{snd.name}]: Add the same file [{proj_file.path}]"))
-            elif isinstance(same_file, TemplateFile):
-                assert isinstance(proj_file, TemplateFile)
-                compare_template_file(proj_file, same_file)
-            elif isinstance(same_file, HelperFile):
-                assert isinstance(proj_file, HelperFile)
-                compare_helper_file(proj_file, same_file)
-            elif isinstance(same_file, ExtensionFile):
-                assert isinstance(proj_file, ExtensionFile)
-                compare_extension_file(proj_file, same_file)
             else:
-                assert False
+                assert isinstance(same_file, TemplateFile)
+                compare_template_file(proj_file, same_file)
 
     for first_lang_proj in projects:
         for second_lang_proj in projects:
