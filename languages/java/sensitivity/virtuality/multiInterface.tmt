@@ -1,0 +1,36 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_VarName]~ -> multinterface12
+
+~[DEFINE_ClassWith2Positive]~ -> MultipleInterfaceClass_2Pos ~[DEFINE_VarName]~ = new MultipleInterfaceClass_2Pos();
+~[DEFINE_ClassWith2Negative]~ -> MultipleInterfaceClass_2Neg ~[DEFINE_VarName]~ = new MultipleInterfaceClass_2Neg();
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/virtuality/helpers/UnaryOpInterface~
+~helper import sensitivity/virtuality/helpers/UnaryOpInterface2~
+~helper import sensitivity/virtuality/helpers/MultiInterfaceInheritanceClass~
+
+~template multi_interface_positive_1 start~
+~[DEFINE_ClassWith2Positive]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.Interface2Call(~[VAR_String@1]~);
+~template end~
+
+~template multi_interface_positive_2 start~
+~[DEFINE_ClassWith2Negative]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.InterfaceCall(~[VAR_String@1]~);
+~template end~
+
+~template multi_interface_negative_1 start~
+~[DEFINE_ClassWith2Positive]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.InterfaceCall(~[VAR_String@1]~);
+~template end~
+
+~template multi_interface_negative_2 start~
+~[DEFINE_ClassWith2Negative]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.Interface2Call(~[VAR_String@1]~);
+~template end~
+
+~main body end~

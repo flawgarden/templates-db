@@ -1,0 +1,27 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+using strs = System.String;
+~imports end~
+
+~unsupported template import_string_module_positive~
+~unsupported template import_string_module_negative~
+~unsupported template import_string_module_from_positive~
+~unsupported template import_string_module_from_negative~
+~unsupported template import_string_module_from_alias_positive~
+~unsupported template import_string_module_from_alias_negative~
+~unsupported template import_string_not_existing_module_positive~
+
+~template import_string_module_alias_negative start~
+~[VAR_string]~ = strs.Concat("42", "42");
+~template end~
+
+~template import_string_module_alias_positive start~
+~[VAR_string@1]~ = strs.Concat("", ~[VAR_string@1]~);
+~template end~
+
+~main body end~

@@ -1,0 +1,60 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/dependencyInjection/helpers/ConsumerAnno~
+~helper import sensitivity/dependencyInjection/helpers/ConsumerInterface~
+~helper import sensitivity/dependencyInjection/helpers/ConsumerSimple~
+~helper import sensitivity/dependencyInjection/helpers/ServiceConst~
+~helper import sensitivity/dependencyInjection/helpers/ServiceI~
+~helper import sensitivity/dependencyInjection/helpers/ServiceSimple~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template simple_dependency_injection_positive start~
+ServiceSimple service111 = new ServiceSimple(~[VAR_String@1]~);
+ConsumerSimple cs111 = new ConsumerSimple(service111);
+~[VAR_String@1]~ = cs111.getFieldValue();
+~template end~
+
+~template simple_dependency_injection_negative start~
+ServiceSimple service111 = new ServiceSimple(~[EXPR_String]~);
+ConsumerSimple cs111 = new ConsumerSimple(service111);
+~[VAR_String]~ = cs111.getFieldValue();
+~template end~
+
+~template interface_dependency_injection_positive start~
+ServiceI service111 = new ServiceSimple(~[VAR_String@1]~);
+ConsumerInterface ci111 = new ConsumerInterface(service111);
+~[VAR_String@1]~ = ci111.getFieldValue();
+~template end~
+
+~template interface_dependency_injection_negative start~
+ServiceI service111 = new ServiceSimple(~[EXPR_String]~);
+ConsumerInterface ci111 = new ConsumerInterface(service111);
+~[VAR_String]~ = ci111.getFieldValue();
+~template end~
+
+~template const_dependency_injection_negative start~
+ServiceI s2 = new ServiceConst(~[EXPR_String]~);
+ConsumerInterface c2 = new ConsumerInterface(s2);
+~[VAR_String]~ = c2.getFieldValue();
+~template end~
+
+~template anno_dependency_injection_positive start~
+ServiceI s3 = new ServiceSimple(~[VAR_String@1]~);
+ConsumerAnno c3 = new ConsumerAnno(s3);
+~[VAR_String@1]~ = c3.getFieldValue();
+~template end~
+
+~template anno_dependency_injection_negative start~
+ServiceI s3 = new ServiceSimple(~[EXPR_String]~);
+ConsumerAnno c3 = new ConsumerAnno(s3);
+~[VAR_String]~ = c3.getFieldValue();
+~template end~
+
+~main body end~

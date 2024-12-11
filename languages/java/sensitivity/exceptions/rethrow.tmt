@@ -1,0 +1,39 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template rethrow_negative start~
+String tmp42 = ~[VAR_String@1]~;
+int[] tmpArray42 = {0, 1, 2, 3, 4};
+int index = -1;
+try {
+    try {
+        int tmp43 = tmpArray42[index];
+    } catch (ArrayIndexOutOfBoundsException e) {
+        ~[VAR_String@1]~ = tmp42;
+        throw e;
+    }
+} catch (ArrayIndexOutOfBoundsException e) {
+    ~[VAR_String@1]~ = "data";
+}
+~template end~
+
+~template rethrow_positive start~
+String tmp42 = ~[VAR_String@1]~;
+int[] tmpArray42 = {0, 1, 2, 3, 4};
+int index = -1;
+try {
+    try {
+        int tmp43 = tmpArray42[index];
+    } catch (ArrayIndexOutOfBoundsException e) {
+        ~[VAR_String@1]~ = "data";
+        throw e;
+    }
+} catch (ArrayIndexOutOfBoundsException e) {
+    ~[VAR_String@1]~ = tmp42;
+}
+~template end~
+
+~main body end~

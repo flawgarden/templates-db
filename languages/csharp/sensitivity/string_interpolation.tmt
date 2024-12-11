@@ -1,0 +1,47 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~unsupported template percent_operator_interpolation_positive~
+~unsupported template format_method_with_indexes_positive~
+
+~template simple_string_interpolation_positive start~
+~[VAR_string@1]~ = $"PREFIX{~[VAR_string@1]~}!";
+~template end~
+
+~template simple_string_interpolation_with_condition_positive start~
+var tmpString = $"PREFIX{~[VAR_string@1]~}!";
+if (tmpString.Contains("PREFIX")) {
+    ~[VAR_string@1]~ = tmpString;
+}
+~template end~
+
+~template simple_string_interpolation_negative start~
+~[VAR_string]~ = $"fixed_string";
+~template end~
+
+~template format_method_interpolation_positive start~
+~[VAR_string@1]~ = String.Format("PREFIX{0}!", ~[VAR_string@1]~);
+~template end~
+
+~template format_method_interpolation_negative start~
+~[VAR_string]~ = String.Format("PREFIX{0}!", "fixed_string");
+~template end~
+
+~template string_interpolation_multiline_positive start~
+var interpolatedStr = $@"aaa
+    MULTILINE {~[VAR_string@1]~}";
+~[VAR_string@1]~ = interpolatedStr;
+~template end~
+
+~template string_interpolation_with_string_operations_positive start~
+~[VAR_string@1]~ = $"PREFIX{~[VAR_string@1]~.ToUpper()}!";
+~template end~
+
+~template string_interpolation_escaping_negative start~
+~[VAR_string@1]~ = $"PREFIX{{~[VAR_string@1]~}}!";
+~template end~
+
+~main body end~
