@@ -1,0 +1,53 @@
+~extensions start~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function interface_constrained_method start~
+private static String interfaceConstrainedMethod(Class<? extends BinaryOpInterface> clazz, String l, String r) {
+    try {
+        BinaryOpInterface tmpWorker = clazz.getDeclaredConstructor().newInstance();
+        return tmpWorker.InterfaceCall(l, r);
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+}
+~function end~
+
+~function inheritance_constrained_method start~
+private static <T extends V, V extends BaseBinaryOpClass> String inheritanceConstrainedMethod(Class<T> clazz, String l, String r) {
+    try {
+        T tmpWorker = clazz.getDeclaredConstructor().newInstance();
+        return tmpWorker.VirtualCall(l, r);
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+}
+~function end~
+
+~helper functions end~
+
+~helper import sensitivity/virtuality/helpers/BaseBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/BinaryOpInterface~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
+
+~template interface_constrained_generic_method_positive start~
+~[VAR_String@1]~ = interfaceConstrainedMethod(ImplBinaryOpInterfaceClass1.class, ~[VAR_String@1]~, ~[CONST_String]~);
+~template end~
+
+~template interface_constrained_generic_method_negative start~
+~[VAR_String@1]~ = interfaceConstrainedMethod(ImplBinaryOpInterfaceClass1.class, ~[CONST_String]~, ~[VAR_String@1]~);
+~template end~
+
+~template inheritance_constrained_generic_method_positive start~
+~[VAR_String@1]~ = inheritanceConstrainedMethod(DerivedBinaryOpClass1.class, ~[VAR_String@1]~, ~[CONST_String]~);
+~template end~
+
+~template inheritance_constrained_generic_method_negative start~
+~[VAR_String@1]~ = inheritanceConstrainedMethod(DerivedBinaryOpClass1.class, ~[CONST_String]~, ~[VAR_String@1]~);
+~template end~
+
+~main body end~

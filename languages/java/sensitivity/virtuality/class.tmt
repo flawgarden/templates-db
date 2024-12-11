@@ -33,7 +33,7 @@ BaseBinaryOpClass a12341 = new DerivedBinaryOpClass1();
 ~template base_binary_op_positive start~
 BaseBinaryOpClass a12341 = (~[EXPR_Boolean]~) ? new DerivedBinaryOpClass1() : new DerivedBinaryOpClass2();
 ~[BODY]~
-~[VAR_String]~ = a12341.VirtualCall("", "");
+~[VAR_String]~ = a12341.VirtualCall(~[VAR_String@1]~, ~[VAR_String@1]~);
 ~template end~
 
 ~template base_binary_op_negative start~

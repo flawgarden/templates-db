@@ -1,0 +1,44 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_PartialVarName]~ -> partial4321
+~[DEFINE_FieldSubName]~ -> StrOne
+~[DEFINE_FieldSubName]~ -> StrTwo
+~[DEFINE_AnyFixedField]~ -> ~[DEFINE_FieldSubName@1]~
+~[DEFINE_CreateNegativePartial]~ -> var ~[DEFINE_PartialVarName]~ = new PartialClass(~[CONST_string]~, ~[CONST_string]~);
+~[DEFINE_CreatePositivePartial]~ -> var ~[DEFINE_PartialVarName]~ = new PartialClass(~[VAR_string@1]~, ~[VAR_string@1]~);
+~[DEFINE_CreateAnyPartial]~ -> ~[DEFINE_CreateNegativePartial]~
+~[DEFINE_CreateAnyPartial]~ -> ~[DEFINE_CreatePositivePartial]~
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/cSharpAbstractions/helpers/partialClass~
+
+~imports start~
+using PartialHelpers;
+~imports end~
+
+~template partial_field_access_positive start~
+~[DEFINE_CreatePositivePartial]~
+~[VAR_string@1]~ = ~[DEFINE_PartialVarName]~.~[DEFINE_AnyFixedField]~;
+~template end~
+
+~template partial_field_access_negative start~
+~[DEFINE_CreateNegativePartial]~
+~[VAR_string]~ = ~[DEFINE_PartialVarName]~.~[DEFINE_AnyFixedField]~;
+~template end~
+
+~template partial_field_reassign_positive start~
+~[DEFINE_CreateAnyPartial]~
+~[DEFINE_PartialVarName]~.Reassign~[DEFINE_AnyFixedField]~(~[VAR_string@1]~);
+~[VAR_string@1]~ = ~[DEFINE_PartialVarName]~.~[DEFINE_AnyFixedField]~;
+~template end~
+
+~template partial_field_reassign_negative start~
+~[DEFINE_CreateAnyPartial]~
+~[DEFINE_PartialVarName]~.Reassign~[DEFINE_AnyFixedField]~(~[CONST_string]~);
+~[VAR_string]~ = ~[DEFINE_PartialVarName]~.~[DEFINE_AnyFixedField]~;
+~template end~
+
+~main body end~

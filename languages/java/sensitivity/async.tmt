@@ -1,0 +1,33 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.ReentrantLock;
+~imports end~
+
+~template simple_async_negative start~
+AtomicReference<String> ar42 = new AtomicReference<>(~[VAR_String@1]~);
+CompletableFuture.runAsync(() -> {
+    ar42.set("string_const");
+});
+~[VAR_String@1]~ = ar42.get();
+~template end~
+
+~template simple_async_positive start~
+final String tmpStr = ~[VAR_String@1]~;
+AtomicReference<String> ar42 = new AtomicReference<>(~[VAR_String@1]~);
+CompletableFuture.runAsync(() -> {
+    ar42.set(tmpStr);
+});
+~[VAR_String@1]~ = ar42.get();
+~template end~
+
+~unsupported template simple_async_call_negative~
+~unsupported template simple_async_call_positive~
+
+~main body end~

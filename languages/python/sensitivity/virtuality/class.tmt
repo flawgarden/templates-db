@@ -24,7 +24,7 @@ a12341 = DerivedBinaryOpClass1()
 
 ~template base_binary_op_positive start~
 a12341 = DerivedBinaryOpClass1() if ~[EXPR_bool]~ else DerivedBinaryOpClass2()
-~[VAR_str]~ = a12341.virtual_call("", "")
+~[VAR_str]~ = a12341.virtual_call(~[VAR_str@1]~, ~[VAR_str@1]~)
 ~template end~
 
 ~template base_binary_op_negative start~

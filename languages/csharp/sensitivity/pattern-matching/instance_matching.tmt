@@ -1,0 +1,69 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function simple_pattern_matching_string_1 start~
+public string simplePatternMatchingString1(object obj) {
+    if (obj is string str) {
+        return str.ToUpper();
+    }
+    return "";
+}
+~function end~
+
+~function simple_pattern_matching_string_2 start~
+public string simplePatternMatchingString2(object obj) {
+    if (obj is string str && str.Length > 5) {
+        return str.ToUpper();
+    }
+    return "";
+}
+~function end~
+
+~helper functions end~
+
+~template pattern_matching_simple_1_positive start~
+~[VAR_string@1]~ = simplePatternMatchingString1(~[VAR_string@1]~);
+~template end~
+
+~template pattern_matching_simple_1_negative start~
+~[VAR_string]~ = simplePatternMatchingString1(~[CONST_int]~);
+~template end~
+
+~template pattern_matching_simple_2_negative start~
+~[VAR_string]~ = simplePatternMatchingString1(~[VAR_int]~);
+~template end~
+
+~template pattern_matching_simple_4_positive start~
+~[VAR_string@1]~ = simplePatternMatchingString2(~[VAR_string@1]~);
+~template end~
+
+~template pattern_matching_simple_4_negative start~
+~[VAR_string]~ = simplePatternMatchingString2(~[CONST_string]~);
+~template end~
+
+~template pattern_matching_switch_simple_1_positive start~
+object obj = ~[VAR_string@1]~;
+
+~[VAR_string@1]~ = obj switch {
+    int _ => "fixed_string",
+    string _ => (string) obj,
+    _ => "fixed_string_2"
+};
+~template end~
+
+~template pattern_matching_switch_simple_1_negative start~
+object obj = ~[CONST_int]~;
+
+~[VAR_string@1]~ = obj switch {
+    int _ => "fixed_string",
+    string _ => ~[VAR_string@1]~,
+    _ => "fixed_string_2"
+};
+~template end~
+
+~main body end~

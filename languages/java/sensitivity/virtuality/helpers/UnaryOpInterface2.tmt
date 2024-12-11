@@ -1,0 +1,7 @@
+~class UnaryOpInterface2 start~
+
+public interface UnaryOpInterface2 {
+    public String Interface2Call(String t);
+}
+
+~class end~

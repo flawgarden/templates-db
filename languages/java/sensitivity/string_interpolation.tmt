@@ -1,0 +1,55 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~unsupported template percent_operator_interpolation_positive~
+~unsupported template format_method_with_indexes_positive~
+~unsupported template string_interpolation_multiline_positive~
+
+
+~template simple_string_interpolation_positive start~
+~[VAR_String@1]~ = STR."PREFIX + \{~[VAR_String@1]~}!";
+~template end~
+
+~template simple_string_interpolation_negative start~
+~[VAR_String]~ = STR."fixed_string";
+~template end~
+
+
+
+~template simple_string_interpolation_with_condition_positive start~
+var tmpString = STR."PREFIX + \{~[VAR_String@1]~}!";
+if (tmpString.contains("PREFIX")) {
+    ~[VAR_String@1]~ = tmpString;
+}
+~template end~
+
+~template format_method_interpolation_positive start~
+var tmpStr = ~[VAR_String@1]~;
+var interpolatedStr = String.format("Some_prefix, %s", tmpStr);
+~[VAR_String@1]~ = interpolatedStr;
+~template end~
+
+~template format_method_interpolation_negative start~
+var tmpStr = ~[VAR_String@1]~;
+tmpStr = ~[CONST_String]~;
+var interpolatedStr = String.format("Some_prefix, %s", tmpStr);
+~[VAR_String@1]~ = interpolatedStr;
+~template end~
+
+
+~template string_interpolation_with_string_operations_positive start~
+~[VAR_String@1]~ = STR."PREFIX + \{~[VAR_String@1]~.toUpperCase()}!";
+~template end~
+
+~template string_interpolation_escaping_negative start~
+~[VAR_String@1]~ = STR."PREFIX + {~[VAR_String@1]~}!";
+~template end~
+
+~main body end~

@@ -29,7 +29,19 @@ IEnumerable<string> YieldBreak(string x, string y) {
 }
 ~function end~
 
+~function YieldInfinite start~
+IEnumerable<string> YieldInfinite(string x, string y) {
+    yield return x;
+    while (true)
+        yield return y;
+}
+~function end~
+
 ~helper functions end~
+
+~unsupported template generator_yield_from_positive~
+~unsupported template generator_yield_from_negative~
+
 
 ~template yield_simple_negative start~
 ~[VAR_string]~ = YieldId("42").First();
@@ -37,6 +49,14 @@ IEnumerable<string> YieldBreak(string x, string y) {
 
 ~template yield_simple_positive start~
 ~[VAR_string@1]~ = YieldId(~[VAR_string@1]~).First();
+~template end~
+
+~template generator_infinite_positive start~
+~[VAR_string@1]~ = YieldInfinite(~[VAR_string@1]~, "fixed_string").First();
+~template end~
+
+~template generator_infinite_negative start~
+~[VAR_string@1]~ = YieldInfinite(~[VAR_string@1]~, "fixed_string").Take(42).Last();
 ~template end~
 
 ~template yield_multiple_take_first_negative start~

@@ -1,0 +1,201 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_RegexName]~ -> regex42
+~[DEFINE_FixedVar]~ -> ~[VAR_String@1]~
+~[DEFINE_ConstStringName]~ -> str42
+~[DEFINE_Pattern]~ -> Pattern pattern = Pattern.compile(~[DEFINE_RegexName]~);
+~[DEFINE_Pattern_IC]~ -> Pattern pattern = Pattern.compile(~[DEFINE_RegexName]~, Pattern.CASE_INSENSITIVE);
+~[DEFINE_Matcher]~ -> Matcher matcher = pattern.matcher(~[DEFINE_ConstStringName]~);
+~[DEFINE_IfMatch]~ -> if (matcher.matches())
+~[DEFINE_NullifyFixedVar]~ -> ~[DEFINE_FixedVar]~ = "";
+~extensions end~
+
+~main body start~
+
+~imports start~
+import java.util.regex.*;
+~imports end~
+
+~template regex_exactly_match_negative start~
+var ~[DEFINE_RegexName]~ = "42";
+var ~[DEFINE_ConstStringName]~ = "42";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_escaping_positive start~
+var ~[DEFINE_RegexName]~ = "\\.+";
+var ~[DEFINE_ConstStringName]~ = "42";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_char_group_negative start~
+var ~[DEFINE_RegexName]~ = "[ab]+";
+var ~[DEFINE_ConstStringName]~ = "aaa";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_not_char_group_positive start~
+var ~[DEFINE_RegexName]~ = "[^ab]+";
+var ~[DEFINE_ConstStringName]~ = "aaa";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_anchor_negative start~
+var ~[DEFINE_RegexName]~ = ".*42\\z";
+var ~[DEFINE_ConstStringName]~ = "10042";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_anchor_positive start~
+var ~[DEFINE_RegexName]~ = "^101";
+var ~[DEFINE_ConstStringName]~ = "10042";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_backreference_positive start~
+var ~[DEFINE_RegexName]~ = "(kek)";
+var ~[DEFINE_ConstStringName]~ = "kek";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_named_backreference_negative start~
+var ~[DEFINE_RegexName]~ = "(?<g1>kek)\\1";
+var ~[DEFINE_ConstStringName]~ = "kekkek";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_counting_quantifier_negative start~
+var ~[DEFINE_RegexName]~ = "k{3,5}";
+var ~[DEFINE_ConstStringName]~ = "kkk";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_count_positive start~
+var ~[DEFINE_RegexName]~ = "k+";
+var ~[DEFINE_ConstStringName]~ = "kkk";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+int count42 = 0;
+while (matcher.find()) {
+    count42++;
+}
+if (count42 != 0) {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_alternation_negative start~
+var ~[DEFINE_RegexName]~ = "(a|b)";
+var ~[DEFINE_ConstStringName]~ = "b";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_lookarounds_positive start~
+var ~[DEFINE_RegexName]~ = "..(?<!42)";
+var ~[DEFINE_ConstStringName]~ = "42";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_options_negative start~
+var ~[DEFINE_RegexName]~ = "abc";
+var ~[DEFINE_ConstStringName]~ = "AbC";
+~[DEFINE_Pattern_IC]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_inline_options_negative start~
+var ~[DEFINE_RegexName]~ = "a(?i)b c";
+var ~[DEFINE_ConstStringName]~ = "aBc";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_replace_positive start~
+var ~[DEFINE_RegexName]~ = "aboba";
+var ~[DEFINE_ConstStringName]~ = "aboba";
+~[DEFINE_Pattern]~
+~[DEFINE_Matcher]~
+~[DEFINE_FixedVar]~ = matcher.replaceAll(~[DEFINE_FixedVar]~);
+~template end~
+
+~template regex_replace_with_substitution_negative start~
+var ~[DEFINE_RegexName]~ = ".+(?<grp>aboba)\\z";
+var tmpVar42 = ~[DEFINE_FixedVar]~;
+Pattern pattern = Pattern.compile(~[DEFINE_RegexName]~);
+Matcher matcher = pattern.matcher(~[DEFINE_FixedVar]~ + "aboba");
+if (matcher.find()) {
+    ~[DEFINE_FixedVar]~ = matcher.replaceAll(matcher.group("grp")); // Replace with the captured group
+}
+~template end~
+
+~template regex_split_positive start~
+String ~[DEFINE_RegexName]~ = "(/|-)";
+String input = "y-" + ~[DEFINE_FixedVar]~ + "/x";
+String[] splitResult = input.split(~[DEFINE_RegexName]~);
+if (splitResult.length > 2) {
+    ~[DEFINE_FixedVar]~ = splitResult[2]; // Get the third element
+}
+~template end~
+
+~template regex_matches_positive start~
+String ~[DEFINE_RegexName]~ = "/.+/.+/";
+String input = "-/" + ~[DEFINE_FixedVar]~ + "/x/";
+Pattern pattern = Pattern.compile(~[DEFINE_RegexName]~);
+Matcher matcher = pattern.matcher(input);
+if (matcher.find()) {
+    ~[DEFINE_FixedVar]~ = matcher.group();
+}
+~template end~
+
+~main body end~

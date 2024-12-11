@@ -1,0 +1,70 @@
+~extensions start~
+~[DEFINE_VarName]~ -> conversion14
+
+~[DEFINE_SetExplicitToPositive]~ -> ExplicitConversionalHolder.givenIndex = 0;
+~[DEFINE_SetExplicitToNegative]~ -> ExplicitConversionalHolder.givenIndex = 42;
+
+~[DEFINE_SetImplicitToPositive]~ -> ImplicitConversionalHolder.givenIndex = 42;
+~[DEFINE_SetImplicitToNegative]~ -> ImplicitConversionalHolder.givenIndex = 0;
+
+~[DEFINE_CreateExplicit_Fixed]~ -> ExplicitConversionalHolder ~[DEFINE_VarName]~ = new ExplicitConversionalHolder(~[VAR_String@1]~);
+~[DEFINE_ConvertToExplicit_Fixed]~ -> ExplicitConversionalHolder ~[DEFINE_VarName]~ = ExplicitConversionalHolder.fromString(~[VAR_String@1]~);
+
+~[DEFINE_CreateImplicit_Fixed]~ -> ImplicitConversionalHolder ~[DEFINE_VarName]~ = new ImplicitConversionalHolder(~[VAR_String@1]~);
+~[DEFINE_ConvertToImplicit_Fixed]~ -> ImplicitConversionalHolder ~[DEFINE_VarName]~ = ImplicitConversionalHolder.fromString(~[VAR_String@1]~);
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/operators/helpers/ExplicitConversionalHolder~
+~helper import sensitivity/operators/helpers/ImplicitConversionalHolder~
+
+~template explicit_conversion_to_string_positive start~
+~[DEFINE_SetExplicitToPositive]~
+~[DEFINE_CreateExplicit_Fixed]~
+~[VAR_String@1]~ = ExplicitConversionalHolder.toString(~[DEFINE_VarName]~);
+~template end~
+
+~template explicit_conversion_to_string_negative start~
+~[DEFINE_SetExplicitToNegative]~
+~[DEFINE_CreateExplicit_Fixed]~
+~[VAR_String@1]~ = ExplicitConversionalHolder.toString(~[DEFINE_VarName]~);
+~template end~
+
+~template explicit_conversion_to_holder_positive start~
+~[DEFINE_SetExplicitToPositive]~
+~[DEFINE_ConvertToExplicit_Fixed]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.toString();
+~template end~
+
+~template explicit_conversion_to_holder_negative start~
+~[DEFINE_SetExplicitToNegative]~
+~[DEFINE_ConvertToExplicit_Fixed]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.toString();
+~template end~
+
+~template implicit_conversion_to_string_positive start~
+~[DEFINE_SetImplicitToPositive]~
+~[DEFINE_CreateImplicit_Fixed]~
+~[VAR_String@1]~ = ImplicitConversionalHolder.toString(~[DEFINE_VarName]~);
+~template end~
+
+~template implicit_conversion_to_string_negative start~
+~[DEFINE_SetImplicitToNegative]~
+~[DEFINE_CreateImplicit_Fixed]~
+~[VAR_String@1]~ = ImplicitConversionalHolder.toString(~[DEFINE_VarName]~);
+~template end~
+
+~template implicit_conversion_to_holder_positive start~
+~[DEFINE_SetImplicitToPositive]~
+~[DEFINE_ConvertToImplicit_Fixed]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.toString();
+~template end~
+
+~template implicit_conversion_to_holder_negative start~
+~[DEFINE_SetImplicitToNegative]~
+~[DEFINE_ConvertToImplicit_Fixed]~
+~[VAR_String@1]~ = ~[DEFINE_VarName]~.toString();
+~template end~
+
+~main body end~

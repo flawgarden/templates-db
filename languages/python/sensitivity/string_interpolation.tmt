@@ -1,0 +1,69 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template simple_string_interpolation_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = f"Some_prefix -> {tmpStr}"
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template simple_string_interpolation_with_condition_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = f"Some_prefix -> {tmpStr}"
+if "Some_prefix" in interpolatedStr:
+    ~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template simple_string_interpolation_negative start~
+tmpStr = ~[VAR_str@1]~
+tmpStr = ~[CONST_str]~
+interpolatedStr = f"Some_prefix -> {tmpStr}"
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template format_method_interpolation_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = "Some_prefix, {}".format(tmpStr)
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template format_method_interpolation_negative start~
+tmpStr = ~[VAR_str@1]~
+tmpStr = ~[CONST_str]~
+interpolatedStr = "Some_prefix, {}".format(tmpStr)
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template percent_operator_interpolation_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = "Some_prefix, %s" % (tmpStr)
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template format_method_with_indexes_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = "This is element {0}".format(tmpStr)
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template string_interpolation_multiline_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = f"""Hello, {tmpStr}.
+MULTILINE."""
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template string_interpolation_with_string_operations_positive start~
+tmpStr = ~[VAR_str@1]~
+interpolatedStr = f"Tmp string in uppercase: {tmpStr.upper()}"
+~[VAR_str@1]~ = interpolatedStr
+~template end~
+
+~template string_interpolation_escaping_negative start~
+~[VAR_str@1]~ = $"PREFIX{{~[VAR_str@1]~}}!";
+~template end~
+
+~main body end~

@@ -1,0 +1,74 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function simple_pattern_matching_string_1 start~
+public String simplePatternMatchingString1(Object obj) {
+    if (obj instanceof String str) {
+        return str.toUpperCase();
+    }
+    return "";
+}
+~function end~
+
+~function simple_pattern_matching_string_2 start~
+public String simplePatternMatchingString2(Object obj) {
+    if (obj instanceof String str && str.length() > 5) {
+        return str.toUpperCase();
+    }
+    return "";
+}
+~function end~
+
+~helper functions end~
+
+~imports start~
+import java.util.*;
+~imports end~
+
+~template pattern_matching_simple_1_positive start~
+~[VAR_String@1]~ = simplePatternMatchingString1(~[VAR_String@1]~);
+~template end~
+
+~template pattern_matching_simple_1_negative start~
+~[VAR_String]~ = simplePatternMatchingString1(~[CONST_Integer]~);
+~template end~
+
+~template pattern_matching_simple_2_negative start~
+~[VAR_String]~ = simplePatternMatchingString1(~[VAR_Integer]~);
+~template end~
+
+~template pattern_matching_simple_4_positive start~
+~[VAR_String@1]~ = simplePatternMatchingString2(~[VAR_String@1]~);
+~template end~
+
+~template pattern_matching_simple_4_negative start~
+~[VAR_String]~ = simplePatternMatchingString2(~[CONST_String]~);
+~template end~
+
+~template pattern_matching_switch_simple_1_positive start~
+Object obj = ~[VAR_String@1]~;
+
+~[VAR_String@1]~ = switch (obj) {
+    case Integer i -> "fixed_string";
+    case String s -> (String) obj;
+    default -> "fixed_string_2";
+};
+~template end~
+
+~template pattern_matching_switch_simple_1_negative start~
+Object obj = ~[CONST_Integer]~;
+
+~[VAR_String@1]~ = switch (obj) {
+    case Integer i -> "fixed_string";
+    case String s -> ~[VAR_String@1]~;
+    default -> "fixed_string_2";
+};
+~template end~
+
+
+~main body end~
