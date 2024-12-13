@@ -2,7 +2,7 @@
 ~helper import sensitivity/record/helpers/Record~
 
 ~imports start~
-import java.util.*;
+using HelperRecords;
 ~imports end~
 
 ~template simple_record_patterns_positive start~

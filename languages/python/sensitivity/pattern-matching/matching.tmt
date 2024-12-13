@@ -1,0 +1,119 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_Int]~ -> 42
+~[MACRO_IntSwitchPattern]~ -> 42
+~[MACRO_IntSwitchPattern]~ -> 42 | 43
+
+~[MACRO_IntList]~ -> [1, 2, 3, 4, 5]
+~[MACRO_IntListSwitchPattern]~ -> [1, 2, 3, 4, 5]
+~[MACRO_IntListSwitchPattern]~ -> [1, 2 | 100500, 3, 4, 5]
+~[MACRO_IntListSwitchPattern]~ -> [1, *_, 5]
+
+
+~[MACRO_Point]~ -> Point(42, -42)
+~[MACRO_PointSwitchPattern]~ -> (42, -42)
+~[MACRO_PointSwitchPattern]~ -> Point(42, -42)
+~[MACRO_PointSwitchPattern]~ -> Point(x, y) if x == -y
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/pattern-matching/helpers/Point~
+
+~unsupported template if_int_pattern_positive~
+~unsupported template if_int_pattern_negative~
+~unsupported template if_string_pattern_positive~
+~unsupported template if_string_pattern_negative~
+~unsupported template if_point_pattern_positive~
+~unsupported template if_point_pattern_negative~
+~unsupported template if_int_list_pattern_positive~
+~unsupported template if_int_list_pattern_negative~
+~unsupported template if_int_list_type_pattern_positive~
+~unsupported template if_int_list_type_pattern_negative~
+~unsupported template switch_int_list_type_pattern_positive~
+~unsupported template switch_int_list_type_pattern_negative~
+~unsupported template switch_string_pattern_positive~
+~unsupported template switch_string_pattern_negative~
+
+~template switch_int_pattern_positive start~
+tmp42 = ~[MACRO_Int]~
+match tmp42:
+    case ~[MACRO_IntSwitchPattern]~:
+        pass
+    case _:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template switch_int_pattern_negative start~
+tmp42 = ~[MACRO_Int]~
+match tmp42:
+    case ~[MACRO_IntSwitchPattern]~:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template switch_int_list_pattern_positive start~
+tmp42 = ~[MACRO_IntList]~
+match tmp42:
+    case ~[MACRO_IntListSwitchPattern]~:
+        pass
+    case _:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template switch_int_list_pattern_negative start~
+tmp42 = ~[MACRO_IntList]~
+match tmp42:
+    case ~[MACRO_IntListSwitchPattern]~:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template switch_point_pattern_positive start~
+tmp42 = ~[MACRO_Point]~
+match tmp42:
+    case ~[MACRO_PointSwitchPattern]~:
+        pass
+    case _:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template switch_point_pattern_negative start~
+tmp42 = ~[MACRO_Point]~
+match tmp42:
+    case ~[MACRO_PointSwitchPattern]~:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~template multiple_matches_pattern_negative start~
+tmp42 = 42
+match tmp42:
+    case 42 | 43:
+        ~[VAR_str]~ = ""
+    case 42:
+        pass
+~template end~
+
+~template multiple_matches_pattern_positive start~
+tmp42 = 42
+match tmp42:
+    case 42 | 43:
+        pass
+    case 42:
+        ~[VAR_str]~ = ""
+~template end~
+
+~template regex_matches_pattern_positive start~
+tmp42 = ["A", ~[VAR_str@1]~, "b"]
+match tmp42:
+    case ['a' | 'A', s, 'b' | 'B']:
+        ~[VAR_str@1]~ = s
+~template end~
+
+~template regex_matches_pattern_negative start~
+tmp42 = ["A", ~[VAR_str@1]~, "b"]
+match tmp42:
+    case ['a' | 'A', _, 'b' | 'B']:
+        ~[VAR_str@1]~ = ""
+~template end~
+
+~main body end~

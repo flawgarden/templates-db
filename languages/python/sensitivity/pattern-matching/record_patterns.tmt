@@ -1,0 +1,37 @@
+~main body start~
+~helper import sensitivity/record/helpers/Record~
+
+~template simple_record_patterns_positive start~
+obj = NestedRecord(SimpleRecord(~[VAR_str@1]~),  SimpleRecord("fixed_string"))
+
+match obj:
+    case NestedRecord(sr, sr2):
+        ~[VAR_str@1]~ = sr.t
+~template end~
+
+~template simple_record_patterns_negative start~
+obj = NestedRecord(SimpleRecord(~[VAR_str@1]~),  SimpleRecord("fixed_string"))
+
+match obj:
+    case NestedRecord(sr, sr2):
+        ~[VAR_str@1]~ = sr2.t
+~template end~
+
+~template simple_record_patterns_nested_positive start~
+obj = NestedRecord(SimpleRecord(~[VAR_str@1]~),  SimpleRecord("bbb"))
+
+match obj:
+    case NestedRecord(SimpleRecord(s1), SimpleRecord(s2)):
+        ~[VAR_str@1]~ = s1
+~template end~
+
+~template simple_record_patterns_nested_negative start~
+obj = NestedRecord(SimpleRecord(~[VAR_str@1]~),  SimpleRecord("bbb"))
+
+match obj:
+    case NestedRecord(SimpleRecord(s1), SimpleRecord(s2)):
+        ~[VAR_str@1]~ = s2
+~template end~
+
+
+~main body end~

@@ -1,0 +1,119 @@
+~extensions start~
+~[DEFINE_ArrayName]~ -> array139418
+~[DEFINE_OtherArrayName]~ -> yarra3141
+
+~[DEFINE_Array_Const]~ -> ~[DEFINE_ArrayName]~ = [ ~[CONST_str]~, ~[CONST_str]~, ~[CONST_str]~ ]
+~[DEFINE_Array_Fixed_1st]~ -> ~[DEFINE_ArrayName]~ = [ ~[VAR_str@1]~, ~[CONST_str]~, ~[CONST_str]~ ]
+~[DEFINE_Array_Fixed_2nd]~ -> ~[DEFINE_ArrayName]~ = [ ~[CONST_str]~, ~[VAR_str@1]~, ~[CONST_str]~ ]
+~[DEFINE_Array_Fixed_3rd]~ -> ~[DEFINE_ArrayName]~ = [ ~[CONST_str]~, ~[CONST_str]~, ~[VAR_str@1]~ ]
+~extensions end~
+
+~main body start~
+
+~template array_expand_full_positive start~
+~[DEFINE_Array_Fixed_2nd]~
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[1]
+~template end~
+
+~template array_expand_full_negative start~
+~[DEFINE_Array_Fixed_2nd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[2]
+~template end~
+
+~template array_expand_prefix_positive start~
+~[DEFINE_Array_Fixed_1st]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_prefix_negative start~
+~[DEFINE_Array_Fixed_3rd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_suffix_positive start~
+~[DEFINE_Array_Fixed_3rd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_suffix_negative start~
+~[DEFINE_Array_Fixed_1st]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_inner_positive start~
+~[DEFINE_Array_Fixed_2nd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_inner_negative start~
+~[DEFINE_Array_Fixed_3rd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_expand_inner_from_end_positive start~
+~[DEFINE_Array_Fixed_2nd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[1]
+~template end~
+
+~template array_expand_inner_from_end_negative start~
+~[DEFINE_Array_Fixed_2nd]~
+var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
+~template end~
+
+~template array_index_from_end_positive start~
+~[DEFINE_Array_Fixed_1st]~
+~[VAR_str@1]~ = ~[DEFINE_ArrayName]~[-3]
+~template end~
+
+~template array_index_from_end_negative start~
+~[DEFINE_Array_Fixed_3rd]~
+~[VAR_str@1]~ = ~[DEFINE_ArrayName]~[-2]
+~template end~
+
+~template array_index_positive start~
+~[DEFINE_Array_Fixed_1st]~
+~[VAR_str@1]~ = ~[DEFINE_ArrayName]~[0]
+~template end~
+
+~template array_index_negative start~
+~[DEFINE_Array_Fixed_1st]~
+~[VAR_str@1]~ = ~[DEFINE_ArrayName]~[2]
+~template end~
+
+~template array_concat_element_positive start~
+~[DEFINE_Array_Const]~
+~[DEFINE_OtherArrayName]~ = [*~[DEFINE_ArrayName]~, ~[VAR_str@1]~ ]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[3];
+~template end~
+
+~template array_concat_element_negative start~
+~[DEFINE_Array_Fixed_1st]~
+~[DEFINE_OtherArrayName]~ = [*~[DEFINE_ArrayName]~, ~[VAR_str@1]~ ]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[2];
+~template end~
+
+~template array_concat_array_positive start~
+~[DEFINE_Array_Fixed_3rd]~
+~[DEFINE_ArrayName]~_2 = [ ~[CONST_str]~, ~[CONST_str]~ ]
+~[DEFINE_OtherArrayName]~ = [*~[DEFINE_ArrayName]~, *~[DEFINE_ArrayName]~_2 ]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[2];
+~template end~
+
+~template array_concat_array_negative start~
+~[DEFINE_Array_Fixed_3rd]~
+~[DEFINE_ArrayName]~_2 = [ ~[CONST_str]~, ~[CONST_str]~ ]
+~[DEFINE_OtherArrayName]~ = [ *~[DEFINE_ArrayName]~, *~[DEFINE_ArrayName]~_2 ]
+~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[3]
+~template end~
+
+~main body end~
