@@ -1,0 +1,53 @@
+~main body start~
+~helper import sensitivity/field/helpers/StringHolder~
+~helper import sensitivity/lambdas/helpers/UnaryOpMutationInterface~
+
+
+~template unary_lambda_mutation_positive start~
+s23423 := ~[VAR_string@1]~
+a12341 := &StringHolder{}
+lambda1231 := func(s *StringHolder) {
+    s.value = s23423
+}
+lambda1231(a12341)
+~[VAR_string@1]~ = a12341.value
+~template end~
+
+~template unary_lambda_mutation_negative start~
+a12341 := &StringHolder{value: ~[VAR_string@1]~}
+lambda1231 := func(s *StringHolder) {
+    s.value = ""
+}
+lambda1231(a12341)
+~[VAR_string@1]~ = a12341.value
+~template end~
+
+~template nested_unary_lambda_mutation_positive start~
+s23423 := ~[VAR_string@1]~
+a12341 := &StringHolder{}
+lambda1231 := func(s *StringHolder) {
+    innerLambda1231 := func(p *StringHolder) {
+        p.value = ""
+    }
+    innerLambda1231(s)
+    s.value = s23423
+}
+lambda1231(a12341)
+~[VAR_string@1]~ = a12341.value
+~template end~
+
+~template nested_unary_lambda_mutation_negative start~
+a12341 := &StringHolder{value: ~[VAR_string@1]~}
+lambda1231 := func(s *StringHolder) {
+    inner234234 := s.value
+    innerLambda1231 := func(p *StringHolder) {
+        p.value = inner234234
+    }
+    innerLambda1231(s)
+    s.value = ""
+}
+lambda1231(a12341)
+~[VAR_string@1]~ = a12341.value
+~template end~
+
+~main body end~

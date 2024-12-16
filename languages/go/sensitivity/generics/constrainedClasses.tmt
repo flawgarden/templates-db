@@ -1,0 +1,44 @@
+~extensions start~
+~[DEFINE_VarName]~ -> constrained09143
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/generics/helpers/InheritanceConstrainedClass~
+~helper import sensitivity/generics/helpers/InterfaceConstrainedClass~
+
+~helper import sensitivity/virtuality/helpers/BinaryOpInterfaceDefault~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
+
+~unsupported template new_constrained_generic_class_positive~
+~unsupported template new_constrained_generic_class_negative~
+
+
+~template interface_constrained_generic_class_positive start~
+impl42 := &ImplBinaryOpInterfaceClass1{}
+~[DEFINE_VarName]~ := NewInterfaceConstrainedClass(impl42)
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.chooseFrom(~[VAR_string@1]~, "fixed_string")
+~template end~
+
+~template interface_constrained_generic_class_negative start~
+impl42 := &ImplBinaryOpInterfaceClass1{}
+~[DEFINE_VarName]~ := NewInterfaceConstrainedClass(impl42)
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.chooseNone(~[VAR_string@1]~, "fixed_string")
+~template end~
+
+~template inheritance_constrained_generic_class_positive start~
+derived42 := &DerivedBinaryOpClass1{}
+constrained09143 := NewInheritanceConstrainedClass(derived42)
+~[VAR_string@1]~ = constrained09143.chooseFrom(~[VAR_string@1]~, "fixed_string")
+~template end~
+
+~template inheritance_constrained_generic_class_negative start~
+derived42 := &DerivedBinaryOpClass1{}
+constrained09143 := NewInheritanceConstrainedClass(derived42)
+~[VAR_string@1]~ = constrained09143.chooseNone(~[VAR_string@1]~, "fixed_string");
+~template end~
+
+
+
+~main body end~

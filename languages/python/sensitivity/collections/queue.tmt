@@ -21,6 +21,9 @@
 from queue import SimpleQueue, Queue, PriorityQueue
 ~imports end~
 
+~unsupported template queue_contains_1_positive~
+~unsupported template queue_remove_if_positive~
+
 ~template simple_poll_positive start~
 ~[DEFINE_Create_Queue]~
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~

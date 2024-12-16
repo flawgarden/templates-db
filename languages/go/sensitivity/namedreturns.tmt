@@ -1,0 +1,73 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function concat start~
+func concat(a string, b string) (res string) {
+    res = a + b
+    return
+}
+~function end~
+
+~function swap start~
+func swap(a string, b string) (first string, second string) {
+	first, second = b, a
+	return
+}
+~function end~
+
+~function brokenConcat start~
+func brokenConcat(a string, b string) (result string) {
+	defer func() {
+		result = b
+	}()
+	result = a + b
+	return
+}
+~function end~
+
+~function getZeroValues start~
+func getZeroValues() (x string, y string) {
+    return
+}
+~function end~
+
+~helper functions end~
+
+~template named_return_simple_positive start~
+~[VAR_string@1]~ = concat(~[VAR_string@1]~, "suffix")
+~template end~
+
+~template named_return_simple_negative start~
+~[VAR_string]~ = concat(~[CONST_string]~, "suffix")
+~template end~
+
+~template named_return_swap_simple_positive start~
+_, b := swap(~[VAR_string@1]~, "suffix")
+~[VAR_string@1]~ = b
+~template end~
+
+~template named_return_swap_simple_negative start~
+a, _ := swap(~[VAR_string@1]~, "suffix")
+~[VAR_string@1]~ = a
+~template end~
+
+~template named_return_with_defer_positive start~
+~[VAR_string@1]~ = brokenConcat("prefix", ~[VAR_string@1]~)
+~template end~
+
+~template named_return_with_defer_negative start~
+~[VAR_string@1]~ = brokenConcat(~[VAR_string@1]~, "suffix")
+~template end~
+
+~template named_return_zero_values_negative start~
+a123, _ := getZeroValues()
+~[VAR_string]~ = a123
+~template end~
+
+
+~main body end~

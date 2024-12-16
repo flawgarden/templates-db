@@ -1,0 +1,14 @@
+~main body start~
+
+~imports start~
+import java.time.LocalTime;
+~imports end~
+
+~template simple_time_neutral start~
+LocalTime time = LocalTime.now();
+if (time.getHour() > 12) {
+    ~[VAR_String]~ = "fixed_string"
+}
+~template end~
+
+~main body end~

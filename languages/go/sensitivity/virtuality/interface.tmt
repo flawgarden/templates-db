@@ -1,0 +1,45 @@
+~main body start~
+~helper import sensitivity/virtuality/helpers/ImplBinaryOpInterfaceClass~
+
+
+~template impl_binary_op_interface_class1_positive start~
+var a12341 BinaryOpInterface = &ImplBinaryOpInterfaceClass1{}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "")
+~template end~
+
+~template impl_binary_op_interface_class1_negative start~
+var a12341 BinaryOpInterface = &ImplBinaryOpInterfaceClass1{}
+~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~)
+~template end~
+
+~template impl_binary_op_interface_class2_positive start~
+var a12341 BinaryOpInterface = &ImplBinaryOpInterfaceClass2{}
+~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~)
+~template end~
+
+~template impl_binary_op_interface_class2_negative start~
+var a12341 BinaryOpInterface = &ImplBinaryOpInterfaceClass2{}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "")
+~template end~
+
+~template base_binary_op_interface_positive start~
+var a12341 BinaryOpInterface
+if ~[EXPR_bool]~ {
+    a12341 = &ImplBinaryOpInterfaceClass1{}
+} else {
+    a12341 = &ImplBinaryOpInterfaceClass2{}
+}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, ~[VAR_string@1]~)
+~template end~
+
+~template base_binary_op_interface_negative start~
+var a12341 BinaryOpInterface
+if ~[EXPR_bool]~ {
+    a12341 = &ImplBinaryOpInterfaceClass1{}
+} else {
+    a12341 = &ImplBinaryOpInterfaceClass2{}
+}
+~[VAR_string]~ = a12341.InterfaceCall("", "")
+~template end~
+
+~main body end~

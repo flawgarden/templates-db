@@ -1,0 +1,36 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~imports start~
+import (
+	"sync/atomic"
+)
+~imports end~
+
+~unsupported template simple_async_call_negative~
+~unsupported template simple_async_call_positive~
+
+~template simple_async_negative start~
+var ar42 atomic.Value
+ar42.Store(~[VAR_string@1]~)
+
+go func() {
+    ar42.Store("string_const")
+}()
+~[VAR_string@1]~ = ar42.Load().(string)
+~template end~
+
+~template simple_async_positive start~
+var ar42 atomic.Value
+ar42.Store(~[VAR_string@1]~)
+
+go func() {
+    ar42.Store(~[VAR_string@1]~)
+}()
+~[VAR_string@1]~ = ar42.Load().(string)
+~template end~
+
+~main body end~

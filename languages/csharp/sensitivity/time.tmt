@@ -1,0 +1,10 @@
+~main body start~
+
+~template simple_time_neutral start~
+DateTime time = DateTime.Now;
+if (time.Hour > 12) {
+    ~[VAR_string]~ = "fixed_string"
+}
+~template end~
+
+~main body end~

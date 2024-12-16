@@ -1,0 +1,39 @@
+~main body start~
+~helper import sensitivity/virtuality/helpers/BinaryOpInterfaceDefault~
+
+~template binary_op_interface_default1_positive start~
+var a12341 BinaryOpInterfaceDefault1 = &BinaryOpInterfaceDefault1Implementation{}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "")
+~template end~
+
+~template binary_op_interface_default1_negative start~
+var a12341 BinaryOpInterfaceDefault1 = &BinaryOpInterfaceDefault1Implementation{}
+~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~)
+~template end~
+
+~template binary_op_interface_default2_positive start~
+var a12341 BinaryOpInterfaceDefault2 = &BinaryOpInterfaceDefault2Implementation{}
+~[VAR_string@1]~ = a12341.InterfaceCall("", ~[VAR_string@1]~)
+~template end~
+
+~template binary_op_interface_default2_negative start~
+var a12341 BinaryOpInterfaceDefault2 = &BinaryOpInterfaceDefault2Implementation{}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, "")
+~template end~
+
+~template binary_op_interface_default_positive start~
+var a12341 BinaryOpInterfaceDefaultBase
+if ~[EXPR_bool]~ {
+    a12341 = &BinaryOpInterfaceDefault1Implementation{}
+} else {
+    a12341 = &BinaryOpInterfaceDefault2Implementation{}
+}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, ~[VAR_string@1]~)
+~template end~
+
+~template binary_op_interface_default_negative start~
+var a12341 BinaryOpInterfaceDefault = &BinaryOpInterfaceDefaultImplementation{}
+~[VAR_string@1]~ = a12341.InterfaceCall(~[VAR_string@1]~, ~[VAR_string@1]~)
+~template end~
+
+~main body end~

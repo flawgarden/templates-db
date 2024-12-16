@@ -1,0 +1,40 @@
+~main body start~
+~helper import sensitivity/virtuality/helpers/DerivedBinaryOpClass~
+
+
+~template derived_binary_op1_positive start~
+var a12341 BaseBinaryOpClass = &DerivedBinaryOpClass1{}
+~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, "")
+~template end~
+
+~template derived_binary_op1_negative start~
+var a12341 BaseBinaryOpClass = &DerivedBinaryOpClass1{}
+~[VAR_string@1]~ = a12341.VirtualCall("", ~[VAR_string@1]~)
+~template end~
+
+~template derived_binary_op2_positive start~
+var a12341 BaseBinaryOpClass = &DerivedBinaryOpClass2{}
+~[VAR_string@1]~ = a12341.VirtualCall("", ~[VAR_string@1]~)
+~template end~
+
+~template derived_binary_op2_negative start~
+var a12341 BaseBinaryOpClass = &DerivedBinaryOpClass1{}
+~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, "")
+~template end~
+
+~template base_binary_op_positive start~
+var a12341 BaseBinaryOpClass
+if ~[EXPR_bool]~ {
+    a12341 = &DerivedBinaryOpClass1{}
+} else {
+    a12341 = &DerivedBinaryOpClass2{}
+}
+~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, ~[VAR_string@1]~)
+~template end~
+
+~template base_binary_op_negative start~
+var a12341 BaseBinaryOpClass = &DerivedBinaryOpClassDefault{}
+~[VAR_string@1]~ = a12341.VirtualCall(~[VAR_string@1]~, ~[VAR_string@1]~)
+~template end~
+
+~main body end~

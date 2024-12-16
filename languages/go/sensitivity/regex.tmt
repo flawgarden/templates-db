@@ -1,0 +1,171 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_RegexName]~ -> regex42
+~[DEFINE_FixedVar]~ -> ~[VAR_string@1]~
+~[DEFINE_ConstStringName]~ -> str42
+~[DEFINE_Matcher]~ -> matcher, _ := regexp.Compile(~[DEFINE_RegexName]~)
+~[DEFINE_Matcher_IC]~ -> matcher, _ := regexp.Compile("(?i)" + ~[DEFINE_RegexName]~)
+~[DEFINE_IfMatch]~ -> if matcher.MatchString(~[DEFINE_ConstStringName]~)
+~[DEFINE_NullifyFixedVar]~ -> ~[DEFINE_FixedVar]~ = "";
+~extensions end~
+
+~main body start~
+
+~imports start~
+import (
+    "regexp"
+)
+~imports end~
+
+~unsupported template regex_lookarounds_positive~
+~unsupported template regex_backreference_positive~
+~unsupported template regex_named_backreference_negative~
+
+
+~template regex_exactly_match_negative start~
+~[DEFINE_RegexName]~ := "42";
+~[DEFINE_ConstStringName]~ := "42";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_escaping_positive start~
+~[DEFINE_RegexName]~ := "\\.+";
+~[DEFINE_ConstStringName]~ := "42";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_char_group_negative start~
+~[DEFINE_RegexName]~ := "[ab]+";
+~[DEFINE_ConstStringName]~ := "aaa";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_not_char_group_positive start~
+~[DEFINE_RegexName]~ := "[^ab]+";
+~[DEFINE_ConstStringName]~ := "aaa";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_anchor_negative start~
+~[DEFINE_RegexName]~ := ".*42$";
+~[DEFINE_ConstStringName]~ := "10042";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_anchor_positive start~
+~[DEFINE_RegexName]~ := "^101";
+~[DEFINE_ConstStringName]~ := "10042";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_counting_quantifier_negative start~
+~[DEFINE_RegexName]~ := "k{3,5}";
+~[DEFINE_ConstStringName]~ := "kkk";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_count_positive start~
+~[DEFINE_RegexName]~ := "k+";
+~[DEFINE_ConstStringName]~ := "kkk";
+~[DEFINE_Matcher]~
+matches := matcher.FindAllStringIndex(~[DEFINE_ConstStringName]~, -1)
+count42 := len(matches)
+
+if count42 != 0 {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_alternation_negative start~
+~[DEFINE_RegexName]~ := "(a|b)";
+~[DEFINE_ConstStringName]~ := "b";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_options_negative start~
+~[DEFINE_RegexName]~ := "abc";
+~[DEFINE_ConstStringName]~ := "AbC";
+~[DEFINE_Matcher_IC]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_inline_options_negative start~
+~[DEFINE_RegexName]~ := "(?i)a(?i)b(?i)c";
+~[DEFINE_ConstStringName]~ := "aBc";
+~[DEFINE_Matcher]~
+~[DEFINE_IfMatch]~ {
+    ~[DEFINE_NullifyFixedVar]~
+}
+~template end~
+
+~template regex_replace_positive start~
+~[DEFINE_RegexName]~ := "aboba";
+~[DEFINE_ConstStringName]~ := "aboba";
+~[DEFINE_Matcher]~
+~[DEFINE_FixedVar]~ = matcher.ReplaceAllString(~[DEFINE_FixedVar]~ + ~[DEFINE_ConstStringName]~, "")
+~template end~
+
+~template regex_replace_with_substitution_negative start~
+~[DEFINE_RegexName]~ := ".+(aboba)$"
+tmpVar42 := ~[DEFINE_FixedVar]~ + "aboba"
+matcher, _ := regexp.Compile(~[DEFINE_RegexName]~)
+matches := matcher.FindStringSubmatch(tmpVar42)
+if matcher != nil {
+    grpIndex := matcher.SubexpIndex("grp")
+    if grpIndex != -1 && len(matches) > grpIndex {
+        ~[DEFINE_FixedVar]~ = matches[grpIndex]
+    }
+}
+~template end~
+
+~template regex_split_positive start~
+~[DEFINE_RegexName]~ := "(/|-)"
+input42 := "y-" + ~[DEFINE_FixedVar]~ + "/x"
+pattern, _ := regexp.Compile(~[DEFINE_RegexName]~)
+splitResult := pattern.Split(input42, -1)
+
+if len(splitResult) > 2 {
+    ~[DEFINE_FixedVar]~ = splitResult[2]
+}
+~template end~
+
+~template regex_matches_positive start~
+~[DEFINE_RegexName]~ := "/.+/.+/"
+input := "-/" + ~[DEFINE_FixedVar]~ + "/x/"
+
+pattern, _ := regexp.Compile(~[DEFINE_RegexName]~)
+
+matcher := pattern.FindString(input)
+if matcher != "" {
+    ~[DEFINE_FixedVar]~ = matcher // Set fixedVar to the matched string
+}
+~template end~
+
+~main body end~

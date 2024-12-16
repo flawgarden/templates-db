@@ -1,0 +1,18 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/struct/helpers/HelperStructs~
+
+~template struct_get_positive start~
+simpleStruct42 := NewSimpleStruct(~[VAR_string@1]~, "fixed_string", 5)
+~[VAR_string@1]~ = simpleStruct42.Str1;
+~template end~
+
+~template struct_get_negative start~
+simpleStruct42 := NewSimpleStruct("fixed_string", ~[VAR_string@1]~, 5)
+~[VAR_string@1]~ = simpleStruct42.Str1;
+~template end~
+
+~main body end~

@@ -1,0 +1,170 @@
+~extensions start~
+~extensions import *~
+
+~[MACRO_string_Array]~ -> []string{~[EXPR_string]~}
+~[MACRO_string_Array]~ -> []string{~[EXPR_string]~, ~[EXPR_string]~}
+~[MACRO_string_Array]~ -> []string{~[EXPR_string]~, ~[EXPR_string]~, ~[EXPR_string]~}
+~extensions end~
+
+~main body start~
+
+~template for_operator_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_negative start~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_reverse_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := ~[EXPR_int]~; i >= 0; i-- {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_reverse_negative start~
+for i := ~[EXPR_int]~; i >= 0; i-- {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_string_array_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+stringArray := ~[MACRO_string_Array]~
+for i := 0; i < len(stringArray); i++ {
+    if stringArray[i] == stringArray[i+1] {
+        ~[VAR_string@1]~ = tmpUnique42
+    }
+}
+~template end~
+
+~template for_operator_string_array_negative start~
+stringArray := ~[MACRO_string_Array]~
+for i := 0; i < len(stringArray); i++ {
+    if stringArray[i] == stringArray[i+1] {
+        ~[VAR_string]~ = ""
+    }
+}
+~template end~
+
+~template for_operator_continue_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    if ~[EXPR_bool]~ {
+        continue
+    }
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_continue_negative start~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    if ~[EXPR_bool]~ {
+        continue
+    }
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_break_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    if ~[EXPR_bool]~ {
+        break
+    }
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_break_negative start~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    if ~[EXPR_bool]~ {
+        break
+    }
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_nested_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    for j := 0; j < ~[EXPR_int]~; j++ {
+        ~[VAR_string@1]~ = tmpUnique42
+    }
+}
+~template end~
+
+~template for_operator_nested_negative start~
+for i := 0; i < ~[EXPR_int]~; i++ {
+    for j := 0; j < ~[EXPR_int]~; j++ {
+        ~[VAR_string]~ = ""
+    }
+}
+~template end~
+
+~template for_operator_change_index_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~ {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_change_index_negative start~
+for i := 0; i < ~[EXPR_int]~; i += ~[EXPR_int]~ {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_non_zero_init_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for i := ~[EXPR_int]~; i < ~[EXPR_int]~; i++ {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_non_zero_init_negative start~
+for i := ~[EXPR_int]~; i < ~[EXPR_int]~; i++ {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~template for_operator_strcpy_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+~[VAR_string@1]~ = ""
+for i := 0; i < len(tmpUnique42); i++ {
+    c := tmpUnique42[i]
+    ~[VAR_string@1]~ += string(c)
+}
+~template end~
+
+~template for_operator_strcpy_negative start~
+tmpUnique42 := ""
+for i := 0; i < len(~[VAR_string@1]~); i++ {
+    c := ~[VAR_string@1]~[i]
+    tmpUnique42 += string(c)
+    if i+1 == len(~[VAR_string@1]~) {
+        ~[VAR_string@1]~ = ""
+    }
+}
+~template end~
+
+~template for_operator_collection_positive start~
+tmpUnique42 := ~[VAR_string@1]~
+for _, el := range ~[VAR_Collection<~[TYPE]~>]~ {
+    ~[VAR_string@1]~ = tmpUnique42
+}
+~template end~
+
+~template for_operator_collection_negative start~
+for _, el := range ~[VAR_Collection<~[TYPE]~>]~ {
+    ~[VAR_string]~ = ""
+}
+~template end~
+
+~main body end~
