@@ -89,5 +89,4 @@ d = FakeDuckWithAttribute(~[VAR_~[TYPE@1]~@1]~)
 ~[VAR_~[TYPE@1]~@1]~ = make_it_quack_field_attr(d, "tmp_str")
 ~template end~
 
-
 ~main body end~

@@ -10,6 +10,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantLock;
 ~imports end~
 
+~unsupported template simple_async_call_negative~
+~unsupported template simple_async_call_positive~
+
 ~template simple_async_negative start~
 AtomicReference<String> ar42 = new AtomicReference<>(~[VAR_String@1]~);
 CompletableFuture.runAsync(() -> {
@@ -26,8 +29,5 @@ CompletableFuture.runAsync(() -> {
 });
 ~[VAR_String@1]~ = ar42.get();
 ~template end~
-
-~unsupported template simple_async_call_negative~
-~unsupported template simple_async_call_positive~
 
 ~main body end~

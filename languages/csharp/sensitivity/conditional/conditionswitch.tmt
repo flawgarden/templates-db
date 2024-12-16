@@ -1,0 +1,75 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~unsupported template switch_fallthrough_positive~
+~unsupported template switch_fallthrough_negative~
+
+~template switch_basic_positive start~
+int value = 777;
+~[VAR_string@1]~ = value switch
+{
+    < 0 => "fixed_string",
+    0 => "fixed_string",
+    > 1 => ~[VAR_string@1]~ + "_suffix",
+    _ => "Unknown"
+};
+~template end~
+
+~template switch_basic_negative start~
+int value = 0;
+~[VAR_string@1]~ = value switch
+{
+    < 0 => "fixed_string",
+    > 1 => ~[VAR_string@1]~ + "_suffix",
+    _ => "Unknown"
+};
+~template end~
+
+~template switch_multiple_conditions_positive start~
+int value = 7;
+~[VAR_string@1]~ = value switch
+{
+    < 0 => "fixed_string",
+    >= 0 and <= 10 => ~[VAR_string@1]~ + "_suffix", // Note: abc should already have a value
+    > 12 => "fixed_string",
+    _ => "fixed_string"
+};
+~template end~
+
+~template switch_multiple_conditions_negative start~
+int value = -1;
+~[VAR_string@1]~ = value switch
+{
+    < 0 => "fixed_string",
+    >= 0 and <= 10 => ~[VAR_string@1]~ + "_suffix", // Note: abc should already have a value
+    > 12 => "fixed_string",
+    _ => "fixed_string"
+};
+~template end~
+
+
+~template switch_multiple_case_conditions_positive start~
+int value = 6;
+~[VAR_string@1]~ = value switch
+{
+    1 or 2 or 3 => "fixed_string",
+    4 or 5 or 6 => ~[VAR_string@1]~ + "_suffix",
+    _ => "fixed_string"
+};
+~template end~
+
+~template switch_multiple_case_conditions_negative start~
+int value = 7;
+~[VAR_string@1]~ = value switch
+{
+    1 or 2 or 3 => "fixed_string",
+    4 or 5 or 6 => ~[VAR_string@1]~ + "_suffix",
+    _ => "fixed_string"
+};
+~template end~
+
+
+~main body end~

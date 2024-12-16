@@ -1,0 +1,74 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+
+~function MakeItQuack start~
+func MakeItQuack(duck interface{ Quack(string) string }, arg string) string {
+    return duck.Quack(arg)
+}
+~function end~
+
+~function MakeItQuackAttr start~
+func MakeItQuackAttr(duck interface{}, arg string) string {
+    if d, ok := duck.(interface{ Quack(string) string }); ok {
+        return d.Quack(arg)
+    }
+    return "fixed_string"
+}
+~function end~
+
+~function MakeItQuackFieldAttr start~
+func MakeItQuackFieldAttr(duck interface{}, arg string) string {
+	if d, ok := duck.(DuckWithAttribute); ok && d.constant == 42 {
+		return d.Quack(arg)
+	}
+	return "fixed_string"
+}
+~function end~
+
+~helper functions end~
+
+
+~helper import sensitivity/duck/helpers/Duck~
+
+~unsupported template duck_typing_missing_method_exception_positive~
+~unsupported template duck_typing_dynamic_method_addition_positive~
+~unsupported template duck_typing_dynamic_method_addition_exception_negative~
+
+
+~template duck_typing_quack_method_positive start~
+duckLike := Duck{}
+~[VAR_string@1]~ = MakeItQuack(duckLike, ~[VAR_string@1]~)
+~template end~
+
+~template duck_typing_quack_method_negative start~
+duckLike := NotADuck{}
+~[VAR_string@1]~ = MakeItQuack(duckLike, ~[VAR_string@1]~)
+~template end~
+
+~template duck_typing_hasattr_check_positive start~
+duckLike := Duck{}
+~[VAR_string@1]~ = MakeItQuackAttr(duckLike, ~[VAR_string@1]~)
+~template end~
+
+~template duck_typing_hasattr_check_negative start~
+duckLike := DefinitelyNotADuck{}
+~[VAR_string@1]~ = MakeItQuackAttr(duckLike, ~[VAR_string@1]~)
+~template end~
+
+~template duck_typing_multiple_attributes_positive start~
+d := NewDuckWithAttribute(~[VAR_string@1]~)
+~[VAR_string@1]~ = MakeItQuackFieldAttr(d, "tmp_str")
+~template end~
+
+~template duck_typing_multiple_attributes_negative start~
+d := NewFakeDuckWithAttribute(~[VAR_string@1]~)
+~[VAR_string@1]~ = MakeItQuackFieldAttr(d, "tmp_str")
+~template end~
+
+
+~main body end~

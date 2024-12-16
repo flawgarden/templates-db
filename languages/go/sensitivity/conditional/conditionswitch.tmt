@@ -1,0 +1,118 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template switch_basic_positive start~
+value := 777
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value == 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value > 0:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+default:
+    ~[VAR_string@1]~ = "Unknown"
+}
+~template end~
+
+~template switch_basic_negative start~
+value := 0
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value > 0:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+default:
+    ~[VAR_string@1]~ = "Unknown"
+}
+~template end~
+
+~template switch_multiple_conditions_positive start~
+value := 7
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value >= 0 && value <= 10:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+case value > 10:
+    ~[VAR_string@1]~ = "fixed_string"
+default:
+    ~[VAR_string@1]~ = "fixed_string"
+}
+~template end~
+
+~template switch_multiple_conditions_negative start~
+value := -1
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value >= 0 && value <= 10:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+case value > 10:
+    ~[VAR_string@1]~ = "fixed_string"
+default:
+    ~[VAR_string@1]~ = "fixed_string"
+}
+~template end~
+
+
+~template switch_fallthrough_positive start~
+value := -1
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+case value == 0:
+    ~[VAR_string@1]~ = "fixed_string"
+    fallthrough
+case value > 0:
+    ~[VAR_string@1]~ += " Positive"
+default:
+    ~[VAR_string@1]~ = "Unknown"
+}
+~template end~
+
+~template switch_fallthrough_negative start~
+value := 0
+switch {
+case value < 0:
+    ~[VAR_string@1]~ = "fixed_string"
+case value == 0:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+    fallthrough
+case value > 0:
+    ~[VAR_string@1]~ = "fixed_string"
+default:
+    ~[VAR_string@1]~ = "Unknown"
+}
+~template end~
+
+~template switch_multiple_case_conditions_positive start~
+value := 6
+switch value {
+case 1, 2, 3:
+    ~[VAR_string@1]~ = "fixed_string"
+case 4, 5, 6:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+default:
+    ~[VAR_string@1]~ = "fixed_string"
+}
+~template end~
+
+~template switch_multiple_case_conditions_negative start~
+value := 6
+switch value {
+case 1, 2, 3:
+    ~[VAR_string@1]~ = "fixed_string"
+case 4, 5, 6:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + "_suffix"
+    fallthrough
+default:
+    ~[VAR_string@1]~ = "fixed_string"
+}
+~template end~
+
+
+~main body end~

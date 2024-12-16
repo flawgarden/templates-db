@@ -1,0 +1,61 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~unsupported template anonymous_structure_in_slice_positive~
+~unsupported template anonymous_structure_in_slice_negative~
+~unsupported template anonymous_structure_as_return_value_positive~
+~unsupported template anonymous_structure_as_return_value_negative~
+
+
+~template simple_anonymous_structure_positive start~
+var simpleStructure = new
+{
+    Field1 = ~[VAR_string@1]~,
+    Field2 = "fixed_string"
+};
+
+~[VAR_string@1]~ = simpleStructure.Field1;
+~template end~
+
+~template simple_anonymous_structure_negative start~
+var simpleStructure = new
+{
+    Field1 = ~[VAR_string@1]~,
+    Field2 = "fixed_string"
+};
+
+~[VAR_string@1]~ = simpleStructure.Field2;
+~template end~
+
+~template anonymous_structure_with_nested_fields_positive start~
+var car = new
+{
+    Make = "Toyota",
+    Model = "X5 AMG",
+    Specs = new
+    {
+        Year = 2020,
+        Color = ~[VAR_string@1]~
+    }
+};
+~[VAR_string@1]~ = car.Specs.Color;
+~template end~
+
+~template anonymous_structure_with_nested_fields_negative start~
+var car = new
+{
+    Make = "Toyota",
+    Model = "X5 AMG",
+    Specs = new
+    {
+        Year = 2020,
+        Color = ~[VAR_string@1]~
+    }
+};
+~[VAR_string@1]~ = car.Make;
+~template end~
+
+~main body end~

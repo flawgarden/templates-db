@@ -1,0 +1,7 @@
+~class UnaryOpMutationInterface start~
+
+type UnaryOpMutationInterface interface {
+    Mutate(t *StringHolder)
+}
+
+~class end~

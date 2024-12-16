@@ -1,0 +1,71 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/goTypes/helpers/EmbeddedStruct~
+~helper import sensitivity/goTypes/helpers/AnonFields~
+
+
+~template type_assertion_simple_positive start~
+var i123 interface{} = ~[VAR_~[TYPE@1]~@1]~
+if val, ok := i123.(~[TYPE@1]~); ok {
+     ~[VAR_~[TYPE@1]~@1]~ = val + ~[CONST_~[TYPE@1]~]~
+} else {
+    ~[VAR_~[TYPE@1]~@1]~ = ~[CONST_~[TYPE@1]~]~
+}
+~template end~
+
+~template type_assertion_simple_negative start~
+var i123 interface{} = ~[CONST_int]~
+if val, ok := i123.(string); ok {
+     ~[VAR_string@1]~ = val + "suffix"
+} else {
+     ~[VAR_string@1]~ = "const_string"
+}
+~template end~
+
+~template type_assertion_with_struct_pointer_positive start~
+var i123 interface{} = &EmbeddedStruct{Field1: ~[VAR_string@1]~}
+if ptr, ok := i123.(*EmbeddedStruct); ok {
+     ~[VAR_string@1]~ = ptr.Field1
+} else {
+    ~[VAR_string@1]~ = ~[CONST_string]~
+}
+~template end~
+
+~template type_assertion_with_struct_pointer_negative start~
+var i123 interface{} = &Anon{Value1: ~[VAR_string@1]~}
+if ptr, ok := i123.(*EmbeddedStruct); ok {
+     ~[VAR_string@1]~ = ptr.Field1
+} else {
+    ~[VAR_string@1]~ = ~[CONST_string]~
+}
+~template end~
+
+~template type_assertion_in_switch_positive start~
+var i interface{} = ~[VAR_string@1]~
+switch i.(type) {
+case int:
+    ~[VAR_string@1]~ = ~[CONST_string]~
+case string:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + ~[CONST_string]~
+default:
+    ~[VAR_string@1]~ = ~[CONST_string]~
+}
+~template end~
+
+~template type_assertion_in_switch_negative start~
+var i interface{} = ~[CONST_int]~
+switch i.(type) {
+case int:
+    ~[VAR_string@1]~ = ~[CONST_string]~
+case string:
+    ~[VAR_string@1]~ = ~[VAR_string@1]~ + ~[CONST_string]~
+default:
+    ~[VAR_string@1]~ = ~[CONST_string]~
+}
+~template end~
+
+
+~main body end~

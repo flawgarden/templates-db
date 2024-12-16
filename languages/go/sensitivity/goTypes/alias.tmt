@@ -1,0 +1,59 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+~helper import sensitivity/goTypes/helpers/Base~
+
+
+~template type_alias_simple_positive start~
+type MyString = string
+var x MyString = ~[VAR_string@1]~
+~[VAR_string@1]~ = x
+~template end~
+
+~template type_alias_simple_negative start~
+type MyString = string
+var x MyString = ~[CONST_string]~
+~[VAR_string]~ = x
+~template end~
+
+~template type_alias_on_struct_positive start~
+type MyBase = Base
+b123 := MyBase{
+    Value: ~[VAR_string@1]~,
+}
+~[VAR_string@1]~ = b123.Value
+~template end~
+
+~template type_alias_on_struct_negative start~
+type MyBase = Base
+b123 := MyBase{
+    Value: ~[CONST_string]~,
+}
+~[VAR_string]~ = b123.Value
+~template end~
+
+~template type_alias_for_function_positive start~
+type Operation = func(a, b string) string
+
+concat := func(a, b string) string {
+    return a + b
+}
+
+var op Operation = concat
+~[VAR_string@1]~ = op(~[VAR_string@1]~, ~[CONST_string]~)
+~template end~
+
+~template type_alias_for_function_negative start~
+type Operation = func(a, b string) string
+
+concat := func(a, b string) string {
+    return b
+}
+
+var op Operation = concat
+~[VAR_string@1]~ = op(~[VAR_string@1]~, ~[CONST_string]~)
+~template end~
+
+~main body end~

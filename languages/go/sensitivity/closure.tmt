@@ -1,0 +1,110 @@
+~main body start~
+
+~helper functions start~
+~function makePrefixer start~
+func makePrefixer(prefix string) func(string) string {
+    return func(value string) string {
+        return fmt.Sprintf("%s%s", prefix, value)
+    }
+}
+~function end~
+
+~function makeMessageGenerator start~
+func makeMessageGenerator(prefix string) func() func(string) string {
+	return func() func(string) string {
+		return func(name string) string {
+			return prefix + name
+		}
+	}
+}
+~function end~
+
+~function makeMessageGeneratorBroken start~
+func makeMessageGeneratorBroken(prefix string) func() func(string) string {
+	return func() func(string) string {
+		return func(name string) string {
+			return name
+		}
+	}
+}
+~function end~
+~helper functions end~
+
+~template simple_closure_counter_positive start~
+counter := func() func(str string) string {
+    count := 0
+    return func(str string) string {
+        count++
+        if count == 1 {
+            return str
+        } else {
+            return "fixed_string"
+        }
+
+    }
+}()
+~[VAR_string@1]~ = counter(~[VAR_string@1]~)
+~template end~
+
+~template simple_closure_counter_negative start~
+counter := func() func(str string) string {
+    count := 0
+    return func(str string) string {
+        count++
+        if count == 1 {
+            return str
+        } else {
+            return "fixed_string"
+        }
+
+    }
+}()
+counter(~[VAR_string@1]~)
+~[VAR_string@1]~ = counter(~[VAR_string@1]~)
+~template end~
+
+~template closure_capturing_positive start~
+addPrefix := makePrefixer(~[VAR_string@1]~)
+tmp123 := addPrefix("_suffix")
+~[VAR_string@1]~ = tmp123
+~template end~
+
+~template closure_capturing_negative start~
+addPrefix := makePrefixer(~[CONST_string]~)
+tmp123 := addPrefix("_suffix")
+~[VAR_string]~ = tmp123
+~template end~
+
+~template closure_returning_closure_positive start~
+generator := makeMessageGenerator(~[VAR_string@1]~)()
+~[VAR_string@1]~ = generator("_suffix")
+~template end~
+
+~template closure_returning_closure_negative start~
+generator := makeMessageGeneratorBroken(~[VAR_string@1]~)()
+~[VAR_string@1]~ = generator("fixed_string")
+~template end~
+
+~template closure_with_outer_variable_positive start~
+stringReturner := func() func() string {
+    return func() string {
+        return ~[VAR_string@1]~
+    }
+}
+
+stringRet := stringReturner()
+~[VAR_string@1]~ = stringRet()
+~template end~
+
+~template closure_with_outer_variable_negative start~
+stringReturner := func() func() string {
+    return func() string {
+        return ~[CONST_string]~
+    }
+}
+
+stringRet := stringReturner()
+~[VAR_string]~ = stringRet()
+~template end~
+
+~main body end~

@@ -1,0 +1,9 @@
+~class ChannelStruct start~
+type Data struct {
+    Value string
+}
+
+type DataInt struct {
+    Value int
+}
+~class end~

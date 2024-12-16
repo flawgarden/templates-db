@@ -13,6 +13,8 @@
 
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[VAR_~[TYPE@1]~@1]~);
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[VAR_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.add(~[CONST_~[TYPE@1]~@1]~);
+~[DEFINE_Add_Fixed_CONST_ToQueue]~ -> ~[DEFINE_QueueName]~.offer(~[CONST_~[TYPE@1]~@1]~);
 ~extensions end~
 
 ~main body start~
@@ -102,5 +104,23 @@ while (!sourceQueue.isEmpty()) {
 ~[VAR_~[TYPE@1]~@1]~ = targetQueue.poll();
 ~template end~
 
+~template queue_contains_1_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_EXPR_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[TYPE@1]~ value7845 = ~[CONST_TYPE@1]~;
+if (~[DEFINE_QueueName]~.contains(~[VAR_~[TYPE@1]~@1]~)) {
+    value7845 = ~[VAR_~[TYPE@1]~@1]~;
+}
+~[VAR_~[TYPE@1]~@1]~ = value7845;
+~template end~
+
+~template queue_remove_if_positive start~
+~[DEFINE_Create_Queue]~
+~[DEFINE_Add_Fixed_CONST_ToQueue]~
+~[DEFINE_Add_Fixed_VAR_ToQueue]~
+~[DEFINE_QueueName]~.removeIf(item -> item.equals(~[CONST_~[TYPE@1]~@1]~));
+~[VAR_~[TYPE@1]~@1]~ = ~[DEFINE_QueueName]~.poll();
+~template end~
 
 ~main body end~

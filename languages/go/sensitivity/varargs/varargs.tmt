@@ -1,0 +1,83 @@
+~main body start~
+
+~helper functions start~
+
+~function get_first_string start~
+func getFirstString(lines ...string) string {
+    return getStringWithIndex(0, lines...)
+}
+~function end~
+
+~function get_string_with_index start~
+func getStringWithIndex(ind int, lines ...string) string {
+    return lines[ind]
+}
+~function end~
+
+~function get_first_string_from_array start~
+func getFirstStringFromArray(lines ...string) string {
+    return lines[0]
+}
+~function end~
+
+~function varargs_with_generics start~
+func varargsWithGenerics[T any](elements ...T) T {
+    return elements[0]
+}
+~function end~
+
+~function combine_strings start~
+func combineStrings(strs ...string) string {
+    return strings.Join(strs, ", ")
+}
+~function end~
+
+~helper functions end~
+
+~imports start~
+import (
+    "strings"
+)
+~imports end~
+
+~template varargs_get_first_string_positive start~
+~[VAR_string@1]~ = getFirstString(~[VAR_string@1]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_get_first_string_negative start~
+~[VAR_string@1]~ = getFirstString(~[CONST_string]~, ~[VAR_string@1]~)
+~template end~
+
+~template varargs_get_string_with_index_positive start~
+~[VAR_string@1]~ = getStringWithIndex(0, ~[VAR_string@1]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_get_string_with_index_negative start~
+~[VAR_string@1]~ = getStringWithIndex(1, ~[VAR_string@1]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_get_first_string_from_array_positive start~
+~[VAR_string@1]~ = getFirstStringFromArray(~[VAR_string@1]~, ~[VAR_string]~)
+~template end~
+
+~template varargs_get_first_string_from_array_negative start~
+~[VAR_string]~ = getFirstStringFromArray(~[EXPR_string]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_with_generics_positive start~
+~[VAR_string@1]~ = varargsWithGenerics(~[VAR_string@1]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_with_generics_negative start~
+~[VAR_string]~ = varargsWithGenerics(~[EXPR_string]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_combine_strings_positive start~
+~[VAR_string@1]~ = combineStrings(~[VAR_string@1]~, ~[EXPR_string]~)
+~template end~
+
+~template varargs_combine_strings_negative start~
+~[VAR_string]~ = combineStrings(~[EXPR_string]~, ~[EXPR_string]~)
+~template end~
+
+~main body end~

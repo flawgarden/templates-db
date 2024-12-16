@@ -1,0 +1,85 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~unsupported template switch_fallthrough_positive~
+~unsupported template switch_fallthrough_negative~
+
+
+~template switch_basic_positive start~
+value = 777
+match value:
+    case v if v < 0:
+        ~[VAR_str@1]~ = "fixed_string"
+    case v if v == 0:
+        ~[VAR_str@1]~ = "fixed_string"
+    case v if v > 0:
+        ~[VAR_str@1]~ = ~[VAR_str@1]~ + "_suffix"
+    case _:
+        ~[VAR_str@1]~ = "Unknown"
+~template end~
+
+~template switch_basic_negative start~
+value = 777
+match value:
+    case v if v < 0:
+        ~[VAR_str@1]~ = "fixed_string"
+    case v if v > 0:
+        ~[VAR_str@1]~ = ~[VAR_str@1]~ + "_suffix"
+    case _:
+        ~[VAR_str@1]~ = "Unknown"
+~template end~
+
+~template switch_multiple_conditions_positive start~
+value = 7
+match value:
+    case v if v < 0:
+        ~[VAR_str@1]~ = "fixed_string"
+    case v if 0 <= v <= 10:
+        ~[VAR_str@1]~ += "_suffix"
+    case v if v > 10:
+        ~[VAR_str@1]~ = "fixed_string"
+    case _:
+        ~[VAR_str@1]~ = "fixed_string"
+~template end~
+
+~template switch_multiple_conditions_negative start~
+value = -1
+match value:
+    case v if v < 0:
+        ~[VAR_str@1]~ = "fixed_string"
+    case v if 0 <= v <= 10:
+        ~[VAR_str@1]~ += "_suffix"
+    case v if v > 10:
+        ~[VAR_str@1]~ = "fixed_string"
+    case _:
+        ~[VAR_str@1]~ = "fixed_string"
+~template end~
+
+
+~template switch_multiple_case_conditions_positive start~
+value = 6
+match value:
+    case 1 | 2 | 3:
+        ~[VAR_str@1]~ = "fixed_string"
+    case 4 | 5 | 6:
+         ~[VAR_str@1]~ += "_suffix"
+    case _:
+         ~[VAR_str@1]~ = "fixed_string"
+~template end~
+
+~template switch_multiple_case_conditions_negative start~
+value = 7
+match value:
+    case 1 | 2 | 3:
+        ~[VAR_str@1]~ = "fixed_string"
+    case 4 | 5 | 6:
+         ~[VAR_str@1]~ += "_suffix"
+    case _:
+         ~[VAR_str@1]~ = "fixed_string"
+~template end~
+
+
+~main body end~

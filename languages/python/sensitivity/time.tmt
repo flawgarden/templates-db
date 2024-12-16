@@ -1,0 +1,13 @@
+~main body start~
+
+~imports start~
+from datetime import datetime
+~imports end~
+
+~template simple_time_neutral start~
+time = datetime.now()
+if time.hour > 12:
+    ~[VAR_string]~ = "fixed_string"
+~template end~
+
+~main body end~

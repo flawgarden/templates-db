@@ -1,0 +1,9 @@
+~class UnaryOpClass start~
+
+type UnaryOpClass struct{}
+
+func (u UnaryOpClass) VirtualCall(t string) string {
+    return ""
+}
+
+~class end~

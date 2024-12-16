@@ -21,8 +21,6 @@ import java.util.*;
 ~[VAR_String]~ = STR."fixed_string";
 ~template end~
 
-
-
 ~template simple_string_interpolation_with_condition_positive start~
 var tmpString = STR."PREFIX + \{~[VAR_String@1]~}!";
 if (tmpString.contains("PREFIX")) {
