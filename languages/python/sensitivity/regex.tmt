@@ -1,0 +1,139 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_RegexName]~ -> regex42
+~[DEFINE_FixedVar]~ -> ~[VAR_str@1]~
+~[DEFINE_ConstStringName]~ -> str42
+~[DEFINE_IfMatch]~ -> if re.match(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~) is not None:
+~[DEFINE_IfSearch]~ -> if re.search(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~) is not None:
+~[DEFINE_Count]~ -> len(re.findall(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~))
+~[DEFINE_NullifyFixedVar]~ -> ~[DEFINE_FixedVar]~ = ""
+~extensions end~
+
+~main body start~
+
+~imports start~
+import re
+~imports end~
+
+~template regex_exactly_match_negative start~
+~[DEFINE_RegexName]~ = r"42"
+~[DEFINE_ConstStringName]~ = "42"
+~[DEFINE_IfMatch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_escaping_positive start~
+~[DEFINE_RegexName]~ = r"\.+"
+~[DEFINE_ConstStringName]~ = "42"
+~[DEFINE_IfMatch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_char_group_negative start~
+~[DEFINE_RegexName]~ = r"[ab]+"
+~[DEFINE_ConstStringName]~ = "aaa"
+~[DEFINE_IfMatch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_not_char_group_positive start~
+~[DEFINE_RegexName]~ = r"[^ab]+"
+~[DEFINE_ConstStringName]~ = "aaa"
+~[DEFINE_IfMatch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_anchor_negative start~
+~[DEFINE_RegexName]~ = r"42\Z"
+~[DEFINE_ConstStringName]~ = "10042"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_anchor_positive start~
+~[DEFINE_RegexName]~ = r"\A101"
+~[DEFINE_ConstStringName]~ = "100101"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_backreference_positive start~
+~[DEFINE_RegexName]~ = r"(kek)\1"
+~[DEFINE_ConstStringName]~ = "kek"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_named_backreference_negative start~
+~[DEFINE_RegexName]~ = r"(?P<g1>kek)(?P=g1)"
+~[DEFINE_ConstStringName]~ = "kekkek"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_counting_quantifier_negative start~
+~[DEFINE_RegexName]~ = r"k{3,5}"
+~[DEFINE_ConstStringName]~ = "kkk"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_count_positive start~
+~[DEFINE_RegexName]~ = r"k+";
+~[DEFINE_ConstStringName]~ = "kkk";
+if ~[DEFINE_Count]~ > 1
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_alternation_negative start~
+~[DEFINE_RegexName]~ = r"(a|b)"
+~[DEFINE_ConstStringName]~ = "b"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_lookarounds_positive start~
+~[DEFINE_RegexName]~ = r"..(?<!42)"
+~[DEFINE_ConstStringName]~ = "42"
+~[DEFINE_IfSearch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_options_negative start~
+~[DEFINE_RegexName]~ = r"abc";
+~[DEFINE_ConstStringName]~ = "AbC";
+if re.match(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~, re.IGNORECASE) is not None:
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_inline_options_negative start~
+~[DEFINE_RegexName]~ = @"(?i)abc";
+~[DEFINE_ConstStringName]~ = "aBc";
+~[DEFINE_IfMatch]~
+    ~[DEFINE_NullifyFixedVar]~
+~template end~
+
+~template regex_replace_positive start~
+~[DEFINE_RegexName]~ = r"aboba";
+~[DEFINE_ConstStringName]~ = "aboba";
+~[DEFINE_FixedVar]~ = re.sub(~[DEFINE_RegexName]~, ~[DEFINE_FixedVar]~, ~[DEFINE_ConstStringName]~)
+~template end~
+
+~template regex_replace_with_substitution_negative start~
+~[DEFINE_RegexName]~ = r".+(?P<grp>aboba)\Z"
+~[DEFINE_FixedVar]~ = re.sub(~[DEFINE_RegexName]~, r"\g<grp>", ~[DEFINE_FixedVar]~ + "aboba")
+~template end~
+
+~template regex_split_positive start~
+var ~[DEFINE_RegexName]~ = r"(/|-)"
+~[DEFINE_FixedVar]~ = re.split("y-" + ~[DEFINE_FixedVar]~ + "/x", ~[DEFINE_RegexName]~)[2]
+~template end~
+
+~template regex_matches_positive start~
+~[DEFINE_RegexName]~ = r"(.+)/(.+)"
+if m42 := re.match("~[DEFINE_FixedVar]~ + "/x"):
+    ~[DEFINE_FixedVar]~ = m42.group(1)
+~template end~
+
+~main body end~

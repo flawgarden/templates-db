@@ -1,0 +1,34 @@
+~extensions start~
+~extensions import *~
+
+~[DEFINE_HolderName]~ -> disposed9201
+~extensions end~
+
+~main body start~
+~helper import sensitivity/disposable/helpers/ImplementsEnterExit~
+
+~unsupported template disposable_interface_declaration_inside_positive~
+~unsupported template disposable_interface_declaration_inside_negative~
+
+~template disposable_interface_positive start~
+~[DEFINE_HolderName]~ = ImplementsEnterExit(~[VAR_string@1]~)
+~[VAR_string@1]~ = ~[DEFINE_HolderName]~.text
+with ~[DEFINE_HolderName]~:
+    pass
+~template end~
+
+~template disposable_interface_negative start~
+~[DEFINE_HolderName]~ = ImplementsEnterExit(~[VAR_string@1]~)
+with ~[DEFINE_HolderName]~:
+    pass
+~[VAR_string@1]~ = ~[DEFINE_HolderName]~.text
+~template end~
+
+~template disposable_interface_value_positive start~
+~[DEFINE_HolderName]~ = ImplementsEnterExit(~[VAR_string@1]~)
+with ~[DEFINE_HolderName]~ as new_value:
+    ~[VAR_string@1]~ = value
+~template end~
+
+
+~main body end~

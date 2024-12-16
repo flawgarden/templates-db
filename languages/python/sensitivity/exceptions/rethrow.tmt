@@ -1,0 +1,35 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~template rethrow_negative start~
+tmp42 = ~[VAR_string@1]~
+tmpArray42 = [0, 1, 2, 3, 4]
+index = 100
+try:
+    try:
+        tmp43 = tmpArray42[index]
+    except IndexError:
+        ~[VAR_string@1]~ = tmp42
+        raise
+except IndexError:
+    ~[VAR_string@1]~ = "data"
+~template end~
+
+~template rethrow_positive start~
+tmp42 = ~[VAR_string@1]~
+tmpArray42 = [0, 1, 2, 3, 4]
+index = 100
+try:
+    try:
+        tmp43 = tmpArray42[index]
+    except IndexError:
+        ~[VAR_string@1]~ = "data"
+        raise
+except IndexError:
+    ~[VAR_string@1]~ = tmp42
+~template end~
+
+~main body end~

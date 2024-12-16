@@ -1,0 +1,29 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper functions start~
+~function AsyncId start~
+async def async_id(x):
+    return x
+~function end~
+~helper functions end~
+
+~imports start~
+import asyncio
+~imports end~
+
+~unsupported template simple_async_negative~
+~unsupported template simple_async_positive~
+
+~template simple_async_call_negative start~
+~[VAR_string]~ = await async_id("42")
+~template end~
+
+~template simple_async_call_positive start~
+~[VAR_string@1]~ = await async_id(~[VAR_string@1]~)
+~template end~
+
+~main body end~

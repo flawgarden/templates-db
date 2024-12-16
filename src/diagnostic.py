@@ -236,10 +236,12 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
         second_files = snd.files
         for proj_file in fst.files:
             same_file = find_same(second_files, proj_file)
-            if not isinstance(proj_file, TemplateFile):
+            if not isinstance(proj_file, TemplateFile) or proj_file.parents.count("objects") > 0:
                 continue
 
             if same_file is None:
+                result.append(DiagnosticResult.error(f"TODO[{snd.name}]: Add the same file [{proj_file.path}]"))
+            elif same_file.kind == TmtFileKind.TODO:
                 result.append(DiagnosticResult.warning(f"TODO[{snd.name}]: Add the same file [{proj_file.path}]"))
             else:
                 assert isinstance(same_file, TemplateFile)
@@ -252,7 +254,7 @@ def language_structural_equality_diagnostic(projects: List[LanguageProject]) -> 
                 compare(first_lang_proj, second_lang_proj)
                 compare(second_lang_proj, first_lang_proj)
 
-    return result
+    return list(set(result))
 
 
 @nerd.template_diagnostic("Invalid imports")

@@ -12,6 +12,8 @@
 using DisposableHelpers;
 ~imports end~
 
+~unsupported template disposable_interface_value_positive~
+
 ~template disposable_interface_positive start~
 ~[DEFINE_CreateHolderFixed]~
 using (~[DEFINE_HolderName]~)

@@ -133,7 +133,7 @@ class DiagnosticsTest:
     class LanguageStructuralEqualityTest:
 
         @staticmethod
-        def test_missed_template_file_cause_warning():
+        def test_missed_template_file_cause_error():
             template_file = DefaultValues.get_template_file()
             first_project = ProjectBuilder() \
                 .with_template_file(template_file) \
@@ -143,7 +143,7 @@ class DiagnosticsTest:
 
             diagnostics = diagnostic.language_structural_equality_diagnostic([first_project, second_project])
 
-            assert not has_error(diagnostics) and has_warning(diagnostics)
+            assert has_error(diagnostics) and not has_warning(diagnostics)
 
         @staticmethod
         def test_same_unsupported_file_doesnt_cause_error_or_warning():

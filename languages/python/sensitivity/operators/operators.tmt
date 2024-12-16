@@ -1,0 +1,83 @@
+~extensions start~
+~[DEFINE_VarName]~ -> operators1943
+~[DEFINE_VarName2]~ -> srotarepo3491
+
+~[DEFINE_CreateSH_Fixed]~ -> ~[DEFINE_VarName]~ = SpecialOperatorsStringHolder(~[VAR_string@1]~);
+~[DEFINE_CreateSH_Const]~ -> ~[DEFINE_VarName]~ = SpecialOperatorsStringHolder(~[CONST_string]~);
+~[DEFINE_CreateSH_Const2]~ -> ~[DEFINE_VarName2]~ = SpecialOperatorsStringHolder(~[CONST_string]~);
+~extensions end~
+
+~main body start~
+
+~helper import sensitivity/operators/helpers/SpecialOperatorsStringHolder~
+
+~imports start~
+using HelperOperators;
+~imports end~
+
+~unsupported template indexer_custom_two_dim_positive_1~
+~unsupported template indexer_custom_two_dim_positive_2~
+~unsupported template indexer_custom_two_dim_negative_1~
+~unsupported template indexer_custom_two_dim_negative_2~
+
+~template indexer_one_dim_positive start~
+~[DEFINE_CreateSH_Fixed]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~[42]
+~template end~
+
+~template indexer_one_dim_negative start~
+~[DEFINE_CreateSH_Fixed]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~[0]
+~template end~
+
+~template implicit_to_string_call_positive start~
+~[DEFINE_CreateSH_Fixed]~
+~[VAR_string@1]~ = f"{~[DEFINE_VarName]~}"
+~template end~
+
+~template implicit_to_string_call_negative start~
+~[DEFINE_CreateSH_Const]~
+~[VAR_string]~ = f"{~[DEFINE_VarName]~}"
+~template end~
+
+~template unary_operator_plus_call_positive start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_VarName2]~ = +~[DEFINE_VarName]~
+~[VAR_string@1]~ = ~[DEFINE_VarName2]~.value
+~template end~
+
+~template unary_operator_minus_call_negative start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_VarName2]~ = -~[DEFINE_VarName]~
+    ~[VAR_string@1]~ = ~[DEFINE_VarName2]~.value
+~template end~
+
+~template explicit_binary_operator_plus_call_positive start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_CreateSH_Const2]~
+sum41324 = ~[DEFINE_VarName]~ + ~[DEFINE_VarName2]~
+~[VAR_string@1]~ = sum41324.value
+~template end~
+
+~template explicit_binary_operator_minus_call_negative start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_CreateSH_Const2]~
+sum41324 = ~[DEFINE_VarName]~ - ~[DEFINE_VarName2]~
+~[VAR_string@1]~ = sum41324.value
+~template end~
+
+~template implicit_binary_operator_plus_call_positive start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_CreateSH_Const2]~
+~[DEFINE_VarName]~ += ~[DEFINE_VarName2]~;
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.value
+~template end~
+
+~template implicit_binary_operator_minus_call_negative start~
+~[DEFINE_CreateSH_Fixed]~
+~[DEFINE_CreateSH_Const2]~
+~[DEFINE_VarName]~ -= ~[DEFINE_VarName2]~
+~[VAR_string@1]~ = ~[DEFINE_VarName]~.value
+~template end~
+
+~main body end~

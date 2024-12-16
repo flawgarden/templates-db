@@ -1,0 +1,8 @@
+~class Point start~
+from dataclasses import dataclass
+
+@dataclass
+class Point:
+    X: int
+    Y: int
+~class end~
