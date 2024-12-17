@@ -52,7 +52,6 @@ from typing import Any
 
 ~template pattern_matching_switch_simple_1_positive start~
 obj = ~[VAR_str@1]~;
-
 match obj:
     case int():
         ~[VAR_str@1]~ = "fixed_string"
@@ -64,7 +63,6 @@ match obj:
 
 ~template pattern_matching_switch_simple_1_negative start~
 obj = ~[CONST_int]~;
-
 match obj:
     case int():
         ~[VAR_str@1]~ = "fixed_string"

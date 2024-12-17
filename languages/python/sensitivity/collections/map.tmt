@@ -55,7 +55,7 @@ map111.update(map222)
 ~template map_clear_negative start~
 ~[DEFINE_Create_Map]~
 ~[DEFINE_Add_EXPR_ToMap]~
-~[DEFINE_MapName]~[(~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~
+~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@2]~] = ~[VAR_~[TYPE@2]~@2]~
 ~[DEFINE_MapName]~.clear()
 ~[VAR_~[TYPE@2]~@2]~ = ~[DEFINE_MapName]~[~[EXPR_~[TYPE@1]~@2]~]
 ~template end~

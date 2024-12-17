@@ -18,55 +18,55 @@
 
 ~template array_expand_full_negative start~
 ~[DEFINE_Array_Fixed_2nd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[2]
 ~template end~
 
 ~template array_expand_prefix_positive start~
 ~[DEFINE_Array_Fixed_1st]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_prefix_negative start~
 ~[DEFINE_Array_Fixed_3rd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[:1]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_suffix_positive start~
 ~[DEFINE_Array_Fixed_3rd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_suffix_negative start~
 ~[DEFINE_Array_Fixed_1st]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[2:]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_inner_positive start~
 ~[DEFINE_Array_Fixed_2nd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_inner_negative start~
 ~[DEFINE_Array_Fixed_3rd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[1:2]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 
 ~template array_expand_inner_from_end_positive start~
 ~[DEFINE_Array_Fixed_2nd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[1]
 ~template end~
 
 ~template array_expand_inner_from_end_negative start~
 ~[DEFINE_Array_Fixed_2nd]~
-var ~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
+~[DEFINE_OtherArrayName]~ = ~[DEFINE_ArrayName]~[0:-1]
 ~[VAR_str@1]~ = ~[DEFINE_OtherArrayName]~[0]
 ~template end~
 

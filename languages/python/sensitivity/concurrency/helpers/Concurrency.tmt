@@ -3,14 +3,14 @@
 from typing import TypeVar, Generic
 from threading import Lock
 
-T = TypeVar('T')
+S = TypeVar('S')
 
 
-class Wrapper(Generic[T]):
-    i: T
+class Wrapper(Generic[S]):
+    i: S
     lock: Lock
 
-    def __init__(self, t: T):
+    def __init__(self, t: S):
         self.i = t
         self.lock = Lock()
 

@@ -1,7 +1,7 @@
 ~class SpecialOperatorsStringHolder start~
 class SpecialOperatorsStringHolder:
 
-    def __init__(self, value="")
+    def __init__(self, value=""):
         self.value = value
         self.index = 42
 
