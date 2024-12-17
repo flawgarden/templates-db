@@ -82,7 +82,7 @@ import re
 ~template regex_count_positive start~
 ~[DEFINE_RegexName]~ = r"k+";
 ~[DEFINE_ConstStringName]~ = "kkk";
-if ~[DEFINE_Count]~ > 1
+if ~[DEFINE_Count]~ > 1:
     ~[DEFINE_NullifyFixedVar]~
 ~template end~
 
@@ -101,16 +101,17 @@ if ~[DEFINE_Count]~ > 1
 ~template end~
 
 ~template regex_options_negative start~
-~[DEFINE_RegexName]~ = r"abc";
-~[DEFINE_ConstStringName]~ = "AbC";
+~[DEFINE_RegexName]~ = r"abc"
+~[DEFINE_ConstStringName]~ = "AbC"
 if re.match(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~, re.IGNORECASE) is not None:
     ~[DEFINE_NullifyFixedVar]~
 ~template end~
 
 ~template regex_inline_options_negative start~
-~[DEFINE_RegexName]~ = @"(?i)abc";
-~[DEFINE_ConstStringName]~ = "aBc";
-~[DEFINE_IfMatch]~
+pattern42 = r"(?i)abc"
+~[DEFINE_RegexName]~ = re.compile(pattern42)
+~[DEFINE_ConstStringName]~ = "aBc"
+if ~[DEFINE_RegexName]~.search(~[DEFINE_ConstStringName]~):
     ~[DEFINE_NullifyFixedVar]~
 ~template end~
 
@@ -126,14 +127,20 @@ if re.match(~[DEFINE_ConstStringName]~, ~[DEFINE_RegexName]~, re.IGNORECASE) is 
 ~template end~
 
 ~template regex_split_positive start~
-var ~[DEFINE_RegexName]~ = r"(/|-)"
-~[DEFINE_FixedVar]~ = re.split("y-" + ~[DEFINE_FixedVar]~ + "/x", ~[DEFINE_RegexName]~)[2]
+~[DEFINE_RegexName]~ = r"(/|-)"
+input_string42 = f"y-{~[DEFINE_FixedVar]~}/x"
+split_result42 = re.split(~[DEFINE_RegexName]~, input_string42)
+if len(split_result42) > 2:
+    ~[DEFINE_FixedVar]~ = split_result42[2]
 ~template end~
 
 ~template regex_matches_positive start~
-~[DEFINE_RegexName]~ = r"(.+)/(.+)"
-if m42 := re.match("~[DEFINE_FixedVar]~ + "/x"):
-    ~[DEFINE_FixedVar]~ = m42.group(1)
+~[DEFINE_RegexName]~ = r"/.+/.+/"
+input_string = f"-/{~[DEFINE_FixedVar]~}/x/"
+pattern42 = re.compile(~[DEFINE_RegexName]~)
+matcher = pattern42.search(input_string)
+if matcher:
+    ~[DEFINE_FixedVar]~ = matcher.group()
 ~template end~
 
 ~main body end~

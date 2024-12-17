@@ -63,7 +63,7 @@ interpolatedStr = f"Tmp string in uppercase: {tmpStr.upper()}"
 ~template end~
 
 ~template string_interpolation_escaping_negative start~
-~[VAR_str@1]~ = $"PREFIX{{~[VAR_str@1]~}}!";
+~[VAR_str@1]~ = f"PREFIX{{~[VAR_str@1]~}}!";
 ~template end~
 
 ~main body end~

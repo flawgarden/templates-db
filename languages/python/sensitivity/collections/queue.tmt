@@ -46,7 +46,7 @@ from queue import SimpleQueue, Queue, PriorityQueue
 ~template queue_is_empty_1_positive start~
 ~[DEFINE_Create_Queue]~
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~
-~[TYPE@1]~ value7843 = ~[DEFINE_QueueName]~.get()
+value7843 = ~[DEFINE_QueueName]~.get()
 if ~[DEFINE_QueueName]~.empty():
     value7843 = ~[CONST_~[TYPE@1]~]~
 ~[VAR_~[TYPE@1]~@1]~ = value7843
@@ -82,7 +82,7 @@ if ~[DEFINE_QueueName]~.empty():
 ~[DEFINE_Add_EXPR_ToQueue]~
 ~[DEFINE_Add_EXPR_ToQueue]~
 ~[DEFINE_Add_Fixed_VAR_ToQueue]~
-value7847 = ~[CONST_TYPE@1]~
+value7847 = ~[CONST_~[TYPE@1]~]~
 while not ~[DEFINE_QueueName]~.empty():
     value7847 = ~[DEFINE_QueueName]~.get()
 ~[VAR_~[TYPE@1]~@1]~ = value7847
