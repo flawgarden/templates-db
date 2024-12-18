@@ -13,8 +13,48 @@
 
 ~unsupported template new_constrained_generic_class_positive~
 ~unsupported template new_constrained_generic_class_negative~
+~unsupported template template_super_variance_positive~
+~unsupported template template_super_variance_negative~
+~unsupported template template_wildcard_variance_positive~
+~unsupported template template_wildcard_variance_negative~
 
+~template get_value_from_generic_class_positive start~
+gc42 := NewGenericClass(~[VAR_string@1]~)
+~[VAR_string@1]~ = gc42.GetValue()
+~template end~
 
+~template get_value_from_generic_class_negative start~
+gc42 := NewGenericClass("fixed_string")
+~[VAR_string]~ = gc42.GetValue()
+~template end~
+
+~template get_object_value_from_generic_class_positive start~
+gc42 := NewGenericClass(~[VAR_string@1]~)
+if value, ok := gc42.GetObjectValue().(string); ok {
+    ~[VAR_string@1]~ = value
+}
+~template end~
+
+~template get_object_value_from_generic_class_negative start~
+gc42 := NewGenericClass("fixed_string")
+if value, ok := gc42.GetObjectValue().(string); ok {
+    ~[VAR_string]~ = value
+}
+~template end~
+
+~template template_extends_variance_positive start~
+genericWithA := NewGenericClass(A(nil))
+if ExtendsVariance(genericWithA) {
+    ~[VAR_string]~ = "fixed_string"
+}
+~template end~
+
+~template template_extends_variance_negative start~
+genericWithB := NewGenericClass(B{})
+if ExtendsVariance(genericWithB) {
+    ~[VAR_string]~ = "fixed_string"
+}
+~template end~
 ~template interface_constrained_generic_class_positive start~
 impl42 := &ImplBinaryOpInterfaceClass1{}
 ~[DEFINE_VarName]~ := NewInterfaceConstrainedClass(impl42)
@@ -38,7 +78,5 @@ derived42 := &DerivedBinaryOpClass1{}
 constrained09143 := NewInheritanceConstrainedClass(derived42)
 ~[VAR_string@1]~ = constrained09143.chooseNone(~[VAR_string@1]~, "fixed_string");
 ~template end~
-
-
 
 ~main body end~

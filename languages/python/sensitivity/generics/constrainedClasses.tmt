@@ -1,0 +1,42 @@
+~extensions start~
+~extensions import *~
+~extensions end~
+
+~main body start~
+
+~helper import objects/generics/helpers/GenericClass~
+
+~unsupported template new_constrained_generic_class_positive~
+~unsupported template new_constrained_generic_class_negative~
+~unsupported template interface_constrained_generic_class_positive~
+~unsupported template interface_constrained_generic_class_negative~
+~unsupported template inheritance_constrained_generic_class_positive~
+~unsupported template inheritance_constrained_generic_class_negative~
+~unsupported template template_extends_variance_positive~
+~unsupported template template_extends_variance_negative~
+~unsupported template template_super_variance_positive~
+~unsupported template template_super_variance_negative~
+~unsupported template template_wildcard_variance_positive~
+~unsupported template template_wildcard_variance_negative~
+
+~template get_value_from_generic_class_positive start~
+gc = GenericClass[str](~[VAR_str@1]~)
+~[VAR_str@1]~ = gc.get_value()
+~template end~
+
+~template get_value_from_generic_class_negative start~
+gc = GenericClass[str]("fixed_string")
+~[VAR_str]~ = gc.get_value()
+~template end~
+
+~template get_object_value_from_generic_class_positive start~
+gc = GenericClass[str](~[VAR_str@1]~)
+~[VAR_str@1]~ = gc.get_object_value()
+~template end~
+
+~template get_object_value_from_generic_class_negative start~
+gc = GenericClass[str]("fixed_string")
+~[VAR_str]~ = gc.get_object_value()
+~template end~
+
+~main body end~
