@@ -7,6 +7,9 @@
 
 ~main body start~
 
+~helper import objects/generics/helpers/GenericClass~
+~helper import objects/generics/helpers/GenericClassVariance~
+
 ~helper import sensitivity/generics/helpers/InheritanceConstrainedClass~
 ~helper import sensitivity/generics/helpers/InterfaceConstrainedClass~
 
@@ -39,6 +42,66 @@
 ~[VAR_String@1]~ = ~[DEFINE_VarName]~.chooseNone(~[VAR_String@1]~, ~[CONST_String]~);
 ~template end~
 
+~template get_value_from_generic_class_positive start~
+GenericClass<String> gc42 = new GenericClass<>(~[VAR_String@1]~);
+~[VAR_String@1]~ = gc42.getValue();
+~template end~
 
+~template get_value_from_generic_class_negative start~
+GenericClass<String> gc42 = new GenericClass<>("fixed_string");
+~[VAR_String]~ = gc42.getValue();
+~template end~
+
+~template get_object_value_from_generic_class_positive start~
+GenericClass<String> gc42 = new GenericClass<>(~[VAR_String@1]~);
+~[VAR_String@1]~ = (String) gc42.getObjectValue();
+~template end~
+
+~template get_object_value_from_generic_class_negative start~
+GenericClass<String> gc42 = new GenericClass<>("fixed_string");
+~[VAR_String]~ = (String) gc42.getObjectValue();
+~template end~
+
+~template template_extends_variance_positive start~
+GenericClass<A> gc42 = new GenericClass<>(new A());
+if (GenericClassVariance.extendsVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template template_extends_variance_negative start~
+GenericClass<B> gc42 = new GenericClass<>(new B());
+if (GenericClassVariance.extendsVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template template_super_variance_positive start~
+GenericClass<A> gc42 = new GenericClass<>(new A());
+if (GenericClassVariance.superVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template template_super_variance_negative start~
+GenericClass<B> gc42 = new GenericClass<>(new B());
+if (GenericClassVariance.superVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template template_wildcard_variance_positive start~
+GenericClass<C> gc42 = new GenericClass<>(new C());
+if (GenericClassVariance.wildcardVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
+
+~template template_wildcard_variance_negative start~
+GenericClass<B> gc42 = new GenericClass<>(new B());
+if (GenericClassVariance.wildcardVariance(gc42)) {
+    ~[VAR_String]~ = "";
+}
+~template end~
 
 ~main body end~

@@ -8,6 +8,8 @@
 
 ~main body start~
 
+~helper import objects/generics/helpers/GenericClass~
+
 ~helper import sensitivity/generics/helpers/InheritanceConstrainedClass~
 ~helper import sensitivity/generics/helpers/NewConstrainedClass~
 ~helper import sensitivity/generics/helpers/InterfaceConstrainedClass~
@@ -21,6 +23,13 @@
 using HelperClasses;
 using HelperGenerics;
 ~imports end~
+
+~unsupported template template_extends_variance_positive~
+~unsupported template template_extends_variance_negative~
+~unsupported template template_super_variance_positive~
+~unsupported template template_super_variance_negative~
+~unsupported template template_wildcard_variance_positive~
+~unsupported template template_wildcard_variance_negative~
 
 ~template interface_constrained_generic_class_positive start~
 ~[DEFINE_CreateInterfaceConstrained]~
@@ -50,6 +59,26 @@ using HelperGenerics;
 ~template new_constrained_generic_class_negative start~
 ~[DEFINE_CreateNewConstrained]~
 ~[VAR_string@1]~ = ~[DEFINE_VarName]~.GetInstance().VirtualCall(~[CONST_string]~, ~[VAR_string@1]~);
+~template end~
+
+~template get_value_from_generic_class_positive start~
+GenericClass<String> gc42 = new GenericClass<String>(~[VAR_string@1]~);
+~[VAR_string@1]~ = gc42.getValue();
+~template end~
+
+~template get_value_from_generic_class_negative start~
+GenericClass<String> gc42 = new GenericClass<>("fixed_string");
+~[VAR_string]~ = gc42.getValue();
+~template end~
+
+~template get_object_value_from_generic_class_positive start~
+GenericClass<String> gc42 = new GenericClass<String>(~[VAR_string@1]~);
+~[VAR_string@1]~ = (String) gc42.getObjectValue();
+~template end~
+
+~template get_object_value_from_generic_class_negative start~
+GenericClass<String> gc42 = new GenericClass<String>("fixed_string");
+~[VAR_string]~ = (String) gc42.getObjectValue();
 ~template end~
 
 ~main body end~

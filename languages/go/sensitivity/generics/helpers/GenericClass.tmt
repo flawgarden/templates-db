@@ -1,0 +1,35 @@
+~class A start~
+type A interface{}
+~class end~
+
+~class B start~
+type B struct{}
+~class end~
+
+~class C start~
+type C struct{}
+~class end~
+
+~class GenericClass start~
+type GenericClass[T any] struct {
+    value T
+}
+
+func NewGenericClass[T any](value T) *GenericClass[T] {
+    return &GenericClass[T]{value: value}
+}
+
+func (g *GenericClass[T]) GetObjectValue() interface{} {
+    return g.value
+}
+
+func (g *GenericClass[T]) GetValue() T {
+    return g.value
+}
+
+func ExtendsVariance[T A](genericClassObj *GenericClass[T]) bool {
+    _, ok := genericClassObj.GetObjectValue().(B)
+    return ok
+}
+
+~class end~
