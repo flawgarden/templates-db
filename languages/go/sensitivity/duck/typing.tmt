@@ -35,7 +35,7 @@ func MakeItQuackFieldAttr(duck interface{}, arg string) string {
 
 ~helper import sensitivity/duck/helpers/Duck~
 
-~unsupported template duck_typing_missing_method_exception_positive~
+~unsupported template duck_typing_missing_method_exception_negative~
 ~unsupported template duck_typing_dynamic_method_addition_positive~
 ~unsupported template duck_typing_dynamic_method_addition_exception_negative~
 

@@ -53,7 +53,7 @@ duck_like = DefinitelyNotADuck()
 ~[VAR_~[TYPE@1]~@1]~ = make_it_quack_attr(duck_like, ~[VAR_~[TYPE@1]~@1]~)
 ~template end~
 
-~template duck_typing_missing_method_exception_positive start~
+~template duck_typing_missing_method_exception_negative start~
 try:
     duck_like = Duck()
     ~[VAR_~[TYPE@1]~@1]~ = make_it_quack(duck_like, ~[VAR_~[TYPE@1]~@1]~)
